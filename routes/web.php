@@ -92,9 +92,9 @@ Route::get('dangnhap', [
 ]);
 
 
-Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+
+//Route::get('/home', 'HomeController@index')->name('home');
 
 
 Route::prefix('admincp')->group(function () {
@@ -106,3 +106,4 @@ Route::prefix('admincp')->group(function () {
     //Route dùng để đăng xuất
     Route::get('logout', 'Auth\Admin\LoginController@logout')->name('admin.auth.logout');
 });
+Auth::routes();

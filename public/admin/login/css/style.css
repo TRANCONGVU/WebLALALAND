@@ -139,7 +139,18 @@ table {
 a {
     text-decoration: none;
 }
-
+.showpass{
+    display: none;
+}
+.pass:hover >.showpass{
+    display: block;
+    font-size: 25px;
+    background: rgba(0, 0, 0, 0.28);
+    color: white;
+    border-bottom: #da0845 solid 1px;
+    padding-right: 10px;
+    margin-top: 5px;
+}
 .txt-rt {
     text-align: right;
 }
@@ -260,7 +271,7 @@ body {
 
 .content-bottom {
     padding: 3em;
-    background: #fff;
+    background: rgba(0, 0, 0, 0.28);
     border-radius: 0 0 25px 25px;
 }
 
@@ -325,7 +336,7 @@ li:nth-child(2) a {
 /* form style  */
 
 form .field-group {
-    background: #da0845;
+    background: rgba(0, 0, 0, 0.28);
     display: flex;
     display: -webkit-box;
     /* OLD - iOS 6-, Safari 3.1-6 */
@@ -354,6 +365,9 @@ form .field-group span {
 ul.list-login {
     margin: 2em 0;
 }
+ul.list-login li{
+    color: white;
+}
 
 form .field-group .wthree-field {
     flex: 3 50%;
@@ -368,7 +382,8 @@ form .field-group .wthree-field {
     font-size: 16px;
     border: none;
     border-bottom: 1px solid #da0845;
-    background: #fff;
+    background: rgba(0, 0, 0, 0.28);
+    color: white;
     box-sizing: border-box;
     width: 100%;
     font-family: 'Mukta Mahee', sans-serif;
@@ -407,7 +422,7 @@ label.switch {
     height: 23px;
     padding-left: 5em;
     cursor: pointer;
-    color: #000;
+    color: white;
 }
 
 li:nth-child(2) a,

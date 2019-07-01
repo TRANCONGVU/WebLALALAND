@@ -76,10 +76,7 @@
                     </label>
                 </li>
                 <li>
-                    <a href="#" class="text-right">forgot password?</a>
-                </li>
-                <li>
-                    <a href="#" class="text-right">show password</a>
+                    <a href="#" class="text-right" style="color: white">forgot password?</a>
                 </li>
                 <li class="clearfix"></li>
             </ul>
