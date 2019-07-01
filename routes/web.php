@@ -92,6 +92,18 @@ Route::get('dangnhap', [
 ]);
 
 
-Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+
+//Route::get('/home', 'HomeController@index')->name('home');
+
+
+Route::prefix('admincp')->group(function () {
+    Route::get('/', 'Auth\Admin\AdminController@index')->name('admin.index');
+
+    // Route phần đăng nhập
+    Route::get('login', 'Auth\Admin\LoginController@login')->name('admin.auth.login');
+    Route::post('login', 'Auth\Admin\LoginController@loginAdmin')->name('admin.auth.loginAdmin');
+    //Route dùng để đăng xuất
+    Route::get('logout', 'Auth\Admin\LoginController@logout')->name('admin.auth.logout');
+});
+Auth::routes();

@@ -22,6 +22,25 @@ class CreateUsersTable extends Migration
             $table->rememberToken();
             $table->timestamps();
         });
+
+        Schema::create('role', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('name');
+        });
+
+        Schema::create('admins', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('name',191);
+            $table->string('email',191)->unique();
+            $table->string('password',191);
+            $table->timestamp('email_verified_at')->nullable();
+            $table->bigInteger('level')->unsigned();
+            $table
+                ->foreign('level')
+                ->references('id')
+                ->on('role');
+            $table->timestamps();
+        });
     }
 
     /**
