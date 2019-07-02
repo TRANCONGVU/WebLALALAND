@@ -13,4 +13,7 @@ class SliderController extends Controller
     public function addSlider(){
         return view('admincp.slider.add_slider');
     }
+    public function listSlider(){
+        return view('admincp.slider.list_slider');
+    }
 }
