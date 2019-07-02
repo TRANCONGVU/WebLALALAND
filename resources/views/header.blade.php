@@ -1,5 +1,5 @@
   <div class="header">
-      <div class="container head d-flex justify-content-end mt-3">
+      <div class="container head d-flex justify-content-end mt-1">
           <span>Đặt hàng online hoặc gọi cho chúng tôi (+84) 12341413</span>
           <div class="flag ml-3">
               <img src="images/vn-flag.png" alt="">
@@ -121,7 +121,7 @@
                       </div>
 
                   </li>
-                  <li><a href="#">Sale</a></li>
+                  <li><a href="{{ url('sale') }}">Sale</a></li>
                   <li>
                       <a href="{{ url('bosuutap') }}">Bộ sưu tập<i class="fas fa-caret-down"></i></a>
                       <ul class="nav-ul-lv-2">

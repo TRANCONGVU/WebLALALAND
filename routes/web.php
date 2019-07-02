@@ -92,7 +92,10 @@ Route::get('dangnhap', [
 	'uses' => 'Controller_1@get_dangnhap'
 ]);
 
-
+Route::get('sale', [
+	'as' =>'sale  ',
+	'uses' => 'Controller_1@get_sale'
+]);
 
 
 //Route::get('/home', 'HomeController@index')->name('home');

@@ -1,5 +1,5 @@
 .container{
-    padding: 20px;
+    /* padding: 20px; */
 }
 a{
     line-height: 20px;
@@ -231,6 +231,7 @@ background-color: wheat;
 .new-product .over-lay {
     max-height: 400px !important;
 }
+
 .over-lay a:hover {
     text-decoration: none;
 }
@@ -746,4 +747,26 @@ background-color: wheat;
     width: 100%;
     height: 400px;
     object-fit: contain;
+}
+/* -----------------sale page------------------ */
+.sale-item {
+
+}
+.sale-item::before{
+    content : "";
+    position: absolute;
+    color: white;
+    width: 0;
+	height: 0;
+	border-right: 80px solid transparent;
+	border-top: 80px solid red;
+    opacity: 0.9;
+}
+.sale {
+    position: absolute;
+    font-weight: 600;
+    color: white;
+    transform: rotate(-42deg);
+    top: 16px;
+    left: 25px;
 }

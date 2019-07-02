@@ -14,21 +14,21 @@
 <section class="section-2">
     <div class="container">
         <div class="row">
-            <div class="col-md-4 product">
+            <div class="col-md-4 col-sm-6 product">
                 <div class="over-lay">
                 </div>
                 <img src="{{asset('')}}images/product-1.jpg" alt="">
 
 
             </div>
-            <div class="col-md-4 product">
+            <div class="col-md-4  col-sm-6 product">
                 <div class="over-lay">
                 </div>
                 <img src="{{asset('')}}images/product-2.jpg" alt="">
 
 
             </div>
-            <div class="col-md-4 product">
+            <div class="col-md-4  col-sm-6 product">
                 <div class="over-lay">
                 </div>
                 <img src="{{asset('')}}images/product-3.jpg" alt="">
