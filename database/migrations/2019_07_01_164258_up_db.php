@@ -13,16 +13,6 @@ class UpDb extends Migration
      */
     public function up()
     {
-        //
-    }
-
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
-    {
         //slider
         Schema::create('sliders', function (Blueprint $table) {
             $table->bigIncrements('id');
@@ -58,7 +48,7 @@ class UpDb extends Migration
         });
 
         // bo suu tap
-        
+
         Schema::create('collections', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
@@ -107,6 +97,16 @@ class UpDb extends Migration
             $table->foreign('cate_id')->references('id')->on('cate_news')->onDelete('cascade');
             $table->timestamps();
         });
+
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
 
 
     }
