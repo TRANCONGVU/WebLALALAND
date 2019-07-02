@@ -13,18 +13,8 @@ class UpDb extends Migration
      */
     public function up()
     {
-        //
-    }
-
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
-    {
-        //slider
-        Schema::create('sliders', function (Blueprint $table) {
+         //slider
+         Schema::create('sliders', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('image');
             $table->timestamps();
@@ -39,8 +29,8 @@ class UpDb extends Migration
         Schema::create('subcate_products', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
-            $table->integer('cate_id');
-            $table->foreign('cate_id')->references('id')->on('cate_product')->onDelete('cascade');
+            $table->bigInteger('cate_id')->unsigned();
+            $table->foreign('cate_id')->references('id')->on('cate_products')->onDelete('cascade');
             $table->timestamps();
         });
         Schema::create('products', function (Blueprint $table) {
@@ -52,8 +42,8 @@ class UpDb extends Migration
             $table->text('color');
             $table->text('size');
             $table->integer('quantity');
-            $table->integer('subcate_id');
-            $table->foreign('subcate_id')->references('id')->on('subcate_product')->onDelete('cascade');
+            $table->bigInteger('subcate_id')->unsigned();
+            $table->foreign('subcate_id')->references('id')->on('subcate_products')->onDelete('cascade');
             $table->timestamps();
         });
 
@@ -63,7 +53,7 @@ class UpDb extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->text('image');
-            $table->integer('product_id');
+            $table->bigInteger('product_id')->unsigned();
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
             $table->timestamps();
         });
@@ -103,11 +93,19 @@ class UpDb extends Migration
             $table->string('title');
             $table->string('content');
             $table->text('image');
-            $table->integer('cate_id');
+            $table->bigInteger('cate_id')->unsigned();
             $table->foreign('cate_id')->references('id')->on('cate_news')->onDelete('cascade');
             $table->timestamps();
         });
+    }
 
-
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+       //
     }
 }
