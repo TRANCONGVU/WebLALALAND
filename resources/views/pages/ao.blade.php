@@ -28,7 +28,7 @@
                 </div>
             </div>
             <div class="col-md-9 col-12 product-page d-flex flex-column">
-                <h4 class="text-uppercase mt-3 ">product</h4>
+                <h4 class="text-uppercase mt-3 ">áo</h4>
                 <div class="product-menu d-flex justify-content-between">
                     <div class="d-flex">
 

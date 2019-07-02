@@ -1,5 +1,8 @@
+.header .container {
+    padding: 0px;
+}
 .container{
-    /* padding: 20px; */
+    padding: 20px;
 }
 a{
     line-height: 20px;
@@ -44,10 +47,12 @@ a{
     padding: 10px;
     border : 1px solid black;
 }
-.head-2 img{
-    width: 400px;
-    height: 85px;
-    object-fit: contain;
+.logo {
+    width: 450px;
+    height: 100px;
+}
+.logo img {
+    object-fit: cover;
 }
 .head-2-left {
     font-size: 13px;

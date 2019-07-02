@@ -3,7 +3,6 @@
           <span>Đặt hàng online hoặc gọi cho chúng tôi (+84) 12341413</span>
           <div class="flag ml-3">
               <img src="images/vn-flag.png" alt="">
-              <i class="fas fa-caret-down"></i>
               {{--  <div class="flag-hover">
                 <a href="#"></a><div class="d-flex justify-content-bettwen">
                         <img src="images/uk-flag.jpg" alt="">
@@ -19,7 +18,10 @@
           </div>
       </div>
       <div class="container head-2 d-flex justify-content-between ">
-          <img src="images/logo3.png" alt="">
+          <div class="logo">
+              <img src="images/logo3.png" alt="">
+          </div>
+
           <div class="d-flex flex-column mt-4 head-2-left ">
               <span class="text-uppercase">miễn phí giao hàng toàn quốc từ 100k</span>
               <div class="mt-2">
@@ -149,6 +151,8 @@
                           </ul>
                       </a></li>
 
+
+
               </ul>
               <div class="menu-mobile-button">
                   <i class="fas fa-bars"></i>
@@ -167,7 +171,7 @@
               </div>
               <div class="menu-mobile">
                   <a href="{{ url('cart') }}"><i class="fas fa-shopping-cart"></i></a>
-                </div>
+              </div>
           </div>
       </div>
   </nav>
