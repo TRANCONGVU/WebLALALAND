@@ -53,7 +53,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <!-- header-starts -->
     @include('admincp.header')
     <!-- //header-ends -->
-    @yield('content')
+    <section style="margin: 2.5%">
+        @yield('content')
+    </section>
     <!--body wrapper end-->
     </div>
     <!--footer section start-->
