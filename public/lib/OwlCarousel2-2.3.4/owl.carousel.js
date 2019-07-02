@@ -541,7 +541,7 @@
 	/**
 	 * @returns {Boolean} visibility of $element
 	 *                    if you know the carousel will always be visible you can set `checkVisibility` to `false` to
-	 *                    prevent the expensive browser layout forced reflow the $element.is(':visible') does
+	 *                    prevent the expensive browser layouts forced reflow the $element.is(':visible') does
 	 */
 	Owl.prototype.isVisible = function() {
 		return this.settings.checkVisibility
@@ -2985,7 +2985,7 @@
 	};
 
 	/**
-	 * Initializes the layout of the plugin and extends the carousel.
+	 * Initializes the layouts of the plugin and extends the carousel.
 	 * @protected
 	 */
 	Navigation.prototype.initialize = function() {

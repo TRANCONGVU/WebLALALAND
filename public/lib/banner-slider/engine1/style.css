@@ -45,7 +45,7 @@
 	padding:0;
 	border-spacing:0;
 	overflow: visible;
-	/*table-layout:fixed;*/
+	/*table-layouts:fixed;*/
 }
 #wowslider-container1 .ws_images ul li{
 	position: relative;
