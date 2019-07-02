@@ -26,6 +26,8 @@
 <body>
 
 @include('header')
+@include('pages.dangnhap')
+@include('pages.dangky')
 @yield('content')
 @include('footer')
 

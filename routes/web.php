@@ -12,8 +12,12 @@
 */
 
 Route::get('/', [
-	'as' =>'trang-chu',
+	'as' =>'home',
 	'uses' => 'Controller_1@get_trangchu'
+]);
+Route::get('/home', [
+    'as' =>'home1',
+    'uses' => 'Controller_1@get_trangchu'
 ]);
 
 Route::get('trang-chu', [
@@ -91,6 +95,8 @@ Route::get('dangnhap', [
 	'as' =>'dangnhap  ',
 	'uses' => 'Controller_1@get_dangnhap'
 ]);
+
+Route::post('createuser', 'Controller_1@createuser')->name('createuser');
 
 
 

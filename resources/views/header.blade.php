@@ -28,9 +28,30 @@
                           <span>10</span>
                       </div></a>
                   <span><i class="far fa-heart mx-3"></i>Sản phẩm yêu thích</span>
-                  <a href="{{ url('dangnhap') }}">Đăng nhập</a>
-                  <span>hoặc</span>
-                  <a href="{{ url('dangky') }}">Đăng ký</a>
+                  @guest
+                      <a href="{{--{{ url('dangnhap') }}--}}"   data-toggle="modal" data-target="#loginModal">Đăng nhập</a>
+
+                  @if (Route::has('register'))
+                          <span>hoặc</span>
+                          <a href="{{--{{ url('dangky') }}--}}"  data-toggle="modal" data-target="#registerModal">Đăng ký</a>
+                      @endif
+                  @else
+                          <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                              {{ Auth::user()->name }}
+                          </a>
+
+                          <span>/</span>
+                              <a class="dropdown-item" href="{{ route('logout') }}"
+                                 onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                  {{ __('Logout') }}
+                              </a>
+
+                              <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                  @csrf
+                              </form>
+                  @endguest
+
               </div>
           </div>
       </div>
