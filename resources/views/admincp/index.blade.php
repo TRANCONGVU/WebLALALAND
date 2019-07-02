@@ -39,6 +39,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <!-- Meters graphs -->
     <script src="{{ asset('admin/dasbroad') }}/js/jquery-1.10.2.min.js"></script>
     <!-- Placed js at the end of the document so the pages load faster -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+  
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+<link rel="stylesheet" type="text/css" href="/DataTables/datatables.css">
+ 
+<script type="text/javascript" charset="utf8" src="/DataTables/datatables.js"></script>
 
 </head>
 
@@ -71,5 +79,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <script src="{{ asset('admin/dasbroad') }}/js/scripts.js"></script>
 <!-- Bootstrap Core JavaScript -->
 <script src="{{ asset('admin/dasbroad') }}/js/bootstrap.min.js"></script>
+<script>
+$(document).ready( function () {
+            $('#dbtbl').DataTable();
+        } );
+</script>
 </body>
 </html>

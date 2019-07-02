@@ -113,6 +113,7 @@ Route::prefix('admincp')->group(function () {
 		Route::get('/', 'Auth\Admin\AdminController@index')->name('admin.index');
 
 		Route::get('addslider','SliderController@addSlider');
+		Route::get('listslider','SliderController@listSlider');
 	});
 });
 Auth::routes();
