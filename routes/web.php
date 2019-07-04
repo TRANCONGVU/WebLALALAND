@@ -12,8 +12,12 @@
 */
 
 Route::get('/', [
-	'as' =>'trang-chu',
+	'as' =>'home',
 	'uses' => 'Controller_1@get_trangchu'
+]);
+Route::get('/home', [
+    'as' =>'home1',
+    'uses' => 'Controller_1@get_trangchu'
 ]);
 
 Route::get('trang-chu', [
@@ -96,26 +100,30 @@ Route::get('sale', [
 	'as' =>'sale  ',
 	'uses' => 'Controller_1@get_sale'
 ]);
+Route::post('createuser', 'Controller_1@createuser')->name('createuser');
+
+
 
 
 //Route::get('/home', 'HomeController@index')->name('home');
 
 
 Route::prefix('admincp')->group(function () {
-    
+
 
     // Route phần đăng nhập
     Route::get('login', 'Auth\Admin\LoginController@login')->name('admin.auth.login');
     Route::post('login', 'Auth\Admin\LoginController@loginAdmin')->name('admin.auth.loginAdmin');
     //Route dùng để đăng xuất
 	Route::get('logout', 'Auth\Admin\LoginController@logout')->name('admin.auth.logout');
-	
+
 	//slider
 	Route::prefix('/')->middleware('auth:admins')->group(function () {
-		
+
 		Route::get('/', 'Auth\Admin\AdminController@index')->name('admin.index');
 
 		Route::get('addslider','SliderController@addSlider');
+		Route::get('listslider','SliderController@listSlider');
 	});
 });
 Auth::routes();
