@@ -34,7 +34,8 @@ nav.nav-horizontal{
 	z-index: 999;
 	top: 40px;*/
     /* margin-bottom: 30px; */
-    background-color: black;
+    background-color: #ffffffa3;
+    border-top: 1px solid #dedede;
 }
 .nav-horizontal-container{
 	position: relative;
