@@ -12,8 +12,12 @@
 */
 
 Route::get('/', [
-	'as' =>'trang-chu',
+	'as' =>'home',
 	'uses' => 'Controller_1@get_trangchu'
+]);
+Route::get('/home', [
+    'as' =>'home1',
+    'uses' => 'Controller_1@get_trangchu'
 ]);
 
 Route::get('trang-chu', [
@@ -92,6 +96,8 @@ Route::get('dangnhap', [
 	'uses' => 'Controller_1@get_dangnhap'
 ]);
 
+Route::post('createuser', 'Controller_1@createuser')->name('createuser');
+
 
 
 
@@ -113,7 +119,11 @@ Route::prefix('admincp')->group(function () {
 		Route::get('/', 'Auth\Admin\AdminController@index')->name('admin.index');
 
 		Route::get('addslider','SliderController@addSlider');
+<<<<<<< HEAD
 
+=======
+		Route::get('listslider','SliderController@listSlider');
+>>>>>>> 42b18e99d363f03d1dd03e42e32c7c4191c04820
 	});
 
 	Route::group(['prefix' => 'cateproduct'], function (){

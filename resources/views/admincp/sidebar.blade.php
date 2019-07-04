@@ -43,8 +43,21 @@
                     <li><a href="widgets.html">Widgets</a></li>
                 </ul>
             </li>
+<<<<<<< HEAD
             <li><a href="{{asset('admincp/addslider')}}"><i class="lnr lnr-spell-check"></i> <span>Slider</span></a></li>
             <li><a href="tables.html"><i class="lnr lnr-menu"></i> <span>Danh mục sản phẩm</span></a></li>
+=======
+            <li class="menu-list">
+                <a href=""><i class="glyphicon glyphicon-picture"></i>
+                    <span>Slider</span></a>
+                <ul class="sub-menu-list">
+                    <li><a href="{{url('admincp/addslider')}}">Add slider</a> </li>
+                    <li><a href="{{url('admincp/listslider')}}">Danh sách slider</a></li>
+                </ul>
+            </li>
+            {{-- <li><a href="{{asset('admincp/addslider')}}"><i class="lnr lnr-spell-check"></i> <span>Slider</span></a></li> --}}
+            <li><a href="tables.html"><i class="lnr lnr-menu"></i> <span>Tables</span></a></li>
+>>>>>>> 42b18e99d363f03d1dd03e42e32c7c4191c04820
             <li class="menu-list"><a href="#"><i class="lnr lnr-envelope"></i> <span>MailBox</span></a>
                 <ul class="sub-menu-list">
                     <li><a href="inbox.html">Inbox</a> </li>

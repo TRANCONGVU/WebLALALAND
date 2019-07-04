@@ -28,5 +28,15 @@ class DatabaseSeeder extends Seeder
             'password' => bcrypt('12345678'), // password :12345678
             'level' => 3,
         ]);
+        DB::table('users')->insert([
+            'name' => 'user',
+            'birth' => '1997-5-12',
+            'avatar' => 'male.png',
+            'gender' => '0',
+            'email' => 'user@gmail.com',
+            'email_verified_at' => now(),
+            'password' => bcrypt('12345678'), // password :12345678
+
+        ]);
     }
 }
