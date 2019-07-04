@@ -123,11 +123,8 @@ Route::prefix('admincp')->group(function () {
 		Route::get('/', 'Auth\Admin\AdminController@index')->name('admin.index');
 
 		Route::get('addslider','SliderController@addSlider');
-<<<<<<< HEAD
 
-=======
 		Route::get('listslider','SliderController@listSlider');
->>>>>>> 42b18e99d363f03d1dd03e42e32c7c4191c04820
 	});
 
 	Route::group(['prefix' => 'cateproduct'], function (){

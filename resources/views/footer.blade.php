@@ -1,5 +1,6 @@
 <div class="container-fluid footer">
     <div class="container">
+            <div class="container border-line"></div>
         <div class="row text-left">
             <div class="col-md-8 d-flex justify-content-around text-left">
                 <div class="d-flex flex-column footer-contact">

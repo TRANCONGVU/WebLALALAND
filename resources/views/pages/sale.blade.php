@@ -68,14 +68,17 @@
                 </div>
                 <div class="row">
                     <div class="col-md-3 col-sm-4 col-6 sale-item page">
-                        <div class="sale">
-                            SALE
+
+                        <div class="product-img sale-item">
+                            <img src="images/product-3.jpg" alt="">
+                            <div class="over-lay d-flex flex-column justify-content-center">
+                                <a href=""><i class="far fa-heart"></i></a>
+                                <a href="">Mua ngay</a>
+                            </div>
+                            <div class="sale">
+                                SALE
+                            </div>
                         </div>
-                        <div class="over-lay d-flex flex-column justify-content-center">
-                            <a href=""><i class="far fa-heart"></i></a>
-                            <a href="">Mua ngay</a>
-                        </div>
-                        <img src="images/product-3.jpg" alt="">
                         <div class="info-product d-flex flex-column justify-content-center">
                             <a href="#">váy đầm trẻ</a>
                             <a href="#">Mã hàng : 1234jdfk12</a>
@@ -83,14 +86,17 @@
                         </div>
                     </div>
                     <div class="col-md-3 col-sm-4 col-6 sale-item page">
-                        <div class="sale">
-                            SALE
+
+                        <div class="product-img sale-item">
+                            <img src="images/product-3.jpg" alt="">
+                            <div class="over-lay d-flex flex-column justify-content-center">
+                                <a href=""><i class="far fa-heart"></i></a>
+                                <a href="">Mua ngay</a>
+                            </div>
+                            <div class="sale">
+                                SALE
+                            </div>
                         </div>
-                        <div class="over-lay d-flex flex-column justify-content-center">
-                            <a href=""><i class="far fa-heart"></i></a>
-                            <a href="">Mua ngay</a>
-                        </div>
-                        <img src="images/product-3.jpg" alt="">
                         <div class="info-product d-flex flex-column justify-content-center">
                             <a href="#">váy đầm trẻ</a>
                             <a href="#">Mã hàng : 1234jdfk12</a>
@@ -98,14 +104,17 @@
                         </div>
                     </div>
                     <div class="col-md-3 col-sm-4 col-6 sale-item page">
-                        <div class="sale">
-                            SALE
+
+                        <div class="product-img sale-item">
+                            <img src="images/product-3.jpg" alt="">
+                            <div class="over-lay d-flex flex-column justify-content-center">
+                                <a href=""><i class="far fa-heart"></i></a>
+                                <a href="">Mua ngay</a>
+                            </div>
+                            <div class="sale">
+                                SALE
+                            </div>
                         </div>
-                        <div class="over-lay d-flex flex-column justify-content-center">
-                            <a href=""><i class="far fa-heart"></i></a>
-                            <a href="">Mua ngay</a>
-                        </div>
-                        <img src="images/product-3.jpg" alt="">
                         <div class="info-product d-flex flex-column justify-content-center">
                             <a href="#">váy đầm trẻ</a>
                             <a href="#">Mã hàng : 1234jdfk12</a>
@@ -113,14 +122,17 @@
                         </div>
                     </div>
                     <div class="col-md-3 col-sm-4 col-6 sale-item page">
-                        <div class="sale">
-                            SALE
+
+                        <div class="product-img sale-item">
+                            <img src="images/product-3.jpg" alt="">
+                            <div class="over-lay d-flex flex-column justify-content-center">
+                                <a href=""><i class="far fa-heart"></i></a>
+                                <a href="">Mua ngay</a>
+                            </div>
+                            <div class="sale">
+                                SALE
+                            </div>
                         </div>
-                        <div class="over-lay d-flex flex-column justify-content-center">
-                            <a href=""><i class="far fa-heart"></i></a>
-                            <a href="">Mua ngay</a>
-                        </div>
-                        <img src="images/product-3.jpg" alt="">
                         <div class="info-product d-flex flex-column justify-content-center">
                             <a href="#">váy đầm trẻ</a>
                             <a href="#">Mã hàng : 1234jdfk12</a>
@@ -128,14 +140,17 @@
                         </div>
                     </div>
                     <div class="col-md-3 col-sm-4 col-6 sale-item page">
-                        <div class="sale">
-                            SALE
+
+                        <div class="product-img sale-item">
+                            <img src="images/product-3.jpg" alt="">
+                            <div class="over-lay d-flex flex-column justify-content-center">
+                                <a href=""><i class="far fa-heart"></i></a>
+                                <a href="">Mua ngay</a>
+                            </div>
+                            <div class="sale">
+                                SALE
+                            </div>
                         </div>
-                        <div class="over-lay d-flex flex-column justify-content-center">
-                            <a href=""><i class="far fa-heart"></i></a>
-                            <a href="">Mua ngay</a>
-                        </div>
-                        <img src="images/product-3.jpg" alt="">
                         <div class="info-product d-flex flex-column justify-content-center">
                             <a href="#">váy đầm trẻ</a>
                             <a href="#">Mã hàng : 1234jdfk12</a>
@@ -143,26 +158,59 @@
                         </div>
                     </div>
                     <div class="col-md-3 col-sm-4 col-6 sale-item page">
-                        <div class="sale">
-                            SALE
+
+                        <div class="product-img sale-item">
+                            <img src="images/product-3.jpg" alt="">
+                            <div class="over-lay d-flex flex-column justify-content-center">
+                                <a href=""><i class="far fa-heart"></i></a>
+                                <a href="">Mua ngay</a>
+                            </div>
+                            <div class="sale">
+                                SALE
+                            </div>
                         </div>
-                        <div class="over-lay d-flex flex-column justify-content-center">
-                            <a href=""><i class="far fa-heart"></i></a>
-                            <a href="">Mua ngay</a>
-                        </div>
-                        <img src="images/product-3.jpg" alt="">
                         <div class="info-product d-flex flex-column justify-content-center">
                             <a href="#">váy đầm trẻ</a>
                             <a href="#">Mã hàng : 1234jdfk12</a>
                             <a href="#">440,000 Đ</a>
                         </div>
                     </div>
+                    <div class="col-md-3 col-sm-4 col-6 sale-item page">
 
+                        <div class="product-img sale-item">
+                            <img src="images/product-3.jpg" alt="">
+                            <div class="over-lay d-flex flex-column justify-content-center">
+                                <a href=""><i class="far fa-heart"></i></a>
+                                <a href="">Mua ngay</a>
+                            </div>
+                            <div class="sale">
+                                SALE
+                            </div>
+                        </div>
+                        <div class="info-product d-flex flex-column justify-content-center">
+                            <a href="#">váy đầm trẻ</a>
+                            <a href="#">Mã hàng : 1234jdfk12</a>
+                            <a href="#">440,000 Đ</a>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-4 col-6 sale-item page">
 
-
-
-
-
+                        <div class="product-img sale-item">
+                            <img src="images/product-3.jpg" alt="">
+                            <div class="over-lay d-flex flex-column justify-content-center">
+                                <a href=""><i class="far fa-heart"></i></a>
+                                <a href="">Mua ngay</a>
+                            </div>
+                            <div class="sale">
+                                SALE
+                            </div>
+                        </div>
+                        <div class="info-product d-flex flex-column justify-content-center">
+                            <a href="#">váy đầm trẻ</a>
+                            <a href="#">Mã hàng : 1234jdfk12</a>
+                            <a href="#">440,000 Đ</a>
+                        </div>
+                    </div>
                 </div>
                 <div class="show-more text-center mb-3">
                     <a href="#">Xem thêm</a>

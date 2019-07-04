@@ -2,13 +2,18 @@
 @section('content')
 <section class="section-1 container-fluid owl-carousel owl-theme">
     <div class="item">
-        <img src="https://img2.thuthuatphanmem.vn/uploads/2019/01/04/anh-gai-xinh-dep_025100741.jpg" alt="">
+        <img src="{{asset('')}}images/banner-3.jpg" alt="">
+        <div class="title-banner">
+            <span>SALE 100%</span>
+            <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti veritatis laborum fuga, velit
+                !</span>
+        </div>
     </div>
     <div class="item">
-        <img src="{{asset('')}}images/banner-2.jpg" alt="">
+        <img src="{{asset('')}}images/banner-3.jpg" alt="">
     </div>
     <div class="item">
-        <img src="{{asset('')}}images/banner-2.jpg" alt="">
+        <img src="{{asset('')}}images/banner-3.jpg" alt="">
     </div>
 </section>
 <section class="section-2">
@@ -42,14 +47,15 @@
     </div>
     <div class="container">
         <div class="row">
-            <div class="col-md-3 col-sm-6 new-product">
-                <div class="over-lay d-flex flex-column justify-content-center">
-                    <a href=""><i class="far fa-heart"></i></a>
-                    <a href="{{ url( 'chitietsanpham' )}}">Mua ngay</a>
-                </div>
+            <div class="col-md-3 col-sm-6 col-6 new-product">
                 <div class="product-img">
                     <img src="{{asset('')}}images/product-3.jpg" alt="">
+                    <div class="over-lay d-flex flex-column justify-content-center">
+                        <a href=""><i class="far fa-heart"></i></a>
+                        <a href="{{ url( 'chitietsanpham' )}}">Mua ngay</a>
+                    </div>
                 </div>
+
 
                 <div class="info-product d-flex flex-column justify-content-center">
                     <a href="#">váy đầm trẻ</a>
@@ -57,84 +63,96 @@
                     <a href="#">440,000 Đ</a>
                 </div>
             </div>
-            <div class="col-md-3 col-sm-6 new-product">
-                <div class="over-lay d-flex flex-column justify-content-center">
-                    <a href=""><i class="far fa-heart"></i></a>
-                    <a href="{{ url( 'chitietsanpham' )}}">Mua ngay</a>
+            <div class="col-md-3 col-sm-6 col-6 new-product">
+                <div class="product-img">
+                    <img src="{{asset('')}}images/product-3.jpg" alt="">
+                    <div class="over-lay d-flex flex-column justify-content-center">
+                        <a href=""><i class="far fa-heart"></i></a>
+                        <a href="{{ url( 'chitietsanpham' )}}">Mua ngay</a>
+                    </div>
                 </div>
-                <img src="{{asset('')}}images/product-3.jpg" alt="">
+
+
                 <div class="info-product d-flex flex-column justify-content-center">
                     <a href="#">váy đầm trẻ</a>
                     <a href="#">Mã hàng : 1234jdfk12</a>
                     <a href="#">440,000 Đ</a>
                 </div>
             </div>
-            <div class="col-md-3 col-sm-6 new-product">
-                <div class="over-lay d-flex flex-column justify-content-center">
-                    <a href=""><i class="far fa-heart"></i></a>
-                    <a href="{{ url( 'chitietsanpham' )}}">Mua ngay</a>
+            <div class="col-md-3 col-sm-6 col-6 new-product">
+                <div class="product-img">
+                    <img src="{{asset('')}}images/product-3.jpg" alt="">
+                    <div class="over-lay d-flex flex-column justify-content-center">
+                        <a href=""><i class="far fa-heart"></i></a>
+                        <a href="{{ url( 'chitietsanpham' )}}">Mua ngay</a>
+                    </div>
                 </div>
-                <img src="{{asset('')}}images/product-3.jpg" alt="">
+
+
                 <div class="info-product d-flex flex-column justify-content-center">
                     <a href="#">váy đầm trẻ</a>
                     <a href="#">Mã hàng : 1234jdfk12</a>
                     <a href="#">440,000 Đ</a>
                 </div>
             </div>
-            <div class="col-md-3 col-sm-6 new-product">
-                <div class="over-lay d-flex flex-column justify-content-center">
-                    <a href=""><i class="far fa-heart"></i></a>
-                    <a href="{{ url( 'chitietsanpham' )}}">Mua ngay</a>
+            <div class="col-md-3 col-sm-6 col-6 new-product">
+                <div class="product-img">
+                    <img src="{{asset('')}}images/product-3.jpg" alt="">
+                    <div class="over-lay d-flex flex-column justify-content-center">
+                        <a href=""><i class="far fa-heart"></i></a>
+                        <a href="{{ url( 'chitietsanpham' )}}">Mua ngay</a>
+                    </div>
                 </div>
-                <img src="{{asset('')}}images/product-3.jpg" alt="">
+
+
                 <div class="info-product d-flex flex-column justify-content-center">
                     <a href="#">váy đầm trẻ</a>
                     <a href="#">Mã hàng : 1234jdfk12</a>
                     <a href="#">440,000 Đ</a>
                 </div>
             </div>
-            <div class="col-md-3 col-sm-6 new-product">
-                <div class="over-lay d-flex flex-column justify-content-center">
-                    <a href=""><i class="far fa-heart"></i></a>
-                    <a href="{{ url( 'chitietsanpham' )}}">Mua ngay</a>
+            <div class="col-md-3 col-sm-6 col-6 new-product">
+                <div class="product-img">
+                    <img src="{{asset('')}}images/product-3.jpg" alt="">
+                    <div class="over-lay d-flex flex-column justify-content-center">
+                        <a href=""><i class="far fa-heart"></i></a>
+                        <a href="{{ url( 'chitietsanpham' )}}">Mua ngay</a>
+                    </div>
                 </div>
-                <img src="{{asset('')}}images/product-3.jpg" alt="">
+
+
                 <div class="info-product d-flex flex-column justify-content-center">
                     <a href="#">váy đầm trẻ</a>
                     <a href="#">Mã hàng : 1234jdfk12</a>
                     <a href="#">440,000 Đ</a>
                 </div>
             </div>
-            <div class="col-md-3 col-sm-6 new-product">
-                <div class="over-lay d-flex flex-column justify-content-center">
-                    <a href=""><i class="far fa-heart"></i></a>
-                    <a href="{{ url( 'chitietsanpham' )}}">Mua ngay</a>
+            <div class="col-md-3 col-sm-6 col-6 new-product">
+                <div class="product-img">
+                    <img src="{{asset('')}}images/product-3.jpg" alt="">
+                    <div class="over-lay d-flex flex-column justify-content-center">
+                        <a href=""><i class="far fa-heart"></i></a>
+                        <a href="{{ url( 'chitietsanpham' )}}">Mua ngay</a>
+                    </div>
                 </div>
-                <img src="{{asset('')}}images/product-3.jpg" alt="">
+
+
                 <div class="info-product d-flex flex-column justify-content-center">
                     <a href="#">váy đầm trẻ</a>
                     <a href="#">Mã hàng : 1234jdfk12</a>
                     <a href="#">440,000 Đ</a>
                 </div>
             </div>
-            <div class="col-md-3 col-sm-6 new-product">
-                <div class="over-lay d-flex flex-column justify-content-center">
-                    <a href=""><i class="far fa-heart"></i></a>
-                    <a href="{{ url( 'chitietsanpham' )}}">Mua ngay</a>
+            <div class="col-md-3 col-sm-6 col-6 new-product">
+                <div class="product-img">
+                    <img src="{{asset('')}}images/product-3.jpg" alt="">
+                    <div class="over-lay d-flex flex-column justify-content-center">
+                        <a href=""><i class="far fa-heart"></i></a>
+                        <a href="{{ url( 'chitietsanpham' )}}">Mua ngay</a>
+                    </div>
                 </div>
-                <img src="{{asset('')}}images/product-3.jpg" alt="">
-                <div class="info-product d-flex flex-column justify-content-center">
-                    <a href="#">váy đầm trẻ</a>
-                    <a href="#">Mã hàng : 1234jdfk12</a>
-                    <a href="#">440,000 Đ</a>
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-6 new-product">
-                <div class="over-lay d-flex flex-column justify-content-center">
-                    <a href=""><i class="far fa-heart"></i></a>
-                    <a href="{{ url( 'chitietsanpham' )}}">Mua ngay</a>
-                </div>
-                <img src="{{asset('')}}images/product-3.jpg" alt="">
+
+
                 <div class="info-product d-flex flex-column justify-content-center">
                     <a href="#">váy đầm trẻ</a>
                     <a href="#">Mã hàng : 1234jdfk12</a>
@@ -159,25 +177,14 @@
 <section class="section-4">
     <div class="container fashion owl-carousel owl-theme">
         <div class="item new-product">
-            <div class="over-lay d-flex flex-column justify-content-center">
-                <a href="#"><i class="far fa-heart"></i></a>
-                <a href="{{ url( 'chitietsanpham' )}}">Mua ngay</a>
-                <a href="{{ url( 'chitietsanpham' )}}">Xem ngay</a>
+            <div class="product-img">
+                <img src="{{asset('')}}images/product-3.jpg" alt="">
+                <div class="over-lay d-flex flex-column justify-content-center">
+                    <a href=""><i class="far fa-heart"></i></a>
+                    <a href="">Mua ngay</a>
+                    <a href="#">Xem ngay</a>
+                </div>
             </div>
-            <img src="{{asset('')}}images/product-1.jpg" alt="">
-            <div class="info-product d-flex flex-column justify-content-center">
-                <a href="">váy đầm trẻ</a>
-                <a href="#">Mã hàng : 1234jdfk12</a>
-                <a href="#">440,000 Đ</a>
-            </div>
-        </div>
-        <div class="item new-product">
-            <div class="over-lay d-flex flex-column justify-content-center">
-                <a href=""><i class="far fa-heart"></i></a>
-                <a href="">Mua ngay</a>
-                <a href="#">Xem ngay</a>
-            </div>
-            <img src="{{asset('')}}images/product-2.jpg" alt="">
             <div class="info-product d-flex flex-column justify-content-center">
                 <a href="#">váy đầm trẻ</a>
                 <a href="#">Mã hàng : 1234jdfk12</a>
@@ -185,12 +192,14 @@
             </div>
         </div>
         <div class="item new-product">
-            <div class="over-lay d-flex flex-column justify-content-center">
-                <a href=""><i class="far fa-heart"></i></a>
-                <a href="">Mua ngay</a>
-                <a href="#">Xem ngay</a>
+            <div class="product-img">
+                <img src="{{asset('')}}images/product-3.jpg" alt="">
+                <div class="over-lay d-flex flex-column justify-content-center">
+                    <a href=""><i class="far fa-heart"></i></a>
+                    <a href="">Mua ngay</a>
+                    <a href="#">Xem ngay</a>
+                </div>
             </div>
-            <img src="{{asset('')}}images/product-3.jpg" alt="">
             <div class="info-product d-flex flex-column justify-content-center">
                 <a href="#">váy đầm trẻ</a>
                 <a href="#">Mã hàng : 1234jdfk12</a>
@@ -198,12 +207,14 @@
             </div>
         </div>
         <div class="item new-product">
-            <div class="over-lay d-flex flex-column justify-content-center">
-                <a href=""><i class="far fa-heart"></i></a>
-                <a href="">Mua ngay</a>
-                <a href="#">Xem ngay</a>
+            <div class="product-img">
+                <img src="{{asset('')}}images/product-3.jpg" alt="">
+                <div class="over-lay d-flex flex-column justify-content-center">
+                    <a href=""><i class="far fa-heart"></i></a>
+                    <a href="">Mua ngay</a>
+                    <a href="#">Xem ngay</a>
+                </div>
             </div>
-            <img src="{{asset('')}}images/product-3.jpg" alt="">
             <div class="info-product d-flex flex-column justify-content-center">
                 <a href="#">váy đầm trẻ</a>
                 <a href="#">Mã hàng : 1234jdfk12</a>
@@ -211,12 +222,14 @@
             </div>
         </div>
         <div class="item new-product">
-            <div class="over-lay d-flex flex-column justify-content-center">
-                <a href=""><i class="far fa-heart"></i></a>
-                <a href="">Mua ngay</a>
-                <a href="#">Xem ngay</a>
+            <div class="product-img">
+                <img src="{{asset('')}}images/product-3.jpg" alt="">
+                <div class="over-lay d-flex flex-column justify-content-center">
+                    <a href=""><i class="far fa-heart"></i></a>
+                    <a href="">Mua ngay</a>
+                    <a href="#">Xem ngay</a>
+                </div>
             </div>
-            <img src="{{asset('')}}images/product-3.jpg" alt="">
             <div class="info-product d-flex flex-column justify-content-center">
                 <a href="#">váy đầm trẻ</a>
                 <a href="#">Mã hàng : 1234jdfk12</a>
@@ -224,12 +237,29 @@
             </div>
         </div>
         <div class="item new-product">
-            <div class="over-lay d-flex flex-column justify-content-center">
-                <a href=""><i class="far fa-heart"></i></a>
-                <a href="">Mua ngay</a>
-                <a href="#">Xem ngay</a>
+            <div class="product-img">
+                <img src="{{asset('')}}images/product-3.jpg" alt="">
+                <div class="over-lay d-flex flex-column justify-content-center">
+                    <a href=""><i class="far fa-heart"></i></a>
+                    <a href="">Mua ngay</a>
+                    <a href="#">Xem ngay</a>
+                </div>
             </div>
-            <img src="{{asset('')}}images/product-3.jpg" alt="">
+            <div class="info-product d-flex flex-column justify-content-center">
+                <a href="#">váy đầm trẻ</a>
+                <a href="#">Mã hàng : 1234jdfk12</a>
+                <a href="#">440,000 Đ</a>
+            </div>
+        </div>
+        <div class="item new-product">
+            <div class="product-img">
+                <img src="{{asset('')}}images/product-3.jpg" alt="">
+                <div class="over-lay d-flex flex-column justify-content-center">
+                    <a href=""><i class="far fa-heart"></i></a>
+                    <a href="">Mua ngay</a>
+                    <a href="#">Xem ngay</a>
+                </div>
+            </div>
             <div class="info-product d-flex flex-column justify-content-center">
                 <a href="#">váy đầm trẻ</a>
                 <a href="#">Mã hàng : 1234jdfk12</a>

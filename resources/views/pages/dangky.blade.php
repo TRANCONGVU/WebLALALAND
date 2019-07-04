@@ -12,7 +12,7 @@
     /*    background-color: white;*/
     /*}*/
 </style>
-<div class="container">
+<div class="container" style="    position: absolute;">
 
     <div class="modal fade" id="registerModal">
         <div class="modal-dialog">

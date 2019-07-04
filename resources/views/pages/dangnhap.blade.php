@@ -21,7 +21,7 @@
           </form>
     </div>
 @endsection--}}
-<div class="container">
+<div class="container" style="     position: absolute;">
     <div class="modal fade" id="loginModal">
         <div class="modal-dialog">
             <div class="modal-content login-custom-form">
