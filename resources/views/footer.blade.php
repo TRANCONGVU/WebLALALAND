@@ -1,6 +1,6 @@
 <div class="container-fluid footer">
     <div class="container">
-            <div class="container border-line"></div>
+        <div class="container border-line"></div>
         <div class="row text-left">
             <div class="col-md-8 d-flex justify-content-around text-left">
                 <div class="d-flex flex-column footer-contact">
@@ -19,12 +19,12 @@
                     <a href="">Về chúng tôi</a>
                 </div>
                 <div class="d-flex flex-column footer-contact">
-                        <h6>dịch vụ khách hàng</h6>
-                        <a href="">Điều khoản mua hàng</a>
-                        <a href="">Chính sách khách hàng ưu tiên</a>
-                        <a href="">Chính sách thanh toán</a>
-                        <a href="">Chính sách vận chuyển</a>
-                        <a href="">Chính sách bảo mật</a>
+                    <h6>dịch vụ khách hàng</h6>
+                    <a href="">Điều khoản mua hàng</a>
+                    <a href="">Chính sách khách hàng ưu tiên</a>
+                    <a href="">Chính sách thanh toán</a>
+                    <a href="">Chính sách vận chuyển</a>
+                    <a href="">Chính sách bảo mật</a>
                 </div>
 
 
@@ -45,13 +45,26 @@
             </div>
         </div>
         <div class="d-flex flex-column bot-footer text-left">
-                <span ><i class="fas fa-copyright"></i> Coppy right Talent Win Dev Team</span>
-                <span>Số điện thoại: 024 3193 4294 - Email: cskh@company.vn</span>
-                <span>Địa chỉ:Bách Khoa . Q. Hai Bà Trưng, TP. Hà Nội</span>
-                <span>Giấy chứng nhận đăng kí kinh doanh số  được cấp bởi Sở Kế hoạch và Đầu tư thành phố Hà Nội</span>
-            </div>
+            <span><i class="fas fa-copyright"></i> Coppy right Talent Win Dev Team</span>
+            <span>Số điện thoại: 024 3193 4294 - Email: cskh@company.vn</span>
+            <span>Địa chỉ:Bách Khoa . Q. Hai Bà Trưng, TP. Hà Nội</span>
+            <span>Giấy chứng nhận đăng kí kinh doanh số được cấp bởi Sở Kế hoạch và Đầu tư thành phố Hà Nội</span>
+        </div>
     </div>
 
+</div>
+<div class="container-flui" style="position : relative">
+        <div class="box-up">
+                <div class="box-up-item">
+                    <img src="images/mail-icon.png" alt="">
+                </div>
+                <div class="box-up-item">
+                    <img src="images/messager-icon.png" alt="">
+                </div>
+                <div class="box-up-item">
+                    <img src="images/phone-icon.png" alt="">
+                </div>
+            </div>
 </div>
 
 <section class="back-to-top">
