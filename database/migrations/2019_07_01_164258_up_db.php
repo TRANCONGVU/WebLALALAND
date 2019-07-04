@@ -23,14 +23,18 @@ class UpDb extends Migration
         //san pham
         Schema::create('cate_products', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name');
+            $table->string('name')->unique();
             $table->string('slug');
+            $table->tinyInteger('active')->default(1);
+            $table->bigInteger('total_product')->default(0);
+            $table->tinyInteger('home');
             $table->timestamps();
         });
         Schema::create('product_type', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
             $table->string('slug');
+            $table->tinyInteger('active')->default(1);
             $table->bigInteger('cate_id')->unsigned();
             $table->foreign('cate_id')->references('id')->on('cate_products')->onDelete('cascade');
             $table->timestamps();
@@ -42,8 +46,11 @@ class UpDb extends Migration
             $table->string('slug');
             $table->string('image');
             $table->string('code');
+            $table->tinyInteger('pay');
+            $table->tinyInteger('sale');
+            $table->tinyInteger('quantity');
             $table->bigInteger('price');
-            $table->bigInteger('quantity');
+            $table->tinyInteger('active')->default(1);
             $table->bigInteger('category_id')->unsigned();
             $table->bigInteger('producttype_id')->unsigned();
             $table->foreign('category_id')->references('id')->on('cate_products')->onDelete('cascade');
@@ -104,6 +111,7 @@ class UpDb extends Migration
         Schema::create('color',function (Blueprint $table){
             $table->bigIncrements('id');
             $table->string('name');
+            $table->char('image');
             $table->bigInteger('product_id')->unsigned();
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
             $table->timestamps();

@@ -113,6 +113,16 @@ Route::prefix('admincp')->group(function () {
 		Route::get('/', 'Auth\Admin\AdminController@index')->name('admin.index');
 
 		Route::get('addslider','SliderController@addSlider');
+
 	});
+
+	Route::group(['prefix' => 'cateproduct'], function (){
+        Route::get('/','CateProductController@index')->name('list.cateproduct');
+        Route::get('/create','CateProductController@create')->name('create.cateproduct');
+        Route::post('create-cateproduct','CateProductController@store')->name('store.cateproduct');
+        Route::get('edit-cateproduct','CateProductController@edit')->name('edit.cateproduct');
+        Route::post('edit-cateproduct','CateProductController@update')->name('update.cateproduct');
+        Route::get('detail-cateproduct','CateProductController@show')->name('show.cateproduct');
+    });
 });
 Auth::routes();
