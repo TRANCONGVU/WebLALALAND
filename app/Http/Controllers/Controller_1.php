@@ -63,6 +63,9 @@ class Controller_1 extends Controller
     public  function get_dangnhap(){
     	return view('pages.dangnhap');
     }
+    public  function get_sale(){
+        return view('pages.sale');
+    }
 
     public function createuser(Request $request){
 
