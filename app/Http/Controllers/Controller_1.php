@@ -111,4 +111,16 @@ class Controller_1 extends Controller
             return redirect()->back()->withInput($req->only('email', 'remember'));
         }
     }
+    public function lienhe(Request $request){
+        $input=$request->all();
+
+        DB::table('contacts')->insert([
+           'name' => $input['name_message'],
+           'email' => $input['email_message'],
+           'phone' => $input['phone_message'],
+           'content' => $input['content_message'],
+        ]);
+
+        return redirect()->back()->with('thongbao', 'Cảm ơn bạn đã để lại lời nhắn! chúng tôi sẽ phản hôi trong thời gian sớm nhất!');
+    }
 }

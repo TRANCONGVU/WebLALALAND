@@ -24,7 +24,12 @@
 
 </head>
 <body>
-
+@if(session('thongbao'))
+	{{-- <div class = "alert alert-success">{{ session('thongbao') }}</div>--}}
+	<script>
+		alert('{{ session('thongbao') }}');
+	</script>
+@endif
 @include('header')
 @include('pages.dangnhap')
 @include('pages.dangky')

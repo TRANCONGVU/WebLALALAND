@@ -104,6 +104,7 @@ class UpDb extends Migration
             $table->text('email');
             $table->text('phone');
             $table->string('content');
+            $table->integer('status')->default('0');
             $table->timestamps();
         });
         //cau hoi thuong gap

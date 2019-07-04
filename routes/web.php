@@ -19,6 +19,7 @@ Route::get('/home', [
     'as' =>'home1',
     'uses' => 'Controller_1@get_trangchu'
 ]);
+Route::post('/lienhe', 'Controller_1@lienhe')->name('lienhe');
 
 Route::get('trang-chu', [
 	'as' =>'trang-chu',
