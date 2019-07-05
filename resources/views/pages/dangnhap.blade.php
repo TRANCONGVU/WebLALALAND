@@ -25,7 +25,7 @@
     <div class="modal fade" id="loginModal">
         <div class="modal-dialog">
             <div class="modal-content login-custom-form">
-                <form action="{{ route('login') }}" method="post">
+                <form action="{{ route('loginuser') }}" method="post">
                 @csrf
                 <!-- Modal Header -->
                     <div class="modal-header">

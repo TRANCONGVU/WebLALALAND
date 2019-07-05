@@ -34,6 +34,7 @@ class DatabaseSeeder extends Seeder
             'avatar' => 'male.png',
             'gender' => '0',
             'email' => 'user@gmail.com',
+            'status' => '1',
             'email_verified_at' => now(),
             'password' => bcrypt('12345678'), // password :12345678
 

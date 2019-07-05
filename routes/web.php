@@ -97,7 +97,8 @@ Route::get('dangnhap', [
 	'uses' => 'Controller_1@get_dangnhap'
 ]);
 
-Route::post('createuser', 'Controller_1@createuser')->name('createuser');
+Route::post('createuser', 'Auth\UserLoginController@createuser')->name('createuser');
+Route::post('loginuser', 'Auth\UserLoginController@loginuser')->name('loginuser');
 
 
 
@@ -120,20 +121,26 @@ Route::prefix('admincp')->group(function () {
 		Route::get('/', 'Auth\Admin\AdminController@index')->name('admin.index');
 
 		Route::get('addslider','SliderController@addSlider');
-<<<<<<< HEAD
-
-=======
 		Route::get('listslider','SliderController@listSlider');
->>>>>>> 42b18e99d363f03d1dd03e42e32c7c4191c04820
-	});
 
-	Route::group(['prefix' => 'cateproduct'], function (){
-        Route::get('/','CateProductController@index')->name('list.cateproduct');
-        Route::get('/create','CateProductController@create')->name('create.cateproduct');
-        Route::post('create-cateproduct','CateProductController@store')->name('store.cateproduct');
-        Route::get('edit-cateproduct','CateProductController@edit')->name('edit.cateproduct');
-        Route::post('edit-cateproduct','CateProductController@update')->name('update.cateproduct');
-        Route::get('detail-cateproduct','CateProductController@show')->name('show.cateproduct');
+
+        Route::group(['prefix' => 'cateproduct'], function (){
+            Route::get('/','CateProductController@index')->name('list.cateproduct');
+            Route::get('/create','CateProductController@create')->name('create.cateproduct');
+            Route::post('create-cateproduct','CateProductController@store')->name('store.cateproduct');
+            Route::get('edit-cateproduct','CateProductController@edit')->name('edit.cateproduct');
+            Route::post('edit-cateproduct','CateProductController@update')->name('update.cateproduct');
+            Route::get('detail-cateproduct','CateProductController@show')->name('show.cateproduct');
+        });
+        Route::group(['prefix' => 'useraccount'], function (){
+            Route::get('/','UserAccountController@index')->name('list.useraccount');
+            Route::get('/create','CateProductController@create')->name('create.cateproduct');
+            Route::post('create-cateproduct','CateProductController@store')->name('store.cateproduct');
+            Route::get('edit-cateproduct','CateProductController@edit')->name('edit.cateproduct');
+            Route::post('edit-cateproduct','CateProductController@update')->name('update.cateproduct');
+            Route::get('detail-cateproduct','CateProductController@show')->name('show.cateproduct');
+        });
+
     });
 });
 Auth::routes();
