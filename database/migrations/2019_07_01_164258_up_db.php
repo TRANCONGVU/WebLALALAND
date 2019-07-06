@@ -140,9 +140,9 @@ class UpDb extends Migration
             $table->bigIncrements('id');
             $table->string('title');
             $table->string('slug');
-            $table->string('summary');
-            $table->string('content');
-            $table->text('image');
+            $table->text('summary');
+            $table->text('content');
+            $table->string('image');
             $table->bigInteger('cate_id')->unsigned();
             $table->foreign('cate_id')
                 ->references('id')
@@ -150,6 +150,17 @@ class UpDb extends Migration
                 ->onDelete('cascade');
             $table->timestamps();
         });
+        Schema::create('tagnews', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('name');
+            $table->bigInteger('news_id')->unsigned();
+            $table->foreign('news_id')
+                ->references('id')
+                ->on('news')
+                ->onDelete('cascade');
+            $table->timestamps();
+        });
+
         Schema::create('color',function (Blueprint $table){
             $table->bigIncrements('id');
             $table->string('name');
