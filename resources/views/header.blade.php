@@ -167,9 +167,12 @@
                   <li class="lienhe-led"><a href="{{ url('huongdan') }}">Hướng dẫn</a></li>
                   <li class="lienhe-led"><a href="{{ url('tintuc') }}">Tin tức<i class="fas fa-caret-down"></i>
                           <ul class="nav-ul-lv-2">
-                              <li><a href="{{ url('tinkhuyenmai') }}">Tin khuyến mãi</a></li>
+                              @foreach($cate_news as $cate_new)
+                                  <li><a href="{{ url('loaitin/'.$cate_new->slug) }}">{{ $cate_new->name }}</a></li>
+                              @endforeach
+                            {{--  <li><a href="{{ url('tinkhuyenmai') }}">Tin khuyến mãi</a></li>
                               <li><a href="{{ url('tinthoitrang') }}">Tin Thời trang</a></li>
-                              <li><a href="{{ url('tinsukien') }}">Tin sự kiện</a></li>
+                              <li><a href="{{ url('tinsukien') }}">Tin sự kiện</a></li>--}}
                           </ul>
                       </a></li>
                   <li class="lienhe-led"><a href="{{ url('video') }}">video</a></li>

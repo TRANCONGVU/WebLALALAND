@@ -133,15 +133,21 @@ class UpDb extends Migration
         Schema::create('cate_news', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
+            $table->string('slug');
             $table->timestamps();
         });
         Schema::create('news', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('title');
+            $table->string('slug');
+            $table->string('summary');
             $table->string('content');
             $table->text('image');
             $table->bigInteger('cate_id')->unsigned();
-            $table->foreign('cate_id')->references('id')->on('cate_news')->onDelete('cascade');
+            $table->foreign('cate_id')
+                ->references('id')
+                ->on('cate_news')
+                ->onDelete('cascade');
             $table->timestamps();
         });
         Schema::create('color',function (Blueprint $table){
