@@ -148,6 +148,28 @@ Route::prefix('admincp')->group(function () {
 			Route::post('edit-cateproduct','CateProductController@update')->name('update.cateproduct');
 			Route::get('detail-cateproduct','CateProductController@show')->name('show.cateproduct');
 		});
+		Route::group(['prefix' => 'useraccount'], function (){
+            route::get('/','useraccountcontroller@index')->name('list.useraccount');
+
+            route::get('/create','useraccountcontroller@create')->name('create.useraccount');
+            route::post('/store','useraccountcontroller@store')->name('store.useraccount');
+
+            route::get('edit/{id}','useraccountcontroller@edit')->name('edit.useraccount');
+            route::post('update/{id}','useraccountcontroller@update')->name('update.useraccount');
+
+            route::get('setactive/{id}/{status}','useraccountcontroller@active')->name('active.useraccount');
+        });
+        Route::group(['prefix' => 'adminaccount'], function (){
+            route::get('/','adminaccountcontroller@index')->name('list.adminaccount');
+
+            route::get('/create','adminaccountcontroller@create')->name('create.adminaccount');
+            route::post('/store','adminaccountcontroller@store')->name('store.adminaccount');
+
+            route::post('update/{id}','adminaccountcontroller@update')->name('update.adminaccount');
+
+            route::get('setactive/{id}/{status}','adminaccountcontroller@active')->name('active.adminaccount');
+
+        });
 	});
 
 	
