@@ -33,7 +33,7 @@
         <div class="box-content"  >
             <div class="table-responsive" >
     
-                <form name="create" action="" method="post" enctype="multipart/form-data">
+                <form name="create" action="{{url('admincp/slider/addslider')}}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
                         <label class="text-body custom-control-label">Ảnh slider:</label>
@@ -60,7 +60,7 @@
                 
                                 </div>
                     </div>
-                    <textarea name="hay" class="hay" id="hay" cols="30" rows="10"></textarea>
+                    
                     {{-- <div class="form-group">
                         <label for="" class="text-body custom-control-label">Tiêu đề</label>
                         <input type="text" name="title" class="form-control">
@@ -68,7 +68,7 @@
     
                     </div>     --}}
                     <div class="form-group">
-                        <a class="btn btn-danger" href="{{url('admincp/listslider')}}" type="button" title="Cancel" value="">Quay lại</a>
+                        <a class="btn btn-danger" href="{{url('admincp/slider/listslider')}}" type="button" title="Cancel" value="">Quay lại</a>
                         <input name="submit" class="btn btn-primary" type="submit" value="Thêm">
                     </div>
                 </form>
