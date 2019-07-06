@@ -26,6 +26,14 @@ Route::get('trang-chu', [
 	'uses' => 'Controller_1@get_trangchu'
 ]);
 
+Route::get('loaitin/{slug}', [
+    'as' =>'tinkhuyenmai',
+    'uses' => 'Controller_1@get_loaitin'
+]);
+
+
+
+
 Route::get('product', [
 	'as' =>'product',
 	'uses' => 'Controller_1@get_product'
@@ -157,6 +165,16 @@ Route::prefix('admincp')->group(function () {
             Route::post('update/{id}','adminAccountController@update')->name('update.adminaccount');
 
             Route::get('setactive/{id}/{status}','adminAccountController@active')->name('active.adminaccount');
+
+        });
+
+        Route::group(['prefix' => 'catenews'], function (){
+            Route::get('/','catenewsController@index')->name('list.catenews');
+
+            Route::post('/store','catenewsController@store')->name('store.catenews');
+
+            Route::post('update/{id}','catenewsController@update')->name('update.catenews');
+            Route::get('delete/{id}','catenewsController@destroy')->name('destroy.catenews');
 
         });
 
