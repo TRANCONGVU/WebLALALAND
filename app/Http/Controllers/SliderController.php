@@ -19,7 +19,7 @@ class SliderController extends Controller
             // 'title'=>'required'
         ],
         [
-            'image.required'=>'Vui lòng không để trống',
+            'image.required'=>'Vui lòng không để trống ảnh slider.',
             // 'logo.required'=>'Vui lòng không để trống',
             // 'title.required'=>'Vui lòng không để trống'
         ]);
