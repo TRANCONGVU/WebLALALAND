@@ -33,7 +33,7 @@
 }
 /*---------------------------------------Nav-horizontal---------------------------------------*/
 nav.nav-horizontal{
-	background: #f4f6f8;
+	background: rgba(255, 255, 255, 0.80);
 	-webkit-transition: 0.4s all;
 	-moz-transition: 0.4s all;
 	-ms-transition: 0.4s all;

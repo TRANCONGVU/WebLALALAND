@@ -33,7 +33,8 @@ class LoginController extends Controller
         // Đăng nhập
         if (Auth::guard('admins')->attempt(
             ['email' => $request->email,
-                'password'=>$request->password
+                'password'=>$request->password,
+                'status'=>1
             ],
             $request->remember
         )){

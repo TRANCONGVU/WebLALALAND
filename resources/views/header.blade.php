@@ -34,16 +34,20 @@
                   <a href="{{--{{ url('dangky') }}--}}" data-toggle="modal" data-target="#registerModal">Đăng ký</a>
                   @endif
                   @else
-                  <div class="avatar">
-                      <img src="images/product-1.jpg" alt="">
-                  </div>
+                    {{--  <ul class="nav-ul-lv-1">
+                      <li>
+                          <a href="{{ url('bosuutap') }}">Bộ sưu tập<i class="fas fa-caret-down"></i></a>
+                          <ul class="nav-ul-lv-2">
+                              <li><a href="#">Bộ sưu tâp 1</a></li>
+                              <li><a href="#">Bộ sưu tập 2</a></li>
+                              <li><a href="#">Bộ sưu tập 3</a></li>
+                          </ul>
+                      </li>
+                      </ul>--}}
                   <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
                       aria-haspopup="true" aria-expanded="false" v-pre>
                       {{ Auth::user()->name }}
-                  </a>
-
-                  <span>/</span>
-
+                  </a>/
                   <a class="" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                        document.getElementById('logout-form').submit();">
                       {{ __('Logout') }}
@@ -52,6 +56,9 @@
                   <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                       @csrf
                   </form>
+                      <div class="avatar">
+                          <img src="{{ asset('images/avatar/'.Auth::user()->avatar) }}" alt="">
+                      </div>
                   @endguest
 
               </div>
@@ -66,7 +73,7 @@
           <div class="nav-horizontal-content">
 
               <ul class="nav-ul-lv-1">
-                  <li><a href="{{ url('trang-chu') }}"> <img class="nav-logo" src="images/logo3.png" alt=""></a></li>
+                  {{--<li><a href="{{ url('trang-chu') }}"> <img class="nav-logo" src="images/logo3.png" alt=""></a></li>--}}
                   <li><a href="{{ url('trang-chu') }}">Trang chủ</a></li>
                   <li class="sanpham" style="position : unset">
                       <a href="{{ url('product') }}">Sản phẩm<i class="fas fa-caret-down"></i></a>

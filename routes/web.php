@@ -1,4 +1,4 @@
-<?php
+	<?php
 
 /*
 |--------------------------------------------------------------------------
@@ -19,6 +19,7 @@ Route::get('/home', [
     'as' =>'home1',
     'uses' => 'Controller_1@get_trangchu'
 ]);
+Route::post('/lienhe', 'Controller_1@lienhe')->name('lienhe');
 
 Route::get('trang-chu', [
 	'as' =>'trang-chu',
@@ -96,6 +97,8 @@ Route::get('dangnhap', [
 	'uses' => 'Controller_1@get_dangnhap'
 ]);
 
+Route::post('createuser', 'Auth\UserLoginController@createuser')->name('createuser');
+Route::post('loginuser', 'Auth\UserLoginController@loginuser')->name('loginuser');
 Route::get('sale', [
 	'as' =>'sale  ',
 	'uses' => 'Controller_1@get_sale'
@@ -123,17 +126,40 @@ Route::prefix('admincp')->group(function () {
 		Route::get('/', 'Auth\Admin\AdminController@index')->name('admin.index');
 
 		Route::get('addslider','SliderController@addSlider');
-
 		Route::get('listslider','SliderController@listSlider');
-	});
 
-	Route::group(['prefix' => 'cateproduct'], function (){
-        Route::get('/','CateProductController@index')->name('list.cateproduct');
-        Route::get('/create','CateProductController@create')->name('create.cateproduct');
-        Route::post('create-cateproduct','CateProductController@store')->name('store.cateproduct');
-        Route::get('edit-cateproduct','CateProductController@edit')->name('edit.cateproduct');
-        Route::post('edit-cateproduct','CateProductController@update')->name('update.cateproduct');
-        Route::get('detail-cateproduct','CateProductController@show')->name('show.cateproduct');
+
+        Route::group(['prefix' => 'cateproduct'], function (){
+            Route::get('/','CateProductController@index')->name('list.cateproduct');
+            Route::get('/create','CateProductController@create')->name('create.cateproduct');
+            Route::post('create-cateproduct','CateProductController@store')->name('store.cateproduct');
+            Route::get('edit-cateproduct','CateProductController@edit')->name('edit.cateproduct');
+            Route::post('edit-cateproduct','CateProductController@update')->name('update.cateproduct');
+            Route::get('detail-cateproduct','CateProductController@show')->name('show.cateproduct');
+        });
+        Route::group(['prefix' => 'useraccount'], function (){
+            Route::get('/','UserAccountController@index')->name('list.useraccount');
+
+            Route::get('/create','UserAccountController@create')->name('create.useraccount');
+            Route::post('/store','UserAccountController@store')->name('store.useraccount');
+
+            Route::get('edit/{id}','UserAccountController@edit')->name('edit.useraccount');
+            Route::post('update/{id}','UserAccountController@update')->name('update.useraccount');
+
+            Route::get('setactive/{id}/{status}','UserAccountController@active')->name('active.useraccount');
+        });
+        Route::group(['prefix' => 'adminaccount'], function (){
+            Route::get('/','adminAccountController@index')->name('list.adminaccount');
+
+            Route::get('/create','adminAccountController@create')->name('create.adminaccount');
+            Route::post('/store','adminAccountController@store')->name('store.adminaccount');
+
+            Route::post('update/{id}','adminAccountController@update')->name('update.adminaccount');
+
+            Route::get('setactive/{id}/{status}','adminAccountController@active')->name('active.adminaccount');
+
+        });
+
     });
 });
 Auth::routes();

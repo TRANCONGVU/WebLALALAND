@@ -12,7 +12,7 @@
     /*    background-color: white;*/
     /*}*/
 </style>
-<div class="container" style="    position: absolute;">
+<div class="container" style="position: absolute;">
 
     <div class="modal fade" id="registerModal">
         <div class="modal-dialog">
@@ -26,9 +26,9 @@
                         @csrf
 
                         <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
+                            <label for="name" class="col-md-3 col-form-label text-md-right">{{ __('Name') }}</label>
 
-                            <div class="col-md-6">
+                            <div class="col-md-9">
                                 <input id="name" type="text" class="form-control backgroundinput @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
 
                                 @error('name')
@@ -39,9 +39,9 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Giới tính;') }}</label>
+                            <label for="name" class="col-md-3 col-form-label text-md-right">{{ __('Giới tính:') }}</label>
 
-                            <div class="col-md-6">
+                            <div class="col-md-9">
                                 <select name="gender" class="backgroundinput">
                                     <option value="0">Nam</option>
                                     <option value="1">Nữ</option>
@@ -49,12 +49,12 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Birthday') }}</label>
+                            <label for="name" class="col-md-3 col-form-label text-md-right">{{ __('Birthday') }}</label>
 
-                            <div class="col-md-6">
+                            <div class="col-md-9">
                                 <div class="input-group birth-day">
                                     <div class="row">
-                                        <div id="" class="birth-item col-md-4">
+                                        <div id="" class="col-md-4">
                                             Year:<select id="year" name="year" class="backgroundinput" onchange="changyear(this)">
                                                 <?php $now = getdate();?>
                                                 @for($i = $now["year"]- 15 ; $i>= $now["year"]- 65 ; $i--)
@@ -62,14 +62,14 @@
                                                 @endfor
                                             </select>
                                         </div>
-                                        <div id="" class="birth-item col-md-4">
+                                        <div id="" class="col-md-4">
                                             Month:<select id="month" class="backgroundinput" name="month" onchange="checkmonth(this)">
                                                 @for($i = 1; $i<=12 ; $i++)
                                                     <option value="{{$i}}">{{$i}}</option>
                                                 @endfor
                                             </select>
                                         </div>
-                                        <div id="monthday" class="birth-item col-md-4">
+                                        <div id="monthday" class="col-md-4">
                                             Day:<select id="day" name="day" class="backgroundinput">
                                                 @for($i = 1; $i<=31 ; $i++)
                                                     <option>{{$i}}</option>
@@ -144,9 +144,9 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+                            <label for="email" class="col-md-3 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
 
-                            <div class="col-md-6">
+                            <div class="col-md-9">
                                 <input id="email" type="email" class="form-control backgroundinput @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
 
                                 @error('email')
@@ -162,9 +162,9 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('Avatar') }}</label>
+                            <label for="email" class="col-md-3 col-form-label text-md-right">{{ __('Avatar') }}</label>
 
-                            <div class="col-md-6">
+                            <div class="col-md-9">
                                 <input type="file" id="avatar" name="avatar" style="border: transparent;" placeholder="Avatar" class="form-control backgroundinput" onchange="fileValidation()" accept=".jpg, .png, .gif">
                                 <script type="text/javascript">
                                     function fileValidation() {
@@ -194,9 +194,9 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+                            <label for="password" class="col-md-3 col-form-label text-md-right">{{ __('Password') }}</label>
 
-                            <div class="col-md-6">
+                            <div class="col-md-9">
                                 <input id="password" type="password" class="form-control backgroundinput @error('password') is-invalid @enderror" name="password" required autocomplete="new-password"  onchange="lengthPasswword(this)">
 
                                 @error('password')
@@ -221,9 +221,9 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
+                            <label for="password-confirm" class="col-md-3 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
 
-                            <div class="col-md-6">
+                            <div class="col-md-9">
                                 <input id="password-confirm" type="password" class="form-control backgroundinput" name="password_confirmation" required autocomplete="new-password" onchange="confirmPasswword(this)">
                                 <p id="errorpass" style="color: red; font-size: 15px"></p>
                                 <script>
