@@ -16,7 +16,7 @@ class UpDb extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
-            $table->string('birth');
+            $table->date('birth')->nullable();
             $table->string('avatar');
             $table->integer('gender');
             $table->string('email')->unique();
@@ -27,23 +27,24 @@ class UpDb extends Migration
             $table->timestamps();
         });
 
-        Schema::create('role', function (Blueprint $table) {
+       /* Schema::create('role', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
-        });
+        });*/
 
         Schema::create('admins', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name',191);
             $table->string('email',191)->unique();
             $table->string('password',191);
+            $table->integer('status')->default('0');
             $table->timestamp('email_verified_at')->nullable();
-            $table->bigInteger('level')->unsigned();
+            /*$table->bigInteger('level')->unsigned();
             $table
                 ->foreign('level')
                 ->references('id')
                 ->on('role');
-            $table->timestamps();
+            $table->timestamps();*/
         });
 
          //slider

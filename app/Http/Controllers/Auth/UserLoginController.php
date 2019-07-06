@@ -23,7 +23,7 @@ class UserLoginController extends Controller
         if (Auth::guard('web')->attempt(
             ['email' => $request->email,
                 'password'=>$request->password,
-
+                'status' => 1,
             ],
             $request->remember
         )){
@@ -66,13 +66,14 @@ class UserLoginController extends Controller
             'avatar' => $file_name,
             'gender' => $input['gender'],
             'email' => $input['email'],
+            'status' => 1,
             'password' => bcrypt($input['password_confirmation'])
         ]);
 
         if (Auth::guard('web')->attempt(
             ['email' => $request->email,
                 'password'=>$request->password,
-
+                'status' => 1,
             ],
             $request->remember
         )){
@@ -81,4 +82,5 @@ class UserLoginController extends Controller
             return redirect()->back()->with('thongbao', 'Login Failed');
         }
     }
+
 }

@@ -3,7 +3,7 @@
 
 
 <h1>
-        Danh sách slider...
+        Danh sách users...
     </h1>
     <br>
     @if(session('thongbao'))
@@ -13,7 +13,7 @@
         </script>
     @endif
     <div class="table-data__tool">
-    <a class="btn btn-success" href="{{url('admincp/addslider')}}">Thêm slider</a>
+    <a class="btn btn-success" href="{{url('admincp/useraccount/create')}}">Thêm user</a>
     </div>
     <br>
     <table class=" table table-bordered table-hover" id="dbtbl">
@@ -52,14 +52,29 @@
                         @endif
                     </td>
                     <td>
-                        <a type="button" class="fa fa-edit btn btn-default btn btn-success" href="" title="Sửa"></a>
-                        <a type="button" class="fa fa-trash btn btn-default btn btn-danger" href="" onclick="return confirmAction()" title="Xóa">Xóa</a>
-                        <a type="button" class="fa fa-trash btn btn-default btn btn-success" href="" onclick="" title="Xóa">Active</a>
+                        <a type="button" class="fa fa-edit btn btn-default btn btn-success" href="{{ url('admincp/useraccount/edit/'.$value->id) }}" title="Sửa"></a>
+                        {{--<a type="button" class="fa fa-trash btn btn-default btn btn-danger" href="" onclick="return confirmAction()" title="Xóa">Xóa</a>--}}
+                        @if($value->status==1)
+                            <a type="button" class="fa fa-trash btn btn-default btn btn-danger" href="{{ url('admincp/useraccount/setactive/'.$value->id.'/0') }}" onclick="" title="Xóa">unActive</a>
+                        @else
+                            <a type="button" class="fa fa-trash btn btn-default btn btn-primary" href="{{ url('admincp/useraccount/setactive/'.$value->id.'/1') }}" onclick="" title="Xóa">Active</a>
+                        @endif
+
                     </td>
                 </tr>    
              @endforeach
             
         </tbody>
+        {{--<script>--}}
+            {{--function setactive(id,status) {--}}
+
+                {{--alert('{{ url('admincp/useraccount/setactive/') }}'+'/'+id+'/'+status);--}}
+                {{--/*$.get('{{ url('admincp/useraccount/setactive/') }}'+'/'+id+'/'+status, function (data) {--}}
+                    {{--location.reload();--}}
+                    {{--//alert('hihi');--}}
+                {{--});--}}
+            {{--}--}}
+        {{--</script>--}}
     
     </table>
     <script language="JavaScript">

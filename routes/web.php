@@ -1,4 +1,4 @@
-<?php
+	<?php
 
 /*
 |--------------------------------------------------------------------------
@@ -99,6 +99,11 @@ Route::get('dangnhap', [
 
 Route::post('createuser', 'Auth\UserLoginController@createuser')->name('createuser');
 Route::post('loginuser', 'Auth\UserLoginController@loginuser')->name('loginuser');
+Route::get('sale', [
+	'as' =>'sale  ',
+	'uses' => 'Controller_1@get_sale'
+]);
+Route::post('createuser', 'Controller_1@createuser')->name('createuser');
 
 
 
@@ -107,17 +112,17 @@ Route::post('loginuser', 'Auth\UserLoginController@loginuser')->name('loginuser'
 
 
 Route::prefix('admincp')->group(function () {
-    
+
 
     // Route phần đăng nhập
     Route::get('login', 'Auth\Admin\LoginController@login')->name('admin.auth.login');
     Route::post('login', 'Auth\Admin\LoginController@loginAdmin')->name('admin.auth.loginAdmin');
     //Route dùng để đăng xuất
 	Route::get('logout', 'Auth\Admin\LoginController@logout')->name('admin.auth.logout');
-	
+
 	//slider
 	Route::prefix('/')->middleware('auth:admins')->group(function () {
-		
+
 		Route::get('/', 'Auth\Admin\AdminController@index')->name('admin.index');
 
 		Route::get('addslider','SliderController@addSlider');
@@ -134,11 +139,25 @@ Route::prefix('admincp')->group(function () {
         });
         Route::group(['prefix' => 'useraccount'], function (){
             Route::get('/','UserAccountController@index')->name('list.useraccount');
-            Route::get('/create','CateProductController@create')->name('create.cateproduct');
-            Route::post('create-cateproduct','CateProductController@store')->name('store.cateproduct');
-            Route::get('edit-cateproduct','CateProductController@edit')->name('edit.cateproduct');
-            Route::post('edit-cateproduct','CateProductController@update')->name('update.cateproduct');
-            Route::get('detail-cateproduct','CateProductController@show')->name('show.cateproduct');
+
+            Route::get('/create','UserAccountController@create')->name('create.useraccount');
+            Route::post('/store','UserAccountController@store')->name('store.useraccount');
+
+            Route::get('edit/{id}','UserAccountController@edit')->name('edit.useraccount');
+            Route::post('update/{id}','UserAccountController@update')->name('update.useraccount');
+
+            Route::get('setactive/{id}/{status}','UserAccountController@active')->name('active.useraccount');
+        });
+        Route::group(['prefix' => 'adminaccount'], function (){
+            Route::get('/','adminAccountController@index')->name('list.adminaccount');
+
+            Route::get('/create','adminAccountController@create')->name('create.adminaccount');
+            Route::post('/store','adminAccountController@store')->name('store.adminaccount');
+
+            Route::post('update/{id}','adminAccountController@update')->name('update.adminaccount');
+
+            Route::get('setactive/{id}/{status}','adminAccountController@active')->name('active.adminaccount');
+
         });
 
     });

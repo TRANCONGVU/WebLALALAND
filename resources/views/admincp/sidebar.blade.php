@@ -39,7 +39,7 @@
                 <a href="#"><i class="fa fa-user" aria-hidden="true"></i>
                     <span>Accounts</span></a>
                 <ul class="sub-menu-list">
-                    <li><a href="grids.html">Admin</a> </li>
+                    <li><a href="{{ route('list.adminaccount') }}">Admin</a> </li>
                     <li><a href="{{ route('list.useraccount') }}">User</a></li>
                 </ul>
             </li>
