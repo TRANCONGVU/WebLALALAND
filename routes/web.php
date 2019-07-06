@@ -12,8 +12,12 @@
 */
 
 Route::get('/', [
-	'as' =>'trang-chu',
+	'as' =>'home',
 	'uses' => 'Controller_1@get_trangchu'
+]);
+Route::get('/home', [
+    'as' =>'home1',
+    'uses' => 'Controller_1@get_trangchu'
 ]);
 
 Route::get('trang-chu', [
@@ -92,6 +96,12 @@ Route::get('dangnhap', [
 	'uses' => 'Controller_1@get_dangnhap'
 ]);
 
+Route::get('sale', [
+	'as' =>'sale  ',
+	'uses' => 'Controller_1@get_sale'
+]);
+Route::post('createuser', 'Controller_1@createuser')->name('createuser');
+
 
 
 
@@ -99,27 +109,44 @@ Route::get('dangnhap', [
 
 
 Route::prefix('admincp')->group(function () {
-    
+
 
     // Route phần đăng nhập
     Route::get('login', 'Auth\Admin\LoginController@login')->name('admin.auth.login');
     Route::post('login', 'Auth\Admin\LoginController@loginAdmin')->name('admin.auth.loginAdmin');
     //Route dùng để đăng xuất
 	Route::get('logout', 'Auth\Admin\LoginController@logout')->name('admin.auth.logout');
-	
+
 	//slider
 	Route::prefix('/')->middleware('auth:admins')->group(function () {
-		
-		Route::get('/', 'Auth\Admin\AdminController@index')->name('admin.index');
-		//add
-		Route::get('addslider','SliderController@addSlider');
-		Route::post('addslider','SliderController@postSlider');
 
-		//list
-		Route::get('listslider','SliderController@listSlider')->name('listslider');
-		//delete
-		Route::get('delete/{id}','SliderController@deleteSlider');
+		Route::get('/', 'Auth\Admin\AdminController@index')->name('admin.index');
 		
+		Route::group(['prefix'=>'slider'],function(){
+			//add
+			Route::get('addslider','SliderController@addSlider');
+			Route::post('addslider','SliderController@postSlider');
+			//list
+			Route::get('listslider','SliderController@listSlider')->name('listslider');
+			//delete
+			Route::get('delete/{id}','SliderController@deleteSlider');
+			//edit
+			Route::get('edit/{id}','SliderController@editSlider');
+			Route::post('edit/{id}','SliderController@postEditSlider');
+		});
+
+		Route::get('introduce','IntroduceController@intro');
+	
+		Route::group(['prefix' => 'cateproduct'], function (){
+			Route::get('/','CateProductController@index')->name('list.cateproduct');
+			Route::get('/create','CateProductController@create')->name('create.cateproduct');
+			Route::post('create-cateproduct','CateProductController@store')->name('store.cateproduct');
+			Route::get('edit-cateproduct','CateProductController@edit')->name('edit.cateproduct');
+			Route::post('edit-cateproduct','CateProductController@update')->name('update.cateproduct');
+			Route::get('detail-cateproduct','CateProductController@show')->name('show.cateproduct');
+		});
 	});
+
+	
 });
 Auth::routes();

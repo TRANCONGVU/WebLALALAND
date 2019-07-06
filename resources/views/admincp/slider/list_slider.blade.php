@@ -12,7 +12,7 @@
         </div>
     @endif
     <div class="table-data__tool">
-    <a class="btn btn-success" href="{{url('admincp/addslider')}}">Thêm slider</a>
+    <a class="btn btn-success" href="{{url('admincp/slider/addslider')}}">Thêm slider</a>
     </div>
     <br>
     <table class="dataTables_filter table table-bordered table-hover" id="dbtbl">
@@ -33,8 +33,8 @@
                         <img width="250px" height="120px" src=""> 
                     </td>
                     <td>
-                        <a type="button" class="fa fa-edit btn btn-default btn btn-success" href="" title="Sửa"></a>
-                        <a type="button" class="fa fa-trash btn btn-default btn btn-danger" href="{{url('admincp/delete').'/'.$value->id}}" onclick="return confirmAction()" title="Xóa">Xóa</a>
+                        <a type="button" class="fa fa-edit btn btn-default btn btn-success" href="{{url('admincp/slider/edit').'/'.$value->id}}" title="Sửa"></a>
+                        <a type="button" class="fa fa-trash btn btn-default btn btn-danger" href="{{url('admincp/slider/delete').'/'.$value->id}}" onclick="return confirmAction()" title="Xóa">Xóa</a>
                     </td>
                 </tr>    
             @endforeach

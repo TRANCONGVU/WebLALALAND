@@ -5,7 +5,7 @@ $('.section-1').owlCarousel({
     responsiveClass:true,
     dots:true,
     nav:true,
-    autoplay:true,
+    autoplay:false,
     autoplayTimeout:3000,
     responsive:{
         0:{

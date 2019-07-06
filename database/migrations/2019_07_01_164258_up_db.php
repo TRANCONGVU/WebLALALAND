@@ -13,43 +13,86 @@ class UpDb extends Migration
      */
     public function up()
     {
+        Schema::create('users', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('name');
+            $table->string('birth');
+            $table->string('avatar');
+            $table->integer('gender');
+            $table->string('email')->unique();
+            $table->timestamp('email_verified_at')->nullable();
+            $table->string('password');
+            $table->rememberToken();
+            $table->timestamps();
+        });
+
+        Schema::create('role', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('name');
+        });
+
+        Schema::create('admins', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('name',191);
+            $table->string('email',191)->unique();
+            $table->string('password',191);
+            $table->timestamp('email_verified_at')->nullable();
+            $table->bigInteger('level')->unsigned();
+            $table
+                ->foreign('level')
+                ->references('id')
+                ->on('role');
+            $table->timestamps();
+        });
+
          //slider
          Schema::create('sliders', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('image');
-            $table->string('logo');
+            $table->string('logo')->nullable();
             $table->timestamps();
         });
 
         //san pham
         Schema::create('cate_products', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name');
+            $table->string('name')->unique();
+            $table->string('slug');
+            $table->tinyInteger('active')->default(1);
+            $table->bigInteger('total_product')->default(0);
+            $table->tinyInteger('home');
             $table->timestamps();
         });
-        Schema::create('subcate_products', function (Blueprint $table) {
+        Schema::create('product_type', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
+            $table->string('slug');
+            $table->tinyInteger('active')->default(1);
             $table->bigInteger('cate_id')->unsigned();
             $table->foreign('cate_id')->references('id')->on('cate_products')->onDelete('cascade');
             $table->timestamps();
         });
+
         Schema::create('products', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
-            $table->text('image');
-            $table->text('code');
-            $table->integer('sale');
-            $table->text('color');
-            $table->text('size');
-            $table->integer('quantity');
-            $table->bigInteger('subcate_id')->unsigned();
-            $table->foreign('subcate_id')->references('id')->on('subcate_products')->onDelete('cascade');
+            $table->string('slug');
+            $table->string('image');
+            $table->string('code');
+            $table->tinyInteger('pay');
+            $table->tinyInteger('sale');
+            $table->tinyInteger('quantity');
+            $table->bigInteger('price');
+            $table->tinyInteger('active')->default(1);
+            $table->bigInteger('category_id')->unsigned();
+            $table->bigInteger('producttype_id')->unsigned();
+            $table->foreign('category_id')->references('id')->on('cate_products')->onDelete('cascade');
+            $table->foreign('producttype_id')->references('id')->on('product_type')->onDelete('cascade');
             $table->timestamps();
         });
 
         // bo suu tap
-        
+
         Schema::create('collections', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
@@ -96,6 +139,22 @@ class UpDb extends Migration
             $table->text('image');
             $table->bigInteger('cate_id')->unsigned();
             $table->foreign('cate_id')->references('id')->on('cate_news')->onDelete('cascade');
+            $table->timestamps();
+        });
+        Schema::create('color',function (Blueprint $table){
+            $table->bigIncrements('id');
+            $table->string('name');
+            $table->char('image');
+            $table->bigInteger('product_id')->unsigned();
+            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
+            $table->timestamps();
+        });
+        //
+        Schema::create('size',function (Blueprint $table){
+            $table->bigIncrements('id');
+            $table->string('name');
+            $table->bigInteger('product_id')->unsigned();
+            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
             $table->timestamps();
         });
     }

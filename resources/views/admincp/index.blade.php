@@ -48,6 +48,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         
         <script type="text/javascript" charset="utf8" src="/DataTables/datatables.js"></script> --}}
 
+        <script type="text/javascript" src="{{asset('')}}ckeditor/ckeditor.js"></script>
+        {{-- <script type="text/javascript" src="//cdn.ckeditor.com/4.5.3/standard/ckeditor.js"></script> --}}
+
 </head>
 
 <body class="sticky-header left-side-collapsed"  onload="initMap()">
@@ -84,5 +87,6 @@ $(document).ready( function () {
             $('#dbtbl').DataTable();
         } );
 </script>
+
 </body>
 </html>
