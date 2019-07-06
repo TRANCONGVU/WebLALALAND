@@ -28,7 +28,17 @@
     </h1>
     
     <br>
-    
+    @if ($errors ->any())
+
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $err)
+                <li>{{$err}}</li>
+            @endforeach
+        </ul>
+    </div>
+        
+    @endif
     <div class="row">
         <div class="box-content"  >
             <div class="table-responsive" >
@@ -38,7 +48,7 @@
                     <div class="form-group">
                         <label class="text-body custom-control-label">Ảnh slider:</label>
                         <input onchange="showIMG()" name="image" id="image" class="form-control" type="file">
-                        <p style="color:red">{{ $errors->first('image') }}</p>
+                        {{-- <p style="color:red">{{ $errors->first('image') }}</p> --}}
                     </div>
 
                     <div class="form-group">
@@ -51,7 +61,7 @@
                     <div class="form-group">	
                         <label class="text-body custom-control-label">Logo : (Nếu có)</label>
                         <input onchange="showIMGs()" name="logo" id="logo" class="form-control" type="file">
-                        <p style="color:red">{{ $errors->first('logo') }}</p>
+                        {{-- <p style="color:red">{{ $errors->first('logo') }}</p> --}}
                     </div>
 
                     <div class="form-group">

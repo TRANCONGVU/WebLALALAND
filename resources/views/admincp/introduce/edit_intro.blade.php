@@ -4,7 +4,7 @@
 
 
 <h1>
-        Giới thiệu...
+        Sửa Giới thiệu...
     </h1>
     
     <br>
@@ -23,16 +23,18 @@
         <div class="box-content"  >
             <div class="table-responsive" >
     
-                <form name="create" action="{{url('admincp/introduce/introduce')}}" method="post" enctype="multipart/form-data">
+                @foreach ($introduce as $value)
+                <form name="create" action="{{url('admincp/introduce/editIntro').'/'.$value->id}}" method="post" enctype="multipart/form-data">
                     @csrf
-                <textarea name="content"  rows="10" cols="80">{{ old('content')}}</textarea>
+                <textarea name="content"  rows="10" cols="80">{{$value->content}}{{ old('content')}}</textarea>
 
 
                     <div class="form-group">
-                        <a class="btn btn-danger" href="{{url('admincp/introduce/listintroduce')}}" type="button" title="Cancel" value="">Quay lại</a>
-                        <input name="submit" class="btn btn-primary" type="submit" value="Thêm">
+                        <a class="btn btn-danger" href="{{url('admincp/introduce/listintroduce')}}" type="button" title="Cancel" value="">Hủy</a>
+                        <input name="submit" class="btn btn-primary" type="submit" value="Lưu">
                     </div>
                 </form>
+                @endforeach
             </div>
         </div>
     </div>

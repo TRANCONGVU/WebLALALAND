@@ -51,6 +51,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
         <script type="text/javascript" src="{{asset('')}}ckeditor/ckeditor.js"></script>
         {{-- <script type="text/javascript" src="//cdn.ckeditor.com/4.5.3/standard/ckeditor.js"></script> --}}
+        <link rel="stylesheet" href="{{asset('ducbe.css')}}">
 
 </head>
 
