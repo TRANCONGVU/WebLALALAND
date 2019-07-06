@@ -52,7 +52,7 @@
                 </ul>
             </li>
             <li class="menu-list">
-                <a href=""><i class="glyphicon glyphicon-picture"></i>
+                <a href=""><i class="glyphicon glyphicon-filter"></i>
                     <span>Giới thiệu</span></a>
                 <ul class="sub-menu-list">
                     <li><a href="{{url('admincp/introduce/introduce')}}">Thêm giới thiệu</a> </li>

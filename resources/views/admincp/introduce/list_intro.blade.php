@@ -34,8 +34,8 @@
                         </div> 
                     </td>
                     <td>
-                        <a type="button" class="fa fa-edit btn btn-default btn btn-success" href="" title="Sửa"></a>
-                        <a type="button" class="fa fa-trash btn btn-default btn btn-danger" href="" onclick="return confirmAction()" title="Xóa">Xóa</a>
+                        <a type="button" class="fa fa-edit btn btn-default btn btn-success" href="{{url('admincp/introduce/editIntro').'/'.$value->id}}" title="Sửa"></a>
+                        <a type="button" class="fa fa-trash btn btn-default btn btn-danger" href="{{url('admincp/introduce/delete').'/'.$value->id}}" onclick="return confirmAction()" title="Xóa">Xóa</a>
                     </td>
                 </tr>    
             @endforeach

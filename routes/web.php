@@ -153,6 +153,11 @@ Route::prefix('admincp')->group(function () {
 			Route::post('introduce','IntroduceController@postIntro');
 			//lít intro
 			Route::get('listintroduce','IntroduceController@listIntro')->name('listintro');
+			//xoa
+			Route::get('delete/{id}','IntroduceController@delete');
+			//edit
+			Route::get('editIntro/{id}','IntroduceController@edit');
+			Route::post('editIntro/{id}','IntroduceController@postEdit');
 		});
 	
 		//product
