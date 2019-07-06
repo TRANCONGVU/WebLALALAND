@@ -111,9 +111,15 @@ Route::prefix('admincp')->group(function () {
 	Route::prefix('/')->middleware('auth:admins')->group(function () {
 		
 		Route::get('/', 'Auth\Admin\AdminController@index')->name('admin.index');
-
+		//add
 		Route::get('addslider','SliderController@addSlider');
-		Route::get('listslider','SliderController@listSlider');
+		Route::post('addslider','SliderController@postSlider');
+
+		//list
+		Route::get('listslider','SliderController@listSlider')->name('listslider');
+		//delete
+		Route::get('delete/{id}','SliderController@deleteSlider');
+		
 	});
 });
 Auth::routes();

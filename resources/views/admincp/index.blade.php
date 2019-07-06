@@ -34,7 +34,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     </script>
     <!--//end-animate-->
     <!----webfonts--->
-    <link href='//fonts.googleapis.com/css?family=Cabin:400,400italic,500,500italic,600,600italic,700,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Cabin:400,400italic,500,500italic,600,600italic,700,700italic' rel='stylesheet' type='text/css'>
     <!---//webfonts--->
     <!-- Meters graphs -->
     <script src="{{ asset('admin/dasbroad') }}/js/jquery-1.10.2.min.js"></script>
@@ -44,9 +44,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
   
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
-<link rel="stylesheet" type="text/css" href="/DataTables/datatables.css">
- 
-<script type="text/javascript" charset="utf8" src="/DataTables/datatables.js"></script>
+        {{-- <link rel="stylesheet" type="text/css" href="/DataTables/datatables.css">
+        
+        <script type="text/javascript" charset="utf8" src="/DataTables/datatables.js"></script> --}}
 
 </head>
 

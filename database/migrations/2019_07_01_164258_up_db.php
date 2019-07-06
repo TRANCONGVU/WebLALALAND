@@ -17,6 +17,7 @@ class UpDb extends Migration
          Schema::create('sliders', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('image');
+            $table->string('logo');
             $table->timestamps();
         });
 

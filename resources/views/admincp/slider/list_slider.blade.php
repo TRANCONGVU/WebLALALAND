@@ -7,10 +7,9 @@
     </h1>
     <br>
     @if(session('thongbao'))
-        <script>
-            alert('{{ session('thongbao') }}');
-    
-        </script>
+        <div class="alert alert-success">
+            {{ session('thongbao') }}
+        </div>
     @endif
     <div class="table-data__tool">
     <a class="btn btn-success" href="{{url('admincp/addslider')}}">Thêm slider</a>
@@ -19,28 +18,26 @@
     <table class="dataTables_filter table table-bordered table-hover" id="dbtbl">
         <thead>
             <tr>
-                <th>Ảnh slider</th>
-                <th>Logo</th>
-                <th>Tiêu đề</th>
-                <th>Hành Động</th>
+                <th class="col-md-3">Ảnh slider</th>
+                <th class="col-md-3">Logo</th>
+                <th class="col-md-3">Hành Động</th>
             </tr>
         </thead>
         <tbody>
-            {{-- @foreach ($listSlider as $value) --}}
+            @foreach ($slider as $value)
                 <tr>    
                     <td>
-                        <img width="250px" height="120px" src=""> 
+                        <img width="250px" height="120px" src="{{asset('assets/img').'/'.$value->image}}"> 
                     </td>
                     <td>
                         <img width="250px" height="120px" src=""> 
                     </td>
-                    <td>title</td>
                     <td>
                         <a type="button" class="fa fa-edit btn btn-default btn btn-success" href="" title="Sửa"></a>
-                        <a type="button" class="fa fa-trash btn btn-default btn btn-danger" href="" onclick="return confirmAction()" title="Xóa"></a>
+                        <a type="button" class="fa fa-trash btn btn-default btn btn-danger" href="{{url('admincp/delete').'/'.$value->id}}" onclick="return confirmAction()" title="Xóa">Xóa</a>
                     </td>
                 </tr>    
-            {{-- @endforeach --}}
+            @endforeach
             
         </tbody>
     
