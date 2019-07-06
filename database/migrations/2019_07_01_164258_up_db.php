@@ -107,7 +107,7 @@ class UpDb extends Migration
         //gioi thieu
         Schema::create('introduce', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('content');
+            $table->text('content');
             $table->timestamps();
         });
 

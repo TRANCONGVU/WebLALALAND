@@ -47,11 +47,19 @@
                 <a href=""><i class="glyphicon glyphicon-picture"></i>
                     <span>Slider</span></a>
                 <ul class="sub-menu-list">
-                    <li><a href="{{url('admincp/slider/addslider')}}">Add slider</a> </li>
+                    <li><a href="{{url('admincp/slider/addslider')}}">Thêm slider</a> </li>
                     <li><a href="{{url('admincp/slider/listslider')}}">Danh sách slider</a></li>
                 </ul>
             </li>
-            <li><a href="{{asset('admincp/introduce')}}"><i class="lnr lnr-spell-check"></i> <span>Giới thiệu !</span></a></li>
+            <li class="menu-list">
+                <a href=""><i class="glyphicon glyphicon-picture"></i>
+                    <span>Giới thiệu</span></a>
+                <ul class="sub-menu-list">
+                    <li><a href="{{url('admincp/introduce/introduce')}}">Thêm giới thiệu</a> </li>
+                    <li><a href="{{url('admincp/introduce/listintroduce')}}">Danh sách giới thiệu</a></li>
+                </ul>
+            </li>
+            {{-- <li><a href="{{asset('admincp/introduce')}}"><i class="lnr lnr-spell-check"></i> <span>Giới thiệu !</span></a></li> --}}
             <li><a href="tables.html"><i class="lnr lnr-menu"></i> <span>Tables</span></a></li>
             <li class="menu-list"><a href="#"><i class="lnr lnr-envelope"></i> <span>MailBox</span></a>
                 <ul class="sub-menu-list">

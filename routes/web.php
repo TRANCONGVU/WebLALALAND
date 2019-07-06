@@ -138,8 +138,16 @@ Route::prefix('admincp')->group(function () {
 			Route::post('edit/{id}','SliderController@postEditSlider');
 		});
 
-		Route::get('introduce','IntroduceController@intro');
+		//gioi thieu
+		Route::group(['prefix' => 'introduce'],function(){
+			//add intro
+			Route::get('introduce','IntroduceController@intro');
+			Route::post('introduce','IntroduceController@postIntro');
+			//lít intro
+			Route::get('listintroduce','IntroduceController@listIntro')->name('listintro');
+		});
 	
+		//product
 		Route::group(['prefix' => 'cateproduct'], function (){
 			Route::get('/','CateProductController@index')->name('list.cateproduct');
 			Route::get('/create','CateProductController@create')->name('create.cateproduct');
