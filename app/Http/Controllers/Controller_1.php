@@ -6,12 +6,32 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\View;
 
 class Controller_1 extends Controller
 {
+    public function __construct()
+    {
+        $cate_news=DB::table('cate_news')->get();
+        View::share('cate_news', $cate_news);
+    }
+
     public  function get_trangchu(){
     	return view('pages.trangchu');
     }
+
+
+    /*
+     * tin tức
+     * */
+    public function get_loaitin($slug){
+        $data['cates'] = DB::table('cate_news')->where('slug', $slug)->first();
+        $data['news'] = DB::table('news')->where('cate_id', $data['cates']->id)->paginate('4');
+
+        return view('pages.loaitin', $data);
+    }
+
+
     public  function get_product(){
     	return view('pages.product');
     }
