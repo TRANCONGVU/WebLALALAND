@@ -1,4 +1,4 @@
-<?php
+	<?php
 
 /*
 |--------------------------------------------------------------------------
@@ -19,6 +19,7 @@ Route::get('/home', [
     'as' =>'home1',
     'uses' => 'Controller_1@get_trangchu'
 ]);
+Route::post('/lienhe', 'Controller_1@lienhe')->name('lienhe');
 
 Route::get('trang-chu', [
 	'as' =>'trang-chu',
@@ -96,6 +97,8 @@ Route::get('dangnhap', [
 	'uses' => 'Controller_1@get_dangnhap'
 ]);
 
+Route::post('createuser', 'Auth\UserLoginController@createuser')->name('createuser');
+Route::post('loginuser', 'Auth\UserLoginController@loginuser')->name('loginuser');
 Route::get('sale', [
 	'as' =>'sale  ',
 	'uses' => 'Controller_1@get_sale'

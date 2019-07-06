@@ -33,7 +33,7 @@
 }
 /*---------------------------------------Nav-horizontal---------------------------------------*/
 nav.nav-horizontal{
-	background: #f4f6f8;
+	background: rgba(255, 255, 255, 0.80);
 	-webkit-transition: 0.4s all;
 	-moz-transition: 0.4s all;
 	-ms-transition: 0.4s all;
@@ -814,6 +814,33 @@ section.back-to-top{
 	right: 30px;
 	padding: 20px;
 	z-index: 999;
+}
+.box-up {
+    position: fixed;
+	bottom: 0;
+    padding: 20px;
+    right: 0;
+    z-index: 999;
+    top: 200px;
+}
+.box-up-item {
+    padding: 10px;
+    width: 60px;
+    height: 60px;
+    position: relative;
+    right: -20px;
+    background-color: wheat;
+    border : 1px solid #dedede;
+}
+.box-up-item:hover{
+    background-color: pink;
+
+}
+.box-up-item img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
 }
 .back-to-top-button{
 	background: #000;

@@ -12,21 +12,22 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // $this->call(UsersTableSeeder::class);
-        $roles = "Cộng tác viên, Quản trị viên, Administrator";
+     /*   $roles = "Cộng tác viên, Quản trị viên, Administrator";
         $role = explode(',',$roles);
         foreach($role as $rl)
         {
             DB::table('role')->insert([
                 'name' => $rl
             ]);
-        }
+        }*/
 
         DB::table('admins')->insert([
             'name' => 'admin',
             'email' => 'admin@gmail.com',
             'email_verified_at' => now(),
+            'status' => '1',
             'password' => bcrypt('12345678'), // password :12345678
-            'level' => 3,
+            //'level' => 3,
         ]);
         DB::table('users')->insert([
             'name' => 'user',
@@ -34,6 +35,7 @@ class DatabaseSeeder extends Seeder
             'avatar' => 'male.png',
             'gender' => '0',
             'email' => 'user@gmail.com',
+            'status' => '1',
             'email_verified_at' => now(),
             'password' => bcrypt('12345678'), // password :12345678
 

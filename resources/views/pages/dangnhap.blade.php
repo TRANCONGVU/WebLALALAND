@@ -25,7 +25,7 @@
     <div class="modal fade" id="loginModal">
         <div class="modal-dialog">
             <div class="modal-content login-custom-form">
-                <form action="{{ route('login') }}" method="post">
+                <form action="{{ route('loginuser') }}" method="post">
                 @csrf
                 <!-- Modal Header -->
                     <div class="modal-header">
@@ -36,7 +36,7 @@
                     <div class="modal-body">
                         <div class=" w3l-form-group" style="padding-bottom:10px;">
                             <label>Username:</label>
-                            <input id="email" type="email" class="form-control backgroundinput @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                            <input id="login_email" type="email" class="form-control backgroundinput @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
 
                             @error('email')
                             <span class="invalid-feedback" role="alert">
