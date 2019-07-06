@@ -15,6 +15,7 @@ class CateProductController extends Controller
     public function index()
     {
         $cateproduct = DB::table('cate_products')->orderBy('id','desc')->paginate(5);
+//        dd($cateproduct);
         return view('admincp.cate-product.list',compact('cateproduct'));
     }
 

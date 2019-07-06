@@ -4,7 +4,8 @@
     <div class="card-header py-3">
         <h6 class="m-0 font-weight-bold text-primary">Category</h6>
     </div>
-    <div class="card-body">
+
+    <div class="bs-example4" data-example-id="simple-responsive-table">
         <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead>
@@ -14,41 +15,43 @@
                     <th>Slug</th>
                     <th>Active</th>
                     <th>Sản phẩm đã bán</th>
-                    <th></th>
+                    <th>Chỉnh sửa</th>
                 </tr>
                 </thead>
-                <tfoot>
+                <tbody>
                 <tr>
                     <th>STT</th>
                     <th>Name</th>
                     <th>Slug</th>
-                    <th>Status</th>
+                    <th>Active</th>
+                    <th>Sản phẩm đã bán</th>
                     <th>Chỉnh sửa</th>
                 </tr>
-                </tfoot>
+                </tbody>
                 <tbody>
-                @foreach($category as $key => $value)
+                @foreach($cateproduct as $key => $value)
                     <tr>
                         <td>{{ $key+1 }}</td>
                         <td>{{ $value->name }}</td>
                         <td>{{ $value->slug }}</td>
                         <td>
-                            @if($value->status==1)
+                            @if($value->active==1)
                                 {{ "Hiển thị" }}
                             @else
                                 {{ "Không hiển thị" }}
                             @endif
                         </td>
+                        <td>{{ $value->total_product }}</td>
                         <td>
-                            <button class="btn btn-primary edit" title="{{ "Sửa ".$value->name }}" data-toggle="modal" data-target="#edit" onclick="showItems({{$value->id}})" type="button" ><i class="fas fa-edit"></i></button>
-                            <button class="btn btn-danger delete" title="{{ "Xoá ".$value->name }}" data-toggle="modal" data-target="#delete" type="button" data-id="{{ $value->id }}"><i class="fas fa-trash-alt"></i></button>
+                            <a class="fa btn btn-default" title="{{ "Sửa ".$value->name }}" href="{{url('admincp/cateproduct/edit-cateproduct/'.$value->id)}}" type="button"><i class="fas fa-edit"></i></a>
+                            <a class="fa btn btn-default" title="{{ "Xoá ".$value->name }}" href="{{url('admincp/cateproduct/delete-cateproduct/'.$value->id)}}" type="button"><i class="fas fa-trash-alt"></i></a>
                         </td>
                     </tr>
                 @endforeach
                 </tbody>
             </table>
-            <div class="pull-right">{{ $category->links() }}</div>
-        </div>
+            <div class="pull-right">{{ $cateproduct->links() }}</div>
+        </div><!-- /.table-responsive -->
     </div>
 </div>
 @endsection

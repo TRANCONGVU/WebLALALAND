@@ -59,7 +59,6 @@ class UpDb extends Migration
             $table->string('slug');
             $table->tinyInteger('active')->default(1);
             $table->bigInteger('total_product')->default(0);
-            $table->tinyInteger('home');
             $table->timestamps();
         });
         Schema::create('product_type', function (Blueprint $table) {

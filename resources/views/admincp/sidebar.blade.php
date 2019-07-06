@@ -52,11 +52,10 @@
                 </ul>
             </li>
             {{-- <li><a href="{{asset('admincp/addslider')}}"><i class="lnr lnr-spell-check"></i> <span>Slider</span></a></li> --}}
-            <li><a href="tables.html"><i class="lnr lnr-menu"></i> <span>Tables</span></a></li>
-            <li class="menu-list"><a href="#"><i class="lnr lnr-envelope"></i> <span>MailBox</span></a>
+            <li class="menu-list"><a href=""><i class="lnr lnr-menu"></i> <span>Loại sản phẩm</span></a>
                 <ul class="sub-menu-list">
-                    <li><a href="inbox.html">Inbox</a> </li>
-                    <li><a href="compose-mail.html">Compose Mail</a></li>
+                    <li><a href="{{ Route('list.cateproduct') }}">Danh mục sản phẩm</a> </li>
+                    <li><a href="{{ Route('list.cateproduct') }}">Danh mục sản phẩm</a> </li>
                 </ul>
             </li>
             <li class="menu-list"><a href="#"><i class="lnr lnr-indent-increase"></i> <span>Menu Levels</span></a>

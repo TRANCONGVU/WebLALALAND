@@ -1,65 +1,72 @@
   <div class="header">
-      <div class="container head d-flex justify-content-end mt-3">
+      <div class="container head d-flex justify-content-end mt-1">
+
           <span>Đặt hàng online hoặc gọi cho chúng tôi (+84) 12341413</span>
           <div class="flag ml-3">
               <img src="images/vn-flag.png" alt="">
-              <i class="fas fa-caret-down"></i>
-              {{--  <div class="flag-hover">
-                <a href="#"></a><div class="d-flex justify-content-bettwen">
-                        <img src="images/uk-flag.jpg" alt="">
-                        <span class="mr-3">English</span>
-                    </div>
-                </a>
-
-            </div>  --}}
           </div>
           <div class="search ml-2">
               <input class="form-control" type="text" placeholder="Tìm kiếm">
               <i class="fas fa-search"></i>
           </div>
+
+
+
+
       </div>
       <div class="container head-2 d-flex justify-content-between ">
-          <img src="images/logo3.png" alt="">
+          <div class="logo">
+              <img src="images/logo3.png" alt="">
+          </div>
           <div class="d-flex flex-column mt-4 head-2-left ">
               <span class="text-uppercase">miễn phí giao hàng toàn quốc từ 100k</span>
-              <div class="mt-2">
+              <div class="d-flex jutify-content-between mt-2">
                   <a href="{{ url('cart') }}" class="mr-5"><i class="fas fa-cart-plus mr-1"></i>Giỏ hàng<div
                           class="cart pt-1">
                           <span>10</span>
                       </div></a>
                   <span><i class="far fa-heart mx-3"></i>Sản phẩm yêu thích</span>
                   @guest
-                      <a href="{{--{{ url('dangnhap') }}--}}"   data-toggle="modal" data-target="#loginModal">Đăng nhập</a>
+                  <a href="{{--{{ url('dangnhap') }}--}}" data-toggle="modal" data-target="#loginModal">Đăng nhập</a>
 
                   @if (Route::has('register'))
-                          <span>hoặc</span>
-                          <a href="{{--{{ url('dangky') }}--}}"  data-toggle="modal" data-target="#registerModal">Đăng ký</a>
-                      @endif
+                  <span>hoặc</span>
+                  <a href="{{--{{ url('dangky') }}--}}" data-toggle="modal" data-target="#registerModal">Đăng ký</a>
+                  @endif
                   @else
-                          <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                              {{ Auth::user()->name }}
-                          </a>
+                  <div class="avatar">
+                      <img src="images/product-1.jpg" alt="">
+                  </div>
+                  <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
+                      aria-haspopup="true" aria-expanded="false" v-pre>
+                      {{ Auth::user()->name }}
+                  </a>
 
-                          <span>/</span>
-                              <a class="dropdown-item" href="{{ route('logout') }}"
-                                 onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                  {{ __('Logout') }}
-                              </a>
+                  <span>/</span>
 
-                              <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                  @csrf
-                              </form>
+                  <a class="" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                       document.getElementById('logout-form').submit();">
+                      {{ __('Logout') }}
+                  </a>
+
+                  <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                      @csrf
+                  </form>
                   @endguest
 
               </div>
           </div>
+
       </div>
   </div>
   <nav class="nav-horizontal container-fluid">
+
       <div class="nav-horizontal-container container">
+
           <div class="nav-horizontal-content">
+
               <ul class="nav-ul-lv-1">
+                  <li><a href="{{ url('trang-chu') }}"> <img class="nav-logo" src="images/logo3.png" alt=""></a></li>
                   <li><a href="{{ url('trang-chu') }}">Trang chủ</a></li>
                   <li class="sanpham" style="position : unset">
                       <a href="{{ url('product') }}">Sản phẩm<i class="fas fa-caret-down"></i></a>
@@ -119,30 +126,20 @@
                                   <div class="hover-item hover-item1 d-flex flex-column justify-content-start">
                                       <a href="">hot</a>
                                       <a href="">xem nhiều</a>
-
                                   </div>
                                   <div class="hover-item d-flex flex-column justify-content-start">
                                       <a href="">mới</a>
                                       <a href="">mới 2019</a>
-
                                   </div>
-
-
                               </div>
                               <div class="col text-left px-5">
                                   <img src="https://kenh14cdn.com/2018/4/13/photo-4-1523613034062930366784.jpg" alt="">
-
-
                               </div>
-
-
-
-
                           </div>
                       </div>
 
                   </li>
-                  <li><a href="#">Sale</a></li>
+                  <li><a href="{{ url('sale') }}">Sale</a></li>
                   <li>
                       <a href="{{ url('bosuutap') }}">Bộ sưu tập<i class="fas fa-caret-down"></i></a>
                       <ul class="nav-ul-lv-2">
@@ -151,13 +148,12 @@
                           <li><a href="#">Bộ sưu tập 3</a></li>
                       </ul>
                   </li>
-                  <li class="lienhe-led"><a href="{{ url('gioithieu') }}">giới thiệu</a></li>
                   <li class="lienhe-led">
-                      <a href="{{ url('lienhe') }}">Liên hệ<i class="fas fa-caret-down"></i></a>
+                      <a href="{{ url('lienhe') }}">Về lalaland<i class="fas fa-caret-down"></i></a>
                       <ul class="nav-ul-lv-2">
-                          <li><a href="{{ url('lienhe') }}">Liên hệ</a></li>
-                          <li><a href="{{ url('cauhoi') }}">Câu hỏi thường gặp</a></li>
-                          <li><a href="{{ url('gioithieu') }}">Hệ thống cửa hàng</a></li>
+                          <li><a href="{{ url('gioithieu') }}">giới thiệu</a></li>
+                          <li><a href="{{ url('lienhe') }}">liên hệ</a></li>
+                          <li><a href="{{ url('gioithieu') }}">Hệ thống showrom</a></li>
                       </ul>
 
                   </li>
@@ -169,27 +165,35 @@
                               <li><a href="{{ url('tinsukien') }}">Tin sự kiện</a></li>
                           </ul>
                       </a></li>
+                  <li class="lienhe-led"><a href="{{ url('video') }}">video</a></li>
+                  <li class="lienhe-led"><a href="{{ url('tuyendung') }}">tuyển dụng</a></li>
+
+
+
 
               </ul>
-              <div class="menu-mobile-button">
-                  <i class="fas fa-bars"></i>
-              </div>
-              <div class="menu-mobile">
-                  <a href="{{ url('dangnhap') }}"><i class="fas fa-user-friends"></i></a>
-              </div>
-              <div class="menu-mobile" onclick="search" id="search">
-                  <a><i class="fas fa-search-plus"></i></a>
-                  <form class="search2" action="search">
-                      <input class="form-control" type="text" placeholder="tìm kiếm">
-                      <i class="fas fa-search"></i>
+              <div class="menu-mobile-head">
+                  <div class="menu-mobile-button">
+                      <i class="fas fa-bars"></i>
+                  </div>
+                  <div class="menu-mobile">
+                      <a href="{{ url('dangnhap') }}"><i class="fas fa-user-friends"></i></a>
+                  </div>
+                  <div class="menu-mobile" onclick="search" id="search">
+                      <a><i class="fas fa-search-plus"></i></a>
+                      <form class="search2" action="search">
+                          <input class="form-control" type="text" placeholder="tìm kiếm">
+                          <i class="fas fa-search"></i>
 
-                  </form>
+                      </form>
 
+                  </div>
+                  <div class="menu-mobile">
+                      <a href="{{ url('cart') }}"><i class="fas fa-shopping-cart"></i></a>
+                  </div>
               </div>
-              <div class="menu-mobile">
-                  <a href="{{ url('cart') }}"><i class="fas fa-shopping-cart"></i></a>
-                </div>
           </div>
+
       </div>
   </nav>
   <script type="text/javascript" src="js/nav-horizontal.js"></script>

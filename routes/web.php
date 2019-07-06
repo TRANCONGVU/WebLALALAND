@@ -96,6 +96,10 @@ Route::get('dangnhap', [
 	'uses' => 'Controller_1@get_dangnhap'
 ]);
 
+Route::get('sale', [
+	'as' =>'sale  ',
+	'uses' => 'Controller_1@get_sale'
+]);
 Route::post('createuser', 'Controller_1@createuser')->name('createuser');
 
 
@@ -105,17 +109,17 @@ Route::post('createuser', 'Controller_1@createuser')->name('createuser');
 
 
 Route::prefix('admincp')->group(function () {
-    
+
 
     // Route phần đăng nhập
     Route::get('login', 'Auth\Admin\LoginController@login')->name('admin.auth.login');
     Route::post('login', 'Auth\Admin\LoginController@loginAdmin')->name('admin.auth.loginAdmin');
     //Route dùng để đăng xuất
 	Route::get('logout', 'Auth\Admin\LoginController@logout')->name('admin.auth.logout');
-	
+
 	//slider
 	Route::prefix('/')->middleware('auth:admins')->group(function () {
-		
+
 		Route::get('/', 'Auth\Admin\AdminController@index')->name('admin.index');
 
 		Route::get('addslider','SliderController@addSlider');
@@ -128,6 +132,7 @@ Route::prefix('admincp')->group(function () {
 			Route::get('edit-cateproduct','CateProductController@edit')->name('edit.cateproduct');
 			Route::post('edit-cateproduct','CateProductController@update')->name('update.cateproduct');
 			Route::get('detail-cateproduct','CateProductController@show')->name('show.cateproduct');
+			Route::get('delete-cateproduct','CateProductController@destroy')->name('delete.cateproduct');
 		});
 	});
 
