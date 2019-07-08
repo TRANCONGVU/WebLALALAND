@@ -43,10 +43,10 @@
                 <h4 class="text-uppercase mt-3 ">{{ $cates->name }}</h4>
                 @foreach($news as $new)
                     <div class="tintuc-item">
-                        <a href="{{ url('tintuc/'.$new->slug) }}">{{ $new->name }}</a>
+                        <a href="{{ url('tintuc/'.$new->slug) }}">{{ $new->title }}</a>
                         <span>{{ $new->summary }}</span>
                         <span>{{ $new->created_at }}</span>
-                        <img src="{{ asset('images/news/').$new->image }}" alt="">
+                        <img src="{{ asset('images/news/'.$new->image) }}" alt="">
                         <div class="show-more text-center mt-3">
                             <a href="{{ url('tintuc/'.$new->slug) }}">Xem thêm</a>
                         </div>

@@ -200,6 +200,17 @@ Route::prefix('admincp')->group(function () {
             Route::get('delete/{id}','catenewsController@destroy')->name('destroy.catenews');
 
         });
+        Route::group(['prefix' => 'news'], function (){
+            route::get('/','NewsController@index')->name('list.news');
+
+            route::get('/create','NewsController@create')->name('create.news');
+            route::post('/store','NewsController@store')->name('store.news');
+
+            route::get('edit/{id}','NewsController@edit')->name('edit.news');
+            route::post('update/{id}','NewsController@update')->name('update.news');
+
+            Route::get('delete/{id}','NewsController@destroy')->name('delete.news');
+        });
 
     });
 
