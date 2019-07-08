@@ -44,10 +44,10 @@
                           </ul>
                       </li>
                       </ul>--}}
-                  <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
-                      aria-haspopup="true" aria-expanded="false" v-pre>
+                  <a id="navbarDropdown" class="nav-link dropdown-toggle" href="{{ url('profile/'.Auth::user()->id) }}" >
                       {{ Auth::user()->name }}
-                  </a>/
+                  </a>
+                    /
                   <a class="" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                        document.getElementById('logout-form').submit();">
                       {{ __('Logout') }}
@@ -165,7 +165,7 @@
 
                   </li>
                   <li class="lienhe-led"><a href="{{ url('huongdan') }}">Hướng dẫn</a></li>
-                  <li class="lienhe-led"><a href="{{ url('tintuc') }}">Tin tức<i class="fas fa-caret-down"></i>
+                  <li class="lienhe-led"><a href="{{ url('loaitin/all') }}">Tin tức<i class="fas fa-caret-down"></i>
                           <ul class="nav-ul-lv-2">
                               @foreach($cate_news as $cate_new)
                                   <li><a href="{{ url('loaitin/'.$cate_new->slug) }}">{{ $cate_new->name }}</a></li>
