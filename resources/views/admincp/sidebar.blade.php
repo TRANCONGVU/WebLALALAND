@@ -36,8 +36,7 @@
             </li>
             <li class="active"><a href="{{ route('admin.index') }}"><i class="lnr lnr-power-switch"></i><span>Dashboard</span></a></li>
             <li class="menu-list">
-                <a href="#"><i class="fa fa-user" aria-hidden="true"></i>
-                    <span>Accounts</span></a>
+                <a href="#"><i class="fa fa-user"></i><span>Accounts</span></a>
                 <ul class="sub-menu-list">
                     <li><a href="{{ route('list.adminaccount') }}">Admin</a> </li>
                     <li><a href="{{ route('list.useraccount') }}">User</a></li>
