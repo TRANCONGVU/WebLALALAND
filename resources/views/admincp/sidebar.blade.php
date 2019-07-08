@@ -34,21 +34,21 @@
                         <div class="clearfix"> </div>
                     </ul>
             </li>
-            <li class="active"><a href="index.html"><i class="lnr lnr-power-switch"></i><span>Dashboard</span></a></li>
+            <li class="active"><a href="{{ route('admin.index') }}"><i class="lnr lnr-power-switch"></i><span>Dashboard</span></a></li>
             <li class="menu-list">
-                <a href="#"><i class="lnr lnr-cog"></i>
-                    <span>Components</span></a>
+                <a href="#"><i class="fa fa-user" aria-hidden="true"></i>
+                    <span>Accounts</span></a>
                 <ul class="sub-menu-list">
-                    <li><a href="grids.html">Grids</a> </li>
-                    <li><a href="widgets.html">Widgets</a></li>
+                    <li><a href="{{ route('list.adminaccount') }}">Admin</a> </li>
+                    <li><a href="{{ route('list.useraccount') }}">User</a></li>
                 </ul>
             </li>
             <li class="menu-list">
                 <a href=""><i class="glyphicon glyphicon-picture"></i>
                     <span>Slider</span></a>
                 <ul class="sub-menu-list">
-                    <li><a href="{{url('admincp/addslider')}}">Add slider</a> </li>
-                    <li><a href="{{url('admincp/listslider')}}">Danh sách slider</a></li>
+                    <li><a href="{{url('admincp/slider/addslider')}}">Thêm slider</a> </li>
+                    <li><a href="{{url('admincp/slider/listslider')}}">Danh sách slider</a></li>
                 </ul>
             </li>
             {{-- <li><a href="{{asset('admincp/addslider')}}"><i class="lnr lnr-spell-check"></i> <span>Slider</span></a></li> --}}
@@ -56,8 +56,23 @@
                 <ul class="sub-menu-list">
                     <li><a href="{{ Route('list.cateproduct') }}">Danh mục sản phẩm</a> </li>
                     <li><a href="{{ Route('list.cateproduct') }}">Danh mục sản phẩm</a> </li>
+                    </ul>
+            </li>
+            <li class="menu-list">
+                <a href=""><i class="glyphicon glyphicon-filter"></i>
+                    <span>Giới thiệu</span></a>
+                <ul class="sub-menu-list">
+                    <li><a href="{{url('admincp/introduce/introduce')}}">Thêm giới thiệu</a> </li>
+                    <li><a href="{{url('admincp/introduce/listintroduce')}}">Danh sách giới thiệu</a></li>
                 </ul>
             </li>
+            {{-- <li><a href="{{asset('admincp/introduce')}}"><i class="lnr lnr-spell-check"></i> <span>Giới thiệu !</span></a></li> --}}
+            <li><a href="tables.html"><i class="lnr lnr-menu"></i> <span>Tables</span></a></li>
+            <li class="menu-list"><a href="#"><i class="lnr lnr-spell-check"></i> <span>Tin Tức</span></a>
+                <ul class="sub-menu-list">
+                    <li><a href="{{url('admincp/catenews')}}">Danh Mục Tin</a> </li>
+                    <li><a href="{{url('admincp/news')}}">Tin Tức</a></li>
+                
             <li class="menu-list"><a href="#"><i class="lnr lnr-indent-increase"></i> <span>Menu Levels</span></a>
                 <ul class="sub-menu-list">
                     <li><a href="charts.html">Basic Charts</a> </li>

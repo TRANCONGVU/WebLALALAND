@@ -5879,9 +5879,9 @@ canvas#bar1 {
 .float-left {
     width: 14%;
 }
-.input-group {
-    margin: 0 0 0 1em;
-	width:40%;
+/*.input-group {*/
+    /*margin: 0 0 0 1em;*/
+	/*width:40%;*/
 }	
 .navbar-right {
   margin-right:3px !important;

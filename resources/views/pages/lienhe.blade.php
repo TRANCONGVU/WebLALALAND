@@ -8,25 +8,53 @@
                 hãy
                 gửi thông tin cho chúng tôi:</span>
             <div class="container border-line"></div>
-            <form>
+            <form action="{{ route('lienhe') }}" method="post" enctype="multipart/form-data">
+                @csrf
                 <div class="form-group">
                     <label for="name">Name</label>
-                    <input type="text" class="form-control" id="name" placeholder="Name">
+                    <input type="text" class="form-control" name="name_message" id="name_message" placeholder="Name" onclick="an(this)">
+                    <div style="color: red;" id="error_name_message"></div>
                 </div>
                 <div class="form-group">
                     <label for="email">Email</label>
-                    <input type="text" class="form-control" id="email" placeholder="Email">
+                    <input type="email" class="form-control" name="email_message" id="email_message" placeholder="Email" onclick="an(this)">
+                    <div style="color: red;" id="error_email_message"></div>
                 </div>
                 <div class="form-group">
                     <label for="sdt">Phone</label>
-                    <input type="text" class="form-control" id="sdt" placeholder="Phone">
+                    <input type="text" class="form-control" name="phone_message" id="sdt_message" placeholder="Phone" onclick="an(this)">
+                    <div style="color: red;" id="error_sdt_message"></div>
                 </div>
                 <div class="form-group">
                     <label for="text">Nội dung</label>
-                    <textarea class="form-control" id="text" rows="5"></textarea>
+                    <textarea class="form-control" id="content_message" name="content_message" rows="5" onclick="an(this)"></textarea>
+                    <div style="color: red;" id="error_content_message"></div>
                 </div>
                 <div class="form-group">
-                    <button class="btn btn-secondary">Gửi thông tin</button>
+                    <button class="btn btn-secondary" onclick="return sendmessage()">Gửi thông tin</button>
+                    <script>
+                        function sendmessage() {
+                            if($('#name_message').val() === ''){
+                                $('#error_name_message').html('Bạn cần nhập tên để có thể gửi tin nhắn cho Shop');
+                                return false;
+                            }
+                            if($('#email_message').val() === ''){
+                                $('#error_email_message').html('Bạn cần nhập email để có thể gửi tin nhắn cho Shop');
+                                return false;
+                            }
+                            if($('#sdt_message').val() === ''){
+                                $('#error_sdt_message').html('Bạn cần nhập số điện thoại để có thể gửi tin nhắn cho Shop');
+                                return false;
+                            }
+                            if($('#content_message').val() === ''){
+                                $('#error_content_message').html('Bạn cần nhập nội dung tin nhắn');
+                                return false;
+                            }
+                        }
+                        function an(obj) {
+                            $('#error_'+obj.id).html('');
+                        }
+                    </script>
                 </div>
             </form>
         </div>

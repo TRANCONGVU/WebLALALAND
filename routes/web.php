@@ -1,4 +1,4 @@
-<?php
+	<?php
 
 /*
 |--------------------------------------------------------------------------
@@ -19,11 +19,20 @@ Route::get('/home', [
     'as' =>'home1',
     'uses' => 'Controller_1@get_trangchu'
 ]);
+Route::post('/lienhe', 'Controller_1@lienhe')->name('lienhe');
 
 Route::get('trang-chu', [
 	'as' =>'trang-chu',
 	'uses' => 'Controller_1@get_trangchu'
 ]);
+
+Route::get('loaitin/{slug}', [
+    'as' =>'tinkhuyenmai',
+    'uses' => 'Controller_1@get_loaitin'
+]);
+
+
+
 
 Route::get('product', [
 	'as' =>'product',
@@ -96,6 +105,8 @@ Route::get('dangnhap', [
 	'uses' => 'Controller_1@get_dangnhap'
 ]);
 
+Route::post('createuser', 'Auth\UserLoginController@createuser')->name('createuser');
+Route::post('loginuser', 'Auth\UserLoginController@loginuser')->name('loginuser');
 Route::get('sale', [
 	'as' =>'sale  ',
 	'uses' => 'Controller_1@get_sale'
@@ -121,6 +132,85 @@ Route::prefix('admincp')->group(function () {
 	Route::prefix('/')->middleware('auth:admins')->group(function () {
 
 		Route::get('/', 'Auth\Admin\AdminController@index')->name('admin.index');
+		
+		Route::group(['prefix'=>'slider'],function(){
+			//add
+			Route::get('addslider','SliderController@addSlider');
+			Route::post('addslider','SliderController@postSlider');
+			//list
+			Route::get('listslider','SliderController@listSlider')->name('listslider');
+			//delete
+			Route::get('delete/{id}','SliderController@deleteSlider');
+			//edit
+			Route::get('edit/{id}','SliderController@editSlider');
+			Route::post('edit/{id}','SliderController@postEditSlider');
+		});
+
+		//gioi thieu
+		Route::group(['prefix' => 'introduce'],function(){
+			//add intro
+			Route::get('introduce','IntroduceController@intro');
+			Route::post('introduce','IntroduceController@postIntro');
+			//lít intro
+			Route::get('listintroduce','IntroduceController@listIntro')->name('listintro');
+			//xoa
+			Route::get('delete/{id}','IntroduceController@delete');
+			//edit
+			Route::get('editIntro/{id}','IntroduceController@edit');
+			Route::post('editIntro/{id}','IntroduceController@postEdit');
+		});
+	
+		//product
+		Route::group(['prefix' => 'cateproduct'], function (){
+			Route::get('/','CateProductController@index')->name('list.cateproduct');
+			Route::get('/create','CateProductController@create')->name('create.cateproduct');
+			Route::post('create-cateproduct','CateProductController@store')->name('store.cateproduct');
+			Route::get('edit-cateproduct','CateProductController@edit')->name('edit.cateproduct');
+			Route::post('edit-cateproduct','CateProductController@update')->name('update.cateproduct');
+			Route::get('detail-cateproduct','CateProductController@show')->name('show.cateproduct');
+		});
+		Route::group(['prefix' => 'useraccount'], function (){
+            route::get('/','useraccountcontroller@index')->name('list.useraccount');
+
+            route::get('/create','useraccountcontroller@create')->name('create.useraccount');
+            route::post('/store','useraccountcontroller@store')->name('store.useraccount');
+
+            route::get('edit/{id}','useraccountcontroller@edit')->name('edit.useraccount');
+            route::post('update/{id}','useraccountcontroller@update')->name('update.useraccount');
+
+            route::get('setactive/{id}/{status}','useraccountcontroller@active')->name('active.useraccount');
+        });
+        Route::group(['prefix' => 'adminaccount'], function (){
+            route::get('/','adminaccountcontroller@index')->name('list.adminaccount');
+
+            route::get('/create','adminaccountcontroller@create')->name('create.adminaccount');
+            route::post('/store','adminaccountcontroller@store')->name('store.adminaccount');
+
+            route::post('update/{id}','adminaccountcontroller@update')->name('update.adminaccount');
+
+            route::get('setactive/{id}/{status}','adminaccountcontroller@active')->name('active.adminaccount');
+
+		});
+		Route::group(['prefix' => 'catenews'], function (){
+            Route::get('/','catenewsController@index')->name('list.catenews');
+
+            Route::post('/store','catenewsController@store')->name('store.catenews');
+
+            Route::post('update/{id}','catenewsController@update')->name('update.catenews');
+            Route::get('delete/{id}','catenewsController@destroy')->name('destroy.catenews');
+
+        });
+        Route::group(['prefix' => 'news'], function (){
+            route::get('/','NewsController@index')->name('list.news');
+
+            route::get('/create','NewsController@create')->name('create.news');
+            route::post('/store','NewsController@store')->name('store.news');
+
+            route::get('edit/{id}','NewsController@edit')->name('edit.news');
+            route::post('update/{id}','NewsController@update')->name('update.news');
+
+            Route::get('delete/{id}','NewsController@destroy')->name('delete.news');
+        });
 
 		Route::get('addslider','SliderController@addSlider');
 		Route::get('listslider','SliderController@listSlider');
