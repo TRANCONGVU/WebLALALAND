@@ -1,5 +1,26 @@
 
 /*---------------------------------------Responsive---------------------------------------*/
+@media only screen and (min-width: 2135px) {
+    .product-banner .banner-item {
+        margin: 0 70px;
+    }
+    .banner-item-img {
+        width: 300px;
+        height: 400px;
+    }
+    .product-banner {
+        top: -90%;
+    }
+}
+@media only screen and (min-width: 1550px) and (max-width : 2134px ) {
+    .product-banner .banner-item{
+        margin: 0 20px;
+    }
+    .banner-item-img {
+        width: 250px;
+        height: 350px;
+    }
+}
 @media only screen and (min-width: 1201px) {
     .body{
         padding: 20px;
