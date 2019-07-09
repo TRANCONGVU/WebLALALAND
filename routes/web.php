@@ -30,6 +30,20 @@ Route::get('loaitin/{slug}', [
     'as' =>'tinkhuyenmai',
     'uses' => 'Controller_1@get_loaitin'
 ]);
+Route::get('tintuc/{slug}', [
+    'as' =>'tintuc',
+    'uses' => 'Controller_1@get_tin'
+]);
+
+    Route::group(['prefix' => 'profile'], function (){
+        Route::get('/{id}', 'Controller_1@profile')->name('profile');
+        Route::post('changeinfor/{id}', 'Controller_1@changeinfor')->name('changeinfor');
+
+        Route::get('checkpass/{id}/{value}', 'Controller_1@checkpass')->name('checkpass');
+        Route::post('changepass/{id}', 'Controller_1@changepass')->name('changepass');
+
+
+    });
 
 
 

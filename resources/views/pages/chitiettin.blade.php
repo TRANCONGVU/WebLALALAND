@@ -1,12 +1,6 @@
 @extends('master-layout')
 @section('title')
-
-    @if(isset($cates))
-        {{ $cates->name }}
-    @else
-        Tin tức
-    @endif
-
+    {{ $new->title }}
 @endsection
 @section('content')
 
@@ -50,22 +44,39 @@
                 </div>
             </div>
             <div class="col-md-9 col-12 product-page d-flex flex-column">
-                @if(isset($cates))
-                <h4 class="text-uppercase mt-3 ">{{ $cates->name }}</h4>
-                @else
-                    <h4 class="text-uppercase mt-3 ">Tất cả Tin Tức</h4>
-                @endif
-                @foreach($news as $new)
+                    <h4 class="text-uppercase mt-3 ">{{ $new->title }}</h4>
+
                     <div class="tintuc-item">
-                        <a href="{{ url('tintuc/'.$new->slug) }}">{{ $new->title }}</a>
-                        <span>{{ $new->summary }}</span>
                         <span>{{ $new->created_at }}</span>
-                        <img src="{{ asset('images/news/'.$new->image) }}" alt="">
-                        <div class="show-more text-center mt-3">
-                            <a href="{{ url('tintuc/'.$new->slug) }}">Xem thêm</a>
+                        <hr>
+                        <div><b>{{ $new->summary }}</b></div>
+                        <br>
+                        <div>{!! $new->content !!}</div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-md-4 col-sm-4 col-lg-4 col-xl-4">
+                                @if(isset($pre))
+                                    <a href="{{url('')}}/tintuc/{{ $pre->slug }}" title=""><i class="fas fa-sign-out-alt"></i>Tin Trước</a>
+                                @endif
+                            </div>
+                            <div class="col-md-4 col-sm-4 col-lg-4 col-xl-4" style="text-align: center;">
+                                <a href="{{url('')}}/loaitin/all" title="">Tất cả tin tức</a>
+                            </div>
+                            <div class="col-md-4 col-sm-4 col-lg-4 col-xl-4" style="text-align: right;">
+                                @if(isset($next))
+                                    <a href="{{url('')}}/tintuc/{{ $next->slug }}" title=""><i class="fas fa-sign-in-alt"></i>Tin sau</a>
+                                @endif
+                            </div>
                         </div>
+                        <hr>
+                        <div>
+                            <h5>Tag:</h5>
+                            @foreach($tags as $tag)
+                                <a class="chip pink lighten-4"><i class="fa fa-tags"></i>{{ $tag->name }}</a>
+                            @endforeach
+                        </div>
+
                     </div>
-                @endforeach
                 {{--
                 <div class="tintuc-item">
                     <a href="#">cuộc sống</a>
@@ -119,26 +130,6 @@
                     </div>
                 </div>--}}
 
-                <nav aria-label="Page">
-                        {{--<ul class="pagination">
-                          <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Previous">
-                              <span aria-hidden="true">&laquo;</span>
-                              <span class="sr-only">Previous</span>
-                            </a>
-                          </li>
-                          <li class="page-item"><a class="page-link" href="#">1</a></li>
-                          <li class="page-item"><a class="page-link" href="#">2</a></li>
-                          <li class="page-item"><a class="page-link" href="#">3</a></li>
-                          <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Next">
-                              <span aria-hidden="true">&raquo;</span>
-                              <span class="sr-only">Next</span>
-                            </a>
-                          </li>
-                        </ul>--}}
-                    {{ $news->links() }}
-                </nav>
 
             </div>
 
