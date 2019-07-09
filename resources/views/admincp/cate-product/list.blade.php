@@ -14,12 +14,63 @@
         {{--<div class="card-header py-3">--}}
             {{--<h6 class="m-0 font-weight-bold text-primary">Category</h6>--}}
         {{--</div>--}}
+
         <div class="bs-example4" data-example-id="simple-responsive-table">
+            <h1>Danh sách Danh Mục</h1>
+            <div class="table-data__tool">
+                <button class="btn btn-success" id="btadd"  onclick="addcate()">Thêm danh mục</button>
+                <button class="btn btn-danger" id="bthuy"  onclick="huycate()">Hủy</button>
+                <div id="addcate" class="hide">
+                    <hr>
+                    <form action="{{ route('store.cateproduct') }}" method="post">
+                        @csrf
+                        <div class="row">
+                            <div class="col-md-2">
+                                <h3>Tên Danh Mục:</h3>
+                            </div>
+                            <div class="col-md-7">
+
+                                <input class="form-control" id="catename" required type="text" name="name" />
+                                @if($errors->first('name')!=null)
+                                    <script>
+                                        alert("{{ $errors->first('name') }}");
+                                    </script>
+                                @endif
+                                <select class="form-control" name="status">
+                                    <option value="1">Hiển thị</option>
+                                    <option value="0">Không hiển thị</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <input class="btn btn-success" type="submit" name="submit" value="Thêm"/>
+                            </div>
+                        </div>
+                    </form>
+                    <hr>
+                </div>
+                <script>
+                    function addcate() {
+                        $('#btadd').hide();
+                        $('#bthuy').show();
+                        var add = document.querySelector("#addcate");
+
+                        add.classList.remove("hide");
+                    }
+                    function huycate() {
+                        $('#btadd').show();
+                        $('#bthuy').hide();
+                        $('#catename').val('');
+                        var add = document.querySelector("#addcate");
+
+                        add.classList.add("hide");
+                    }
+                </script>
+            </div>
+            <br>
             <div class="table-responsive">
                 @if(session('thongbao'))
                     <script>
                         alert('{{ session('thongbao') }}');
-
                     </script>
                 @endif
                 <table class="table table-bordered table-hover" id="dbtbl" width="100%" cellspacing="0">
@@ -46,7 +97,8 @@
                     <tbody>
                     @foreach($cateproduct as $key => $value)
                         <tr>
-                            <form action="" method="post">
+                            <form action="{{ url('admincp/cateproduct/edit/'.$value->id) }}" method="post">
+                                @csrf
                             <td>{{ $key+1 }}</td>
                             <td><input name="name" type="text" class="inputadmin" id="name{{$value->id}}" value="{{ $value->name }}" readonly/></td>
                             <td>{{ $value->slug }}</td>
@@ -59,7 +111,12 @@
                                <button type="submit" class=" btn btn-success hide" id="submit{{ $value->id }}" title="Sửa Danh Mục"><i class="fas fa-pencil-alt"></i></button>
                                 <a class="fa fa-edit  btn btn-primary" id="sua{{ $value->id }}"  onclick="sua({{ $value->id }})"></a>
                                 <button type="reset"  class=" btn btn-danger hide"  id="reset{{ $value->id }}" onclick=" return huy({{ $value->id }})"><i class="fas fa-window-close"></i></button>
-                                <button data-id="{{$value->id}}" title="{{ " Xoá ".$value->name }}" class="fa btn btn-danger"><i class="fas fa-trash"></i></button>
+                                @if($value->active==0)
+                                    <a data-id="{{$value->id}}" href="{{ url('admincp/cateproduct/destroy/'.$value->id.'/1') }}" title="{{ " Xoá ".$value->name }}" class="fa btn btn-danger">Hiển thị</a>
+                                @else
+                                    <a data-id="{{$value->id}}" href="{{ url('admincp/cateproduct/destroy/'.$value->id.'/0') }}" title="{{ " Xoá ".$value->name }}" class="fa btn btn-danger">Không Hiển thị</a>
+                                @endif
+
                             </td>
                             </form>
                         </tr>
@@ -72,6 +129,9 @@
         </div>
     </div>
     <script>
+        $(document).ready(function () {
+            $('#bthuy').hide();
+        });
         function sua(id){
             var name = document.querySelector("#name"+id);
             var submit = document.querySelector("#submit"+id);
@@ -106,7 +166,7 @@
                 var id = $(this).attr('data-id');
                 $.ajax({
                     type: 'get',
-                    url: "{{ route('destroy.cateproduct') }}",
+                    url: "{{--{{ route('destroy.cateproduct') }}--}}",
                     data:{
                         _token : $('[name="_token"]').val(),
                         id:id //id trên nối với id request trong controller
