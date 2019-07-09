@@ -27,7 +27,10 @@
 	}
 	.nav-horizontal-search form button i{
 		font-size: 13px;
-	}
+    }
+    .product-banner .banner-item {
+        margin: 0px 10px;
+    }
 
 }
 @media only screen and (max-width: 1060px) {
@@ -61,6 +64,13 @@
     }
     .section-3 {
         margin-left: 10px;
+    }
+    .product-banner .banner-item {
+        margin: 0px;
+    }
+    .banner-item-img {
+        width: 120px;
+        height: 160px;
     }
 
 }
@@ -144,19 +154,27 @@
         height: 300px !important;
         object-fit: contain;
     }
-    .owl-carousel .owl-nav button.owl-next, .owl-carousel .owl-nav button.owl-prev {
+    .owl-carousel .owl-nav button.owl-next ,.owl-carousel .owl-nav button.owl-prev {
         font-size: 50px;
-        top: 120px;
+        top: 90px;
     }
     .conect-bottom {
         align-items: center;
         margin-top: 20px;
+    }
+    .product-banner {
+        display: none;
     }
 }
 @media only screen and (max-width: 687px) {
    .header {
        display: none;
    }
+   .owl-carousel .owl-nav button.owl-next ,.owl-carousel .owl-nav button.owl-prev {
+    font-size: 50px;
+    top: 90px;
+   }
+}
 
 }
 @media only screen and (max-width: 680px) {
@@ -238,9 +256,11 @@
     }
     .owl-carousel .owl-nav button.owl-next, .owl-carousel .owl-nav button.owl-prev {
         font-size: 40px;
-        top: 150px;
+        top: 70px;
     }
-
+    .owl-carousel .owl-nav button.owl-prev {
+        top: 40px;
+    }
 
 }
 @media only screen and (max-width: 440px) {
