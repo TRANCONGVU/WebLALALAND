@@ -39,10 +39,9 @@ class CateProductController extends Controller
     public function store(Request $request)
     {
         $this->validate($request,[
-            'name' => 'required|unique:cate_products,name|min:3'
+            'name' => 'unique:cate_products,name|min:3'
         ],
         [
-            'name.required'=>'Vui lòng không để trống.',
             'name.unique' => 'Thể loại đã tồn tại.',
             'name.min' => 'Vui lòng nhập trên 3 từ.',
         ]);
@@ -51,7 +50,7 @@ class CateProductController extends Controller
             'slug' => $this->slug($request->name),
             'active' => $request->status,
         ]);
-        return redirect()->route('list.cateproduct')->with('thongbao','Tạo danh mục sản phẩm thành công');
+        return redirect()->back()->with('thongbao','Tạo danh mục sản phẩm thành công');
     }
 
     /**
@@ -98,7 +97,6 @@ class CateProductController extends Controller
         DB::table('cate_products')->where('id',$request->id)->update([
             'name'=> $request->name,
             'slug'=> $this->slug($request->name),
-            'active' => $request->status,
         ]);
         return redirect()->route('list.cateproduct')->with('thongbao','Cập nhật danh mục sản phẩm thành công');
     }
@@ -109,10 +107,12 @@ class CateProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request)
+    public function destroy($id,$value)
     {
-        DB::table('cate_products')->where('id',$request->id)->update([
-            'active'=> 0,
+        DB::table('cate_products')->where('id',$id)->update([
+            'active'=> $value,
         ]);
+        return redirect()->route('list.cateproduct');
+
     }
 }
