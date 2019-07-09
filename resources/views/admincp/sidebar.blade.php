@@ -50,6 +50,14 @@
                     <li><a href="{{url('admincp/slider/listslider')}}">Danh sách slider</a></li>
                 </ul>
             </li>
+            {{-- <li><a href="{{asset('admincp/addslider')}}"><i class="lnr lnr-spell-check"></i> <span>Slider</span></a></li> --}}
+            <li class="menu-list"><a href=""><i class="lnr lnr-menu"></i> <span>Loại sản phẩm</span></a>
+                <ul class="sub-menu-list">
+                    <li><a href="{{ Route('list.cateproduct') }}">Danh mục sản phẩm</a> </li>
+                    <li><a href="{{ Route('list.producttype') }}">Loại sản phẩm</a> </li>
+                    <li><a href="{{ Route('list.product') }}">Danh sách sản phẩm</a> </li>
+                    </ul>
+            </li>
             <li class="menu-list">
                 <a href=""><i class="glyphicon glyphicon-filter"></i>
                     <span>Giới thiệu</span></a>
@@ -64,8 +72,7 @@
                 <ul class="sub-menu-list">
                     <li><a href="{{url('admincp/catenews')}}">Danh Mục Tin</a> </li>
                     <li><a href="{{url('admincp/news')}}">Tin Tức</a></li>
-                </ul>
-            </li>
+                
             <li class="menu-list"><a href="#"><i class="lnr lnr-indent-increase"></i> <span>Menu Levels</span></a>
                 <ul class="sub-menu-list">
                     <li><a href="charts.html">Basic Charts</a> </li>

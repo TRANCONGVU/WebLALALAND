@@ -14,6 +14,54 @@
     </div>
     <div class="item">
         <img src="{{asset('')}}images/banner-3.jpg" alt="">
+        <div class="product-banner">
+            <div class="row">
+                <div class="col-md-3 ">
+                    <div class="banner-item">
+                        <div class="banner-item-img">
+                            <img src="images/product-1.jpg" alt="">
+                        </div>
+                        <a href="#">váy font end</a>
+                        <span>244.000 Đ</span>
+                    </div>
+
+
+                </div>
+                <div class="col-md-3 ">
+                    <div class="banner-item">
+                        <div class="banner-item-img">
+                            <img src="images/product-4.jpg" alt="">
+                        </div>
+                        <a href="#">váy font end</a>
+                        <span>244.000 Đ</span>
+                    </div>
+
+
+                </div>
+                <div class="col-md-3 ">
+                    <div class="banner-item">
+                        <div class="banner-item-img">
+                            <img src="images/product-2.jpg" alt="">
+                        </div>
+                        <a href="#">váy font end</a>
+                        <span>244.000 Đ</span>
+                    </div>
+
+
+                </div>
+                <div class="col-md-3 ">
+                    <div class="banner-item">
+                        <div class="banner-item-img">
+                            <img src="images/product-3.jpg" alt="">
+                        </div>
+                        <a href="#">váy font end</a>
+                        <span>244.000 Đ</span>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
     </div>
 </section>
 <section class="section-2">

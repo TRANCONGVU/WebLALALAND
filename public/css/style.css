@@ -831,3 +831,38 @@ position: absolute;
 .row {
     padding :0 30px;
 }
+.product-banner
+{
+    position: relative;
+    top: -85%;
+}
+.product-banner .banner-item{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    margin: 0px 40px;
+    padding: 20px 0;
+    border : 2px solid white;
+    text-transform : capitalize;
+    background-color: #f8fcffab;
+    border-radius: 10px;
+}
+.product-banner .banner-item:hover{
+    border : 5px solid white;
+    box-shadow: 10px 5px 10px 0px black;
+}
+.banner-item a{
+    font-weight: 600;
+    margin : 5px 0;
+    padding: 2px;
+}
+
+.banner-item-img{
+    width: 155px;
+    height: 225px;
+
+}
+.banner-item-img img {
+    border-radius: 10px;
+}
