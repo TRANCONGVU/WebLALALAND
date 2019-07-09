@@ -39,7 +39,8 @@ class Controller_1 extends Controller
     	return view('pages.bosuutap');
     }
     public  function get_gioithieu(){
-    	return view('pages.gioithieu');
+        $data['introduce'] = DB::table('introduce')->orderBy('id','desc')->limit(1)->get();
+    	return view('pages.gioithieu',$data);
     }
     public  function get_lienhe(){
     	return view('pages.lienhe');
