@@ -160,22 +160,44 @@ Route::prefix('admincp')->group(function () {
 			Route::post('editIntro/{id}','IntroduceController@postEdit');
 		});
 	
-		//product
+		//category product
 		Route::group(['prefix' => 'cateproduct'], function (){
 			Route::get('/','CateProductController@index')->name('list.cateproduct');
 			Route::get('/create','CateProductController@create')->name('create.cateproduct');
-			Route::post('create-cateproduct','CateProductController@store')->name('store.cateproduct');
-			Route::get('edit-cateproduct','CateProductController@edit')->name('edit.cateproduct');
-			Route::post('edit-cateproduct','CateProductController@update')->name('update.cateproduct');
-			Route::get('detail-cateproduct','CateProductController@show')->name('show.cateproduct');
+			Route::post('create','CateProductController@store')->name('store.cateproduct');
+			Route::get('edit/{id}','CateProductController@edit')->name('edit.cateproduct');
+			Route::post('edit/{id}','CateProductController@update')->name('update.cateproduct');
+			Route::get('detail','CateProductController@show')->name('show.cateproduct');
+			Route::get('destroy','CateProductController@destroy')->name('destroy.cateproduct');
 		});
+        //product type
+		Route::group(['prefix' => 'producttype'],function (){
+            Route::get('/','ProductTypeController@index')->name('list.producttype');
+            Route::get('/create','ProductTypeController@create')->name('create.producttype');
+            Route::post('create','ProductTypeController@store')->name('store.producttype');
+            Route::get('edit/{id}','ProductTypeController@edit')->name('edit.producttype');
+            Route::post('edit/{id}','ProductTypeController@update')->name('update.producttype');
+            Route::get('detail','ProductTypeController@show')->name('show.producttype');
+            Route::get('destroy','ProductTypeController@destroy')->name('destroy.producttype');
+        });
+        //product
+        Route::group(['prefix' => 'product'],function (){
+            Route::get('/','ProductController@index')->name('list.product');
+            Route::get('/create','ProductController@create')->name('create.product');
+            Route::post('create','ProductController@store')->name('store.product');
+            Route::get('edit/{id}','ProductController@edit')->name('edit.product');
+            Route::post('edit/{id}','ProductController@update')->name('update.product');
+            Route::get('detail','ProductController@show')->name('show.product');
+            Route::get('destroy','ProductController@destroy')->name('destroy.product');
+        });
+
 		Route::group(['prefix' => 'useraccount'], function (){
             route::get('/','useraccountcontroller@index')->name('list.useraccount');
 
             route::get('/create','useraccountcontroller@create')->name('create.useraccount');
             route::post('/store','useraccountcontroller@store')->name('store.useraccount');
 
-            route::get('edit/{id}','useraccountcontroller@edit')->name('edit.useraccount');
+            route::get('edit/{id}','useraccountconedit-cateproducttroller@edit')->name('edit.useraccount');
             route::post('update/{id}','useraccountcontroller@update')->name('update.useraccount');
 
             route::get('setactive/{id}/{status}','useraccountcontroller@active')->name('active.useraccount');
@@ -215,15 +237,6 @@ Route::prefix('admincp')->group(function () {
 		Route::get('addslider','SliderController@addSlider');
 		Route::get('listslider','SliderController@listSlider');
 
-		Route::group(['prefix' => 'cateproduct'], function (){
-			Route::get('/','CateProductController@index')->name('list.cateproduct');
-			Route::get('/create','CateProductController@create')->name('create.cateproduct');
-			Route::post('create-cateproduct','CateProductController@store')->name('store.cateproduct');
-			Route::get('edit-cateproduct','CateProductController@edit')->name('edit.cateproduct');
-			Route::post('edit-cateproduct','CateProductController@update')->name('update.cateproduct');
-			Route::get('detail-cateproduct','CateProductController@show')->name('show.cateproduct');
-			Route::get('delete-cateproduct','CateProductController@destroy')->name('delete.cateproduct');
-		});
 	});
 
 	

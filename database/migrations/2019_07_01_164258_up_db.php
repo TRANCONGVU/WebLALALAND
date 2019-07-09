@@ -60,7 +60,7 @@ class UpDb extends Migration
             $table->bigIncrements('id');
             $table->string('name')->unique();
             $table->string('slug')->index();
-            $table->tinyInteger('active')->default(1)->index();
+            $table->tinyInteger('active')->index();
             $table->bigInteger('total_product')->default(0);
             $table->timestamps();
         });
