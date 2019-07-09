@@ -59,17 +59,16 @@ class UpDb extends Migration
         Schema::create('cate_products', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name')->unique();
-            $table->string('slug');
-            $table->tinyInteger('active')->default(1);
+            $table->string('slug')->index();
+            $table->tinyInteger('active')->index();
             $table->bigInteger('total_product')->default(0);
-            $table->tinyInteger('home');
             $table->timestamps();
         });
         Schema::create('product_type', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
-            $table->string('slug');
-            $table->tinyInteger('active')->default(1);
+            $table->string('slug')->index();
+            $table->tinyInteger('active')->default(1)->index();
             $table->bigInteger('cate_id')->unsigned();
             $table->foreign('cate_id')->references('id')->on('cate_products')->onDelete('cascade');
             $table->timestamps();
