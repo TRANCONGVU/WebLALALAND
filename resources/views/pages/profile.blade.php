@@ -69,7 +69,7 @@
         </div>
             <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12" style="text-align: center">
                     <br>
-                 
+
                     <button class="btn btn-outline-success" id="btinforchange" onclick="suathongtin()">Sửa Thông tin</button>
                     <button class="btn btn-outline-primary" id="btchangepass" onclick="changpassword()">Đổi Mật Khẩu</button>
                     <script>
