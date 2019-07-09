@@ -817,11 +817,9 @@ section.back-to-top{
 }
 .box-up {
     position: fixed;
-	bottom: 0;
-    padding: 20px;
-    right: 0;
+    right: 20px;
     z-index: 999;
-    top: 300px;
+    top: 400px;
 }
 .box-up-item {
     padding: 10px;
