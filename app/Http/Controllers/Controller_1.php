@@ -14,6 +14,9 @@ class Controller_1 extends Controller
     {
         $cate_news=DB::table('cate_news')->get();
         View::share('cate_news', $cate_news);
+        $new_post = DB::table('news')->orderBy('id', 'desc')->limit(4)->get();
+        View::share('new_posts', $new_post);
+
     }
 
     public  function get_trangchu(){
@@ -25,12 +28,104 @@ class Controller_1 extends Controller
      * tin tức
      * */
     public function get_loaitin($slug){
-        $data['cates'] = DB::table('cate_news')->where('slug', $slug)->first();
-        $data['news'] = DB::table('news')->where('cate_id', $data['cates']->id)->paginate('4');
+        if($slug=='all'){
+            $data['news'] = DB::table('news')->orderBy('id', 'desc')->paginate('4');
+        }
+        else {
+            $data['cates'] = DB::table('cate_news')->where('slug', $slug)->first();
+            $data['news'] = DB::table('news')->where('cate_id', $data['cates']->id)->paginate('4');
+        }
 
         return view('pages.loaitin', $data);
     }
+    public function get_tin($slug){
+        $max = DB::table('news')->max('id');
+        $min = DB::table('news')->min('id');
 
+        $data['new'] = DB::table('news')
+            ->select('news.*', 'cate_news.name as cate')
+            ->join('cate_news','cate_news.id','news.cate_id')
+            ->where('news.slug', $slug)->first();
+        if($data['new']->id<$max) {
+            $next = $data['new']->id;
+            do {
+                $next++;
+                $data['next'] = DB::table('news')->where('id', $next)->first();
+            } while ($data['next'] == null);
+        }
+        if($data['new']->id>$min) {
+            $pre = $data['new']->id;
+
+            do {
+                $pre--;
+                $data['pre'] = DB::table('news')->where('id', $pre)->first();
+            } while ($data['pre'] == null);
+        }
+        $data['new'] = DB::table('news')->where('slug', $slug)->first();
+        $data['pre'] = DB::table('news')->where('id', $data['new']->id-1)->first();
+        $data['next'] = DB::table('news')->where('id', $data['new']->id+1)->first();
+        $data['tags'] = DB::table('tagnews')->where('news_id', $data['new']->id)->limit(10)->get();
+        return view('pages.chitiettin', $data);
+
+    }
+    /*
+     * user
+     * */
+    public function profile($id){
+        $data['user'] = DB::table('users')->where('id', $id)->first();
+//        dd($data['user']);
+        return view('pages.profile', $data);
+
+    }
+    public function changeinfor(Request $request, $id){
+//        dd($request->all());
+        $input= $request->all();
+
+        if ($request->hasFile('avataruser')) {
+            $old= DB::table('users')->find($id);
+//            dd($old->avatar);
+            $file = $request->file('avataruser');
+            $name = $file->getClientOriginalName();
+            $avatar = str_random(4) . "_avatar_" . $name;
+            while (file_exists('images/avatar/' . $avatar)) {
+                $Hinh = str_random(4) . "_avatar_" . $name;
+            }
+            $file->move('images/avatar/', $avatar);
+            if($old->avatar!='male.png' && $old->avatar!='female.png' && file_exists('images/avatar/' . $old->avatar)){
+                unlink('images/avatar/' . $old->avatar);
+            }
+            $file_name = $avatar;
+        }
+        else{
+            $file_name = $input['old-file'];
+        }
+        DB::table('users')->where('id', $id)->update([
+            'name' => $input['username'],
+            'birth' => $input['birthuser'],
+            'avatar' => $file_name,
+            'gender' => $input['genderuser'],
+            'email' => $input['emailuser'],
+        ]);
+
+        return redirect()->back()->with('thongbao', 'update acount without change password success');
+    }
+    public function checkpass($id, $value){
+        $user=DB::table('users')->find($id);
+
+        if (password_verify($value,$user->password)) {
+
+        }else{
+            echo 'This old pasword dose not match';
+        }
+    }
+    public function changepass(Request $request, $id){
+        $input=$request->all();
+
+            DB::table('users')->where('id', $id)->update([
+                'password' => bcrypt($input['repass']),
+            ]);
+            return redirect()->back()->with('thongbao','Change password success');
+    }
 
     public  function get_product(){
     	return view('pages.product');
