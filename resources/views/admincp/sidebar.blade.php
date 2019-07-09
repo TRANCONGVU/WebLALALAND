@@ -72,7 +72,8 @@
                 <ul class="sub-menu-list">
                     <li><a href="{{url('admincp/catenews')}}">Danh Mục Tin</a> </li>
                     <li><a href="{{url('admincp/news')}}">Tin Tức</a></li>
-                
+                </ul>
+            </li>
             <li class="menu-list"><a href="#"><i class="lnr lnr-indent-increase"></i> <span>Menu Levels</span></a>
                 <ul class="sub-menu-list">
                     <li><a href="charts.html">Basic Charts</a> </li>

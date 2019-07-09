@@ -127,6 +127,10 @@ class Controller_1 extends Controller
             return redirect()->back()->with('thongbao','Change password success');
     }
 
+    public function createuser(Request $request){
+        dd($request->all());
+    }
+
     public  function get_product(){
     	return view('pages.product');
     }

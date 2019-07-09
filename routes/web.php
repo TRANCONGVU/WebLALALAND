@@ -41,12 +41,7 @@ Route::get('tintuc/{slug}', [
 
         Route::get('checkpass/{id}/{value}', 'Controller_1@checkpass')->name('checkpass');
         Route::post('changepass/{id}', 'Controller_1@changepass')->name('changepass');
-
-
     });
-
-
-
 
 Route::get('product', [
 	'as' =>'product',
@@ -125,7 +120,7 @@ Route::get('sale', [
 	'as' =>'sale  ',
 	'uses' => 'Controller_1@get_sale'
 ]);
-Route::post('createuser', 'Controller_1@createuser')->name('createuser');
+
 
 
 
@@ -182,7 +177,7 @@ Route::prefix('admincp')->group(function () {
 			Route::get('edit/{id}','CateProductController@edit')->name('edit.cateproduct');
 			Route::post('edit/{id}','CateProductController@update')->name('update.cateproduct');
 			Route::get('detail','CateProductController@show')->name('show.cateproduct');
-			Route::get('destroy','CateProductController@destroy')->name('destroy.cateproduct');
+			Route::get('destroy/{id}/{value}','CateProductController@destroy')->name('destroy.cateproduct');
 		});
         //product type
 		Route::group(['prefix' => 'producttype'],function (){
