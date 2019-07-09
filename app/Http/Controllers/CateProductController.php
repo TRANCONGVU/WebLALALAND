@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\Validator;
 
 class CateProductController extends Controller
 {
@@ -15,6 +16,7 @@ class CateProductController extends Controller
     public function index()
     {
         $cateproduct = DB::table('cate_products')->orderBy('id','desc')->paginate(5);
+//        dd($cateproduct);
         return view('admincp.cate-product.list',compact('cateproduct'));
     }
 
@@ -25,7 +27,7 @@ class CateProductController extends Controller
      */
     public function create()
     {
-
+        return view('admincp.cate-product.create');
     }
 
     /**
@@ -36,7 +38,20 @@ class CateProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request,[
+            'name' => 'required|unique:cate_products,name|min:3'
+        ],
+        [
+            'name.required'=>'Vui lòng không để trống.',
+            'name.unique' => 'Thể loại đã tồn tại.',
+            'name.min' => 'Vui lòng nhập trên 3 từ.',
+        ]);
+        DB::table('cate_products')->insert([
+            'name' => $request->name,
+            'slug' => $this->slug($request->name),
+            'active' => $request->status,
+        ]);
+        return redirect()->route('list.cateproduct')->with('thongbao','Tạo danh mục sản phẩm thành công');
     }
 
     /**
@@ -58,7 +73,9 @@ class CateProductController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data = DB::table('cate_products')->find($id);
+//        dd($data);
+        return view('admincp.cate-product.edit',compact('data'));
     }
 
     /**
@@ -68,9 +85,22 @@ class CateProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request,$id)
     {
-        //
+        $this->validate($request,[
+            'name'=>'required|min:3'
+        ],
+        [
+            'name.required'=>'Vui lòng không để trống.',
+            'name.min' => 'Vui lòng nhập trên 3 từ.',
+        ]);
+
+        DB::table('cate_products')->where('id',$request->id)->update([
+            'name'=> $request->name,
+            'slug'=> $this->slug($request->name),
+            'active' => $request->status,
+        ]);
+        return redirect()->route('list.cateproduct')->with('thongbao','Cập nhật danh mục sản phẩm thành công');
     }
 
     /**
@@ -79,8 +109,10 @@ class CateProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        DB::table('cate_products')->where('id',$request->id)->update([
+            'active'=> 0,
+        ]);
     }
 }
