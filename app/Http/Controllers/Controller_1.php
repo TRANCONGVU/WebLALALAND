@@ -38,7 +38,7 @@ class Controller_1 extends Controller
         $data['product']=DB::table('products')
             ->where('slug', $slug)->first();
         $data['colors'] = DB::table('product_details')
-            ->select('product_details.id as colorid','product_details.image', 'color.name')
+            ->select('color.id as colorid','product_details.id as detailid', 'color.name')
             ->join('color', 'color.id', '=', 'product_details.color_id')
             ->where('product_details.product_id',$data['product']->id)
             ->get();
@@ -46,6 +46,7 @@ class Controller_1 extends Controller
             ->where('category_id',  $data['product']->category_id)->limit(5)->get();
         $data['product_hot']=DB::table('products')
             ->limit(4)->orderBy('pay','desc')->first();
+//        dd($data['colors']);
 
         return view('pages.chitietsanpham', $data);
     }

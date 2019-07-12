@@ -1,5 +1,14 @@
 @extends('master-layout')
 @section('content')
+    <style>
+        .quantity{
+            width: 100%;
+            text-align: center;
+            background: none;
+            border: none;
+            color: white;
+        }
+    </style>
 <div class="container-fluid">
     <div class="container">
         <div class="row">
@@ -84,30 +93,36 @@
                     </div>
                     <div class="col-md-6  text-left d-flex flex-column">
                         <h4>{{ $product->name }}</h4>
-                        <span class="gia">Đơn giá : {{ number_format($product->sale)." VNĐ" }}</span>
+                        <span class="gia">Giá Khuyến Mại : {{ number_format($product->sale)." VNĐ" }}</span>
+                        Giá cũ : <p class="" style="  text-decoration: line-through;">{{ number_format($product->price)." VNĐ" }}</p>
                         <span>Mã hàng : {{ $product->code }}</span>
                         <div class="form-group mt-3">
                             <label for="1">Màu sắc</label>
-                            <select class="form-control my-3" id="1" onchange="selectsize(this)">
+                            <select class="form-control my-3"  onchange="selectsize(this)">
                                 <option value="0">--Màu--</option>
                                 @foreach($colors as $color)
-                                    <option value="{{ $color->colorid }}" id="color{{ $color->colorid }}">{{ $color->name }}</option>
+                                    <option value="{{ $color->colorid }}" id="{{ $color->detailid }}">{{ $color->name }}</option>
                                 @endforeach
                                     <script>
                                         function selectsize(obj){
-
+                                            var options = obj.children;
                                             var x = obj.value;
                                             if(x==="0"){
-                                                $("#sizeproduct").html('');
-                                            }
-                                            else {
-                                                $.get('{{ url('selectsize/') }}/'+obj.value, function (data) {
-                                                    $("#sizeproduct").html(data);
-                                                });
-                                                $.get('{{ url('selectcolor/') }}/'+obj.value+'/{{ $product->id }}', function (data) {
-                                                    $("#product-carousel").html(data);
-                                                });
-                                            }
+                                                   $("#sizeproduct").html('');
+                                               }
+                                               else {
+                                                for (var i = 0; i < options.length; i++) {
+                                                    if (options[i].selected) {
+                                                        $.get('{{ url('selectsize/') }}/' + options[i].id, function (data) {
+                                                            $("#sizeproduct").html(data);
+                                                        });
+                                                    }
+                                                }
+                                                   $.get('{{ url('selectcolor/') }}/' + obj.value + '/{{ $product->id }}', function (data) {
+                                                       $("#product-carousel").html(data);
+                                                   });
+
+                                                }
                                         };
                                     </script>
                                 {{--<option>Green</option>--}}
@@ -119,12 +134,44 @@
                         </div>
                         <h6>Số lượng</h6>
                         <div class="soluong d-flex justify-content-between">
-                            <button class="btn"><i class="fas fa-minus"></i></button>
-                            <span>1</span>
-                            <button class="btn"><i class="fas fa-plus"></i></button>
+                            <button class="btn" onclick="minus()"><i class="fas fa-minus"></i></button>
+                            <input name="quantity" class="quantity" id="quantity" type="number" value="1" onchange="cost(this)">
+                            <input id="sale" type="hidden" value="{{ $product->sale }}">
+                            <button class="btn" onclick="plus()"><i class="fas fa-plus"></i></button>
+                            <script>
+                                function plus(){
+                                    var number=parseInt($('#quantity').val())+1;
+                                    $('#quantity').val(number);
+                                    var total = number*parseInt($('#sale').val());
+
+                                    document.getElementById('total').innerHTML= total.toLocaleString()+' VNĐ';
+                                }
+                                function minus() {
+                                    if(parseInt($('#quantity').val()) > 1){
+                                        var number = parseInt($('#quantity').val()) - 1;
+
+                                        $('#quantity').val(number);
+                                        var total = number * parseInt($('#sale').val());
+
+                                        document.getElementById('total').innerHTML = total.toLocaleString() + ' VNĐ';
+                                    }
+                                }
+                                function cost(obj) {
+                                    //alert(obj.value);
+                                    if(obj.value <1){
+                                        alert('bạn không thể chọn số lượng nhỏ hơn 1');
+                                        obj.value= 1;
+                                    }
+                                    else{
+                                        var total = parseInt(obj.value) * parseInt($('#sale').val());
+
+                                        document.getElementById('total').innerHTML = total.toLocaleString() + ' VNĐ';
+                                    }
+                                }
+                            </script>
                         </div>
                         <h6>
-                            Số tiền :<span> 100.000đ </span>
+                            Số tiền :   <span id="total"> {{ number_format($product->sale). " VNĐ" }}</span>
                         </h6>
 
                     </div>
