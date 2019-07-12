@@ -72,5 +72,9 @@ class DatabaseSeeder extends Seeder
                 'slug' => $this->slug($cate)
             ]);
         }
+
+        DB::table('introduce')->insert([
+            ''
+        ]);
     }
 }
