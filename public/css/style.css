@@ -20,7 +20,6 @@ a{
 
 .container img{
     width: 100%;
-    height: 100%;
     object-fit: cover;
 }
 
@@ -585,21 +584,19 @@ position: absolute;
     left: -130px;
 }
 .product-page .carousel-indicators li:nth-child(1){
-    background-image: url('../images/product-1.jpg');
     top: 0px;
     background-size: cover;
 
     top: 20px;
 }
 .product-page .carousel-indicators li:nth-child(2){
-    background-image: url('../images/product-1.jpg');
     top: 0px;
     background-size: cover;
 
     top: 140px;
 }
 .product-page .carousel-indicators li:nth-child(3){
-    background-image: url('../images/product-1.jpg');
+
     top: 0px;
     background-size: cover;
 

@@ -72,5 +72,52 @@ class DatabaseSeeder extends Seeder
                 'slug' => $this->slug($cate)
             ]);
         }
+        DB::table('collections')->insert([
+            [
+            'name' => 'Đông-Xuân',
+            'image' => 'dong-xuan.jpg'
+            ],
+            [
+            'name' => 'Hè-Thu',
+            'image' => 'he-thu.jpg'
+            ]
+        ]);
+
+        $sizes ="X,XS,XL,XXL,XXXL,M,L";
+        $size = explode(',', $sizes);
+        foreach ($size as $value){
+            DB::table('size')->insert([
+               'name' => $value
+            ]);
+        }
+
+        $colors ="red,green,blue,yellow,orange,violet,black,white,pink,brown,grey";
+        $color = explode(',', $colors);
+         foreach ($color as $value){
+             DB::table('color')->insert([
+                 'name' => $value
+             ]);
+         }
+
+         $cates ="Áo,Đầm,Chân Váy,Quần,Phụ Kiện,Công Sở";
+         $cate = explode(',', $cates);
+              foreach($cate as $value)
+              {
+                  DB::table('cate_products')->insert([
+                      'name' => $value,
+                      'slug' => $this->slug($value)
+                  ]);
+              }
+        DB::table('sliders')->insert([
+            [
+                'image' => 'xnrS_image_banner-1.jpg'
+            ],
+            [
+                'image' => 't4BX_image_banner-2.jpg'
+            ],
+            [
+                'image' => '8sEr_image_banner-3.jpg'
+            ]
+        ]);
     }
 }

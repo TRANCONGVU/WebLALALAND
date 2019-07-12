@@ -20,6 +20,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <link href="{{ asset('admin/dasbroad') }}/css/style.css" rel='stylesheet' type='text/css' />
     <!-- Graph CSS -->
     <link href="{{ asset('admin/dasbroad') }}/css/font-awesome.css" rel="stylesheet">
+
     <!-- jQuery -->
     <!-- lined-icons -->
     <link rel="stylesheet" href="{{ asset('admin/dasbroad') }}/css/icon-font.min.css" type='text/css' />
@@ -30,6 +31,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <!--animate-->
     <link href="{{ asset('admin/dasbroad') }}/css/animate.css" rel="stylesheet" type="text/css" media="all">
     <script src="{{ asset('admin/dasbroad') }}/js/wow.min.js"></script>
+    <link href="{{ asset('css/chosen/chosen.css') }}" rel="stylesheet">
     <script>
         new WOW().init();
     </script>
@@ -85,11 +87,15 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <script src="{{ asset('admin/dasbroad') }}/js/scripts.js"></script>
 <!-- Bootstrap Core JavaScript -->
 <script src="{{ asset('admin/dasbroad') }}/js/bootstrap.min.js"></script>
+
 <script>
 $(document).ready( function () {
             $('#dbtbl').DataTable();
+            $('.chosen-select').chosen({width: '100%'});
         } );
 </script>
+<script src="{{ asset('js/chosen/chosen.jquery.js')}}"></script>
+
 
 </body>
 </html>

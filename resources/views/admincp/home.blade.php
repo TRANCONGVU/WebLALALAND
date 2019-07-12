@@ -1,8 +1,11 @@
 @extends('admincp.index')
+@section('title')
+    Trang Chủ Admin
+@endsection
 @section('content')
     <div id="page-wrapper">
         <div class="graphs">
-            <div class="col_3">
+            <div class=" row">
                 <div class="col-md-3 widget widget1">
                     <div class="r3_counter_box">
                         <i class="fa fa-mail-forward"></i>
@@ -383,4 +386,5 @@
         </div>
         <!--body wrapper start-->
     </div>
+
 @endsection
