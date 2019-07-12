@@ -42,6 +42,19 @@ Route::get('tintuc/{slug}', [
         Route::get('checkpass/{id}/{value}', 'Controller_1@checkpass')->name('checkpass');
         Route::post('changepass/{id}', 'Controller_1@changepass')->name('changepass');
     });
+    Route::get('sanpham/{slug}', [
+        'as' =>'chitietsanpham1',
+        'uses' => 'Controller_1@get_chitietsanpham'
+    ]);
+
+
+    /*
+     * ajax
+     * */
+
+    Route::get('selectsize/{id}', 'ajaxController@selectsize')->name('selectsize');
+    Route::get('selectcolor/{colorid}/{productid}', 'ajaxController@selectcolor')->name('selectcolor');
+
 
 Route::get('product', [
 	'as' =>'product',
@@ -190,15 +203,48 @@ Route::prefix('admincp')->group(function () {
             Route::get('destroy','ProductTypeController@destroy')->name('destroy.producttype');
         });
         //product
+        Route::group(['prefix' => 'collections'],function (){
+            Route::get('/','CollectionsController@index')->name('list.collections');
+
+            Route::post('create','CollectionsController@store')->name('store.collections');
+
+            Route::post('edit/{id}','CollectionsController@update')->name('update.collections');
+            Route::get('destroy/{id}/{value}','CollectionsController@destroy')->name('destroy.collections');
+        });
+
+        /*
+         *
+         * */
+        Route::group(['prefix' => 'size'],function (){
+            Route::get('/','SizeController@index')->name('list.size');
+
+            Route::post('create','SizeController@store')->name('store.size');
+
+            Route::post('edit/{id}','SizeController@update')->name('update.size');
+            Route::get('delete/{id}/{value}','SizeController@destroy')->name('destroy.size');
+        });
+
+        Route::group(['prefix' => 'color'],function (){
+            Route::get('/','ColorController@index')->name('list.color');
+
+            Route::post('create','ColorController@store')->name('store.color');
+
+            Route::post('edit/{id}','ColorController@update')->name('update.color');
+            Route::get('delete/{id}/{value}','ColorController@destroy')->name('destroy.color');
+        });
+
+        //product
         Route::group(['prefix' => 'product'],function (){
             Route::get('/','ProductController@index')->name('list.product');
+
             Route::get('/create','ProductController@create')->name('create.product');
-            Route::post('create','ProductController@store')->name('store.product');
+            Route::post('/create','ProductController@store')->name('store.product');
             Route::get('edit/{id}','ProductController@edit')->name('edit.product');
             Route::post('edit/{id}','ProductController@update')->name('update.product');
             Route::get('detail','ProductController@show')->name('show.product');
             Route::get('destroy','ProductController@destroy')->name('destroy.product');
         });
+
 
 		Route::group(['prefix' => 'useraccount'], function (){
             route::get('/','useraccountcontroller@index')->name('list.useraccount');

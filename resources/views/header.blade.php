@@ -79,7 +79,18 @@
                       <a href="{{ url('product') }}">Sản phẩm<i class="fas fa-caret-down"></i></a>
                       <div class="sp-hover">
                           <div class="row">
-                              <div class="col text-left px-5">
+                              @foreach($cate_products as $value)
+                              <div class="col-md-3">
+                                  <div class="hover-item hover-item1 d-flex flex-column justify-content-start">
+                                      <a href="{{ url('cate/'.$value->slug) }}">{{ $value->name }}</a>
+                                      <a href="#">jacket</a>
+                                      <a href="#">sơ mi</a>
+                                      <a href="#">hello</a>
+                                  </div>
+                              </div>
+                              @endforeach
+
+                              {{--<div class="col text-left px-5">
                                   <div class="hover-item hover-item1 d-flex flex-column justify-content-start">
                                       <a href="">Áo</a>
                                       <a href="#">jacket</a>
@@ -141,7 +152,7 @@
                               </div>
                               <div class="col text-left px-5">
                                   <img src="https://kenh14cdn.com/2018/4/13/photo-4-1523613034062930366784.jpg" alt="">
-                              </div>
+                              </div>--}}
                           </div>
                       </div>
 

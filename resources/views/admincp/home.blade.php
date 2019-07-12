@@ -3,7 +3,6 @@
     Trang Chủ Admin
 @endsection
 @section('content')
-    <div class="container">
     <div id="page-wrapper">
         <div class="graphs">
             <div class=" row">
@@ -387,5 +386,5 @@
         </div>
         <!--body wrapper start-->
     </div>
-    </div>
+
 @endsection
