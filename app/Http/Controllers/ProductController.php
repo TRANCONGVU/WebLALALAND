@@ -106,12 +106,12 @@ class ProductController extends Controller
                 ]);
                 $details = DB::table('product_details')->where('image', $file_name)->orderBy('id', 'desc')->first();
 
-                if(isset($input['sizenumber'.$i])) {
-                    for ($j = 1; $j <= $input['sizenumber' . $i]; $j++) {
+                if(isset($input['sizenumber'.$input['color'.$i]])) {
+                    for ($j = 1; $j <= $input['sizenumber' . $input['color'.$i]]; $j++) {
                         DB::table('color_size')->insert([
                             'detail_id' => $details->id,
-                            'size_id' => $input['size-name-' . $i . '-' . $j],
-                            'quantity' => $input['quantity-' . $i . '-' . $j]
+                            'size_id' => $input['size-name-' . $input['color'.$i] . '-' . $j],
+                            'quantity' => $input['quantity-' . $input['color'.$i] . '-' . $j]
                         ]);
                     }
                 }
