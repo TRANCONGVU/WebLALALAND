@@ -119,5 +119,8 @@ class DatabaseSeeder extends Seeder
                 'image' => '8sEr_image_banner-3.jpg'
             ]
         ]);
+        DB::table('payment_methods')->insert([
+           [ 'name' => 'Thanh toán khi nhận hàng']
+        ]);
     }
 }

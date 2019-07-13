@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Darryldecode\Cart\Cart;
 use Illuminate\Support\Facades\DB;
 
 class ajaxController extends Controller
@@ -73,7 +74,61 @@ class ajaxController extends Controller
         echo $html;
 
     }
+    public function addcart(Request $request){
 
+        session_start();
+        //dd($request->all());
+        $input=$request->all();
 
+        $product= DB::table('products')->find($input['id']);
+        $size= DB::table('size')->find($input['size']);
+        $color= DB::table('color')->find($input['color']);
+        //dd($product);
+
+        /* echo "<pre>";
+           print_r($product);
+         echo "</pre>";
+
+         die();*/
+        \Cart::add(array(
+            array(
+                'id' => $product->id,
+                'name' => $product->name,
+                'price' => $product->sale,
+                'quantity' => $input['quantity'],
+                'attributes' => array(
+                    'sizeid' => $size->id,
+                    'sizename' => $size->name,
+                    'colorid' => $color->id,
+                    'colorname' => $color->name,
+                    'image' => $product->image
+                )
+
+            ),
+        ));
+
+//        dd(\Cart::getContent());
+    }
+    public function updatecart(Request $request){
+        $input=$request->all();
+
+//        dd($input['quantity']);
+
+        \Cart::update($input['id'], array(
+            'quantity' => $input['quantity'], // so if the current product has a quantity of 4, another 2 will be added so this will result to 6
+        ));
+        $cart = \Cart::getContent();
+        $tong=0;
+        foreach ($cart as $value){
+            $tong += $value->quantity*$value->price;
+        }
+        echo number_format($tong).' VNĐ';
+    }
+
+    public function deletecart($id){
+        \Cart::remove($id);
+
+        return redirect()->route('cart');
+    }
 
 }

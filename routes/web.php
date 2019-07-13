@@ -55,6 +55,17 @@ Route::get('tintuc/{slug}', [
     Route::get('selectsize/{id}', 'ajaxController@selectsize')->name('selectsize');
     Route::get('selectcolor/{colorid}/{productid}', 'ajaxController@selectcolor')->name('selectcolor');
 
+    /*
+     * giỏ hàng
+     * */
+    Route::post('addcart', 'ajaxController@addcart')->name('addcart');
+    Route::post('updatecart', 'ajaxController@updatecart')->name('updatecart');
+    Route::get('deletecart/{id}', 'ajaxController@deletecart')->name('deletecart');
+    Route::get('thanhtoan', [
+        'as' =>'form',
+        'uses' => 'Controller_1@get_form'
+    ]);
+    Route::post('postthanhtoan', 'Controller_1@postthanhtoan')->name('postthanhtoan');
 
 Route::get('product', [
 	'as' =>'product',
@@ -114,10 +125,7 @@ Route::get('cart', [
 	'as' =>'cart',
 	'uses' => 'Controller_1@get_cart'
 ]);
-Route::get('form', [
-	'as' =>'form',
-	'uses' => 'Controller_1@get_form'
-]);
+
 Route::get('dangky', [
 	'as' =>'dangky  ',
 	'uses' => 'Controller_1@get_dangky'
@@ -129,6 +137,7 @@ Route::get('dangnhap', [
 
 Route::post('createuser', 'Auth\UserLoginController@createuser')->name('createuser');
 Route::post('loginuser', 'Auth\UserLoginController@loginuser')->name('loginuser');
+Route::post('logoutuser', 'Auth\UserLoginController@logout')->name('logoutuser');
 Route::get('sale', [
 	'as' =>'sale  ',
 	'uses' => 'Controller_1@get_sale'
