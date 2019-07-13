@@ -264,6 +264,13 @@
     .select-show{
         margin-top: 15px;
     }
+    .noibatsp .col-6 {
+        /* height: 300px; */
+        padding: 10px;
+    }
+    .video iframe{
+        height: 250px !important;
+    }
 }
 @media only screen and (max-width: 475px) {
     .responve-caroulsel {

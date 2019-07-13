@@ -210,6 +210,15 @@ class Controller_1 extends Controller
     public  function get_sale(){
         return view('pages.sale');
     }
+    public  function get_video(){
+        return view('pages.video');
+    }
+    public  function get_tuyendung(){
+        return view('pages.tuyendung');
+    }
+    public  function get_tuyendungdetaits(){
+        return view('pages.tuyendungdetais');
+    }
 
 
     public function lienhe(Request $request){
