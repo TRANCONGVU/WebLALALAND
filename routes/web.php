@@ -56,11 +56,23 @@ Route::get('tintuc/{slug}', [
     Route::get('selectcolor/{colorid}/{productid}', 'ajaxController@selectcolor')->name('selectcolor');
 
 
+
 Route::get('product', [
 	'as' =>'product',
 	'uses' => 'Controller_1@get_product'
 ]);
-
+Route::get('tuyendungdetaits', [
+	'as' =>'tuyendungdetaits',
+	'uses' => 'Controller_1@get_tuyendungdetaits'
+]);
+Route::get('video', [
+	'as' =>'video',
+	'uses' => 'Controller_1@get_video'
+]);
+Route::get('tuyendung', [
+	'as' =>'tuyendung',
+	'uses' => 'Controller_1@get_tuyendung'
+]);
 Route::get('bosuutap', [
 	'as' =>'bosuutap',
 	'uses' => 'Controller_1@get_bosuutap'
@@ -154,7 +166,7 @@ Route::prefix('admincp')->group(function () {
 	Route::prefix('/')->middleware('auth:admins')->group(function () {
 
 		Route::get('/', 'Auth\Admin\AdminController@index')->name('admin.index');
-		
+
 		Route::group(['prefix'=>'slider'],function(){
 			//add
 			Route::get('addslider','SliderController@addSlider');
@@ -181,7 +193,7 @@ Route::prefix('admincp')->group(function () {
 			Route::get('editIntro/{id}','IntroduceController@edit');
 			Route::post('editIntro/{id}','IntroduceController@postEdit');
 		});
-	
+
 		//category product
 		Route::group(['prefix' => 'cateproduct'], function (){
 			Route::get('/','CateProductController@index')->name('list.cateproduct');
@@ -294,6 +306,6 @@ Route::prefix('admincp')->group(function () {
 
 	});
 
-	
+
 });
 Auth::routes();

@@ -16,8 +16,8 @@
                     <span>Màu : Tím</span>
                     <div class="d-flex komuonlamnua">
                         <input class="form-control text-center" value="1" type="number">
-                        <i class="far fa-trash-alt ml-3 mt-2"></i>
-                        <a class="ml-3 mt-2" href="#">Cập nhật giỏ hàng của bạn</a>
+
+                        <a class="mt-2" href="#"><i class="far fa-trash-alt ml-3 mt-2"></i>Cập nhật giỏ hàng của bạn</a>
                     </div>
 
                 </div>
