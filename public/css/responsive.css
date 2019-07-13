@@ -275,7 +275,7 @@
     }
 
     .section-1 .item {
-        height: 200px;
+        height: 350px;
     }
     .title-banner span:nth-child(1) {
         font-size: 30px;
@@ -283,12 +283,12 @@
     .title-banner span:nth-child(2) {
         font-size: 15px;
     }
-    .owl-carousel .owl-nav button.owl-next, .owl-carousel .owl-nav button.owl-prev {
-        font-size: 40px;
-        top: 70px;
+    .owl-carousel .owl-nav button.owl-next, .owl-carousel .owl-nav {
+        font-size: 50px;
+        top: 25%;
     }
     .owl-carousel .owl-nav button.owl-prev {
-        top: 40px;
+        top: 20%;
     }
     .product-img img{
         height: 200px;
@@ -304,6 +304,14 @@
         top: 5px;
         font-size: 13px;
         left: 5px;
+    }
+    .bacham {
+        width: 30px;
+        height: 30px;
+    }
+    .box-up-item{
+        width: 30px;
+        height: 30px;
     }
 
 }

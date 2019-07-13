@@ -2,7 +2,7 @@
 var danhsach = document.getElementById("danhsach");
 var menu = document.getElementById("menu");
 var xem = document.querySelector(".xapsep");
-console.log(xem);
+// console.log(xem);
 var tt = true;
 danhsach.addEventListener('click', function () {
     if (tt === true) {
