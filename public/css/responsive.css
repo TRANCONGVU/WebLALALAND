@@ -125,12 +125,14 @@
 
 }
 @media only screen and (max-width: 888px) {
-
-	}
-	.footer-link a,.footer-thongtin-lienhe,.footer-thongtin-lienhe span{
+    .footer-link a,.footer-thongtin-lienhe,.footer-thongtin-lienhe span{
 		font-size: 12px;
+    }
+    .select-show {
+        margin-top: 20px;
+    }
 	}
-}
+
 @media only screen and (max-width: 830px) {
 	.nav-horizontal-container{
 		padding-bottom: 10px;
@@ -195,6 +197,9 @@
     font-size: 50px;
     top: 90px;
    }
+   .logo-mobile{
+       display: block;
+   }
 }
 
 }
@@ -256,6 +261,9 @@
     .page .over-lay {
         height: 100% !important;
     }
+    .select-show{
+        margin-top: 15px;
+    }
 }
 @media only screen and (max-width: 475px) {
     .responve-caroulsel {
@@ -267,7 +275,7 @@
     }
 
     .section-1 .item {
-        height: 200px;
+        height: 350px;
     }
     .title-banner span:nth-child(1) {
         font-size: 30px;
@@ -275,12 +283,35 @@
     .title-banner span:nth-child(2) {
         font-size: 15px;
     }
-    .owl-carousel .owl-nav button.owl-next, .owl-carousel .owl-nav button.owl-prev {
-        font-size: 40px;
-        top: 70px;
+    .owl-carousel .owl-nav button.owl-next, .owl-carousel .owl-nav {
+        font-size: 50px;
+        top: 25%;
     }
     .owl-carousel .owl-nav button.owl-prev {
-        top: 40px;
+        top: 20%;
+    }
+    .product-img img{
+        height: 200px;
+    }
+    .chose div {
+        margin: 0%;
+    }
+    .sale-item::before{
+        border-right: 50px solid transparent;
+        border-top: 50px solid red;
+    }
+    .sale{
+        top: 5px;
+        font-size: 13px;
+        left: 5px;
+    }
+    .bacham {
+        width: 30px;
+        height: 30px;
+    }
+    .box-up-item{
+        width: 30px;
+        height: 30px;
     }
 
 }
@@ -309,6 +340,23 @@
     .title-banner {
         top: 20px;
     }
+    .cart-content{
+        flex-direction: column;
+        align-items: center;
+    }
+    .select-show {
+        padding: 0;
+    }
+}
+@media only screen and ( max-width :  390px){
+    .select-show a{
+        padding: 5px;
+    }
+}
+@media only screen and ( max-width :  350px){
+    .form-inline .form-control {
+        width: 120px;
+    }
 }
 @media only screen and (max-width: 332px) {
 	.nav-horizontal-search form input{
@@ -316,5 +364,8 @@
 	}
 	.nav-horizontal-search-active{
 		width: 176px;
-	}
+    }
+    .xemnhu {
+        margin : 20px 5px;
+    }
 }

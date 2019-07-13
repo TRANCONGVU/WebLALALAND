@@ -54,18 +54,52 @@
 
 </div>
 <div class="container-flui" style="position : relative">
-        <div class="box-up">
+    <div class="box-up">
+        <a id="hihi" onclick="hihi">
+            <div class="box-up-item bacham">
+                <i class="fas fa-ellipsis-h"></i>
+            </div>
+        </a>
+        <div class="hide">
+            <a href="#">
                 <div class="box-up-item">
                     <img src="images/mail-icon.png" alt="">
                 </div>
+            </a>
+            <a href="">
                 <div class="box-up-item">
                     <img src="images/messager-icon.png" alt="">
                 </div>
+            </a>
+            <a href="">
                 <div class="box-up-item">
                     <img src="images/phone-icon.png" alt="">
                 </div>
-            </div>
+            </a>
+
+        </div>
+
+    </div>
 </div>
+<script type="text/javascript">
+    var lk = document.getElementById("hihi");
+    var hihi = document.querySelector(".hide");
+    var hidett = true;
+    lk.addEventListener('click', function () {
+        if (hidett === true) {
+            hihi.classList.add('show');
+            hihi.classList.remove('hide');
+            return hidett = false;
+            console.log(hidett);
+        } else {
+            hihi.classList.add('hide');
+            hihi.classList.remove('show');
+            return hidett = true;
+            console.log(hidett);
+        }
+    });
+
+</script>
 
 <section class="back-to-top">
     <div class="back-to-top-button"><i class="fas fa-angle-double-up"></i></div>
