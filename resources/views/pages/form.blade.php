@@ -31,6 +31,7 @@
                         <div class="form-group col-md-12">
                             <label for="Họ và Tên">Email</label>
                             <input type="text" class="form-control" id="name" name="name" required placeholder="Họ và Tên" value="{{ Auth::user()->name }}">
+                            <input type="hidden" class="form-control" id="userid" name="userid" required placeholder="Họ và Tên" value="{{ Auth::user()->id }}">
                         </div>
                         <div class="form-group col-md-12">
                             <label for="Số Điện Thoại">Email</label>
@@ -60,7 +61,7 @@
                 </div>
                 <button type="submit" class="btn btn-primary">Đặt hàng</button>
             </form>
-            <div class="xacnhan">
+            {{--<div class="xacnhan">
                 <div>
                     <i class="fas fa-check-circle mt-2"></i>
                     <span>Đơn hàng của bạn đã đươc xác nhận</span>
@@ -80,10 +81,10 @@
                 </div>
 
 
-            </div>
+            </div>--}}
         </div>
         <div class="col-md-4 thanhtoan-sp">
-            <div class="thanhtoan-left d-flex justify-content-between    ">
+          {{--  <div class="thanhtoan-left d-flex justify-content-between    ">
                 <div>
                     <img src="images/product-4.jpg" alt="">
                     <span> đầm ren đuôi cá</span>
@@ -92,7 +93,7 @@
                 <div class="name-sp">
                     <span> 1,999,999 Đ</span>
                 </div>
-            </div>
+            </div>--}}
             <div class="container border-line">
 
             </div>

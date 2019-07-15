@@ -228,8 +228,9 @@ class UpDb extends Migration
                 ->references('id')
                 ->on('payment_methods')
                 ->onDelete('cascade');
-            $table->float('total');
+            $table->bigInteger('total');
             $table->date('day');
+            $table->integer('status')->default(0);
         });
         Schema::create('cart_details',function (Blueprint $table){
             $table->bigIncrements('id');

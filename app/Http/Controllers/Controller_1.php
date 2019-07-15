@@ -181,7 +181,10 @@ class Controller_1 extends Controller
            'day' => now(),
         ]);
 
-        $cartid = DB::table('carts')->where('code', $input['code'])->first();
+        $cartid = DB::table('carts')
+            ->select('carts.*', 'payment_methods.name as pay')
+            ->join('payment_methods', 'payment_methods.id','=', 'carts.payment_method_id')
+            ->where('code', $input['code'])->first();
         foreach ($carts as $value){
             DB::table('cart_details')->insert([
                 'cart_id' => $cartid->id,
@@ -191,7 +194,14 @@ class Controller_1 extends Controller
                 'money' => $value->price*$value->quantity,
             ]);
         }
-        echo 'ok';
+
+        if(isset($input['userid'])){
+            DB::table('users')->where('id', $input['userid'])->update([
+               'address' =>  $input['address'],
+               'phone' =>  $input['phone'],
+            ]);
+        }
+    return \view('pages.xacnhan', compact('cartid'));
 
 
     }
@@ -254,6 +264,15 @@ class Controller_1 extends Controller
     }
     public  function get_sale(){
         return view('pages.sale');
+    }
+    public  function get_video(){
+        return view('pages.video');
+    }
+    public  function get_tuyendung(){
+        return view('pages.tuyendung');
+    }
+    public  function get_tuyendungdetaits(){
+        return view('pages.tuyendungdetais');
     }
 
 

@@ -141,7 +141,26 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
+        $data['product'] = DB::table('products')->find($id);
+        $data['cates'] = DB::table('cate_products')->get();
+        $data['collections'] = DB::table('collections')->get();
+        $data['sizes'] = DB::table('size')->get();
+        $data['colors'] = DB::table('color')
+            ->where(DB::raw('(select count(*) from product_details WHERE product_details.color_id=color.id AND product_id='.$id.')'),'=', 0)
+            ->get();
+        //dd($data['colors']);
         //
+
+        $data['hascolors'] = DB::table('product_details')
+            ->select('product_details.id','product_details.color_id' ,'product_details.image', 'color.name')
+            ->join('color', 'color.id','=', 'product_details.color_id')
+            ->where('product_details.product_id',$id)
+            ->get();
+        foreach ($data['hascolors'] as $value){
+            $data['sizes'.$value->id]= DB::table('color_size')->where('detail_id',$value->id)->get();
+        }
+        //dd($data);
+        return view('admincp.product.edit', $data);
     }
 
     /**
@@ -153,7 +172,84 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
+        //dd($request->all());
         //
+
+        $input= $request->all();
+        if($input['sale']==''){
+            $sale=0;
+        }
+        else{
+            $sale=$input['sale'];
+        }
+        if ($request->hasFile('file-0-0')) {
+            $old = DB::table('products')->find($id);
+            $file = $request->file('file-0-0');
+            $name = $file->getClientOriginalName();
+            $avatar = str_random(4) . "_product_" . $name;
+            while (file_exists('images/products/' . $avatar)) {
+                $Hinh = str_random(4) . "_product_" . $name;
+            }
+            $file->move('images/products/', $avatar);
+            if($old->image !='' && file_exists('images/products/' . $old->image)){
+                unlink('images/products/' . $old->image);
+            }
+            $file_name1 = $avatar;
+        }
+        else{
+            $file_name1= $input['old-image'];
+        }
+        DB::table('products')->where('id', $id)->update([
+            'name' => $input['name'],
+            'slug' => $this->slug($input['name']),
+            'price'=> $input['price'],
+            'sale'=> $sale,
+            'category_id' => $input['cate'],
+            'collections_id' => $input['collections'],
+            'image' => $file_name1,
+            'updated_at' =>now()
+        ]);
+
+
+
+        if($input['color-number']!=0){
+            for($i=1; $i<=$input['color-number']; $i++){
+                if(isset($input['color'.$i])) {
+
+                    $file_name="";
+                    for($k=1; $k<=3; $k++) {
+                        if ($request->hasFile('file-'.$i.'-'.$k)) {
+                            $file = $request->file('file-'.$i.'-'.$k);
+                            $name = $file->getClientOriginalName();
+                            $avatar = str_random(4) . "_product_" . $name;
+                            while (file_exists('images/products/' . $avatar)) {
+                                $Hinh = str_random(4) . "_product_" . $name;
+                            }
+                            $file->move('images/products/', $avatar);
+                            $file_name .= $avatar.',';
+                        }
+                    }
+                    //dd($file_name);
+                    DB::table('product_details')->insert([
+                        'product_id'=> $id,
+                        'color_id' => $input['color'.$i],
+                        'image' => $file_name
+                    ]);
+                    $details = DB::table('product_details')->where('image', $file_name)->orderBy('id', 'desc')->first();
+
+                    if(isset($input['sizenumber'.$input['color'.$i]])) {
+                        for ($j = 1; $j <= $input['sizenumber' . $input['color'.$i]]; $j++) {
+                            DB::table('color_size')->insert([
+                                'detail_id' => $details->id,
+                                'size_id' => $input['size-name-' . $input['color'.$i] . '-' . $j],
+                                'quantity' => $input['quantity-' . $input['color'.$i] . '-' . $j]
+                            ]);
+                        }
+                    }
+                }
+            }
+        }
+        return redirect()->route('list.product')->with('thongbao','Sửa Sản Phẩm thành Công');
     }
 
     /**

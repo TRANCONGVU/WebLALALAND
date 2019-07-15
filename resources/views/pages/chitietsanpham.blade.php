@@ -98,7 +98,8 @@
                     <div class="col-md-6  text-left d-flex flex-column">
                         <h4>{{ $product->name }}</h4>
                         <span class="gia">Giá Khuyến Mại : {{ number_format($product->sale)." VNĐ" }}</span>
-                        Giá cũ : <p class="" style="  text-decoration: line-through;">{{ number_format($product->price)." VNĐ" }}</p>
+                        <span class="">Sale :  {{ 100-($product->sale/$product->price)*100 }}%</span>
+                        <b>Giá cũ :</b> <p class="" style="  text-decoration: line-through;">{{ number_format($product->price)." VNĐ" }}</p>
                         <span>Mã hàng : {{ $product->code }}</span>
                         <div class="form-group mt-3">
                             <label for="1">Màu sắc</label>

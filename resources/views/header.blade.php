@@ -1,3 +1,4 @@
+
   <div class="header">
       <div class="container head d-flex justify-content-end mt-1">
 
@@ -66,6 +67,12 @@
 
       </div>
   </div>
+  <div class="d-flex justify-content-center">
+        <div class="logo-mobile">
+                <img src="images/logo3.png" alt="">
+            </div>
+  </div>
+
   <nav class="nav-horizontal container-fluid">
 
       <div class="nav-horizontal-container container">
@@ -73,7 +80,7 @@
           <div class="nav-horizontal-content">
 
               <ul class="nav-ul-lv-1">
-                  {{--<li><a href="{{ url('trang-chu') }}"> <img class="nav-logo" src="images/logo3.png" alt=""></a></li>--}}
+                  <li><a href="{{ url('trang-chu') }}"> <img class="nav-logo" src="images/logo3.png" alt=""></a></li>
                   <li><a href="{{ url('trang-chu') }}">Trang chủ</a></li>
                   <li class="sanpham" style="position : unset">
                       <a href="{{ url('product') }}">Sản phẩm<i class="fas fa-caret-down"></i></a>
@@ -198,7 +205,7 @@
                       <i class="fas fa-bars"></i>
                   </div>
                   <div class="menu-mobile">
-                      <a href="{{ url('dangnhap') }}"><i class="fas fa-user-friends"></i></a>
+                      <a  data-toggle="modal" data-target="#loginModal" ><i class="fas fa-user-friends"></i></a>
                   </div>
                   <div class="menu-mobile" onclick="search" id="search">
                       <a><i class="fas fa-search-plus"></i></a>
