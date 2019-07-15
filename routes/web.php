@@ -42,10 +42,9 @@ Route::get('tintuc/{slug}', [
         Route::get('checkpass/{id}/{value}', 'Controller_1@checkpass')->name('checkpass');
         Route::post('changepass/{id}', 'Controller_1@changepass')->name('changepass');
     });
-    Route::get('sanpham/{slug}', [
-        'as' =>'chitietsanpham1',
-        'uses' => 'Controller_1@get_chitietsanpham'
-    ]);
+
+    Route::get('sanpham/{slug}', 'Controller_1@get_chitietsanpham')->name('sanpham');
+
 
 
     /*
@@ -55,6 +54,20 @@ Route::get('tintuc/{slug}', [
     Route::get('selectsize/{id}', 'ajaxController@selectsize')->name('selectsize');
     Route::get('selectcolor/{colorid}/{productid}', 'ajaxController@selectcolor')->name('selectcolor');
 
+    /*
+     * giỏ hàng
+     * */
+    Route::post('addcart', 'ajaxController@addcart')->name('addcart');
+    Route::post('updatecart', 'ajaxController@updatecart')->name('updatecart');
+    Route::get('deletecart/{id}', 'ajaxController@deletecart')->name('deletecart');
+    Route::get('thanhtoan', [
+        'as' =>'form',
+        'uses' => 'Controller_1@get_form'
+    ]);
+    Route::post('postthanhtoan', 'Controller_1@postthanhtoan')->name('postthanhtoan');
+
+    Route::get('editcolor/{productid}/{colorid}', 'ajaxController@editcolor')->name('editcolor');
+    Route::get('deletecolor/{productid}/{colorid}', 'ajaxController@deletecolor')->name('deletecolor');
 
 
 Route::get('product', [
@@ -126,10 +139,7 @@ Route::get('cart', [
 	'as' =>'cart',
 	'uses' => 'Controller_1@get_cart'
 ]);
-Route::get('form', [
-	'as' =>'form',
-	'uses' => 'Controller_1@get_form'
-]);
+
 Route::get('dangky', [
 	'as' =>'dangky  ',
 	'uses' => 'Controller_1@get_dangky'
@@ -141,6 +151,7 @@ Route::get('dangnhap', [
 
 Route::post('createuser', 'Auth\UserLoginController@createuser')->name('createuser');
 Route::post('loginuser', 'Auth\UserLoginController@loginuser')->name('loginuser');
+Route::post('logoutuser', 'Auth\UserLoginController@logout')->name('logoutuser');
 Route::get('sale', [
 	'as' =>'sale  ',
 	'uses' => 'Controller_1@get_sale'

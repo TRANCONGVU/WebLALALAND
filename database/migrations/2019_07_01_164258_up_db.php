@@ -17,6 +17,8 @@ class UpDb extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->date('birth')->nullable();
+            $table->string('address')->nullable();
+            $table->string('phone')->nullable();
             $table->string('avatar');
             $table->integer('gender');
             $table->string('email')->unique();
@@ -207,6 +209,40 @@ class UpDb extends Migration
                 ->on('size')
                 ->onDelete('cascade');
             $table->integer('quantity')->default(1);
+        });
+
+        Schema::create('payment_methods',function (Blueprint $table){
+            $table->bigIncrements('id');
+            $table->string('name');
+        });
+
+        Schema::create('carts',function (Blueprint $table){
+            $table->bigIncrements('id');
+            $table->string('code');
+            $table->string('name');
+            $table->string('email');
+            $table->string('phone');
+            $table->string('address');
+            $table->bigInteger('payment_method_id')->unsigned();
+            $table->foreign('payment_method_id')
+                ->references('id')
+                ->on('payment_methods')
+                ->onDelete('cascade');
+            $table->bigInteger('total');
+            $table->date('day');
+            $table->integer('status')->default(0);
+        });
+        Schema::create('cart_details',function (Blueprint $table){
+            $table->bigIncrements('id');
+            $table->bigInteger('cart_id')->unsigned();
+            $table->foreign('cart_id')
+                ->references('id')
+                ->on('carts')
+                ->onDelete('cascade');
+            $table->string('name');
+           $table->integer('price');
+           $table->integer('quantity');
+           $table->integer('money');
         });
 
     }

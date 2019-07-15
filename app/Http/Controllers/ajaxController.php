@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Darryldecode\Cart\Cart;
 use Illuminate\Support\Facades\DB;
 
 class ajaxController extends Controller
@@ -73,7 +74,147 @@ class ajaxController extends Controller
         echo $html;
 
     }
+    public function addcart(Request $request){
+
+        session_start();
+        //dd($request->all());
+        $input=$request->all();
+
+        $product= DB::table('products')->find($input['id']);
+        $size= DB::table('size')->find($input['size']);
+        $color= DB::table('color')->find($input['color']);
+        //dd($product);
+
+        /* echo "<pre>";
+           print_r($product);
+         echo "</pre>";
+
+         die();*/
+        \Cart::add(array(
+            array(
+                'id' => $product->id,
+                'name' => $product->name,
+                'price' => $product->sale,
+                'quantity' => $input['quantity'],
+                'attributes' => array(
+                    'sizeid' => $size->id,
+                    'sizename' => $size->name,
+                    'colorid' => $color->id,
+                    'colorname' => $color->name,
+                    'image' => $product->image
+
+                )
+
+            ),
+        ));
+
+//        dd(\Cart::getContent());
+    }
+    public function updatecart(Request $request){
+        $input=$request->all();
+
+//        dd($input['quantity']);
+
+        \Cart::update($input['id'], array(
+            'quantity' => $input['quantity'], // so if the current product has a quantity of 4, another 2 will be added so this will result to 6
+        ));
+        $cart = \Cart::getContent();
+        $tong=0;
+        foreach ($cart as $value){
+            $tong += $value->quantity*$value->price;
+        }
+        echo number_format($tong).' VNĐ';
+    }
+
+    public function deletecart($id){
+        \Cart::remove($id);
+
+        return redirect()->route('cart');
+    }
 
 
+    /*
+     * color
+     * */
 
+    public function editcolor($productid, $colorid){
+        $colors= DB::table('product_details')
+            ->where([
+                ['product_id','=',$productid],
+                ['color_id','=',$colorid],
+            ])
+            ->first();
+        $sizes = DB::table('size')
+            ->where(DB::raw('(select count(*) from color_size WHERE color_size.size_id=size.id AND detail_id='.$colors->id.')'),'=', 0)
+            ->get();
+        $sizehas=DB::table('color_size')
+            ->select('size.id','size.name', 'color_size.quantity')
+            ->join('size','size.id', '=', 'color_size.size_id')
+            ->where('detail_id', $colors->id)
+            ->get();
+        $images = explode(',', $colors->image);
+       //dd($sizes);
+
+
+        $html="<div id='color-child-has-".$colorid."' style='border: black dotted 1px; border-radius: 10px'>";
+
+        $html.="<div style='text-align: right'><a onclick='deletecolorhas(".$colorid.")'><i class='fa fa-times' ></i></a> </div>";
+        $html.="<h4>Thêm màu</h4>";
+        $html.="<hr>";
+        $html.="<input name='color-has-".$colorid."' class='form-control' type='text' value='".$colorid."'>";
+        foreach ($images as $key => $image) {
+            if($image!='') {
+                $html.= "<input name='old-file-has-".$colorid."-".$key."' value='".$image."'>";
+                $html .= "<input name='file-has-".$colorid."-".$key."' id='file-".$key."-" . $colorid . "' class='form-control' type='file' onchange='fileValidation(this)'>";
+                $html .= "<div id='imagePreviewfile-".$key."-" . $colorid . "'>";
+                $html .= "<img style='width:200px;' src='" . asset('images/products/' . $image) . "'/>";
+                $html .= "</div>";
+            }
+        }
+        $html.="<h5>Chọn Size:</h5>";
+        $html.="<select id='has-".$colorid."' onchange='chonsize(this)' required>";
+        foreach($sizes as $value){
+            $html.="<option value='".$value->id."'>".$value->name."</option>";
+        }
+        $html.="</select>";
+        $html.="<hr>";
+
+        $html.="<div id='soluonghas-".$colorid."'>";
+        foreach($sizehas as $keysize => $size){
+            $html.='<h5>'.$size->name.'</h5>';
+            $html.='<input type="hidden" id="size-name-has-'.$colorid.'-'.$keysize.'" name="size-name-has-'.$colorid.'-'.$keysize.'" value="'.$size->id.'">';
+            $html.='<input type="number" id="quantity-has-'.$colorid.'-'.$keysize.'" name="quantity-has-'.$colorid.'-'.$keysize.'" min="1" max="100" value="'.$size->quantity.'">';
+        }
+        $html.="</div>";
+        if(isset($keysize)) {
+            $number = $keysize + 1;
+        }
+        else{
+            $number=0;
+        }
+        $html.="<input name='sizenumber-has-".$colorid."' id='sizenumberhas-".$colorid."' class='form-control' type='text' value='". $number."'>";
+
+        $html.="</div>";
+        echo $html;
+    }
+    public function deletecolor($productid, $colorid){
+        $colors= DB::table('product_details')
+            ->where([
+                ['product_id','=',$productid],
+                ['color_id','=',$colorid],
+            ])
+            ->first();
+        $images = explode(',', $colors->image);
+        foreach ($images as $key => $image) {
+            if($image!='' && file_exists('images/products/' . $image)) {
+                    unlink('images/products/' . $image);
+            }
+        }
+        DB::table('product_details')
+            ->where([
+                ['product_id','=',$productid],
+                ['color_id','=',$colorid],
+            ])
+            ->delete();
+    }
 }

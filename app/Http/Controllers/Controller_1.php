@@ -154,6 +154,59 @@ class Controller_1 extends Controller
             return redirect()->back()->with('thongbao','Change password success');
     }
 
+    public  function get_form(){
+        $data['cart'] = \Cart::getContent();
+
+        $data['tong']=0;
+        foreach ($data['cart'] as $value){
+            $data['tong'] += $value->quantity*$value->price;
+        }
+        $data['pays'] = DB::table('payment_methods')->get();
+        $data['pays'] = DB::table('payment_methods')->get();
+
+        return view('pages.form', $data);
+    }
+
+    public function postthanhtoan(Request $request){
+        $carts = \Cart::getContent();
+
+        $input = $request->all();
+        //dd($request->all());
+        DB::table('carts')->insert([
+           'code' => $input['code'],
+           'name' => $input['name'],
+           'email' => $input['email'],
+           'phone' => $input['phone'],
+           'address' => $input['address'],
+           'payment_method_id' => $input['payment_methods'],
+           'total' => $input['tong'],
+           'day' => now(),
+        ]);
+
+        $cartid = DB::table('carts')
+            ->select('carts.*', 'payment_methods.name as pay')
+            ->join('payment_methods', 'payment_methods.id','=', 'carts.payment_method_id')
+            ->where('code', $input['code'])->first();
+        foreach ($carts as $value){
+            DB::table('cart_details')->insert([
+                'cart_id' => $cartid->id,
+                'name' => $value->name,
+                'price' => $value->price,
+                'quantity' => $value->quantity,
+                'money' => $value->price*$value->quantity,
+            ]);
+        }
+
+        if(isset($input['userid'])){
+            DB::table('users')->where('id', $input['userid'])->update([
+               'address' =>  $input['address'],
+               'phone' =>  $input['phone'],
+            ]);
+        }
+    return \view('pages.xacnhan', compact('cartid'));
+
+
+    }
     public function createuser(Request $request){
         dd($request->all());
     }
@@ -196,11 +249,16 @@ class Controller_1 extends Controller
     }
 
     public  function get_cart(){
-    	return view('pages.cart');
+        $data['cart'] = \Cart::getContent();
+
+        $data['tong']=0;
+        foreach ($data['cart'] as $value){
+            $data['tong'] += $value->quantity*$value->price;
+        }
+//                dd($data['tong']);
+    	return view('pages.cart', $data);
     }
-    public  function get_form(){
-    	return view('pages.form');
-    }
+
     public  function get_dangky(){
     	return view('pages.dangky');
     }

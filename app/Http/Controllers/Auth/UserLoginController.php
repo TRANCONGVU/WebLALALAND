@@ -82,5 +82,11 @@ class UserLoginController extends Controller
             return redirect()->back()->with('thongbao', 'Login Failed');
         }
     }
+    public function logout()
+    {
+        Auth::guard('web')->logout();
+        // chuyển hướng về trang login của admin
+        return redirect()->back();
+    }
 
 }
