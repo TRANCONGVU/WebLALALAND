@@ -156,10 +156,12 @@ class Controller_1 extends Controller
 
     public  function get_form(){
         $data['cart'] = \Cart::getContent();
+
         $data['tong']=0;
         foreach ($data['cart'] as $value){
             $data['tong'] += $value->quantity*$value->price;
         }
+        $data['pays'] = DB::table('payment_methods')->get();
         $data['pays'] = DB::table('payment_methods')->get();
 
         return view('pages.form', $data);
@@ -248,6 +250,7 @@ class Controller_1 extends Controller
 
     public  function get_cart(){
         $data['cart'] = \Cart::getContent();
+
         $data['tong']=0;
         foreach ($data['cart'] as $value){
             $data['tong'] += $value->quantity*$value->price;

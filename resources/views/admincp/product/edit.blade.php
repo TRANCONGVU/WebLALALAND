@@ -81,6 +81,40 @@
                             </span>
                         @enderror
                     </div>
+                    {{-- Màu Hiện có --}}
+                    <div id="has-content-color">
+                        <label class="text-body custom-control-label">Màu Đã Có:</label>
+                         <select id="hascolor" class="form-control" onchange="colorhas(this)">
+                             <option>--Màu Đã Có--</option>
+                             @foreach($hascolors as $value)
+                                 <option value="{{ $value->color_id }}" >{{ $value->name }}</option>
+                             @endforeach
+                         </select>
+                        <div id="hascolorcontent">
+                        </div>
+                        <input name="has-color-select" id="hascolorselect" type="text" value="0">
+
+                          <script>
+                              function colorhas(obj) {
+                                  $.get('{{ url('editcolor/'.$product->id) }}'+'/'+obj.value, function (data) {
+                                      $("#hascolorcontent").append(data);
+                                      $("#hascolorselect").val(parseInt($("#hascolorselect").val())+1);
+                                  });
+
+                              }
+                              function deletecolorhas(id) {
+                                  var x= confirm('bạn có chắc chắn xóa màu này?');
+                                  if(x==true){
+                                      $.get('{{ url('deletecolor/'.$product->id) }}'+'/'+id, function (data) {
+                                          var parent = document.getElementById("hascolorcontent");
+                                          var child = document.getElementById('color-child-has-'+id);
+                                          parent.removeChild(child);
+                                      });
+                                  }
+
+                              }
+                          </script>
+                    </div>
 
                     <div class="form-group">
                         <label class="text-body custom-control-label">Thêm Màu Mới:</label>
@@ -90,7 +124,7 @@
                                 <option value="{{ $cate->id }}" id="colorvalue{{$cate->id}}">{{ $cate->name }}</option>
                             @endforeach
                         </select>
-                        <input type="hidden" id="color-number" name="color-number" value="0" required>
+                        <input type="text" id="color-number" name="color-number" value="0">
                         <div id="content-color" ></div>
                         <script>
                             function chonmau() {
@@ -159,16 +193,16 @@
                             function chonsize(obj) {
                                 var options = obj.children;
                                 var html="";
-                                var number= parseInt($('#sizenumber'+obj.id).val())+1;
+                                var number= parseInt($('#sizenumber'+obj.id).val());
                                 for (var i = 0; i < options.length; i++){
                                     if (options[i].selected){
-                                        html += '<h5>'+options[i].text+'</h5>'
-                                            +'<input type="hidden" name="size-name-'+obj.id+'-'+number+'" value="'+options[i].value+'">'
-                                            +' <input type="number" name="quantity-'+obj.id+'-'+number+'" min="1" max="100" value="1">';
 
+                                        html += '<h5>'+options[i].text+'</h5>'
+                                            +'<input type="hidden" id="size-name-'+obj.id+'-'+number+'" name="size-name-'+obj.id+'-'+number+'" value="'+options[i].value+'">'
+                                            +'<input type="number" id="quantity-'+obj.id+'-'+number+'" name="quantity-'+obj.id+'-'+number+'" min="1" max="100" value="1">';
                                     }
                                 }
-                                $('#sizenumber'+obj.id).val(number);
+                                $('#sizenumber'+obj.id).val(number+1);
                                 $('#soluong'+obj.id).append(html);
                                 $('#quantity').val(parseInt($('#quantity').val())+1);
                             }
@@ -176,28 +210,7 @@
 
                     </div>
 
-                    {{-- Màu Hiện có --}}
-                    <div id="has-content-color">
-                        <h3>Những Màu đã có</h3>
-                        <select id="hascolor" class="form-control" onchange="colorhas(this)">
-                            <option>--Màu Đã Có--</option>
-                            @foreach($hascolors as $value)
-                                <option value="{{ $value->color_id }}" >{{ $value->name }}</option>
-                            @endforeach
 
-                        </select>
-                        <div id="hascolorcontent">
-
-                        </div>
-
-                        <script>
-                            function colorhas(obj) {
-                                $.get('{{ url('editcolor/'.$product->id) }}'+'/'+obj.value, function (data) {
-                                    $("#hascolorcontent").html(data);
-                                });
-                            }
-                        </script>
-                    </div>
                     {{-- Gửi thôn tin đi --}}
                     <div class="form-group">
                         <input id="quantity" type="hidden" value="0">

@@ -67,6 +67,7 @@ Route::get('tintuc/{slug}', [
     Route::post('postthanhtoan', 'Controller_1@postthanhtoan')->name('postthanhtoan');
 
     Route::get('editcolor/{productid}/{colorid}', 'ajaxController@editcolor')->name('editcolor');
+    Route::get('deletecolor/{productid}/{colorid}', 'ajaxController@deletecolor')->name('deletecolor');
 
 
 Route::get('product', [
