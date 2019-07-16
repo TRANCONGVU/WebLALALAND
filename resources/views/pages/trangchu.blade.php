@@ -257,41 +257,6 @@
 <section class="section-4">
     <div class="container fashion owl-carousel owl-theme">
         @foreach($product_hots as $product)
-<<<<<<< HEAD
-            <div class="item new-product">
-                <div class="product-img">
-                    <img src="{{asset('images/products/'.$product->image)}}" class="x" alt="" width="208px" height="406px">
-                    <div class="over-lay d-flex flex-column justify-content-center">
-                        <a href=""><i class="far fa-heart"></i></a>
-                        <a href="{{ url('sanpham/'.$product->slug) }}">Mua ngay</a>
-                        <a href="{{ url('sanpham/'.$product->slug) }}">Xem ngay</a>
-                    </div>
-                </div>
-                <div class="info-product d-flex flex-column justify-content-center">
-                    <a href="{{ url('sanpham/'.$product->slug) }}">{{ $product->name }}</a>
-                    <a href="{{ url('sanpham/'.$product->slug) }}">Mã hàng : {{ $product->code }}</a>
-                    <a href="{{ url('sanpham/'.$product->slug) }}">{{ $product->sale }}</a>
-                </div>
-            </div>
-
-         @endforeach
-            {{--<div class="item new-product">
-            <div class="product-img">
-                <img src="{{asset('')}}images/product-3.jpg" alt="">
-                <div class="over-lay d-flex flex-column justify-content-center">
-                    <a href=""><i class="far fa-heart"></i></a>
-                    <a href="">Mua ngay</a>
-                    <a href="#">Xem ngay</a>
-                </div>
-            </div>
-            <div class="info-product d-flex flex-column justify-content-center">
-                <a href="#">váy đầm trẻ</a>
-                <a href="#">Mã hàng : 1234jdfk12</a>
-                <a href="#">440,000 Đ</a>
-            </div>
-        </div>
-=======
->>>>>>> fdb1a3d960d2da9010685c901fcd324a17ec15e0
         <div class="item new-product">
             <div class="product-img">
                 <img src="{{asset('images/products/'.$product->image)}}" alt="" width="208px" height="406px">

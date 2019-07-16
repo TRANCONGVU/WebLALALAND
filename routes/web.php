@@ -312,6 +312,18 @@ Route::prefix('admincp')->group(function () {
             Route::get('delete/{id}','NewsController@destroy')->name('delete.news');
         });
 
+        Route::group(['prefix' => 'recruitment'], function (){
+            route::get('/','RecruitmentController@index')->name('list.recruitment');
+
+            route::get('/create','RecruitmentController@create')->name('create.recruitment');
+            route::post('/store','RecruitmentController@store')->name('store.recruitment');
+
+            route::get('edit/{id}','RecruitmentController@edit')->name('edit.recruitment');
+            route::post('update/{id}','RecruitmentController@update')->name('update.recruitment');
+
+            Route::get('delete/{id}','RecruitmentController@destroy')->name('delete.recruitment');
+        });
+
 		Route::get('addslider','SliderController@addSlider');
 		Route::get('listslider','SliderController@listSlider');
 

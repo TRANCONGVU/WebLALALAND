@@ -244,6 +244,32 @@ class UpDb extends Migration
            $table->integer('quantity');
            $table->integer('money');
         });
+        /*
+         * tuyển dụng
+         * */
+        Schema::create('recruitments',function (Blueprint $table){
+            $table->bigIncrements('id');
+            $table->string('title');
+            $table->string('slug');
+            $table->string('code');
+            $table->date('begin_time');
+            $table->date('end_time');
+            $table->string('image');
+            $table->text('content');
+            $table->bigInteger('salary');
+            $table->string('position');
+            $table->integer('work_time');
+            $table->integer('status')->default(0);
+        });
+        Schema::create('tag_recruitment',function (Blueprint $table){
+            $table->bigIncrements('id');
+            $table->string('name');
+            $table->bigInteger('recruitment_id')->unsigned();
+            $table->foreign('recruitment_id')
+                ->references('id')
+                ->on('recruitments')
+                ->onDelete('cascade');
+        });
 
     }
 
