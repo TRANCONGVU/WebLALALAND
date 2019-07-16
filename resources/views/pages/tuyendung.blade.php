@@ -7,6 +7,10 @@
                 <div class="sidebar-content">
                     <div class="title-sidebar">
                         <span>danh mục sản phẩm</span>
+
+                        @foreach($new_posts as $value)
+                            <a href="{{ url('tintuc/'.$value->slug) }}">{{ $value->title }}</a>
+                        @endforeach
                     </div>
                 </div>
                 <div class="sidebar-content">
@@ -31,30 +35,16 @@
                 <h4 class="text-uppercase mt-3 ">tuyển dụng</h4>
                 <div class="row">
                     <div class="col-12">
+                        @foreach($recruitments as $value)
                         <div class="tuyendung-box">
-                            <img src="images/product-1.jpg" alt="">
+                            <img src="{{ asset('images/recruitment/'.$value->image) }}" alt="">
                             <div class="tt-tuyendung">
-                                    <span> Bán hàng part time 22h - 6h </span>
-                                    <span><i class="fas fa-map-marker-alt"></i>236 Hoàng Quốc Việt</span>
+                                    <span>{{ $value->title }}</span>
+                                    <span><i class="fas fa-map-marker-alt"></i>{{ $value->begin_time." to ".$value->end_time}}</span>
                                     <a href="#">Xem ngay</a>
                             </div>
                         </div>
-                        <div class="tuyendung-box">
-                                <img src="images/product-1.jpg" alt="">
-                                <div class="tt-tuyendung">
-                                        <span> Bán hàng part time 22h - 6h </span>
-                                        <span><i class="fas fa-map-marker-alt"></i>236 Hoàng Quốc Việt</span>
-                                        <a href="#">Xem ngay</a>
-                                </div>
-                            </div>
-                            <div class="tuyendung-box">
-                                    <img src="images/product-1.jpg" alt="">
-                                    <div class="tt-tuyendung">
-                                            <span> Bán hàng part time 22h - 6h </span>
-                                            <span><i class="fas fa-map-marker-alt"></i>236 Hoàng Quốc Việt</span>
-                                            <a href="#">Xem ngay</a>
-                                    </div>
-                                </div>
+                        @endforeach
                     </div>
 
 

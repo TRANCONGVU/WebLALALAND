@@ -272,7 +272,9 @@ class Controller_1 extends Controller
         return view('pages.video');
     }
     public  function get_tuyendung(){
-        return view('pages.tuyendung');
+
+        $data['recruitments'] = DB::table('recruitments')->orderBy('id', 'desc')->paginate(6);
+        return view('pages.tuyendung', $data);
     }
     public  function get_tuyendungdetaits(){
         return view('pages.tuyendungdetais');

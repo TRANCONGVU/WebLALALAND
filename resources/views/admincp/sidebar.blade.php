@@ -83,7 +83,7 @@
                     <li><a href="charts.html">Basic Charts</a> </li>
                 </ul>
             </li>
-            <li><a href="codes.html"><i class="lnr lnr-pencil"></i> <span>Typography</span></a></li>
+            <li><a href="{{ route('list.recruitment') }}"><i class="lnr lnr-pencil"></i> <span>Tuyển Dụng</span></a></li>
             <li><a href="media.html"><i class="lnr lnr-select"></i> <span>Media Css</span></a></li>
             <li class="menu-list"><a href="#"><i class="lnr lnr-book"></i>  <span>Pages</span></a>
                 <ul class="sub-menu-list">
