@@ -9,9 +9,11 @@ class IntroduceController extends Controller
 {
     //add intro
     public function intro(){
-        return view('admincp.introduce.introduce');
+        $data['introduce'] = DB::table('introduce')->first();
+        return view('admincp.introduce.introduce', $data);
     }
     public function postIntro(Request $request){
+        dd($request->all());
         $this->validate($request,[
             
             'content'=>'required'
@@ -48,7 +50,7 @@ class IntroduceController extends Controller
     }
     public function postEdit(Request $request,$id){
         $this->validate($request,[
-            
+
             'content'=>'required'
         ],
         [
@@ -59,6 +61,22 @@ class IntroduceController extends Controller
             'content' =>$request ->content
         ]);
         return redirect()->route('listintro')->with('thongbao','Sửa thông tin giới thiệu thành công!!!');
-        // return redirect()->back()->with('thongbao','Thêm thông tin giới thiệu thành công!!!'); 
+        // return redirect()->back()->with('thongbao','Thêm thông tin giới thiệu thành công!!!');
+    }
+
+    public function update(Request $request,$id){
+        DB::table('introduce')->where('id',$id)->update([
+            'summary' =>$request ->summary,
+            'content' =>$request ->content,
+            'email' =>$request ->email,
+            'phone' =>$request ->phone,
+            'facebook' =>$request ->facebook,
+            'youtube' =>$request ->youtube,
+            'instagram' =>$request ->instagram,
+            'twitter' =>$request ->twitter,
+            'video' =>$request ->video,
+        ]);
+
+        return redirect()->back()->with('thongbao', 'sửa giới thiệu thành công');
     }
 }

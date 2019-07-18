@@ -41,7 +41,7 @@
                             <div class="tt-tuyendung">
                                     <span>{{ $value->title }}</span>
                                     <span><i class="fas fa-map-marker-alt"></i>{{ $value->begin_time." to ".$value->end_time}}</span>
-                                    <a href="#">Xem ngay</a>
+                                    <a href="{{ url('tuyendung/'.$value->slug) }}">Xem ngay</a>
                             </div>
                         </div>
                         @endforeach
@@ -51,7 +51,7 @@
 
                 </div>
                 <div class="show-more text-center mb-3">
-                    <a href="#">Xem thêm</a>
+                   {{ $recruitments->links() }}
                 </div>
             </div>
 

@@ -23,10 +23,11 @@ class RecruitmentController extends Controller
     public function edit($id){
         $data['recruitment'] = DB::table('recruitments')->find($id);
         $tags=DB::table('tag_recruitment')->where('recruitment_id',$id)->get();
-        $data['tags'] ="";
+        $tagname ="";
         foreach ($tags as $tag){
-            $data['tags'] .= $tag;
+            $tagname .= $tag->name.',';
         }
+        $data['tags']= $tagname;
         return view('admincp.recruitment.edit',$data);
     }
     public function store(Request $request)
@@ -104,7 +105,7 @@ class RecruitmentController extends Controller
             'work_time' => $input['work_time'],
         ]);
 
-             //DB::table('tag_recruitment')->where('recruitment_id',$id)->delete();
+             DB::table('tag_recruitment')->where('recruitment_id',$id)->delete();
         $tags = explode(',', $input['tags']);
         foreach ($tags as $tag) {
             if ($tag != ''){

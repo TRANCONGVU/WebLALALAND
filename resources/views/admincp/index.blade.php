@@ -95,6 +95,8 @@ $(document).ready( function () {
         } );
 </script>
 <script src="{{ asset('js/chosen/chosen.jquery.js')}}"></script>
+<script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
+<script src="https://cdn.ckeditor.com/4.12.1/standard/ckeditor.js"></script>
 
 
 </body>

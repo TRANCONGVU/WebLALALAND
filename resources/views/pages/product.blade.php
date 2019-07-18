@@ -7,6 +7,12 @@
                 <div class="sidebar-content">
                     <div class="title-sidebar">
                         <span>danh mục sản phẩm</span>
+                        <hr>
+                        <div class="tintuc-sidebar">
+                        @foreach($cate_products as $value)
+                            <a href="{{ url('loaisanpham/'.$value->slug) }}">{{ $value->name }}</a>
+                        @endforeach
+                        </div>
                     </div>
                 </div>
                 <div class="sidebar-content">
@@ -20,15 +26,18 @@
                         <span>Về chúng tôi</span>
                     </div>
                     <span>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo velit aliquam sint dolorum placeat
-                        fugiat itaque nostrum veniam ipsam alias libero odio nesciunt optio, possimus qui voluptate illo
-                        atque deleniti!
+                      {{ $introduce->summary }}
                     </span>
 
                 </div>
             </div>
             <div class="col-md-9 col-12 product-page d-flex flex-column">
-                <h4 class="text-uppercase mt-3 ">product</h4>
+                @isset($cate)
+                    <h4 class="text-uppercase mt-3 ">{{ $cate->name }}</h4>
+                @else
+                    <h4 class="text-uppercase mt-3 ">Tất cả sản phẩm</h4>
+                @endisset
+
                 <div class="product-menu d-flex justify-content-between">
                     <div class="d-flex">
 
@@ -44,184 +53,70 @@
                     <div class="chose d-flex">
                         <div>
                             <span>hiển thị</span>
-                            <select>
-                                <option>0</option>
-                                <option>16</option>
-                                <option>32</option>
-
+                            <select id="hienthi" onchange="hienthisanpham(this)">
+                                <option >--Hiển thị--</option>
+                                <option value="8">8</option>
+                                <option value="16">16</option>
+                                <option value="32">32</option>
                             </select>
+
                         </div>
                         <div>
                             <span>sắp xếp theo</span>
-                            <select>
-                                <option>Nổi Bật</option>
-                                <option>Giá, Tăng Dần</option>
-                                <option>Giá, Giảm Dần</option>
-                                <option>Thứ tự, A-Z</option>
-                                <option>Thứ tự, Z-A</option>
-                                <option>Cũ Nhất</option>
-                                <option>Mới Nhất</option>
-                                <option>Bán Chạy Nhất</option>
+                            <select onchange="sapxep(this)">
+                                <option value="pay,desc">Bán Chạy Nhất</option>
+                                <option value="sale,desc">Giá, Tăng Dần</option>
+                                <option value="sale,asc">Giá, Giảm Dần</option>
+                                <option value="name,desc">Thứ tự, A-Z</option>
+                                <option value="name,asc">Thứ tự, Z-A</option>
+                                <option value="id,asc">Cũ Nhất</option>
+                                <option value="id,desc">Mới Nhất</option>
+
                             </select>
                         </div>
+                        <script>
+                            function hienthisanpham(obj) {
+                                //alert(obj.value);
+                                $.get('{{ url('showproduct/') }}/' + obj.value, function (data) {
+                                    $("#sanpham").html(data);
+                                    $("#links").hide() ;
+                                });
+                            };
+                            function sapxep(obj) {
+                                var x= obj.value.split(',');
+                                //alert(x[1]);
+                               $.get('{{ url('sapxep/') }}/' + x[0]+'/'+x[1], function (data) {
+                                    $("#sanpham").html(data);
+                                    $("#links").hide() ;
+                                });
+                            }
+                        </script>
 
                     </div>
                 </div>
-                <div class="row xapsep">
+                <div class="row xapsep" id="sanpham">
+                    @foreach($products as $value)
                     <div class="col-md-3  col-sm-6 col-6 new-product " id="vv">
                         <div class="product-img">
-                            <img src="{{asset('')}}images/product-3.jpg" alt="">
+                            <img src="{{asset('images/products/'.$value->image)}}" alt="" style="height: 310px;">
                             <div class="over-lay d-flex flex-column justify-content-center">
                                 <a href=""><i class="far fa-heart"></i></a>
-                                <a href="{{ url( 'chitietsanpham' )}}">Mua ngay</a>
+                                <a href="{{ url( 'sanpham/'.$value->slug )}}">Mua ngay</a>
                             </div>
 
                         </div>
                         <div class="info-product d-flex flex-column justify-content-center">
-                            <a href="#">váy đầm trẻ</a>
-                            <a href="#">Mã hàng : 1234jdfk12</a>
-                            <a href="#">440,000 Đ</a>
-                            <a href="{{ url( 'chitietsanpham' )}}">Mua ngay</a>
+                            <a href="{{url( 'sanpham/'.$value->slug )}}">{{ $value->name }}</a>
+                            <a href="{{url( 'sanpham/'.$value->slug )}}">Mã hàng : {{ $value->code }}</a>
+                            <a href="{{url( 'sanpham/'.$value->slug )}}">{{ number_format($value->sale)." VNĐ" }}</a>
+                            <a href="{{url( 'sanpham/'.$value->slug )}}">Mua ngay</a>
                         </div>
                     </div>
-                    <div class="col-md-3 col-sm-6 col-6 new-product " id="vv">
-                        <div class="product-img">
-                            <img src="{{asset('')}}images/product-3.jpg" alt="">
-                            <div class="over-lay d-flex flex-column justify-content-center">
-                                <a href=""><i class="far fa-heart"></i></a>
-                                <a href="{{ url( 'chitietsanpham' )}}">Mua ngay</a>
-                            </div>
+                 @endforeach
 
-                        </div>
-                        <div class="info-product d-flex flex-column justify-content-center">
-                            <a href="#">váy đầm trẻ</a>
-                            <a href="#">Mã hàng : 1234jdfk12</a>
-                            <a href="#">440,000 Đ</a>
-                            <a href="{{ url( 'chitietsanpham' )}}">Mua ngay</a>
-                        </div>
-                    </div>
-
-                    <div class="col-md-3 col-sm-6 col-6 new-product " id="vv">
-                        <div class="product-img">
-                            <img src="{{asset('')}}images/product-3.jpg" alt="">
-                            <div class="over-lay d-flex flex-column justify-content-center">
-                                <a href=""><i class="far fa-heart"></i></a>
-                                <a href="{{ url( 'chitietsanpham' )}}">Mua ngay</a>
-                            </div>
-
-                        </div>
-                        <div class="info-product d-flex flex-column justify-content-center">
-                            <a href="#">váy đầm trẻ</a>
-                            <a href="#">Mã hàng : 1234jdfk12</a>
-                            <a href="#">440,000 Đ</a>
-                            <a href="{{ url( 'chitietsanpham' )}}">Mua ngay</a>
-                        </div>
-                    </div>
-
-                    <div class="col-md-3 col-sm-6 col-6 new-product " id="vv">
-                        <div class="product-img">
-                            <img src="{{asset('')}}images/product-3.jpg" alt="">
-                            <div class="over-lay d-flex flex-column justify-content-center">
-                                <a href=""><i class="far fa-heart"></i></a>
-                                <a href="{{ url( 'chitietsanpham' )}}">Mua ngay</a>
-                            </div>
-
-                        </div>
-                        <div class="info-product d-flex flex-column justify-content-center">
-                            <a href="#">váy đầm trẻ</a>
-                            <a href="#">Mã hàng : 1234jdfk12</a>
-                            <a href="#">440,000 Đ</a>
-                            <a href="{{ url( 'chitietsanpham' )}}">Mua ngay</a>
-                        </div>
-                    </div>
-
-                    <div class="col-md-3 col-sm-6 col-6 new-product " id="vv">
-                        <div class="product-img">
-                            <img src="{{asset('')}}images/product-3.jpg" alt="">
-                            <div class="over-lay d-flex flex-column justify-content-center">
-                                <a href=""><i class="far fa-heart"></i></a>
-                                <a href="{{ url( 'chitietsanpham' )}}">Mua ngay</a>
-                            </div>
-
-                        </div>
-                        <div class="info-product d-flex flex-column justify-content-center">
-                            <a href="#">váy đầm trẻ</a>
-                            <a href="#">Mã hàng : 1234jdfk12</a>
-                            <a href="#">440,000 Đ</a>
-                            <a href="{{ url( 'chitietsanpham' )}}">Mua ngay</a>
-                        </div>
-                    </div>
-
-                    <div class="col-md-3 col-sm-6 col-6 new-product " id="vv">
-                        <div class="product-img">
-                            <img src="{{asset('')}}images/product-3.jpg" alt="">
-                            <div class="over-lay d-flex flex-column justify-content-center">
-                                <a href=""><i class="far fa-heart"></i></a>
-                                <a href="{{ url( 'chitietsanpham' )}}">Mua ngay</a>
-                            </div>
-
-                        </div>
-                        <div class="info-product d-flex flex-column justify-content-center">
-                            <a href="#">váy đầm trẻ</a>
-                            <a href="#">Mã hàng : 1234jdfk12</a>
-                            <a href="#">440,000 Đ</a>
-                            <a href="{{ url( 'chitietsanpham' )}}">Mua ngay</a>
-                        </div>
-                    </div>
-
-                    <div class="col-md-3 col-sm-6 col-6 new-product " id="vv">
-                        <div class="product-img">
-                            <img src="{{asset('')}}images/product-3.jpg" alt="">
-                            <div class="over-lay d-flex flex-column justify-content-center">
-                                <a href=""><i class="far fa-heart"></i></a>
-                                <a href="{{ url( 'chitietsanpham' )}}">Mua ngay</a>
-                            </div>
-
-                        </div>
-                        <div class="info-product d-flex flex-column justify-content-center">
-                            <a href="#">váy đầm trẻ</a>
-                            <a href="#">Mã hàng : 1234jdfk12</a>
-                            <a href="#">440,000 Đ</a>
-                            <a href="{{ url( 'chitietsanpham' )}}">Mua ngay</a>
-                        </div>
-                    </div>
-
-                    <div class="col-md-3 col-sm-6 col-6 new-product " id="vv">
-                        <div class="product-img">
-                            <img src="{{asset('')}}images/product-3.jpg" alt="">
-                            <div class="over-lay d-flex flex-column justify-content-center">
-                                <a href=""><i class="far fa-heart"></i></a>
-                                <a href="{{ url( 'chitietsanpham' )}}">Mua ngay</a>
-                            </div>
-
-                        </div>
-                        <div class="info-product d-flex flex-column justify-content-center">
-                            <a href="#">váy đầm trẻ</a>
-                            <a href="#">Mã hàng : 1234jdfk12</a>
-                            <a href="#">440,000 Đ</a>
-                            <a href="{{ url( 'chitietsanpham' )}}">Mua ngay</a>
-                        </div>
-                    </div>
-
-                    <div class="col-md-3 col-sm-6 col-6 new-product " id="vv">
-                        <div class="product-img">
-                            <img src="{{asset('')}}images/product-3.jpg" alt="">
-                            <div class="over-lay d-flex flex-column justify-content-center">
-                                <a href=""><i class="far fa-heart"></i></a>
-                                <a href="{{ url( 'chitietsanpham' )}}">Mua ngay</a>
-                            </div>
-
-                        </div>
-                        <div class="info-product d-flex flex-column justify-content-center">
-                            <a href="#">váy đầm trẻ</a>
-                            <a href="#">Mã hàng : 1234jdfk12</a>
-                            <a href="#">440,000 Đ</a>
-                            <a href="{{ url( 'chitietsanpham' )}}">Mua ngay</a>
-                        </div>
-                    </div>
                 </div>
-                <div class="show-more text-center mb-3">
-                    <a href="#">Xem thêm</a>
+                <div class="show-more text-center mb-3" id="links">
+                    {{ $products->links() }}
                 </div>
             </div>
         </div>

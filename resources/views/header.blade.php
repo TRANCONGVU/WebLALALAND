@@ -83,16 +83,20 @@
                   <li><a href="{{ url('trang-chu') }}"> <img class="nav-logo" src="images/logo3.png" alt=""></a></li>
                   <li><a href="{{ url('trang-chu') }}">Trang chủ</a></li>
                   <li class="sanpham" style="position : unset">
-                      <a href="{{ url('product') }}">Sản phẩm<i class="fas fa-caret-down"></i></a>
+                      <a href="{{ url('loaisanpham/all') }}">Sản phẩm<i class="fas fa-caret-down"></i></a>
                       <div class="sp-hover">
                           <div class="row">
                               @foreach($cate_products as $value)
                               <div class="col-md-3">
                                   <div class="hover-item hover-item1 d-flex flex-column justify-content-start">
-                                      <a href="{{ url('cate/'.$value->slug) }}">{{ $value->name }}</a>
-                                      <a href="#">jacket</a>
-                                      <a href="#">sơ mi</a>
-                                      <a href="#">hello</a>
+                                      <a href="{{ url('loaisanpham/'.$value->slug) }}">{{ $value->name }}</a>
+                                      @foreach($headerproducts as $key => $productitem)
+                                          @if($productitem->category_id ==$value->id && $key<=2)
+                                            <a href="{{ url('sanpham/'.$productitem->slug) }}">{{ $productitem->name }}</a>
+                                          @endif
+                                      @endforeach
+                                 {{--     <a href="#">sơ mi</a>
+                                      <a href="#">hello</a>--}}
                                   </div>
                               </div>
                               @endforeach
@@ -166,11 +170,12 @@
                   </li>
                   <li><a href="{{ url('sale') }}">Sale</a></li>
                   <li>
-                      <a href="{{ url('bosuutap') }}">Bộ sưu tập<i class="fas fa-caret-down"></i></a>
+                      <a href="{{ url('bosuutap/all') }}">Bộ sưu tập<i class="fas fa-caret-down"></i></a>
                       <ul class="nav-ul-lv-2">
-                          <li><a href="#">Bộ sưu tâp 1</a></li>
-                          <li><a href="#">Bộ sưu tập 2</a></li>
-                          <li><a href="#">Bộ sưu tập 3</a></li>
+                          @foreach( $headcollections as $value)
+                              <li><a href="{{ url('bosuutap/'.$value->slug) }}">{{ $value->name }}</a></li>
+
+                          @endforeach
                       </ul>
                   </li>
                   <li class="lienhe-led">
@@ -178,7 +183,7 @@
                       <ul class="nav-ul-lv-2">
                           <li><a href="{{ url('gioithieu') }}">giới thiệu</a></li>
                           <li><a href="{{ url('lienhe') }}">liên hệ</a></li>
-                          <li><a href="{{ url('gioithieu') }}">Hệ thống showrom</a></li>
+                          <li><a href="{{ url('showrom') }}">Hệ thống showrom</a></li>
                       </ul>
 
                   </li>

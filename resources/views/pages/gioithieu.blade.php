@@ -2,7 +2,9 @@
 @section('content')
 <div class="container gioithieu d-flex flex-column">
     <h4 class="text-left text-uppercase">Giới thiệu</h4>
-    <span>Công ty chúng tôi luôn mang đến giá trị tốt nhất cho bạn</span>
+    <span>{!! $introduce->content !!}</span>
+
+    {{-- <span>Công ty chúng tôi luôn mang đến giá trị tốt nhất cho bạn</span>
     <span>
         Nội dung Lorem ipsum dolor sit amet consectetur, adipisicing elit. Molestias accusantium ipsam, voluptates
         officiis sequi
@@ -28,7 +30,7 @@
             <li>SDT : 01223423255 </li>
         </ul>
 
-    </div>
+    </div>--}}
 </div>
 
 @endsection

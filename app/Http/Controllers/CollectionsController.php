@@ -39,6 +39,7 @@ class CollectionsController extends Controller
 
         DB::table('collections')->insert([
            'name' => $input['name'],
+           'slug' => $this->slug($input['name']),
            'image' => $file_name,
         ]);
 
@@ -70,6 +71,7 @@ class CollectionsController extends Controller
 
         DB::table('collections')->where('id', $id)->update([
             'name' => $input['name'],
+            'slug' => $this->slug($input['name']),
             'image' => $file_name,
         ]);
 

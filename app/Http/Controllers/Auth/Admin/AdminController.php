@@ -16,6 +16,12 @@ class AdminController extends Controller
     // }
     public function index()
     {
-        return view('admincp.home');
+
+        $data['countbill'] = DB::table('carts')->where('status', 0)->count();
+        $data['countproducts'] = DB::table('products')->count();
+        $data['countusers'] = DB::table('users')->where('status', 1)->count();
+        $data['countcontacts'] = DB::table('contacts')->where('status', 0)->count();
+        $data['contacts'] = DB::table('contacts')->where('status', 0)->get();
+        return view('admincp.home', $data);
     }
 }
