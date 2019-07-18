@@ -74,6 +74,7 @@ class IntroduceController extends Controller
             'youtube' =>$request ->youtube,
             'instagram' =>$request ->instagram,
             'twitter' =>$request ->twitter,
+            'video' =>$request ->video,
         ]);
 
         return redirect()->back()->with('thongbao', 'sửa giới thiệu thành công');

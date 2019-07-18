@@ -84,7 +84,7 @@ class UpDb extends Migration
             $table->bigIncrements('id');
             $table->text('summary');
             $table->text('content');
-            $table->string('video')->nullable();
+            $table->text('video')->nullable();
             $table->string('email')->nullable();
             $table->string('phone')->nullable();
             $table->string('facebook')->nullable();

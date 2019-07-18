@@ -217,4 +217,54 @@ class ajaxController extends Controller
             ])
             ->delete();
     }
+
+    public function showproduct($number){
+        $products = DB::table('products')->orderBy('id', 'desc')->limit($number)->get();
+        //dd($products);
+        $html="";
+        foreach ($products as $value){
+            $html.="<div class='col-md-3  col-sm-6 col-6 new-product' id='vv'>";
+            $html.="<div class='product-img'>";
+            $html.="<img src='".asset('images/products/'.$value->image)."' alt='' style='height: 310px;'>";
+            $html.="<div class='over-lay d-flex flex-column justify-content-center'>";
+            $html.="<a href=''><i class='far fa-heart'></i></a>";
+            $html.="<a href='".url( 'sanpham/'.$value->slug )."'>Mua ngay</a>";
+            $html.="</div>";
+            $html.="</div>";
+            $html.="<div class='info-product d-flex flex-column justify-content-center'>";
+            $html.="<a href='".url( 'sanpham/'.$value->slug )."'>".$value->name."</a>";
+            $html.="<a href='".url( 'sanpham/'.$value->slug )."'>Mã hàng : ". $value->code."</a>";
+            $html.="<a href='".url( 'sanpham/'.$value->slug )."'>".number_format($value->sale)." VNĐ</a>";
+            $html.="<a href='".url( 'sanpham/'.$value->slug )."'>Mua ngay</a>";
+            $html.="</div>";
+            $html.="</div>";
+        }
+        echo $html;
+    }
+
+    public function sapxep($value, $method){
+
+        $products = DB::table('products')->orderBy($value, $method)->limit(8)->get();
+        //dd($products);
+        $html="";
+        foreach ($products as $value){
+            $html.="<div class='col-md-3  col-sm-6 col-6 new-product' id='vv'>";
+            $html.="<div class='product-img'>";
+            $html.="<img src='".asset('images/products/'.$value->image)."' alt='' style='height: 310px;'>";
+            $html.="<div class='over-lay d-flex flex-column justify-content-center'>";
+            $html.="<a href=''><i class='far fa-heart'></i></a>";
+            $html.="<a href='".url( 'sanpham/'.$value->slug )."'>Mua ngay</a>";
+            $html.="</div>";
+            $html.="</div>";
+            $html.="<div class='info-product d-flex flex-column justify-content-center'>";
+            $html.="<a href='".url( 'sanpham/'.$value->slug )."'>".$value->name."</a>";
+            $html.="<a href='".url( 'sanpham/'.$value->slug )."'>Mã hàng : ". $value->code."</a>";
+            $html.="<a href='".url( 'sanpham/'.$value->slug )."'>".number_format($value->sale)." VNĐ</a>";
+            $html.="<a href='".url( 'sanpham/'.$value->slug )."'>Mua ngay</a>";
+            $html.="</div>";
+            $html.="</div>";
+        }
+        echo $html;
+
+    }
 }

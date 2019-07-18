@@ -65,8 +65,8 @@
 
                     </div>
                     <div class="form-group">
-                        <label class="text-body custom-control-label">Tiêu Đề:</label>
-                        <input id="video" type="file" class="form-control backgroundinput @error('video') is-invalid @enderror" name="video" >
+                        <label class="text-body custom-control-label">video:</label>
+                        <input id="video" type="text" class="form-control backgroundinput @error('video') is-invalid @enderror" name="video" value="{{ $introduce->video }}">
                     </div>
 
                     <div class="form-group">

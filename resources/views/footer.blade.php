@@ -71,7 +71,7 @@
         <div class="hide">
             <a href="#">
                 <div class="box-up-item">
-                    <img src="images/mail-icon.png" alt="">
+                    <a href="mailto:{{ $introduce->email }}"><img src="images/mail-icon.png" alt=""></a>
                 </div>
             </a>
             <a href="">

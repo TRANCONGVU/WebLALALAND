@@ -70,6 +70,9 @@ Route::get('tintuc/{slug}', [
     Route::get('editcolor/{productid}/{colorid}', 'ajaxController@editcolor')->name('editcolor');
     Route::get('deletecolor/{productid}/{colorid}', 'ajaxController@deletecolor')->name('deletecolor');
 
+    Route::get('showproduct/{number}', 'ajaxController@showproduct')->name('showproduct');
+    Route::get('sapxep/{value}/{method}', 'ajaxController@sapxep')->name('sapxep');
+
 
     /*
      * tuyển dụng

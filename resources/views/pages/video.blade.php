@@ -20,9 +20,7 @@
                         <span>Về chúng tôi</span>
                     </div>
                     <span>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo velit aliquam sint dolorum placeat
-                        fugiat itaque nostrum veniam ipsam alias libero odio nesciunt optio, possimus qui voluptate illo
-                        atque deleniti!
+                        {{ $introduce->summary }}
                     </span>
 
                 </div>
@@ -32,17 +30,15 @@
 
                 <div class="row xapsep">
                     <div class="col-12 video  " id="vv">
-                        <iframe width="100%" height="400px" src="https://www.youtube.com/embed/knW7-x7Y7RE" frameborder="0"
-                            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                            allowfullscreen></iframe>
+                      {!! $introduce->video !!}
 
                     </div>
 
 
                 </div>
-                <div class="show-more text-center mb-3">
+             {{--   <div class="show-more text-center mb-3">
                     <a href="#">Xem thêm</a>
-                </div>
+                </div>--}}
             </div>
 
         </div>
