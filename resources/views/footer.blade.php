@@ -32,10 +32,18 @@
             <div class="col-md-4 conect-bottom d-flex flex-column ">
                 <h6 class="">kết nối với chúng tôi</h6>
                 <div class="conect">
-                    <a href=""><img src="images/fb-icon.png" alt=""></a>
-                    <a href=""><img src="images/youtube-icon.png" alt=""></a>
-                    <a href=""><img src="images/instar-icon.png" alt=""></a>
-                    <a href=""><img src="images/twitter.png" alt=""></a>
+                    @if($introduce->facebook!='')
+                        <a target="_blank" href="{{ $introduce->facebook }}"><img src="images/fb-icon.png" alt=""></a>
+                    @endif
+                    @if($introduce->youtube!='')
+                        <a target="_blank" href="{{ $introduce->youtube }}"><img src="images/youtube-icon.png" alt=""></a>
+                    @endif
+                    @if($introduce->instagram!='')
+                        <a target="_blank" href="{{ $introduce->instagram }}"><img src="images/instar-icon.png" alt=""></a>
+                    @endif
+                    @if($introduce->twitter!='')
+                        <a target="_blank" href="{{ $introduce->twitter }}"><img src="images/twitter.png" alt=""></a>
+                    @endif
                 </div>
                 <h6 class="mt-3">Đăng ký nhận tin</h6>
                 <form action="" class="form-inline">

@@ -44,6 +44,7 @@ Route::get('tintuc/{slug}', [
     });
 
     Route::get('sanpham/{slug}', 'Controller_1@get_chitietsanpham')->name('sanpham');
+    Route::get('showrom', 'Controller_1@showrom')->name('showrom');
 
 
 
@@ -70,7 +71,12 @@ Route::get('tintuc/{slug}', [
     Route::get('deletecolor/{productid}/{colorid}', 'ajaxController@deletecolor')->name('deletecolor');
 
 
-Route::get('product', [
+    /*
+     * tuyển dụng
+     * */
+    Route::get('tuyendung/{slug}', 'Controller_1@chitiettuyendung')->name('chitiettuyendung');
+
+Route::get('loaisanpham/{slug}', [
 	'as' =>'product',
 	'uses' => 'Controller_1@get_product'
 ]);
@@ -86,7 +92,7 @@ Route::get('tuyendung', [
 	'as' =>'tuyendung',
 	'uses' => 'Controller_1@get_tuyendung'
 ]);
-Route::get('bosuutap', [
+Route::get('bosuutap/{slug}', [
 	'as' =>'bosuutap',
 	'uses' => 'Controller_1@get_bosuutap'
 ]);
@@ -201,8 +207,8 @@ Route::prefix('admincp')->group(function () {
 			//xoa
 			Route::get('delete/{id}','IntroduceController@delete');
 			//edit
-			Route::get('editIntro/{id}','IntroduceController@edit');
-			Route::post('editIntro/{id}','IntroduceController@postEdit');
+			Route::get('edit/{id}','IntroduceController@edit');
+			Route::post('edit/{id}','IntroduceController@update');
 		});
 
 		//category product
@@ -275,7 +281,7 @@ Route::prefix('admincp')->group(function () {
             route::get('/create','useraccountcontroller@create')->name('create.useraccount');
             route::post('/store','useraccountcontroller@store')->name('store.useraccount');
 
-            route::get('edit/{id}','useraccountconedit-cateproducttroller@edit')->name('edit.useraccount');
+            route::get('edit/{id}','useraccountcontroller@edit')->name('edit.useraccount');
             route::post('update/{id}','useraccountcontroller@update')->name('update.useraccount');
 
             route::get('setactive/{id}/{status}','useraccountcontroller@active')->name('active.useraccount');
@@ -322,6 +328,24 @@ Route::prefix('admincp')->group(function () {
             route::post('update/{id}','RecruitmentController@update')->name('update.recruitment');
 
             Route::get('delete/{id}','RecruitmentController@destroy')->name('delete.recruitment');
+        });
+        Route::group(['prefix' => 'showrom'], function (){
+            route::get('/','ShowromController@index')->name('list.showrom');
+
+            route::post('/store','ShowromController@store')->name('store.showrom');
+
+            route::post('update/{id}','ShowromController@update')->name('update.showrom');
+
+            Route::get('delete/{id}','ShowromController@destroy')->name('delete.showrom');
+        });
+        Route::group(['prefix' => 'bill'], function (){
+            route::get('/','BillController@index')->name('list.bill');
+
+            route::post('/store','BillController@store')->name('store.bill');
+
+            route::post('update/{id}','BillController@update')->name('update.bill');
+
+            Route::get('delete/{id}','BillController@destroy')->name('delete.bill');
         });
 
 		Route::get('addslider','SliderController@addSlider');

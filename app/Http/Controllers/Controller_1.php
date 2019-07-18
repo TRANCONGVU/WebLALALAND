@@ -16,8 +16,15 @@ class Controller_1 extends Controller
         View::share('cate_news', $cate_news);
         $new_post = DB::table('news')->orderBy('id', 'desc')->limit(4)->get();
         View::share('new_posts', $new_post);
-        $cate_products = DB::table('cate_products')->orderBy('id', 'desc')->limit(4)->get();
+        $cate_products = DB::table('cate_products')->orderBy('id', 'desc')->get();
         View::share('cate_products', $cate_products);
+        $products = DB::table('products')->orderBy('id','desc')->get();
+        View::share('headerproducts', $products);
+        $collection = DB::table('collections')->get();
+        View::share('headcollections', $collection);
+
+        $introduce = DB::table('introduce')->first();
+        View::share('introduce', $introduce);
 
     }
 
@@ -49,6 +56,10 @@ class Controller_1 extends Controller
 //        dd($data['colors']);
 
         return view('pages.chitietsanpham', $data);
+    }
+    public function showrom(){
+        $data['showroms'] = DB::table('showrom')->orderBy('id', 'desc')->get();
+        return view('pages.showrom', $data);
     }
 
     /*
@@ -211,11 +222,37 @@ class Controller_1 extends Controller
         dd($request->all());
     }
 
-    public  function get_product(){
-    	return view('pages.product');
+    public  function get_product($slug){
+
+        if($slug== 'all'){
+            $data['products'] = DB::table('products')->orderBy('id', 'desc')->paginate(12);
+        }
+        else {
+            $data['cate'] = DB::table('cate_products')->where('slug', $slug)->first();
+            $data['products'] = DB::table('products')
+                ->select('products.*')
+                ->join('cate_products', 'cate_products.id','=', 'products.category_id')
+                ->where('cate_products.slug',  $slug)
+                ->orderBy('products.id', 'desc')->paginate(12);
+
+        }
+
+    	return view('pages.product', $data);
     }
-    public  function get_bosuutap(){
-    	return view('pages.bosuutap');
+    public  function get_bosuutap($slug){
+        if($slug== 'all'){
+            $data['products'] = DB::table('products')->orderBy('id', 'desc')->paginate(12);
+        }
+        else {
+            $data['collections'] = DB::table('collections')->where('slug', $slug)->first();
+            $data['products'] = DB::table('products')
+                ->select('products.*')
+                ->join('collections', 'collections.id','=', 'products.collections_id')
+                ->where('collections.slug',  $slug)
+                ->orderBy('products.id', 'desc')->paginate(12);
+
+        }
+    	return view('pages.bosuutap', $data);
     }
     public  function get_gioithieu(){
     	return view('pages.gioithieu');
@@ -276,6 +313,35 @@ class Controller_1 extends Controller
         $data['recruitments'] = DB::table('recruitments')->orderBy('id', 'desc')->paginate(6);
         return view('pages.tuyendung', $data);
     }
+    public function chitiettuyendung($slug){
+        $max = DB::table('recruitments')->max('id');
+        $min = DB::table('recruitments')->min('id');
+
+        $data['recruitment'] = DB::table('recruitments')->where('slug', $slug)->first();
+
+        if($data['recruitment']->id<$max) {
+            $next = $data['recruitment']->id;
+            do {
+                $next++;
+                $data['next'] = DB::table('news')->where('id', $next)->first();
+            } while ($data['$recruitment'] == null);
+        }
+        if($data['recruitment']->id>$min) {
+            $pre = $data['recruitment']->id;
+
+            do {
+                $pre--;
+                $data['pre'] = DB::table('news')->where('id', $pre)->first();
+            } while ($data['pre'] == null);
+        }
+
+        $data['pre'] = DB::table('recruitments')->where('id', $data['recruitment']->id-1)->first();
+        $data['next'] = DB::table('recruitments')->where('id', $data['recruitment']->id+1)->first();
+        $data['tags'] = DB::table('tag_recruitment')->where('recruitment_id', $data['recruitment']->id)->limit(10)->get();
+
+        return view('pages.chitiettuyendung', $data);
+
+    }
     public  function get_tuyendungdetaits(){
         return view('pages.tuyendungdetais');
     }
@@ -289,6 +355,7 @@ class Controller_1 extends Controller
            'email' => $input['email_message'],
            'phone' => $input['phone_message'],
            'content' => $input['content_message'],
+            'created_at' => now()
         ]);
 
         return redirect()->back()->with('thongbao', 'Cảm ơn bạn đã để lại lời nhắn! chúng tôi sẽ phản hôi trong thời gian sớm nhất!');

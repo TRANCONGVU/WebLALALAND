@@ -8,11 +8,13 @@
     <div class="menu-right">
         <div class="user-panel-top">
             <div class="profile_details_left">
+{{--
                 <ul class="nofitications-dropdown">
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-envelope"></i><span class="badge">3</span></a>
 
-                        <ul class="dropdown-menu">
+                        --}}
+{{--<ul class="dropdown-menu">
                             <li>
                                 <div class="notification_header">
                                     <h3>You have 3 new messages</h3>
@@ -47,7 +49,8 @@
                                     <a href="#">See all messages</a>
                                 </div>
                             </li>
-                        </ul>
+                        </ul>--}}{{--
+
                     </li>
                     <li class="login_box" id="loginContainer">
                         <div class="search-box">
@@ -160,6 +163,7 @@
                     </li>
                     <div class="clearfix"></div>
                 </ul>
+--}}
             </div>
             <div class="profile_details">
                 <ul>
@@ -182,7 +186,7 @@
                     <div class="clearfix"> </div>
                 </ul>
             </div>
-            <div class="social_icons">
+           {{-- <div class="social_icons">
                 <div class="col-md-4 social_icons-left">
                     <a href="#" class="yui"><i class="fa fa-facebook i1"></i><span>300<sup>+</sup> Likes</span></a>
                 </div>
@@ -193,7 +197,7 @@
                     <a href="#"><i class="fa fa-twitter i1"></i><span>500<sup>+</sup> Tweets</span></a>
                 </div>
                 <div class="clearfix"> </div>
-            </div>
+            </div>--}}
             <div class="clearfix"></div>
         </div>
     </div>

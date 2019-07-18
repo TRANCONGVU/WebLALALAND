@@ -82,8 +82,22 @@ class UpDb extends Migration
         //gioi thieu
         Schema::create('introduce', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->text('summary');
             $table->text('content');
-            $table->timestamps();
+            $table->string('video')->nullable();
+            $table->string('email')->nullable();
+            $table->string('phone')->nullable();
+            $table->string('facebook')->nullable();
+            $table->string('youtube')->nullable();
+            $table->string('instagram')->nullable();
+            $table->string('twitter')->nullable();
+
+        });
+        Schema::create('showrom', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('name');
+            $table->string('address');
+            $table->string('phone');
         });
 
         // lien he
@@ -145,6 +159,7 @@ class UpDb extends Migration
         Schema::create('collections', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
+            $table->string('slug');
             $table->string('image');
             $table->integer('status')->default(1);
             $table->timestamps();

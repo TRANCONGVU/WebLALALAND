@@ -36,9 +36,7 @@
                         <span>Về chúng tôi</span>
                     </div>
                     <span>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo velit aliquam sint dolorum placeat
-                        fugiat itaque nostrum veniam ipsam alias libero odio nesciunt optio, possimus qui voluptate illo
-                        atque deleniti!
+                       {{ $introduce->summary }}
                     </span>
 
                 </div>
