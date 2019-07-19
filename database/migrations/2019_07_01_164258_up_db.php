@@ -76,9 +76,6 @@ class UpDb extends Migration
             $table->timestamps();
         });*/
 
-
-
-
         //gioi thieu
         Schema::create('introduce', function (Blueprint $table) {
             $table->bigIncrements('id');
@@ -255,6 +252,8 @@ class UpDb extends Migration
                 ->on('carts')
                 ->onDelete('cascade');
             $table->string('name');
+            $table->bigInteger('color');
+            $table->bigInteger('size');
            $table->integer('price');
            $table->integer('quantity');
            $table->integer('money');

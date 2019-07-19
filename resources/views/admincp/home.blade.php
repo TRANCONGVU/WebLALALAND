@@ -59,12 +59,12 @@
                     <div class="col-md-4 switch-right">
                         <div class="switch-right-grid">
                             <div class="switch-right-grid1">
-                                <h3>TODAY'S STATS</h3>
-                                <p>Duis aute irure dolor in reprehenderit.</p>
+                                <h3>Doanh Thu theo Ngày</h3>
+                                <hr>
                                 <ul>
-                                    <li>Earning: $400 USD</li>
-                                    <li>Items Sold: 20 Items</li>
-                                    <li>Last Hour Sales: $34 USD</li>
+                                    <li>Earning: {{ number_format($countday)." VNĐ" }}</li>
+                                    <li>Items Sold: {{ $cartday }} Đơn</li>
+                                    <li><a href="{{ url('admincp/bill/view/day') }}">Xem</a> </li>
                                 </ul>
                             </div>
                         </div>
@@ -91,12 +91,13 @@
                     <div class="col-md-4 switch-right">
                         <div class="switch-right-grid">
                             <div class="switch-right-grid1">
-                                <h3>MONTHLY STATS</h3>
-                                <p>Duis aute irure dolor in reprehenderit.</p>
+                                <h3>Doanh Thu Theo Tháng (Tháng {{ getdate()['mon'] }})</h3>
+                                <hr>
                                 <ul>
-                                    <li>Earning: $5,000 USD</li>
-                                    <li>Items Sold: 400 Items</li>
-                                    <li>Last Hour Sales: $2,434 USD</li>
+                                    <li>Doanh Thu: {{ number_format($countmon)." VNĐ" }}</li>
+                                    <li>Số Đơn: {{ $cartmon }} Đơn</li>
+                                    <li><a href="{{ url('admincp/bill/view/mon') }}">Xem</a> </li>
+
                                 </ul>
                             </div>
                         </div>
@@ -126,12 +127,12 @@
                     <div class="col-md-4 switch-right">
                         <div class="switch-right-grid">
                             <div class="switch-right-grid1">
-                                <h3>ALLTIME STATS</h3>
-                                <p>Duis aute irure dolor in reprehenderit.</p>
+                                <h3>Tổng Doanh Thu</h3>
+                                <hr>
                                 <ul>
-                                    <li>Earning: $80,000 USD</li>
-                                    <li>Items Sold: 8,000 Items</li>
-                                    <li>Last Hour Sales: $75,434 USD</li>
+                                    <li>Doanh Thu: {{ number_format($countall)." VNĐ" }}</li>
+                                    <li>Số Đơn: {{ $cartall }} Đơn</li>
+                                    <li><a href="{{ url('admincp/bill/view/all') }}">Xem</a> </li>
                                 </ul>
                             </div>
                         </div>
@@ -267,7 +268,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4 span_8">
+             {{--   <div class="col-md-4 span_8">
                     <div class="activity_box activity_box1">
                         <h3>chat</h3>
                         <div class="scrollbar" id="style-2">
@@ -381,7 +382,7 @@
                         </form>
                     </div>
                     <div class="clearfix"> </div>
-                </div>
+                </div>--}}
                 <div class="clearfix"> </div>
 
             </div>

@@ -105,7 +105,7 @@
                     <div class="info-product d-flex flex-column justify-content-center">
                         <a href="{{ url('sanpham/'.$product->slug) }}">{{ $product->name }}</a>
                         <a href="{{ url('sanpham/'.$product->slug) }}">Mã hàng : {{ $product->code }}</a>
-                        <a href="{{ url('sanpham/'.$product->slug) }}">{{ $product->sale }}</a>
+                        <a href="{{ url('sanpham/'.$product->slug) }}">{{ number_format($product->sale).' VNĐ' }}</a>
                     </div>
                 </div>
 
@@ -234,8 +234,12 @@
     </div>
 </section>
 <section class="section-3 container-fluid my-4">
-    <img src="{{asset('')}}images/banner-3.jpg" alt="">
-
+    {{--<img src="{{asset('')}}images/banner-3.jpg" alt="">--}}
+    @foreach($sliders as $key => $slider)
+        @if($key==0)
+            <img src="{{asset('assets/img/'.$slider->image)}}" alt="">
+        @endif
+    @endforeach
 </section>
 
 <div class="container border-line">
@@ -256,7 +260,7 @@
             <div class="info-product d-flex flex-column justify-content-center">
                 <a href="{{ url('sanpham/'.$product->slug) }}">{{ $product->name }}</a>
                 <a href="{{ url('sanpham/'.$product->slug) }}">Mã hàng : {{ $product->code }}</a>
-                <a href="{{ url('sanpham/'.$product->slug) }}">{{ $product->sale }}</a>
+                <a href="{{ url('sanpham/'.$product->slug) }}">{{ number_format($product->sale).' VNĐ' }}</a>
             </div>
         </div>
 

@@ -5,18 +5,18 @@
             <div class="col-md-8 d-flex justify-content-around text-left">
                 <div class="d-flex flex-column footer-contact">
                     <h6>Thông tin cửa hàng</h6>
-                    <a href="">Sản phẩm nổi bật</a>
-                    <a href="">Hệ thống cửa hàh</a>
-                    <a href="">Lookbook / Bộ sưu tập</a>
+                    <a href="{{ url('loaisanpham/all') }}">Sản phẩm nổi bật</a>
+                    <a href="{{ url('showrom') }}">Hệ thống cửa hàng</a>
+                    <a href="{{ url('bosuutap/all') }}">Lookbook / Bộ sưu tập</a>
                     <img class="mt-5" src="images/dathongbao.png" alt="">
                 </div>
                 <div class="d-flex flex-column footer-contact">
                     <h6>dịch vụ khách hàng</h6>
-                    <a href="">Đơn hàng</a>
-                    <a href="">Câu hỏi thường gặp</a>
-                    <a href="">Liên hệ với chúng tôi</a>
-                    <a href="">Tuyển dụng</a>
-                    <a href="">Về chúng tôi</a>
+                    <a href="{{ url('cart') }}">Đơn hàng</a>
+                    <a href="{{ url('cauhoi') }}">Câu hỏi thường gặp</a>
+                    <a href="{{ url('lienhe') }}">Liên hệ với chúng tôi</a>
+                    <a href="{{ url('tuyendung') }}">Tuyển dụng</a>
+                    <a href="{{ url('gioithieu') }}">Về chúng tôi</a>
                 </div>
                 <div class="d-flex flex-column footer-contact">
                     <h6>dịch vụ khách hàng</h6>
@@ -81,7 +81,7 @@
             </a>
             <a href="">
                 <div class="box-up-item">
-                    <img src="images/phone-icon.png" alt="">
+                    <a href="tel:{{ $introduce->phone }}"><img src="images/phone-icon.png" alt=""></a>
                 </div>
             </a>
 

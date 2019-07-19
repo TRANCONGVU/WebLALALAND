@@ -7,13 +7,22 @@
                 <div class="sidebar-content">
                     <div class="title-sidebar">
                         <span>danh mục sản phẩm</span>
+                        <div class="tintuc-sidebar">
+                            @foreach($cate_products as $value)
+                                <a href="{{ url('loaisanpham/'.$value->slug) }}">{{ $value->name }}</a>
+                            @endforeach
+                        </div>
                     </div>
                 </div>
                 <div class="sidebar-content">
                     <div class="title-sidebar">
                         <span>sản phẩm nổi bật</span>
                     </div>
-                    <img src="images/product-1.jpg" alt="">
+                    @foreach($headerproducts as $key => $value)
+                        @if($key==0)
+                            <a href="{{ url('sanpham/'.$value->slug) }}"> <img src="{{ asset('images/products/'.$value->image) }}" alt=""></a>
+                        @endif
+                    @endforeach
                 </div>
                 <div class="sidebar-content">
                     <div class="title-sidebar">

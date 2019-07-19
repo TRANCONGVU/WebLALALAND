@@ -19,7 +19,11 @@
                         <div class="title-sidebar">
                             <span>sản phẩm nổi bật</span>
                         </div>
-                        <img src="images/product-1.jpg" alt="">
+                        @foreach($headerproducts as $key => $value)
+                            @if($key==0)
+                                <a href="{{ url('sanpham/'.$value->slug) }}"> <img src="{{ asset('images/products/'.$value->image) }}" alt=""></a>
+                            @endif
+                        @endforeach
                     </div>
                     <div class="sidebar-content">
                         <div class="title-sidebar">
@@ -35,7 +39,7 @@
                     @isset($collections)
                         <h4 class="text-uppercase mt-3 ">{{ $collections->name }}</h4>
                     @else
-                        <h4 class="text-uppercase mt-3 ">Tất cả sản phẩm</h4>
+                        <h4 class="text-uppercase mt-3 ">Tất cả Bộ sưu Tập</h4>
                     @endisset
 
 
@@ -56,6 +60,7 @@
                                             <span>hiển thị</span>
                                             <select id="hienthi" onchange="hienthisanpham(this)">
                                                 <option>--hiển thị--</option>
+                                                <option value="0">0</option>
                                                 <option value="8">8</option>
                                                 <option value="16">16</option>
                                                 <option value="32">32</option>
@@ -63,18 +68,63 @@
                                             <script>
                                                  function hienthisanpham(obj) {
                                                      //alert(obj.value);
-                                                     $.get('{{ url('showproduct/') }}/' + obj.value, function (data) {
-                                                         $("#sanpham").html(data);
-                                                         $("#links").hide() ;
-                                                     });
+                                                     @isset($collection->id)
+                                                        var collection_id= {{ $collections->id }};
+                                                     @else
+                                                        var collection_id= "";
+                                                     @endisset
+
+                                                     var agrs = {
+                                                             url: "{{ url('showproduct/') }}", // gửi ajax đến file result.php
+                                                             type: "post", // chọn phương thức gửi là post
+                                                             dataType: "text", // dữ liệu trả về dạng text
+                                                             data: { // Danh sách các thuộc tính sẽ gửi đi
+                                                                 _token: '{{ csrf_token() }}',
+                                                                 collections: collection_id,
+                                                                 cate: null,
+                                                                 number: obj.value,
+                                                             },
+                                                             success: function (result) {
+                                                                 // Sau khi gửi và kết quả trả về thành công thì gán nội dung trả về
+                                                                 // đó vào thẻ div có id = result
+                                                                 $('#sanpham').html(result);
+                                                                 $("#links").hide() ;
+                                                             }
+                                                         };
+
+                                                     // Truyền object vào để gọi ajax
+                                                     $.ajax(agrs);
                                                  }
                                                  function sapxep(obj) {
                                                      var x= obj.value.split(',');
-                                                     //alert(x[1]);
-                                                     $.get('{{ url('sapxep/') }}/' + x[0]+'/'+x[1], function (data) {
-                                                         $("#sanpham").html(data);
-                                                         $("#links").hide() ;
-                                                     });
+                                                     @isset($collection->id)
+                                                        var collection_id= {{ $collections->id }};
+                                                     @else
+                                                         var collection_id= "";
+                                                     @endisset
+                                                     //alert(collection_id);
+
+                                                     var agrs = {
+                                                         url: "{{ url('sapxep/') }}", // gửi ajax đến file result.php
+                                                         type: "post", // chọn phương thức gửi là post
+                                                         dataType: "text", // dữ liệu trả về dạng text
+                                                         data: { // Danh sách các thuộc tính sẽ gửi đi
+                                                             _token: '{{ csrf_token() }}',
+                                                             collections: collection_id,
+                                                             cate: null,
+                                                             value: x[0],
+                                                             method: x[1],
+                                                         },
+                                                         success: function (result) {
+                                                             // Sau khi gửi và kết quả trả về thành công thì gán nội dung trả về
+                                                             // đó vào thẻ div có id = result
+                                                             $('#sanpham').html(result);
+                                                             $("#links").hide() ;
+                                                         }
+                                                     };
+
+                                                     // Truyền object vào để gọi ajax
+                                                     $.ajax(agrs);
                                                  }
                                             </script>
                                         </div>

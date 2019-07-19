@@ -218,8 +218,25 @@ class ajaxController extends Controller
             ->delete();
     }
 
-    public function showproduct($number){
-        $products = DB::table('products')->orderBy('id', 'desc')->limit($number)->get();
+    public function showproduct(Request $request){
+        //dd($request->all());
+        if($request->collections!=null){
+            $products = DB::table('products')
+                ->orderBy('id', 'desc')
+                ->where('collections_id',$request->collections)
+                ->limit($request->number)->get();
+        }
+        else if($request->cate!=null) {
+            $products = DB::table('products')
+                ->orderBy('id', 'desc')
+                ->where('category_id',$request->cate)
+                ->limit($request->number)->get();
+        }else{
+            $products = DB::table('products')
+                ->orderBy('id', 'desc')
+                ->limit($request->number)->get();
+        }
+        //$products = DB::table('products')->orderBy('id', 'desc')->limit($number)->get();
         //dd($products);
         $html="";
         foreach ($products as $value){
@@ -242,9 +259,24 @@ class ajaxController extends Controller
         echo $html;
     }
 
-    public function sapxep($value, $method){
-
-        $products = DB::table('products')->orderBy($value, $method)->limit(8)->get();
+    public function sapxep(Request $request){
+        //dd($request->all());
+        if($request->collections!=null){
+            $products = DB::table('products')
+                ->orderBy($request->value, $request->method)
+                ->where('collections_id',$request->collections)
+                ->limit(8)->get();
+        }
+        else if($request->cate!=null) {
+            $products = DB::table('products')
+                ->orderBy($request->value, $request->method)
+                ->where('category_id',$request->cate)
+                ->limit(8)->get();
+        }else{
+            $products = DB::table('products')
+                ->orderBy($request->value, $request->method)
+                ->limit(8)->get();
+        }
         //dd($products);
         $html="";
         foreach ($products as $value){
@@ -266,5 +298,32 @@ class ajaxController extends Controller
         }
         echo $html;
 
+    }
+
+    public function sale(Request $request){
+        //dd($request->all());
+        $products = DB::table('products')->get();
+        $html="";
+        foreach ($products as $value){
+            $sale= 100-($value->sale/$value->price)*100;
+            if($sale>=$request->saledown && $sale<=$request->saleup){
+                $html.="<div class='col-md-3  col-sm-6 col-6 new-product' id='vv'>";
+                $html.="<div class='product-img'>";
+                $html.="<img src='".asset('images/products/'.$value->image)."' alt='' style='height: 310px;'>";
+                $html.="<div class='over-lay d-flex flex-column justify-content-center'>";
+                $html.="<a href=''><i class='far fa-heart'></i></a>";
+                $html.="<a href='".url( 'sanpham/'.$value->slug )."'>Mua ngay</a>";
+                $html.="</div>";
+                $html.="</div>";
+                $html.="<div class='info-product d-flex flex-column justify-content-center'>";
+                $html.="<a href='".url( 'sanpham/'.$value->slug )."'>".$value->name."</a>";
+                $html.="<a href='".url( 'sanpham/'.$value->slug )."'>Mã hàng : ". $value->code."</a>";
+                $html.="<a href='".url( 'sanpham/'.$value->slug )."'>".number_format($value->sale)." VNĐ</a>";
+                $html.="<a href='".url( 'sanpham/'.$value->slug )."'>Mua ngay</a>";
+                $html.="</div>";
+                $html.="</div>";
+            }
+        }
+        echo $html;
     }
 }
