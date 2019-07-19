@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\View;
+use Darryldecode\Cart\Cart;
 
 class Controller_1 extends Controller
 {
@@ -25,6 +26,9 @@ class Controller_1 extends Controller
 
         $introduce = DB::table('introduce')->first();
         View::share('introduce', $introduce);
+
+
+        View::share('soluong', '10');
 
     }
 
@@ -202,6 +206,8 @@ class Controller_1 extends Controller
             DB::table('cart_details')->insert([
                 'cart_id' => $cartid->id,
                 'name' => $value->name,
+                'color' => $value->attributes->colorid,
+                'size' => $value->attributes->sizeid,
                 'price' => $value->price,
                 'quantity' => $value->quantity,
                 'money' => $value->price*$value->quantity,
@@ -242,6 +248,7 @@ class Controller_1 extends Controller
     public  function get_bosuutap($slug){
         if($slug== 'all'){
             $data['products'] = DB::table('products')->orderBy('id', 'desc')->paginate(12);
+            $data['collections'] = null;
         }
         else {
             $data['collections'] = DB::table('collections')->where('slug', $slug)->first();
@@ -253,6 +260,30 @@ class Controller_1 extends Controller
 
         }
     	return view('pages.bosuutap', $data);
+    }
+
+    public function search(Request $request){
+        //dd($request->all());
+        $data['key'] =$request->name;
+        $data['countproducts'] = DB::table('products')->where('name', 'like', '%'.$request->name."%")->count();
+        $data['countnews'] = DB::table('news')
+            ->join('tagnews', 'tagnews.news_id', '=','news.id')
+            ->where('tagnews.name', 'like', '%'.$request->name."%")->count();
+        $data['countrecruitments'] = DB::table('recruitments')
+            ->join('tag_recruitment', 'tag_recruitment.recruitment_id', '=','recruitments.id')
+            ->where('tag_recruitment.name', 'like', '%'.$request->name."%")->count();
+        $data['count']= $data['countproducts'] + $data['countnews'] +$data['countrecruitments'];
+
+        $data['searchproducts'] = DB::table('products')->where('name', 'like', '%'.$request->name."%")->get();
+        $data['searchnews'] = DB::table('news')
+            ->join('tagnews', 'tagnews.news_id', '=','news.id')
+            ->where('tagnews.name', 'like', '%'.$request->name."%")->get();
+        $data['searchrecruitments'] = DB::table('recruitments')
+            ->join('tag_recruitment', 'tag_recruitment.recruitment_id', '=','recruitments.id')
+            ->where('tag_recruitment.name', 'like', '%'.$request->name."%")->get();
+        //dd($data['recruitments']);
+
+        return view('pages.search', $data);
     }
     public  function get_gioithieu(){
     	return view('pages.gioithieu');
@@ -303,7 +334,12 @@ class Controller_1 extends Controller
     	return view('pages.dangnhap');
     }
     public  function get_sale(){
-        return view('pages.sale');
+
+        $data['products'] = DB::table('products')
+            ->select('products.*')
+            ->join('cate_products', 'cate_products.id','=', 'products.category_id')
+            ->orderBy('products.id', 'desc')->paginate(12);
+        return view('pages.sale', $data);
     }
     public  function get_video(){
         return view('pages.video');

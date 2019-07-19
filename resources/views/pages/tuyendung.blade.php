@@ -6,7 +6,7 @@
             <div class="col-md-3 col sidebar my-4">
                 <div class="sidebar-content">
                     <div class="title-sidebar">
-                        <span>danh mục sản phẩm</span>
+                        <span>Tin Nổi Bật</span>
 
                         @foreach($new_posts as $value)
                             <a href="{{ url('tintuc/'.$value->slug) }}">{{ $value->title }}</a>
@@ -17,16 +17,18 @@
                     <div class="title-sidebar">
                         <span>sản phẩm nổi bật</span>
                     </div>
-                    <img src="images/product-1.jpg" alt="">
+                    @foreach($headerproducts as $key => $value)
+                        @if($key==0)
+                            <a href="{{ url('sanpham/'.$value->slug) }}"> <img src="{{ asset('images/products/'.$value->image) }}" alt=""></a>
+                        @endif
+                    @endforeach
                 </div>
                 <div class="sidebar-content">
                     <div class="title-sidebar">
                         <span>Về chúng tôi</span>
                     </div>
                     <span>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo velit aliquam sint dolorum placeat
-                        fugiat itaque nostrum veniam ipsam alias libero odio nesciunt optio, possimus qui voluptate illo
-                        atque deleniti!
+                        {{ $introduce->summary }}
                     </span>
 
                 </div>

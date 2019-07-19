@@ -29,7 +29,11 @@
                     <div class="title-sidebar">
                         <span>xu hướng thời trang 2019</span>
                     </div>
-                    <img src="images/product-1.jpg" alt="">
+                    @foreach($headerproducts as $key => $value)
+                        @if($key==0)
+                            <a href="{{ url('sanpham/'.$value->slug) }}"> <img src="{{ asset('images/products/'.$value->image) }}" alt=""></a>
+                        @endif
+                    @endforeach
                 </div>
                 <div class="sidebar-content">
                     <div class="title-sidebar">

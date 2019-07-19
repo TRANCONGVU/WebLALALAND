@@ -70,8 +70,13 @@ Route::get('tintuc/{slug}', [
     Route::get('editcolor/{productid}/{colorid}', 'ajaxController@editcolor')->name('editcolor');
     Route::get('deletecolor/{productid}/{colorid}', 'ajaxController@deletecolor')->name('deletecolor');
 
-    Route::get('showproduct/{number}', 'ajaxController@showproduct')->name('showproduct');
-    Route::get('sapxep/{value}/{method}', 'ajaxController@sapxep')->name('sapxep');
+    Route::post('showproduct', 'ajaxController@showproduct')->name('showproduct');
+    Route::post('sapxep', 'ajaxController@sapxep')->name('sapxep');
+    Route::post('sale', 'ajaxController@sale')->name('sale');
+    Route::get('search', [
+        'as' =>'search',
+        'uses' => 'Controller_1@search'
+    ]);
 
 
     /*
@@ -344,11 +349,10 @@ Route::prefix('admincp')->group(function () {
         Route::group(['prefix' => 'bill'], function (){
             route::get('/','BillController@index')->name('list.bill');
 
-            route::post('/store','BillController@store')->name('store.bill');
+            route::get('item/{id}','BillController@item')->name('item.bill');
 
-            route::post('update/{id}','BillController@update')->name('update.bill');
-
-            Route::get('delete/{id}','BillController@destroy')->name('delete.bill');
+            Route::get('confirm/{id}','BillController@confirm')->name('confirm.bill');
+            Route::get('view/{value}','BillController@view')->name('view.bill');
         });
 
 		Route::get('addslider','SliderController@addSlider');

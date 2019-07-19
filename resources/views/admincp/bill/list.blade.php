@@ -33,29 +33,56 @@
             </tr>
         </thead>
         <tbody>
-             @foreach ($bills as $key => $value)
-                <tr>    
-                    <td>{{ $key+1 }}</td>
-                    <td>{{ $value->name }}</td>
-                    <td>{{ $value->email }}</td>
-                    <td>{{ $value->phone }}</td>
-                    <td>{{ $value->address }}</td>
-                    <td>{{ $value->payment_method_id }}</td>
-                    <td>{{ number_format($value->total).' VNĐ' }}</td>
-                    <td>{{ $value->day }}</td>
-                    <td>
-                        @if($value->status==1)
-                            Đã xử lý
-                        @else
-                            Chưa Xử lý
-                        @endif
-                    </td>
-                    <td>
-                        <a type="button" class="fa fa-edit btn btn-default btn btn-success" href="{{ url('admincp/news/edit/'.$value->id) }}" title="Sửa"></a>
-                        <a type="button" class="fa fa-trash btn btn-default btn btn-danger" href="{{ url('admincp/news/delete/'.$value->id) }}" onclick="return confirmAction()" title="Xóa">Xóa</a>
-                    </td>
-                </tr>    
-             @endforeach
+            @isset($time)
+                @foreach ($bills as $key => $value)
+                    @if (strtotime(now()) - strtotime($value->day) <= $time)
+                    <tr>
+                        <td>{{ $key+1 }}</td>
+                        <td>{{ $value->name }}</td>
+                        <td>{{ $value->email }}</td>
+                        <td>{{ $value->phone }}</td>
+                        <td>{{ $value->address }}</td>
+                        <td>{{ $value->payment_method_id }}</td>
+                        <td>{{ number_format($value->total).' VNĐ' }}</td>
+                        <td>{{ $value->day }}</td>
+                        <td>
+                            @if($value->status==1)
+                                Đã xử lý
+                            @else
+                                Chưa Xử lý
+                            @endif
+                        </td>
+                        <td>
+                            <a type="button" class="fa fa-eye btn btn-default btn btn-primary" href="{{ url('admincp/bill/item/'.$value->id) }}" title="Xem Chi Tiết">Xem Chi tiết</a>
+                        </td>
+                    </tr>
+                    @endif
+                @endforeach
+            @else
+                @foreach ($bills as $key => $value)
+                    <tr>
+                        <td>{{ $key+1 }}</td>
+                        <td>{{ $value->name }}</td>
+                        <td>{{ $value->email }}</td>
+                        <td>{{ $value->phone }}</td>
+                        <td>{{ $value->address }}</td>
+                        <td>{{ $value->payment_method_id }}</td>
+                        <td>{{ number_format($value->total).' VNĐ' }}</td>
+                        <td>{{ $value->day }}</td>
+                        <td>
+                            @if($value->status==1)
+                                Đã xử lý
+                            @else
+                                Chưa Xử lý
+                            @endif
+                        </td>
+                        <td>
+                            <a type="button" class="fa fa-eye btn btn-default btn btn-primary" href="{{ url('admincp/bill/item/'.$value->id) }}" title="Xem Chi Tiết">Xem Chi tiết</a>
+                        </td>
+                    </tr>
+                @endforeach
+            @endisset
+
             
         </tbody>
         {{--<script>--}}
