@@ -45,9 +45,11 @@
 
 
                 </div>
-             {{--   <div class="show-more text-center mb-3">
-                    <a href="#">Xem thêm</a>
-                </div>--}}
+                @if($introduce->youtube=='null')
+                   <div class="show-more text-center mb-3">
+                       <a target="_blank" href="{{ $introduce->youtube }}">Xem thêm</a>
+                   </div>
+                @endif
             </div>
 
         </div>
