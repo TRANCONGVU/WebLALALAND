@@ -293,7 +293,10 @@ class Controller_1 extends Controller
     	return view('pages.lienhe', $data);
     }
     public  function get_cauhoi(){
-    	return view('pages.cauhoi');
+        $data['showroms'] = DB::table('showrom')->orderBy('id', 'desc')->get();
+        $data['payments'] = DB::table('payment_methods')->orderBy('id', 'desc')->get();
+
+        return view('pages.cauhoi', $data);
     }
     public  function get_tintuc(){
     	return view('pages.tintuc');

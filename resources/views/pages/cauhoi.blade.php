@@ -24,8 +24,9 @@
 
                 <div id="collapse1" class="collapse" aria-labelledby="question1" data-parent="#accordion">
                     <div class="card-body text-center">
-                       <li>236 Hoàng Quốc Việt , Từ Liêm , Hà Nôi</li>
-                       <li>236 Phạm Văn Đồng , Từ Liêm , Hà Nôi</li>
+                        @foreach($showroms as $value)
+                            <li>{{ $value->address }}</li>
+                        @endforeach
                     </div>
                 </div>
             </div>
@@ -37,16 +38,18 @@
                     <h5 class="mb-0">
                         <button class="btn btn-link" data-toggle="collapse" data-target="#collapse2"
                             aria-expanded="true" aria-controls="collapse2">
-                            <span>Thanh toán qua thẻ</span>
+                            <span>Phương thức thanh toán</span>
                         </button>
                     </h5>
                 </div>
 
                 <div id="collapse2" class="collapse" aria-labelledby="question2" data-parent="#accordion">
                     <div class="card-body text-left">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi vero, earum, similique eius
-                        tempora ad exercitationem tenetur repellat ipsam itaque dicta rem eos quia veniam dolores id
-                        laudantium numquam sapiente.
+                       <ul>
+                        @foreach($payments as $value)
+                            <li>{{ $value->name }}</li>
+                        @endforeach
+                       </ul>
                     </div>
                 </div>
             </div>
@@ -63,34 +66,11 @@
 
                 <div id="collapse3" class="collapse" aria-labelledby="question3" data-parent="#accordion">
                     <div class="card-body text-left">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi vero, earum, similique eius
-                        tempora ad exercitationem tenetur repellat ipsam itaque dicta rem eos quia veniam dolores id
-                        laudantium numquam sapiente.
+                     Sau khoảng 2 đến 3 ngày sau khi đặ hàng bạn sẽ nhận được hàng của mình!
                     </div>
                 </div>
             </div>
-            <div class="card">
-                    <div class="card-header" id="question4">
-                        <h5 class="mb-0">
-                            <button class="btn btn-link" data-toggle="collapse" data-target="#collapse4"
-                                aria-expanded="true" aria-controls="collapse4">
-                                <span>sua bao lâu nhận được hàng</span>
-                            </button>
-                        </h5>
-                    </div>
-
-                    <div id="collapse4" class="collapse" aria-labelledby="question4" data-parent="#accordion">
-                        <div class="card-body text-left">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi vero, earum, similique eius
-                            tempora ad exercitationem tenetur repellat ipsam itaque dicta rem eos quia veniam dolores id
-                            laudantium numquam sapiente.
-                        </div>
-                    </div>
-                </div>
-
         </div>
-
-
     </div>
 </div>
 
