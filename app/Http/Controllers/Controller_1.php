@@ -16,13 +16,40 @@ class Controller_1 extends Controller
         View::share('cate_news', $cate_news);
         $new_post = DB::table('news')->orderBy('id', 'desc')->limit(4)->get();
         View::share('new_posts', $new_post);
+        $cate_products = DB::table('cate_products')->orderBy('id', 'desc')->limit(4)->get();
+        View::share('cate_products', $cate_products);
 
     }
 
     public  function get_trangchu(){
-    	return view('pages.trangchu');
-    }
+        $data['sliders']=DB::table('sliders')->limit(3)->orderBy('id','desc')->get();
+        $data['product_hots']=DB::table('products')
+            ->limit(4)->orderBy('pay','desc')->get();
+        $data['product_news']=DB::table('products')
+            ->limit(4)->orderBy('id','desc')->get();
+        //dd($data['product_hots']);
 
+    	return view('pages.trangchu', $data);
+    }
+    /*
+     * sản phẩm
+     * */
+    public  function get_chitietsanpham($slug){
+        $data['product']=DB::table('products')
+            ->where('slug', $slug)->first();
+        $data['colors'] = DB::table('product_details')
+            ->select('color.id as colorid','product_details.id as detailid', 'color.name')
+            ->join('color', 'color.id', '=', 'product_details.color_id')
+            ->where('product_details.product_id',$data['product']->id)
+            ->get();
+        $data['lienquan'] = DB::table('products')
+            ->where('category_id',  $data['product']->category_id)->limit(5)->get();
+        $data['product_hot']=DB::table('products')
+            ->limit(4)->orderBy('pay','desc')->first();
+//        dd($data['colors']);
+
+        return view('pages.chitietsanpham', $data);
+    }
 
     /*
      * tin tức
@@ -168,9 +195,7 @@ class Controller_1 extends Controller
     public  function get_giohang(){
     	return view('pages.giohang');
     }
-    public  function get_chitietsanpham(){
-    	return view('pages.chitietsanpham');
-    }
+
     public  function get_cart(){
     	return view('pages.cart');
     }

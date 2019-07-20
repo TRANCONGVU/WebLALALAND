@@ -4,29 +4,6 @@
 @endsection
 @section('content')
     <link href="{{ asset('css/bootstrap-tagsinput/bootstrap-tagsinput.css') }}" rel="stylesheet">
-
-
-{{-- <form role="form" class="form-horizontal" action="">    
-    <div class="form-group">
-        <div class="col-md-8">
-            <div class="input-group in-grp1">							
-                <span class="input-group-addon">
-                    <i class="fa fa-envelope-o"></i>
-                </span>
-                <input type="text" class="form-control1" placeholder="Email Address">
-            </div>
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="col-md-8">
-            <div class="input-group in-grp1">
-                <label>Img slider</label>
-                <input type="file" id="exampleInputFile">
-            </div>
-        </div>
-    </div>
-</form> --}}
-
 <h1>
     Thêm Bài Viết...
     </h1>

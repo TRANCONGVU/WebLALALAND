@@ -54,7 +54,10 @@
             <li class="menu-list"><a href=""><i class="lnr lnr-menu"></i> <span>Loại sản phẩm</span></a>
                 <ul class="sub-menu-list">
                     <li><a href="{{ Route('list.cateproduct') }}">Danh mục sản phẩm</a> </li>
-                    <li><a href="{{ Route('list.producttype') }}">Loại sản phẩm</a> </li>
+                    <li><a href="{{ Route('list.collections') }}">Bộ Sưu Tập</a> </li>
+                    <li><a href="{{ Route('list.size') }}">Kích thước</a> </li>
+                    <li><a href="{{ Route('list.color') }}">Màu Sắc</a> </li>
+                    {{--<li><a href="{{ Route('list.producttype') }}">Loại sản phẩm</a> </li>--}}
                     <li><a href="{{ Route('list.product') }}">Danh sách sản phẩm</a> </li>
                     </ul>
             </li>
