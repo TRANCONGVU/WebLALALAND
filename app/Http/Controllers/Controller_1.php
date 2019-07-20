@@ -289,7 +289,8 @@ class Controller_1 extends Controller
     	return view('pages.gioithieu');
     }
     public  function get_lienhe(){
-    	return view('pages.lienhe');
+        $data['showroms'] = DB::table('showrom')->orderBy('id', 'desc')->get();
+    	return view('pages.lienhe', $data);
     }
     public  function get_cauhoi(){
     	return view('pages.cauhoi');
