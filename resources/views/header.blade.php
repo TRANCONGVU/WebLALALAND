@@ -249,11 +249,11 @@
                       <ul class="menu-left-ul-lv-1">
                           <li><a href="{{ url('trang-chu') }}">Trang chủ</a></li>
                           <li><a href="{{ url('gioithieu') }}">Giới thiệu</a></li>
-                          <li><a href="{{ url('product') }}">Sản Phẩm</a></li>
-                          <li><a href="{{ url('khuyenmai') }}">Khuyến mãi</a></li>
+                          <li><a href="{{ url('loaisanpham/all') }}">Sản Phẩm</a></li>
+                          <li><a href="{{ url('sale') }}">Khuyến mãi</a></li>
                           <li><a href="{{ url('lienhe') }}">Liên hệ</a></li>
                           <li><a href="{{ url('huongdan') }}">Hướng Dẫn</a></li>
-                          <li><a href="{{ url('tintuc') }}">Tin Tức</a></li>
+                          <li><a href="{{ url('loaitin/all') }}">Tin Tức</a></li>
 
                       </ul>
 
