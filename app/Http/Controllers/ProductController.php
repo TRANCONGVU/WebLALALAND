@@ -59,7 +59,7 @@ class ProductController extends Controller
         }
         if ($request->hasFile('file-0-0')) {
             $file = $request->file('file-0-0');
-            $name = $file->getClientOriginalName();
+            $name = str_slug($file->getClientOriginalName());
             $avatar = str_random(4) . "_product_" . $name;
             while (file_exists('images/products/' . $avatar)) {
                 $Hinh = str_random(4) . "_product_" . $name;
@@ -88,7 +88,7 @@ class ProductController extends Controller
                 for($k=1; $k<=3; $k++) {
                     if ($request->hasFile('file-'.$i.'-'.$k)) {
                         $file = $request->file('file-'.$i.'-'.$k);
-                        $name = $file->getClientOriginalName();
+                        $name = str_slug($file->getClientOriginalName());;
                         $avatar = str_random(4) . "_product_" . $name;
                         while (file_exists('images/products/' . $avatar)) {
                             $Hinh = str_random(4) . "_product_" . $name;
@@ -186,7 +186,7 @@ class ProductController extends Controller
         if ($request->hasFile('file-0-0')) {
             $old = DB::table('products')->find($id);
             $file = $request->file('file-0-0');
-            $name = $file->getClientOriginalName();
+            $name = str_slug($file->getClientOriginalName());
             $avatar = str_random(4) . "_product_" . $name;
             while (file_exists('images/products/' . $avatar)) {
                 $Hinh = str_random(4) . "_product_" . $name;
@@ -221,7 +221,7 @@ class ProductController extends Controller
                     for($k=1; $k<=3; $k++) {
                         if ($request->hasFile('file-'.$i.'-'.$k)) {
                             $file = $request->file('file-'.$i.'-'.$k);
-                            $name = $file->getClientOriginalName();
+                            $name = str_slug($file->getClientOriginalName());
                             $avatar = str_random(4) . "_product_" . $name;
                             while (file_exists('images/products/' . $avatar)) {
                                 $Hinh = str_random(4) . "_product_" . $name;
@@ -263,7 +263,7 @@ class ProductController extends Controller
                         if ($request->hasFile('file-has-' . $has->color_id . '-' . $i)) {
                             $old = DB::table('products')->find($id);
                             $file = $request->file('file-has-' . $has->color_id . '-' . $i);
-                            $name = $file->getClientOriginalName();
+                            $name = str_slug($file->getClientOriginalName());
                             $avatar = str_random(4) . "_product_" . $name;
                             while (file_exists('images/products/' . $avatar)) {
                                 $Hinh = str_random(4) . "_product_" . $name;
@@ -271,7 +271,6 @@ class ProductController extends Controller
                             $file->move('images/products/', $avatar);
                             if ($input['old-file-has-' . $has->color_id . '-' . $i] != '' && file_exists('images/products/' . $input['old-file-has-' . $has->color_id . '-' . $i])) {
                                 unlink('images/products/' . $input['old-file-has-' . $has->color_id . '-' . $i]);
-                                dd('ok');
                             }
                             $detail_img .= $avatar . ",";
                         } else {
@@ -318,6 +317,22 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
+        $images = DB::table('product_details')
+            ->select('product_details.image')
+            ->join('products', 'products.id', '=', 'product_details.product_id')
+            ->where('products.id', $id)
+            ->get();
+        foreach ($images as $value){
+            $pictures=explode(',',$value->image);
+            foreach ($pictures as $pic){
+                if($pic !='' && file_exists('images/products/' . $pic)){
+                    unlink('images/products/' . $pic);
+                }
+            }
+        }
+        DB::table('products')->where('id', $id)->delete();
+
+        return redirect()->back()->with('thongbao', 'Xóa sản phẩm thành công!');
         //
     }
 }

@@ -84,6 +84,36 @@
                         <th>Chỉnh sửa</th>
                     </tr>
                     </thead>
+
+                    <tbody>
+                    @foreach($cateproduct as $key => $value)
+                        <tr>
+                            <form action="{{ url('admincp/cateproduct/edit/'.$value->id) }}" method="post">
+                                @csrf
+                            <td>{{ $key+1 }}</td>
+                            <td><input name="name" type="text" class="inputadmin" id="name{{$value->id}}" value="{{ $value->name }}" readonly/></td>
+                            <td>{{ $value->slug }}</td>
+                            <td>
+                                @if($value->status==1) {{ "Hiển thị" }} @else {{ "Không hiển thị" }} @endif
+                            </td>
+                            <td>{{ $value->total_product }}</td>
+                            <td>
+                                {{--<a class="fa btn btn-default" title="{{ " Sửa ".$value->name }}" href="{{url('admincp/cateproduct/edit/'.$value->id)}}" type="button"><i class="fas fa-edit"></i></a>--}}
+                               <button type="submit" class=" btn btn-success hide" id="submit{{ $value->id }}" title="Sửa Danh Mục"><i class="fas fa-pencil-alt"></i></button>
+                                <a class="fa fa-edit  btn btn-primary" id="sua{{ $value->id }}"  onclick="sua({{ $value->id }})"></a>
+                                <button type="reset"  class=" btn btn-danger hide"  id="reset{{ $value->id }}" onclick=" return huy({{ $value->id }})"><i class="fas fa-window-close"></i></button>
+                                @if($value->status==0)
+                                    <a data-id="{{$value->id}}" href="{{ url('admincp/cateproduct/setactive/'.$value->id.'/1') }}" title="{{ " Xoá ".$value->name }}" class="fa btn btn-primary">Hiển thị</a>
+                                    <a data-id="{{$value->id}}" href="{{ url('admincp/cateproduct/destroy/'.$value->id) }}" title="{{ " Xoá ".$value->name }}" class="fa btn btn-danger" onclick="return confirm('xóa danh mụ sẽ xóa tất cả các sản phẩm trong danh mục đó! bạn có muốn tiếp tục?')">Xóa</a>
+                                @else
+                                    <a data-id="{{$value->id}}" href="{{ url('admincp/cateproduct/setactive/'.$value->id.'/0') }}" title="{{ " Xoá ".$value->name }}" class="fa btn btn-danger">Không Hiển thị</a>
+                                @endif
+
+                            </td>
+                            </form>
+                        </tr>
+                    @endforeach
+                    </tbody>
                     <tfoot>
                     <tr>
                         <th>STT</th>
@@ -94,36 +124,7 @@
                         <th>Chỉnh sửa</th>
                     </tr>
                     </tfoot>
-                    <tbody>
-                    @foreach($cateproduct as $key => $value)
-                        <tr>
-                            <form action="{{ url('admincp/cateproduct/edit/'.$value->id) }}" method="post">
-                                @csrf
-                            <td>{{ $key+1 }}</td>
-                            <td><input name="name" type="text" class="inputadmin" id="name{{$value->id}}" value="{{ $value->name }}" readonly/></td>
-                            <td>{{ $value->slug }}</td>
-                            <td>
-                                @if($value->active==1) {{ "Hiển thị" }} @else {{ "Không hiển thị" }} @endif
-                            </td>
-                            <td>{{ $value->total_product }}</td>
-                            <td>
-                                {{--<a class="fa btn btn-default" title="{{ " Sửa ".$value->name }}" href="{{url('admincp/cateproduct/edit/'.$value->id)}}" type="button"><i class="fas fa-edit"></i></a>--}}
-                               <button type="submit" class=" btn btn-success hide" id="submit{{ $value->id }}" title="Sửa Danh Mục"><i class="fas fa-pencil-alt"></i></button>
-                                <a class="fa fa-edit  btn btn-primary" id="sua{{ $value->id }}"  onclick="sua({{ $value->id }})"></a>
-                                <button type="reset"  class=" btn btn-danger hide"  id="reset{{ $value->id }}" onclick=" return huy({{ $value->id }})"><i class="fas fa-window-close"></i></button>
-                                @if($value->active==0)
-                                    <a data-id="{{$value->id}}" href="{{ url('admincp/cateproduct/destroy/'.$value->id.'/1') }}" title="{{ " Xoá ".$value->name }}" class="fa btn btn-danger">Hiển thị</a>
-                                @else
-                                    <a data-id="{{$value->id}}" href="{{ url('admincp/cateproduct/destroy/'.$value->id.'/0') }}" title="{{ " Xoá ".$value->name }}" class="fa btn btn-danger">Không Hiển thị</a>
-                                @endif
-
-                            </td>
-                            </form>
-                        </tr>
-                    @endforeach
-                    </tbody>
                 </table>
-                <div class="pull-right">{{ $cateproduct->links() }}</div>
             </div>
             <!-- /.table-responsive -->
         </div>

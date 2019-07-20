@@ -17,11 +17,11 @@ class Controller_1 extends Controller
         View::share('cate_news', $cate_news);
         $new_post = DB::table('news')->orderBy('id', 'desc')->limit(4)->get();
         View::share('new_posts', $new_post);
-        $cate_products = DB::table('cate_products')->orderBy('id', 'desc')->get();
+        $cate_products = DB::table('cate_products')->where('status', '=',1)->orderBy('id', 'desc')->get();
         View::share('cate_products', $cate_products);
         $products = DB::table('products')->orderBy('id','desc')->get();
         View::share('headerproducts', $products);
-        $collection = DB::table('collections')->get();
+        $collection = DB::table('collections')->where('status', '=',1)->get();
         View::share('headcollections', $collection);
 
         $introduce = DB::table('introduce')->first();

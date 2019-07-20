@@ -28,7 +28,11 @@ class SizeController extends Controller
         ]);
         return redirect()->back()->with('thongbao', 'Sửa size thành công');
     }
-    public function destroy($id, $value){
+    public function destroy($id){
+        DB::table('size')->where('id', $id)->delete();
+        return redirect()->back()->with('thonbao', 'xóa size thành công');
+    }
+    public function setactive($id, $value){
         DB::table('size')->where('id', $id)->update([
             'status' =>  $value
         ]);

@@ -2,10 +2,10 @@
 
     <!--logo and iconic logo start-->
     <div class="logo">
-        <h1><a href="{{ url('admincp') }}">Easy <span>Admin</span></a></h1>
+        <h1><a target="_blank" href="{{ url('') }}">LalaLand <span>Shop</span></a></h1>
     </div>
     <div class="logo-icon text-center">
-        <a href="{{ url('admincp') }}"><i class="lnr lnr-home"></i> </a>
+        <a target="_blank" href="{{ url('') }}"><i class="lnr lnr-home"></i> </a>
     </div>
 
     <!--logo and iconic logo end-->

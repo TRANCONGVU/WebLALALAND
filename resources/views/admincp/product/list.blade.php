@@ -43,7 +43,7 @@
                 <td>{{ $value->quantity}}</td>
                 <td>
                     <a type="button" class="fa fa-edit btn btn-default btn btn-success" href="{{ url('admincp/product/edit/'.$value->id) }}" title="Sửa"></a>
-                    <a type="button" class="fa fa-trash btn btn-default btn btn-danger" href="{{ url('admincp/product/delete/'.$value->id) }}" onclick="return confirmAction()" title="Xóa">Xóa</a>
+                    <a type="button" class="fa fa-trash btn btn-default btn btn-danger" href="{{ url('admincp/product/delete/'.$value->id) }}" onclick="return confirm('hành dộng sẽ xóa sản phẩm! bạn có muốn tiếp tục?')" title="Xóa">Xóa</a>
                 </td>
             </tr>
         @endforeach

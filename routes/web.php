@@ -1,4 +1,4 @@
-	<?php
+<?php
 
 /*
 |--------------------------------------------------------------------------
@@ -227,8 +227,10 @@ Route::prefix('admincp')->group(function () {
 			Route::get('edit/{id}','CateProductController@edit')->name('edit.cateproduct');
 			Route::post('edit/{id}','CateProductController@update')->name('update.cateproduct');
 			Route::get('detail','CateProductController@show')->name('show.cateproduct');
-			Route::get('destroy/{id}/{value}','CateProductController@destroy')->name('destroy.cateproduct');
-		});
+			Route::get('destroy/{id}','CateProductController@destroy')->name('destroy.cateproduct');
+            route::get('setactive/{id}/{status}','CateProductController@cateproduct')->name('active.cateproduct');
+
+        });
         //product type
 		Route::group(['prefix' => 'producttype'],function (){
             Route::get('/','ProductTypeController@index')->name('list.producttype');
@@ -246,7 +248,8 @@ Route::prefix('admincp')->group(function () {
             Route::post('create','CollectionsController@store')->name('store.collections');
 
             Route::post('edit/{id}','CollectionsController@update')->name('update.collections');
-            Route::get('destroy/{id}/{value}','CollectionsController@destroy')->name('destroy.collections');
+            Route::get('setactive/{id}/{value}','CollectionsController@setactive')->name('setactive.collections');
+            Route::get('delete/{id}','CollectionsController@destroy')->name('delete.collections');
         });
 
         /*
@@ -258,7 +261,8 @@ Route::prefix('admincp')->group(function () {
             Route::post('create','SizeController@store')->name('store.size');
 
             Route::post('edit/{id}','SizeController@update')->name('update.size');
-            Route::get('delete/{id}/{value}','SizeController@destroy')->name('destroy.size');
+            Route::get('setactive/{id}/{value}','SizeController@setactive')->name('setactive.size');
+            Route::get('delete/{id}','SizeController@destroy')->name('delete.size');
         });
 
         Route::group(['prefix' => 'color'],function (){
@@ -267,7 +271,8 @@ Route::prefix('admincp')->group(function () {
             Route::post('create','ColorController@store')->name('store.color');
 
             Route::post('edit/{id}','ColorController@update')->name('update.color');
-            Route::get('delete/{id}/{value}','ColorController@destroy')->name('destroy.color');
+            Route::get('setactive/{id}/{value}','ColorController@setactive')->name('setactive.color');
+            Route::get('delete/{id}','ColorController@destroy')->name('destroy.color');
         });
 
         //product
@@ -279,7 +284,7 @@ Route::prefix('admincp')->group(function () {
             Route::get('edit/{id}','ProductController@edit')->name('edit.product');
             Route::post('edit/{id}','ProductController@update')->name('update.product');
             Route::get('detail','ProductController@show')->name('show.product');
-            Route::get('destroy','ProductController@destroy')->name('destroy.product');
+            Route::get('delete/{id}','ProductController@destroy')->name('destroy.product');
         });
 
 
@@ -293,6 +298,7 @@ Route::prefix('admincp')->group(function () {
             route::post('update/{id}','useraccountcontroller@update')->name('update.useraccount');
 
             route::get('setactive/{id}/{status}','useraccountcontroller@active')->name('active.useraccount');
+            route::get('delete/{id}','useraccountcontroller@destroy')->name('delete.useraccount');
         });
         Route::group(['prefix' => 'adminaccount'], function (){
             route::get('/','adminaccountcontroller@index')->name('list.adminaccount');
@@ -303,6 +309,7 @@ Route::prefix('admincp')->group(function () {
             route::post('update/{id}','adminaccountcontroller@update')->name('update.adminaccount');
 
             route::get('setactive/{id}/{status}','adminaccountcontroller@active')->name('active.adminaccount');
+            route::get('delete/{id}','adminaccountcontroller@destroy')->name('delete.adminaccount');
 
 		});
 		Route::group(['prefix' => 'catenews'], function (){

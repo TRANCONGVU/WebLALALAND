@@ -15,7 +15,7 @@
 </style>
 
 <h1>
-        Danh sách Danh Mục Tin...
+        Danh sách Kích cỡ sản phẩm...
     </h1>
     <br>
     @if(session('thongbao'))
@@ -25,7 +25,7 @@
         </script>
     @endif
     <div class="table-data__tool">
-    <button class="btn btn-success" id="btadd"  onclick="addcate()">Thêm danh mục</button>
+    <button class="btn btn-success" id="btadd"  onclick="addcate()">Thêm kích cỡ</button>
     <button class="btn btn-danger" id="bthuy"  onclick="huycate()">Hủy</button>
         <div id="addcate" class="hide">
             <hr>
@@ -33,7 +33,7 @@
                 @csrf
                 <div class="row">
                     <div class="col-md-2">
-                        <h3>Tên Danh Mục:</h3>
+                        <h3>Tên kích cỡ:</h3>
                     </div>
                     <div class="col-md-7">
 
@@ -94,9 +94,10 @@
                             <input type="reset" value="Hủy" class="btn btn-danger hide" id="reset{{ $value->id }}" onclick="return huy({{ $value->id }})">
                             <a type="button" id="edit{{$value->id}}" class="fa fa-edit btn btn-default btn btn-success" href="#" title="Sửa" onclick="sua({{ $value->id }})"></a>
                             @if($value->status==1)
-                                <a class="btn btn-danger" href="{{ url('admincp/size/delete/'.$value->id.'/0') }}" title="Xóa danh mục {{ $value->name }}" onclick="return confirmAction()">Ẩn</a>
+                                <a class="btn btn-danger" href="{{ url('admincp/size/setactive/'.$value->id.'/0') }}" title="Ẩn danh mục {{ $value->name }}" onclick="return confirm('Hành động sẽ ẩn size này! bạn có muốn tiếp tục?')">Ẩn</a>
                             @else
-                                <a class="btn btn-success" href="{{ url('admincp/size/delete/'.$value->id.'/1') }}" title="Xóa danh mục {{ $value->name }}" onclick="return confirmAction()">Hiện</a>
+                                <a class="btn btn-success" href="{{ url('admincp/size/setactive/'.$value->id.'/1') }}" title="Hiện danh mục {{ $value->name }}" onclick="return confirm('HÀnh động sẽ hiển thị size này! bạn có muốn tiếp tục?')">Hiện</a>
+                                <a class="btn btn-danger" href="{{ url('admincp/size/delete/'.$value->id) }}" title="Xóa danh mục {{ $value->name }}" onclick="return confirm('HÀnh động sẽ xóa size này! bạn có muốn tiếp tục?')">Xóa</a>
                             @endif
 
                         </td>
