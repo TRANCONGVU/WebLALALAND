@@ -122,4 +122,8 @@ class UserAccountController extends Controller
 
         return redirect()->back();
     }
+    public function destroy($id){
+        DB::table('users')->where('id', $id)->delete();
+        return redirect()->back()->with('thongbao', 'Xóa tài khoản user thành công');
+    }
 }

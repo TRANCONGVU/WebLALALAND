@@ -82,10 +82,11 @@
                                 {{--<a type="button" class="fa fa-trash btn btn-default btn btn-danger" href="" onclick="return confirmAction()" title="Xóa">Xóa</a>--}}
                             @else
                                 @if($value->status==1)
-                                    <a type="button" class="fa fa-trash btn btn-default btn btn-danger" href="{{ url('admincp/adminaccount/setactive/'.$value->id.'/0') }}" onclick="" title="Xóa">unActive</a>
+                                    <a type="button" class="fa fa-trash btn btn-default btn btn-danger" href="{{ url('admincp/adminaccount/setactive/'.$value->id.'/0') }}" onclick="" title="UnActive">UnActive</a>
 
                                 @else
-                                    <a type="button" class="fa fa-trash btn btn-default btn btn-primary" href="{{ url('admincp/adminaccount/setactive/'.$value->id.'/1') }}" onclick="" title="Xóa">Active</a>
+                                    <a type="button" class="fa fa-trash btn btn-default btn btn-primary" href="{{ url('admincp/adminaccount/setactive/'.$value->id.'/1') }}" onclick="" title="Active">Active</a>
+                                    <a type="button" class="fa fa-trash btn btn-default btn btn-danger" href="{{ url('admincp/adminaccount/delete/'.$value->id) }}" onclick="return confirmAction()" title="Xóa">Xóa</a>
                                 @endif
                             @endif
                         </td>
@@ -183,8 +184,6 @@
                 document.getElementById('error'+x.id).style.display = 'none';
             }
         }
-        
-    
     </script>
 
     @endsection

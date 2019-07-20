@@ -15,7 +15,7 @@ class CateProductController extends Controller
      */
     public function index()
     {
-        $cateproduct = DB::table('cate_products')->orderBy('id','desc')->paginate(5);
+        $cateproduct = DB::table('cate_products')->orderBy('id','desc')->get();
 //        dd($cateproduct);
         return view('admincp.cate-product.list',compact('cateproduct'));
     }
@@ -107,12 +107,33 @@ class CateProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id,$value)
+    public function destroy($id)
     {
-        DB::table('cate_products')->where('id',$id)->update([
-            'active'=> $value,
+        $images = DB::table('product_details')
+            ->select('product_details.image')
+            ->join('products', 'products.id', '=', 'product_details.product_id')
+            ->where('products.category_id', $id)
+            ->get();
+        foreach ($images as $value){
+            $pictures=explode(',',$value->image);
+            foreach ($pictures as $pic){
+                if($pic !='' && file_exists('images/products/' . $pic)){
+                    unlink('images/products/' . $pic);
+                }
+            }
+        }
+        DB::table('cate_products')->where('id',$id)->delete();
+        return redirect()->route('list.cateproduct')->with('thongbao', 'Xóa danh mục thành công');
+
+    }
+    public function cateproduct($id, $status){
+
+
+        DB::table('cate_products')->where('id', $id)->update([
+            'status' => $status,
         ]);
-        return redirect()->route('list.cateproduct');
+
+        return redirect()->back();
 
     }
 }

@@ -61,4 +61,8 @@ class adminAccountController extends Controller
 
         return redirect()->back();
     }
+    public function destroy($id){
+        DB::table('admins')->where('id', $id)->delete();
+        return redirect()->back()->with('thongbao', 'Đã xóa tài khoản Amdin thành công');
+    }
 }
