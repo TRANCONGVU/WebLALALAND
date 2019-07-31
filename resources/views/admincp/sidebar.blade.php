@@ -2,10 +2,10 @@
 
     <!--logo and iconic logo start-->
     <div class="logo">
-        <h1><a href="{{ url('admincp') }}">Easy <span>Admin</span></a></h1>
+        <h1><a target="_blank" href="{{ url('') }}">LalaLand <span>Shop</span></a></h1>
     </div>
     <div class="logo-icon text-center">
-        <a href="{{ url('admincp') }}"><i class="lnr lnr-home"></i> </a>
+        <a target="_blank" href="{{ url('') }}"><i class="lnr lnr-home"></i> </a>
     </div>
 
     <!--logo and iconic logo end-->
@@ -66,31 +66,21 @@
                     <span>Giới thiệu</span></a>
                 <ul class="sub-menu-list">
                     <li><a href="{{url('admincp/introduce/introduce')}}">Thêm giới thiệu</a> </li>
-                    <li><a href="{{url('admincp/introduce/listintroduce')}}">Danh sách giới thiệu</a></li>
+                    <li><a href="{{url('admincp/showrom')}}">Danh Sách Cửa hàng</a></li>
                 </ul>
             </li>
             {{-- <li><a href="{{asset('admincp/introduce')}}"><i class="lnr lnr-spell-check"></i> <span>Giới thiệu !</span></a></li> --}}
-            <li><a href="tables.html"><i class="lnr lnr-menu"></i> <span>Tables</span></a></li>
+
             <li class="menu-list"><a href="#"><i class="lnr lnr-spell-check"></i> <span>Tin Tức</span></a>
                 <ul class="sub-menu-list">
                     <li><a href="{{url('admincp/catenews')}}">Danh Mục Tin</a> </li>
                     <li><a href="{{url('admincp/news')}}">Tin Tức</a></li>
                 </ul>
             </li>
-            <li class="menu-list"><a href="#"><i class="lnr lnr-indent-increase"></i> <span>Menu Levels</span></a>
-                <ul class="sub-menu-list">
-                    <li><a href="charts.html">Basic Charts</a> </li>
-                </ul>
-            </li>
-            <li><a href="codes.html"><i class="lnr lnr-pencil"></i> <span>Typography</span></a></li>
-            <li><a href="media.html"><i class="lnr lnr-select"></i> <span>Media Css</span></a></li>
-            <li class="menu-list"><a href="#"><i class="lnr lnr-book"></i>  <span>Pages</span></a>
-                <ul class="sub-menu-list">
-                    <li><a href="sign-in.html">Sign In</a> </li>
-                    <li><a href="sign-up.html">Sign Up</a></li>
-                    <li><a href="blank_page.html">Blank Page</a></li>
-                </ul>
-            </li>
+
+            <li><a href="{{ route('list.recruitment') }}"><i class="lnr lnr-pencil"></i> <span>Tuyển Dụng</span></a></li>
+            <li><a href="{{ route('list.bill') }}"><i class="lnr lnr-cart   "></i> <span>Đơn hàng</span></a></li>
+
         </ul>
         <!--sidebar nav end-->
     </div>

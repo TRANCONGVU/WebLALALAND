@@ -1,5 +1,6 @@
 @extends('master-layout')
 @section('content')
+    <link rel="stylesheet" href="{{ asset('xzoom/xzoom.css') }}">
     <style>
         .quantity{
             width: 100%;
@@ -44,9 +45,7 @@
                         <span>Về chúng tôi</span>
                     </div>
                     <span>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo velit aliquam sint dolorum placeat
-                        fugiat itaque nostrum veniam ipsam alias libero odio nesciunt optio, possimus qui voluptate illo
-                        atque deleniti!
+                       {{ $introduce->summary }}
                     </span>
 
                 </div>
@@ -71,7 +70,7 @@
                             </ol>--}}
                             <div class="carousel-inner">
                                 <div class="carousel-item active">
-                                    <img src="{{asset('images/products/'.$product->image)}}" alt="">
+                                    <img class="xzoom" src="{{asset('images/products/'.$product->image)}}" alt="">
                                 </div>
                                {{-- <div class="carousel-item">
                                     <img class="d-block w-100" src="images/product-1.jpg" alt="Second slide">
@@ -91,14 +90,18 @@
                         </div>
 
                     </div>
+                   {{-- <form action="#" method="post" name="">
+                        @csrf
+                        <input type="hidden" name="productid" value="{{ $product->id }}" />--}}
                     <div class="col-md-6  text-left d-flex flex-column">
                         <h4>{{ $product->name }}</h4>
                         <span class="gia">Giá Khuyến Mại : {{ number_format($product->sale)." VNĐ" }}</span>
-                        Giá cũ : <p class="" style="  text-decoration: line-through;">{{ number_format($product->price)." VNĐ" }}</p>
+                        <span class="">Sale :  {{ 100-($product->sale/$product->price)*100 }}%</span>
+                        <b>Giá cũ :</b> <p class="" style="  text-decoration: line-through;">{{ number_format($product->price)." VNĐ" }}</p>
                         <span>Mã hàng : {{ $product->code }}</span>
                         <div class="form-group mt-3">
                             <label for="1">Màu sắc</label>
-                            <select class="form-control my-3"  onchange="selectsize(this)">
+                            <select class="form-control my-3" name="productcolor" id="productcolor"  onchange="selectsize(this)">
                                 <option value="0">--Màu--</option>
                                 @foreach($colors as $color)
                                     <option value="{{ $color->colorid }}" id="{{ $color->detailid }}">{{ $color->name }}</option>
@@ -128,12 +131,13 @@
                                 {{--<option>Green</option>--}}
                             </select>
                             <label for="1">Kích cỡ</label>
-                            <select class="form-control" id="sizeproduct">
+                            <select class="form-control" id="sizeproduct" name="productsize">
 
                             </select>
                         </div>
                         <h6>Số lượng</h6>
                         <div class="soluong d-flex justify-content-between">
+                            @csrf
                             <button class="btn" onclick="minus()"><i class="fas fa-minus"></i></button>
                             <input name="quantity" class="quantity" id="quantity" type="number" value="1" onchange="cost(this)">
                             <input id="sale" type="hidden" value="{{ $product->sale }}">
@@ -173,12 +177,43 @@
                         <h6>
                             Số tiền :   <span id="total"> {{ number_format($product->sale). " VNĐ" }}</span>
                         </h6>
-
+                        <div id="result"></div>
                     </div>
+
                 </div>
                 <div class="show-more text-center mb-3">
-                    <a href="#"  data-toggle="modal" data-target="#modal1">Thêm vào giỏ hàng</a>
+                    <button class="btn btn-outline-success"   data-toggle="modal" data-target="#modal1" onclick="addcart()">Thêm vào giỏ hàng</button>
                 </div>
+                <script>
+                    function addcart() {
+                        if($('#productcolor').val() === '0'){
+                            alert('bạn chưa chọn size');
+                        }
+                        else {
+                            var agrs = {
+                                url: "{{ url('addcart') }}", // gửi ajax đến file result.php
+                                type: "post", // chọn phương thức gửi là post
+                                dataType: "text", // dữ liệu trả về dạng text
+                                data: { // Danh sách các thuộc tính sẽ gửi đi
+                                    _token: '{{ csrf_token() }}',
+                                    id: {{ $product->id }},
+                                    color: $('#productcolor').val(),
+                                    size: $('#sizeproduct').val(),
+                                    quantity: $('#quantity').val(),
+                                },
+                                success: function (result) {
+                                    // Sau khi gửi và kết quả trả về thành công thì gán nội dung trả về
+                                    // đó vào thẻ div có id = result
+                                    $('#result').html(result);
+                                }
+                            };
+
+                            // Truyền object vào để gọi ajax
+                            $.ajax(agrs);
+                        }
+                    }
+
+                </script>
                 <div class="container border-line">
                     <span> # Sản phẩm liên quan </span>
                 </div>
@@ -232,7 +267,9 @@
         </div>
     </div>
 </div>
-<script type="text/javascript" src="lib/    jquery.min.js"></script>
+<script type="text/javascript" src="lib/jquery.min.js"></script>
 <script type="text/javascript" src="lib/OwlCarousel2-2.3.4/owl.carousel.min.js"></script>
 <script type="text/javascript" src="js/carousel.js"></script>
+    <script type="text/javascript" src="{{asset('xzoom/xzoom.min.js')}}"></script>
+
 @endsection

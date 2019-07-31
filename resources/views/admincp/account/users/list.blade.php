@@ -55,9 +55,10 @@
                         <a type="button" class="fa fa-edit btn btn-default btn btn-success" href="{{ url('admincp/useraccount/edit/'.$value->id) }}" title="Sửa"></a>
                         {{--<a type="button" class="fa fa-trash btn btn-default btn btn-danger" href="" onclick="return confirmAction()" title="Xóa">Xóa</a>--}}
                         @if($value->status==1)
-                            <a type="button" class="fa fa-trash btn btn-default btn btn-danger" href="{{ url('admincp/useraccount/setactive/'.$value->id.'/0') }}" onclick="" title="Xóa">unActive</a>
+                            <a type="button" class="btn btn-default btn btn-danger" href="{{ url('admincp/useraccount/setactive/'.$value->id.'/0') }}" onclick="" title="unActive">unActive</a>
                         @else
-                            <a type="button" class="fa fa-trash btn btn-default btn btn-primary" href="{{ url('admincp/useraccount/setactive/'.$value->id.'/1') }}" onclick="" title="Xóa">Active</a>
+                            <a type="button" class="btn btn-default btn btn-primary" href="{{ url('admincp/useraccount/setactive/'.$value->id.'/1') }}" onclick="" title="Active">Active</a>
+                            <a type="button" class="btn btn-default btn btn-danger" href="{{ url('admincp/useraccount/delete/'.$value->id) }}" onclick="return confirmAction()" title="Xóa">Xóa</a>
                         @endif
 
                     </td>

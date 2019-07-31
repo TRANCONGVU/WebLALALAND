@@ -75,10 +75,12 @@ class DatabaseSeeder extends Seeder
         DB::table('collections')->insert([
             [
             'name' => 'Đông-Xuân',
+            'slug' => $this->slug('Đông-Xuân'),
             'image' => 'dong-xuan.jpg'
             ],
             [
             'name' => 'Hè-Thu',
+            'slug' => $this->slug('Hè-Thu'),
             'image' => 'he-thu.jpg'
             ]
         ]);
@@ -118,6 +120,17 @@ class DatabaseSeeder extends Seeder
             [
                 'image' => '8sEr_image_banner-3.jpg'
             ]
+        ]);
+        DB::table('payment_methods')->insert([
+           [ 'name' => 'Thanh toán khi nhận hàng']
+        ]);
+
+        DB::table('introduce')->insert([
+            'summary' => 'Cửa hàng thời trang',
+            'content' => '<p>C&ocirc;ng ty ch&uacute;ng t&ocirc;i lu&ocirc;n mang đến gi&aacute; trị tốt nhất cho bạn</p>',
+            'email' => 'kienchidong@gmail.com',
+            'phone' => '0392123325',
+            'facebook' => 'https://www.facebook.com/kienchidong',
         ]);
     }
 }

@@ -28,7 +28,11 @@ class ColorController extends Controller
         ]);
         return redirect()->back()->with('thongbao', 'Sửa màu thành công');
     }
-    public function destroy($id, $value){
+    public function destroy($id){
+        DB::table('color')->where('id', $id)->delete();
+        return redirect()->back()->with('thongbao', 'Xóa màu thành công!');
+    }
+    public function setactive($id, $value){
         DB::table('color')->where('id', $id)->update([
             'status' =>  $value
         ]);

@@ -97,9 +97,10 @@
                             <input type="reset" value="Hủy" class="btn btn-danger hide" id="reset{{ $value->id }}" onclick="return huy({{ $value->id }})">
                             <a type="button" id="edit{{$value->id}}" class="fa fa-edit btn btn-default btn btn-success" href="#" title="Sửa" onclick="sua({{ $value->id }})"></a>
                             @if($value->status==1)
-                                <a class="btn btn-danger" href="{{ url('admincp/color/delete/'.$value->id.'/0') }}" title="Xóa danh mục {{ $value->name }}" onclick="return confirmAction()">Ẩn</a>
+                                <a class="btn btn-danger" href="{{ url('admincp/color/setactive/'.$value->id.'/0') }}" title="Ẩn danh mục {{ $value->name }}" onclick="return confirm('hành động sẽ hiển thị màu này! bạn có muốn tiếp tục?')">Ẩn</a>
                             @else
-                                <a class="btn btn-success" href="{{ url('admincp/color/delete/'.$value->id.'/1') }}" title="Xóa danh mục {{ $value->name }}" onclick="return confirmAction()">Hiện</a>
+                                <a class="btn btn-success" href="{{ url('admincp/color/setactive/'.$value->id.'/1') }}" title="Hiện danh mục {{ $value->name }}" onclick="return confirm('hành động sẽ hiển thị màu này! bạn có muốn tiếp tục?')">Hiện</a>
+                                <a class="btn btn-danger" href="{{ url('admincp/color/delete/'.$value->id) }}" title="Xóa danh mục {{ $value->name }}" onclick="return confirm('hành động sẽ xóa màu này! bạn có muốn tiếp tục?')">Xóa</a>
                             @endif
 
                         </td>

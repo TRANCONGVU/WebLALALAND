@@ -101,9 +101,10 @@
                             <input type="reset" value="Hủy" class="btn btn-danger hide" id="reset{{ $value->id }}" onclick="return huy({{ $value->id }})">
                             <a type="button" id="edit{{$value->id}}" class="fa fa-edit btn btn-default btn btn-success" href="#" title="Sửa" onclick="sua({{ $value->id }})"></a>
                             @if($value->status==0)
-                                <a data-id="{{$value->id}}" href="{{ url('admincp/collections/destroy/'.$value->id.'/1') }}" title="{{ " Xoá ".$value->name }}" class="fa btn btn-danger" onclick="confirmAction()">Hiển thị</a>
+                                <a data-id="{{$value->id}}" href="{{ url('admincp/collections/setactive/'.$value->id.'/1') }}" title="{{ " Xoá ".$value->name }}" class="fa btn btn-danger" onclick="return confirm('hành động sẽ hiển thị bộ sưu tập này! bạn có muốn tiếp tục?')">Hiển thị</a>
+                                <a data-id="{{$value->id}}" href="{{ url('admincp/collections/delete/'.$value->id) }}" title="{{ " Xoá ".$value->name }}" class="fa btn btn-danger" onclick="return confirm('hành động sẽ Xóa bộ sưu tập này! bạn có muốn tiếp tục?')">Xóa</a>
                             @else
-                                <a data-id="{{$value->id}}" href="{{ url('admincp/collections/destroy/'.$value->id.'/0') }}" title="{{ " Xoá ".$value->name }}" class="fa btn btn-danger" onclick="confirmAction()">Ẩn</a>
+                                <a data-id="{{$value->id}}" href="{{ url('admincp/collections/setactive/'.$value->id.'/0') }}" title="{{ " Xoá ".$value->name }}" class="fa btn btn-danger" onclick="return confirm('hành động sẽ ẩn bộ sưu tập này! bạn có muốn tiếp tục?')">Ẩn</a>
                             @endif                        </td>
                         </form>
                     </tr>

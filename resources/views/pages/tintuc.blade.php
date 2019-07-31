@@ -8,6 +8,9 @@
                 <div class="sidebar-content">
                     <div class="title-sidebar">
                         <span>Bài viết gần đây</span>
+                        @foreach($new_posts as $value)
+                            <a href="{{ url('tintuc/'.$value->slug) }}">{{ $value->title }}</a>
+                        @endforeach
                     </div>
                     <div class="tintuc-sidebar">
                         <a href="#">xu hướng thời trang 2019</a>

@@ -5,18 +5,18 @@
             <div class="col-md-8 d-flex justify-content-around text-left">
                 <div class="d-flex flex-column footer-contact">
                     <h6>Thông tin cửa hàng</h6>
-                    <a href="">Sản phẩm nổi bật</a>
-                    <a href="">Hệ thống cửa hàh</a>
-                    <a href="">Lookbook / Bộ sưu tập</a>
+                    <a href="{{ url('loaisanpham/all') }}">Sản phẩm nổi bật</a>
+                    <a href="{{ url('showrom') }}">Hệ thống cửa hàng</a>
+                    <a href="{{ url('bosuutap/all') }}">Lookbook / Bộ sưu tập</a>
                     <img class="mt-5" src="images/dathongbao.png" alt="">
                 </div>
                 <div class="d-flex flex-column footer-contact">
                     <h6>dịch vụ khách hàng</h6>
-                    <a href="">Đơn hàng</a>
-                    <a href="">Câu hỏi thường gặp</a>
-                    <a href="">Liên hệ với chúng tôi</a>
-                    <a href="">Tuyển dụng</a>
-                    <a href="">Về chúng tôi</a>
+                    <a href="{{ url('cart') }}">Đơn hàng</a>
+                    <a href="{{ url('cauhoi') }}">Câu hỏi thường gặp</a>
+                    <a href="{{ url('lienhe') }}">Liên hệ với chúng tôi</a>
+                    <a href="{{ url('tuyendung') }}">Tuyển dụng</a>
+                    <a href="{{ url('gioithieu') }}">Về chúng tôi</a>
                 </div>
                 <div class="d-flex flex-column footer-contact">
                     <h6>dịch vụ khách hàng</h6>
@@ -32,10 +32,18 @@
             <div class="col-md-4 conect-bottom d-flex flex-column ">
                 <h6 class="">kết nối với chúng tôi</h6>
                 <div class="conect">
-                    <a href=""><img src="images/fb-icon.png" alt=""></a>
-                    <a href=""><img src="images/youtube-icon.png" alt=""></a>
-                    <a href=""><img src="images/instar-icon.png" alt=""></a>
-                    <a href=""><img src="images/twitter.png" alt=""></a>
+                    @if($introduce->facebook!='')
+                        <a target="_blank" href="{{ $introduce->facebook }}"><img src="images/fb-icon.png" alt=""></a>
+                    @endif
+                    @if($introduce->youtube!='')
+                        <a target="_blank" href="{{ $introduce->youtube }}"><img src="images/youtube-icon.png" alt=""></a>
+                    @endif
+                    @if($introduce->instagram!='')
+                        <a target="_blank" href="{{ $introduce->instagram }}"><img src="images/instar-icon.png" alt=""></a>
+                    @endif
+                    @if($introduce->twitter!='')
+                        <a target="_blank" href="{{ $introduce->twitter }}"><img src="images/twitter.png" alt=""></a>
+                    @endif
                 </div>
                 <h6 class="mt-3">Đăng ký nhận tin</h6>
                 <form action="" class="form-inline">
@@ -54,18 +62,52 @@
 
 </div>
 <div class="container-flui" style="position : relative">
-        <div class="box-up">
+    <div class="box-up">
+        <a id="hihi" onclick="hihi">
+            <div class="box-up-item bacham">
+                <i class="fas fa-ellipsis-h"></i>
+            </div>
+        </a>
+        <div class="hide">
+            <a href="#">
                 <div class="box-up-item">
-                    <img src="images/mail-icon.png" alt="">
+                    <a href="mailto:{{ $introduce->email }}"><img src="images/mail-icon.png" alt=""></a>
                 </div>
+            </a>
+            <a href="">
                 <div class="box-up-item">
                     <img src="images/messager-icon.png" alt="">
                 </div>
+            </a>
+            <a href="">
                 <div class="box-up-item">
-                    <img src="images/phone-icon.png" alt="">
+                    <a href="tel:{{ $introduce->phone }}"><img src="images/phone-icon.png" alt=""></a>
                 </div>
-            </div>
+            </a>
+
+        </div>
+
+    </div>
 </div>
+<script type="text/javascript">
+    var lk = document.getElementById("hihi");
+    var hihi = document.querySelector(".hide");
+    var hidett = true;
+    lk.addEventListener('click', function () {
+        if (hidett === true) {
+            hihi.classList.add('show');
+            hihi.classList.remove('hide');
+            return hidett = false;
+            console.log(hidett);
+        } else {
+            hihi.classList.add('hide');
+            hihi.classList.remove('show');
+            return hidett = true;
+            console.log(hidett);
+        }
+    });
+
+</script>
 
 <section class="back-to-top">
     <div class="back-to-top-button"><i class="fas fa-angle-double-up"></i></div>

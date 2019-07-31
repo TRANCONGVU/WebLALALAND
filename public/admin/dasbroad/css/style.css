@@ -5887,8 +5887,8 @@ canvas#bar1 {
   margin-right:3px !important;
 }
 .col-md-3.widget {
-  width:100%;
-  float:none;
+  /*width:100%;*/
+  /*float:none;*/
 }
 .span_7, .span_8, .col_4{
   padding:0;
@@ -5967,7 +5967,7 @@ ul.new li.new_left, ul.new li.new_right {
   padding: 17px 0;
 }
 .col-md-3.widget.widget1 {
-  width:100%;
+  /*width:100%;*/
 }
 .grid_box1 {
   margin-bottom: 5px;

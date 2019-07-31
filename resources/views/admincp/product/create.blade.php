@@ -102,13 +102,13 @@
                                     html+="<div id='imagePreviewfile-3-"+$('#color').val()+"'>";
                                     html+="</div>";
                                     html+="<h5>Chọn Size:</h5>";
-                                    html+="<select id='"+$('#color').val()+"' onchange='chonsize(this)'>";
+                                    html+="<select id='"+$('#color').val()+"' onchange='chonsize(this)' required>";
                                     @foreach($sizes as $value)
                                         html+="<option value='"+"{{ $value->id }}"+"'>"+"{{ $value->name }}"+"</option>";
                                     @endforeach
                                     html+="</select>";
                                     html+="<div id='soluong"+$('#color').val()+"'>";
-                                    html+="<input name='sizenumber"+$('#color').val()+"' id='sizenumber"+$('#color').val()+"' class='form-control' type='text' value='0'>";
+                                    html+="<input name='sizenumber"+$('#color').val()+"' id='sizenumber"+$('#color').val()+"' class='form-control' type='hidden' value='0'>";
                                     html+="</div>";
                                     html+="<hr>";
                                     html+="</div>";

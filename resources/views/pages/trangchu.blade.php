@@ -1,39 +1,40 @@
 @extends('master-layout')
 @section('content')
+
 <section class="section-1 container-fluid owl-carousel owl-theme">
     @foreach($sliders as $key => $slider)
-        @if($key==0)
-            <div class="item">
-                <img src="{{asset('assets/img/'.$slider->image)}}" alt="">
-                <div class="title-banner">
-                    <span>SALE 100%</span>
-                    <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti veritatis laborum fuga, velit
+    @if($key==0)
+    <div class="item">
+        <img src="{{asset('assets/img/'.$slider->image)}}" alt="">
+        <div class="title-banner">
+            <span>SALE 100%</span>
+            <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti veritatis laborum fuga, velit
                 !</span>
-                </div>
-            </div>
-        @elseif($key==1)
-            <div class="item">
-                <img src="{{asset('assets/img/'.$slider->image)}}" alt="">
-            </div>
-        @else
-            <div class="item">
-                <img src="{{asset('assets/img/'.$slider->image)}}" alt="">
-                <div class="product-banner">
-                    <div class="row">
-                        @foreach($product_hots as $product)
-                        <div class="col-md-3 ">
-                            <div class="banner-item">
-                                <div class="banner-item-img">
-                                    <img src="{{ asset('images/products/'.$product->image) }}" alt="">
-                                </div>
-                                <a href="{{ url('sanpham/'.$product->slug) }}">{{ $product->name }}</a>
-                                <span>{{ number_format($product->sale)." VNĐ" }}</span>
-                            </div>
-
-
+        </div>
+    </div>
+    @elseif($key==1)
+    <div class="item">
+        <img src="{{asset('assets/img/'.$slider->image)}}" alt="">
+    </div>
+    @else
+    <div class="item">
+        <img src="{{asset('assets/img/'.$slider->image)}}" alt="">
+        <div class="product-banner">
+            <div class="row">
+                @foreach($product_hots as $product)
+                <div class="col-md-3 ">
+                    <div class="banner-item">
+                        <div class="banner-item-img">
+                            <img src="{{ asset('images/products/'.$product->image) }}" alt="">
                         </div>
-                        @endforeach
-                       {{-- <div class="col-md-3 ">
+                        <a href="{{ url('sanpham/'.$product->slug) }}">{{ $product->name }}</a>
+                        <span>{{ number_format($product->sale)." VNĐ" }}</span>
+                    </div>
+
+
+                </div>
+                @endforeach
+                {{-- <div class="col-md-3 ">
                             <div class="banner-item">
                                 <div class="banner-item-img">
                                     <img src="images/product-4.jpg" alt="">
@@ -66,36 +67,23 @@
 
 
                         </div>--}}
-                    </div>
-                </div>
             </div>
-        @endif
+        </div>
+    </div>
+    @endif
     @endforeach
 </section>
 <section class="section-2">
     <div class="container">
-        <div class="row">
-            <div class="col-md-4 col-sm-6 product">
-                <div class="over-lay">
-                </div>
-                <img src="{{asset('')}}images/product-1.jpg" alt="">
-
-
-            </div>
-            <div class="col-md-4  col-sm-6 product">
-                <div class="over-lay">
-                </div>
-                <img src="{{asset('')}}images/product-2.jpg" alt="">
-
-
-            </div>
-            <div class="col-md-4  col-sm-6 product">
-                <div class="over-lay">
-                </div>
-                <img src="{{asset('')}}images/product-3.jpg" alt="">
-
-
-            </div>
+        <div class="row noibatsp">
+            @foreach( $headcollections as $key => $value)
+                @if($key<=2)
+                    <div class="col-md-4 col-sm-6 product">
+                        <a href="{{ url('bosuutap/'.$value->slug) }}" class="over-lay">
+                        </a><img src="{{asset('images/collections/'.$value->image)}}" alt="">
+                    </div>
+                @endif
+            @endforeach
         </div>
     </div>
     <div class="container border-line">
@@ -109,7 +97,7 @@
                         <img src="{{asset('images/products/'.$product->image)}}" alt="" width="208px" height="406px">
                         <div class="over-lay d-flex flex-column justify-content-center">
                             <a href=""><i class="far fa-heart"></i></a>
-                            <a href="{{ url( 'chitietsanpham' )}}">Mua ngay</a>
+                            <a href="{{ url('sanpham/'.$product->slug) }}">Mua ngay</a>
                         </div>
                     </div>
 
@@ -117,7 +105,7 @@
                     <div class="info-product d-flex flex-column justify-content-center">
                         <a href="{{ url('sanpham/'.$product->slug) }}">{{ $product->name }}</a>
                         <a href="{{ url('sanpham/'.$product->slug) }}">Mã hàng : {{ $product->code }}</a>
-                        <a href="{{ url('sanpham/'.$product->slug) }}">{{ $product->sale }}</a>
+                        <a href="{{ url('sanpham/'.$product->slug) }}">{{ number_format($product->sale).' VNĐ' }}</a>
                     </div>
                 </div>
 
@@ -125,7 +113,7 @@
          {{--
             <div class="col-md-3 col-sm-6 col-6 new-product">
                 <div class="product-img">
-                    <img src="{{asset('')}}images/product-3.jpg" alt="">
+                    <img src="{{asset('images/products/'.$product->image)}}" alt="" width="208px" height="406px">
                     <div class="over-lay d-flex flex-column justify-content-center">
                         <a href=""><i class="far fa-heart"></i></a>
                         <a href="{{ url( 'chitietsanpham' )}}">Mua ngay</a>
@@ -134,101 +122,124 @@
 
 
                 <div class="info-product d-flex flex-column justify-content-center">
-                    <a href="#">váy đầm trẻ</a>
-                    <a href="#">Mã hàng : 1234jdfk12</a>
-                    <a href="#">440,000 Đ</a>
+                    <a href="{{ url('sanpham/'.$product->slug) }}">{{ $product->name }}</a>
+                    <a href="{{ url('sanpham/'.$product->slug) }}">Mã hàng : {{ $product->code }}</a>
+                    <a href="{{ url('sanpham/'.$product->slug) }}">{{ $product->sale }}</a>
                 </div>
             </div>
+
+            @endforeach
+            {{--
             <div class="col-md-3 col-sm-6 col-6 new-product">
                 <div class="product-img">
                     <img src="{{asset('')}}images/product-3.jpg" alt="">
-                    <div class="over-lay d-flex flex-column justify-content-center">
-                        <a href=""><i class="far fa-heart"></i></a>
-                        <a href="{{ url( 'chitietsanpham' )}}">Mua ngay</a>
-                    </div>
-                </div>
-
-
-                <div class="info-product d-flex flex-column justify-content-center">
-                    <a href="#">váy đầm trẻ</a>
-                    <a href="#">Mã hàng : 1234jdfk12</a>
-                    <a href="#">440,000 Đ</a>
-                </div>
+            <div class="over-lay d-flex flex-column justify-content-center">
+                <a href=""><i class="far fa-heart"></i></a>
+                <a href="{{ url( 'chitietsanpham' )}}">Mua ngay</a>
             </div>
-            <div class="col-md-3 col-sm-6 col-6 new-product">
-                <div class="product-img">
-                    <img src="{{asset('')}}images/product-3.jpg" alt="">
-                    <div class="over-lay d-flex flex-column justify-content-center">
-                        <a href=""><i class="far fa-heart"></i></a>
-                        <a href="{{ url( 'chitietsanpham' )}}">Mua ngay</a>
-                    </div>
-                </div>
-
-
-                <div class="info-product d-flex flex-column justify-content-center">
-                    <a href="#">váy đầm trẻ</a>
-                    <a href="#">Mã hàng : 1234jdfk12</a>
-                    <a href="#">440,000 Đ</a>
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-6 col-6 new-product">
-                <div class="product-img">
-                    <img src="{{asset('')}}images/product-3.jpg" alt="">
-                    <div class="over-lay d-flex flex-column justify-content-center">
-                        <a href=""><i class="far fa-heart"></i></a>
-                        <a href="{{ url( 'chitietsanpham' )}}">Mua ngay</a>
-                    </div>
-                </div>
-
-
-                <div class="info-product d-flex flex-column justify-content-center">
-                    <a href="#">váy đầm trẻ</a>
-                    <a href="#">Mã hàng : 1234jdfk12</a>
-                    <a href="#">440,000 Đ</a>
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-6 col-6 new-product">
-                <div class="product-img">
-                    <img src="{{asset('')}}images/product-3.jpg" alt="">
-                    <div class="over-lay d-flex flex-column justify-content-center">
-                        <a href=""><i class="far fa-heart"></i></a>
-                        <a href="{{ url( 'chitietsanpham' )}}">Mua ngay</a>
-                    </div>
-                </div>
-
-
-                <div class="info-product d-flex flex-column justify-content-center">
-                    <a href="#">váy đầm trẻ</a>
-                    <a href="#">Mã hàng : 1234jdfk12</a>
-                    <a href="#">440,000 Đ</a>
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-6 col-6 new-product">
-                <div class="product-img">
-                    <img src="{{asset('')}}images/product-3.jpg" alt="">
-                    <div class="over-lay d-flex flex-column justify-content-center">
-                        <a href=""><i class="far fa-heart"></i></a>
-                        <a href="{{ url( 'chitietsanpham' )}}">Mua ngay</a>
-                    </div>
-                </div>
-
-
-                <div class="info-product d-flex flex-column justify-content-center">
-                    <a href="#">váy đầm trẻ</a>
-                    <a href="#">Mã hàng : 1234jdfk12</a>
-                    <a href="#">440,000 Đ</a>
-                </div>
-            </div>--}}
-
         </div>
-        <div class="show-more text-center mb-3">
-            <a href="#">Xem thêm</a>
+
+
+        <div class="info-product d-flex flex-column justify-content-center">
+            <a href="#">váy đầm trẻ</a>
+            <a href="#">Mã hàng : 1234jdfk12</a>
+            <a href="#">440,000 Đ</a>
         </div>
+    </div>
+    <div class="col-md-3 col-sm-6 col-6 new-product">
+        <div class="product-img">
+            <img src="{{asset('')}}images/product-3.jpg" alt="">
+            <div class="over-lay d-flex flex-column justify-content-center">
+                <a href=""><i class="far fa-heart"></i></a>
+                <a href="{{ url( 'chitietsanpham' )}}">Mua ngay</a>
+            </div>
+        </div>
+
+
+        <div class="info-product d-flex flex-column justify-content-center">
+            <a href="#">váy đầm trẻ</a>
+            <a href="#">Mã hàng : 1234jdfk12</a>
+            <a href="#">440,000 Đ</a>
+        </div>
+    </div>
+    <div class="col-md-3 col-sm-6 col-6 new-product">
+        <div class="product-img">
+            <img src="{{asset('')}}images/product-3.jpg" alt="">
+            <div class="over-lay d-flex flex-column justify-content-center">
+                <a href=""><i class="far fa-heart"></i></a>
+                <a href="{{ url( 'chitietsanpham' )}}">Mua ngay</a>
+            </div>
+        </div>
+
+
+        <div class="info-product d-flex flex-column justify-content-center">
+            <a href="#">váy đầm trẻ</a>
+            <a href="#">Mã hàng : 1234jdfk12</a>
+            <a href="#">440,000 Đ</a>
+        </div>
+    </div>
+    <div class="col-md-3 col-sm-6 col-6 new-product">
+        <div class="product-img">
+            <img src="{{asset('')}}images/product-3.jpg" alt="">
+            <div class="over-lay d-flex flex-column justify-content-center">
+                <a href=""><i class="far fa-heart"></i></a>
+                <a href="{{ url( 'chitietsanpham' )}}">Mua ngay</a>
+            </div>
+        </div>
+
+
+        <div class="info-product d-flex flex-column justify-content-center">
+            <a href="#">váy đầm trẻ</a>
+            <a href="#">Mã hàng : 1234jdfk12</a>
+            <a href="#">440,000 Đ</a>
+        </div>
+    </div>
+    <div class="col-md-3 col-sm-6 col-6 new-product">
+        <div class="product-img">
+            <img src="{{asset('')}}images/product-3.jpg" alt="">
+            <div class="over-lay d-flex flex-column justify-content-center">
+                <a href=""><i class="far fa-heart"></i></a>
+                <a href="{{ url( 'chitietsanpham' )}}">Mua ngay</a>
+            </div>
+        </div>
+
+
+        <div class="info-product d-flex flex-column justify-content-center">
+            <a href="#">váy đầm trẻ</a>
+            <a href="#">Mã hàng : 1234jdfk12</a>
+            <a href="#">440,000 Đ</a>
+        </div>
+    </div>
+    <div class="col-md-3 col-sm-6 col-6 new-product">
+        <div class="product-img">
+            <img src="{{asset('')}}images/product-3.jpg" alt="">
+            <div class="over-lay d-flex flex-column justify-content-center">
+                <a href=""><i class="far fa-heart"></i></a>
+                <a href="{{ url( 'chitietsanpham' )}}">Mua ngay</a>
+            </div>
+        </div>
+
+
+        <div class="info-product d-flex flex-column justify-content-center">
+            <a href="#">váy đầm trẻ</a>
+            <a href="#">Mã hàng : 1234jdfk12</a>
+            <a href="#">440,000 Đ</a>
+        </div>
+    </div>--}}
+
+    </div>
+    <div class="show-more text-center mb-3">
+        <a href="#">Xem thêm</a>
+    </div>
     </div>
 </section>
 <section class="section-3 container-fluid my-4">
-    <img src="{{asset('')}}images/banner-3.jpg" alt="">
-
+    {{--<img src="{{asset('')}}images/banner-3.jpg" alt="">--}}
+    @foreach($sliders as $key => $slider)
+        @if($key==0)
+            <img src="{{asset('assets/img/'.$slider->image)}}" alt="">
+        @endif
+    @endforeach
 </section>
 
 <div class="container border-line">
@@ -237,143 +248,109 @@
 <section class="section-4">
     <div class="container fashion owl-carousel owl-theme">
         @foreach($product_hots as $product)
-            <div class="item new-product">
-                <div class="product-img">
-                    <img src="{{asset('images/products/'.$product->image)}}" alt="" width="208px" height="406px">
-                    <div class="over-lay d-flex flex-column justify-content-center">
-                        <a href=""><i class="far fa-heart"></i></a>
-                        <a href="">Mua ngay</a>
-                        <a href="#">Xem ngay</a>
-                    </div>
-                </div>
-                <div class="info-product d-flex flex-column justify-content-center">
-                    <a href="{{ url('sanpham/'.$product->slug) }}">{{ $product->name }}</a>
-                    <a href="{{ url('sanpham/'.$product->slug) }}">Mã hàng : {{ $product->code }}</a>
-                    <a href="{{ url('sanpham/'.$product->slug) }}">{{ $product->sale }}</a>
+        <div class="item new-product">
+            <div class="product-img">
+                <img src="{{asset('images/products/'.$product->image)}}" alt="" width="208px" height="406px">
+                <div class="over-lay d-flex flex-column justify-content-center">
+                    <a href=""><i class="far fa-heart"></i></a>
+                    <a href="">Mua ngay</a>
+                    <a href="#">Xem ngay</a>
                 </div>
             </div>
+            <div class="info-product d-flex flex-column justify-content-center">
+                <a href="{{ url('sanpham/'.$product->slug) }}">{{ $product->name }}</a>
+                <a href="{{ url('sanpham/'.$product->slug) }}">Mã hàng : {{ $product->code }}</a>
+                <a href="{{ url('sanpham/'.$product->slug) }}">{{ number_format($product->sale).' VNĐ' }}</a>
+            </div>
+        </div>
 
-         @endforeach
-            {{--<div class="item new-product">
+        @endforeach
+        {{--<div class="item new-product">
             <div class="product-img">
                 <img src="{{asset('')}}images/product-3.jpg" alt="">
-                <div class="over-lay d-flex flex-column justify-content-center">
-                    <a href=""><i class="far fa-heart"></i></a>
-                    <a href="">Mua ngay</a>
-                    <a href="#">Xem ngay</a>
-                </div>
-            </div>
-            <div class="info-product d-flex flex-column justify-content-center">
-                <a href="#">váy đầm trẻ</a>
-                <a href="#">Mã hàng : 1234jdfk12</a>
-                <a href="#">440,000 Đ</a>
+        <div class="over-lay d-flex flex-column justify-content-center">
+            <a href=""><i class="far fa-heart"></i></a>
+            <a href="">Mua ngay</a>
+            <a href="#">Xem ngay</a>
+        </div>
+    </div>
+    <div class="info-product d-flex flex-column justify-content-center">
+        <a href="#">váy đầm trẻ</a>
+        <a href="#">Mã hàng : 1234jdfk12</a>
+        <a href="#">440,000 Đ</a>
+    </div>
+    </div>
+    <div class="item new-product">
+        <div class="product-img">
+            <img src="{{asset('')}}images/product-3.jpg" alt="">
+            <div class="over-lay d-flex flex-column justify-content-center">
+                <a href=""><i class="far fa-heart"></i></a>
+                <a href="">Mua ngay</a>
+                <a href="#">Xem ngay</a>
             </div>
         </div>
-        <div class="item new-product">
-            <div class="product-img">
-                <img src="{{asset('')}}images/product-3.jpg" alt="">
-                <div class="over-lay d-flex flex-column justify-content-center">
-                    <a href=""><i class="far fa-heart"></i></a>
-                    <a href="">Mua ngay</a>
-                    <a href="#">Xem ngay</a>
-                </div>
-            </div>
-            <div class="info-product d-flex flex-column justify-content-center">
-                <a href="#">váy đầm trẻ</a>
-                <a href="#">Mã hàng : 1234jdfk12</a>
-                <a href="#">440,000 Đ</a>
+        <div class="info-product d-flex flex-column justify-content-center">
+            <a href="#">váy đầm trẻ</a>
+            <a href="#">Mã hàng : 1234jdfk12</a>
+            <a href="#">440,000 Đ</a>
+        </div>
+    </div>
+    <div class="item new-product">
+        <div class="product-img">
+            <img src="{{asset('')}}images/product-3.jpg" alt="">
+            <div class="over-lay d-flex flex-column justify-content-center">
+                <a href=""><i class="far fa-heart"></i></a>
+                <a href="">Mua ngay</a>
+                <a href="#">Xem ngay</a>
             </div>
         </div>
-        <div class="item new-product">
-            <div class="product-img">
-                <img src="{{asset('')}}images/product-3.jpg" alt="">
-                <div class="over-lay d-flex flex-column justify-content-center">
-                    <a href=""><i class="far fa-heart"></i></a>
-                    <a href="">Mua ngay</a>
-                    <a href="#">Xem ngay</a>
-                </div>
-            </div>
-            <div class="info-product d-flex flex-column justify-content-center">
-                <a href="#">váy đầm trẻ</a>
-                <a href="#">Mã hàng : 1234jdfk12</a>
-                <a href="#">440,000 Đ</a>
+        <div class="info-product d-flex flex-column justify-content-center">
+            <a href="#">váy đầm trẻ</a>
+            <a href="#">Mã hàng : 1234jdfk12</a>
+            <a href="#">440,000 Đ</a>
+        </div>
+    </div>
+    <div class="item new-product">
+        <div class="product-img">
+            <img src="{{asset('')}}images/product-3.jpg" alt="">
+            <div class="over-lay d-flex flex-column justify-content-center">
+                <a href=""><i class="far fa-heart"></i></a>
+                <a href="">Mua ngay</a>
+                <a href="#">Xem ngay</a>
             </div>
         </div>
-        <div class="item new-product">
-            <div class="product-img">
-                <img src="{{asset('')}}images/product-3.jpg" alt="">
-                <div class="over-lay d-flex flex-column justify-content-center">
-                    <a href=""><i class="far fa-heart"></i></a>
-                    <a href="">Mua ngay</a>
-                    <a href="#">Xem ngay</a>
-                </div>
-            </div>
-            <div class="info-product d-flex flex-column justify-content-center">
-                <a href="#">váy đầm trẻ</a>
-                <a href="#">Mã hàng : 1234jdfk12</a>
-                <a href="#">440,000 Đ</a>
-            </div>
-        </div>--}}
+        <div class="info-product d-flex flex-column justify-content-center">
+            <a href="#">váy đầm trẻ</a>
+            <a href="#">Mã hàng : 1234jdfk12</a>
+            <a href="#">440,000 Đ</a>
+        </div>
+    </div>--}}
     </div>
 </section>
 <div class="container border-line">
-    <span> # Thông tin nổi bật </span>
+    <span> # Tin tức nổi bật </span>
 </div>
 <section class="section-4">
     <div class="container">
-        <div class="row">
-            <div class="col-md-4 col-sm-6 product">
-                <div class="over-lay">
+        <div class="row noibatsp">
+            @foreach($new_posts as $key =>$value)
+            <div class="col-md-4 col-sm-6 col-6 product">
+                <div class="tinnoibat">
+                    <img src="{{asset('images/news/'.$value->image)}}" alt="">
+                    <div class="over-lay">
+                    </div>
                 </div>
-                <img src="{{asset('')}}images/product-1.jpg" alt="">
+
                 <div class="product-info d-flex flex-column text-center">
-                    <a href="#">My product</a>
-                    <a href="#">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae omnis quasi minus illum
-                        nesciunt? Possimus eius esse atque, maiores nam doloribus repellend Lorem ipsum dolor sit amet
-                        consectetur adipisicing elit. Nobis molestias, inventore earum sit incidunt esse ad distinctio
-                        nulla reiciendis sequi, debitis ut voluptate sed autem doloremque, cum eligendi. Dolores,
-                        inventore.</a>
-                    <a href="#">Xem ngay</a>
+                    <a href="{{ url('tintuc/'.$value->slug) }}">{{ $value->title }}</a>
+                    <a href="{{ url('tintuc/'.$value->slug) }}">{{ $value->summary }}</a>
+                    <a href="{{ url('tintuc/'.$value->slug) }}">Xem ngay</a>
 
                 </div>
 
 
             </div>
-            <div class="col-md-4 col-sm-6 product">
-                <div class="over-lay">
-                </div>
-                <img src="{{asset('')}}images/product-1.jpg" alt="">
-                <div class="product-info d-flex flex-column text-center">
-                    <a href="#">My product</a>
-                    <a href="#">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae omnis quasi minus illum
-                        nesciunt? Possimus eius esse atque, maiores nam doloribus repellend Lorem ipsum dolor sit amet
-                        consectetur adipisicing elit. Nobis molestias, inventore earum sit incidunt esse ad distinctio
-                        nulla reiciendis sequi, debitis ut voluptate sed autem doloremque, cum eligendi. Dolores,
-                        inventore.</a>
-                    <a href="#">Xem ngay</a>
-
-                </div>
-
-
-            </div>
-            <div class="col-md-4 col-sm-6 product">
-                <div class="over-lay">
-                </div>
-                <img src="{{asset('')}}images/product-1.jpg" alt="">
-                <div class="product-info d-flex flex-column text-center">
-                    <a href="#">My product</a>
-                    <a href="#">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae omnis quasi minus illum
-                        nesciunt? Possimus eius esse atque, maiores nam doloribus repellend Lorem ipsum dolor sit amet
-                        consectetur adipisicing elit. Nobis molestias, inventore earum sit incidunt esse ad distinctio
-                        nulla reiciendis sequi, debitis ut voluptate sed autem doloremque, cum eligendi. Dolores,
-                        inventore.</a>
-                    <a href="#">Xem ngay</a>
-
-                </div>
-
-
-            </div>
-
+            @endforeach
         </div>
     </div>
 </section>
