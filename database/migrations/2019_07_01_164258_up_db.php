@@ -194,6 +194,8 @@ class UpDb extends Migration
             $table->integer('status')->default(1);
         });
 
+
+
         Schema::create('product_details',function (Blueprint $table){
             $table->bigIncrements('id');
             $table->bigInteger('product_id')->unsigned();

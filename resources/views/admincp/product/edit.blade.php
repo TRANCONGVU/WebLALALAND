@@ -73,8 +73,16 @@
                     </div>
                     <div class="form-group">
                         <label class="text-body custom-control-label">Giá Sale(VNĐ):</label>
-                        <input id="sale" type="number" class="form-control backgroundinput @error('name') is-invalid @enderror" name="sale" value="{{ $product->sale  }}" autocomplete="price" autofocus>
-
+                        {{--<input id="sale" type="number" class="form-control backgroundinput @error('name') is-invalid @enderror" name="sale" value="{{ $product->sale  }}" autocomplete="price" autofocus>--}}
+                        <select class="form-control" name="sale">
+                            @for($i=0; $i<=100; $i+=10)
+                                <option value="{{ $i }}"
+                                    @if($sale == $i)
+                                        selected
+                                    @endif
+                                >{{ $i.'%' }}</option>
+                            @endfor
+                        </select>
                         @error('sale')
                         <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>

@@ -51,12 +51,8 @@ class ProductController extends Controller
     {
        //dd($request->all());
         $input= $request->all();
-        if($input['sale']==''){
-            $sale=0;
-        }
-        else{
-            $sale=$input['sale'];
-        }
+        $sale= $input['price']-($input['price']*$input['sale'])/100;
+        //dd($sale);
         if ($request->hasFile('file-0-0')) {
             $file = $request->file('file-0-0');
             $name = str_slug($file->getClientOriginalName());
@@ -141,6 +137,7 @@ class ProductController extends Controller
     public function edit($id)
     {
         $data['product'] = DB::table('products')->find($id);
+        $data['sale'] = 100-($data['product']->sale/$data['product']->price)*100;
         $data['cates'] = DB::table('cate_products')->get();
         $data['collections'] = DB::table('collections')->get();
         $data['sizes'] = DB::table('size')->get();
@@ -176,13 +173,8 @@ class ProductController extends Controller
 
 
         //
-
-        if($input['sale']==''){
-            $sale=0;
-        }
-        else{
-            $sale=$input['sale'];
-        }
+        $sale= $input['price']-($input['price']*$input['sale'])/100;
+        //dd($sale);
         if ($request->hasFile('file-0-0')) {
             $old = DB::table('products')->find($id);
             $file = $request->file('file-0-0');
@@ -200,6 +192,7 @@ class ProductController extends Controller
         else{
             $file_name1= $input['old-image'];
         }
+
         DB::table('products')->where('id', $id)->update([
             'name' => $input['name'],
             'slug' => $this->slug($input['name']),

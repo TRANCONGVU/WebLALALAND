@@ -331,10 +331,9 @@
     <span> # Tin tức nổi bật </span>
 </div>
 <section class="section-4">
-    <div class="container">
-        <div class="row noibatsp">
+        <div class="container fashion owl-carousel owl-theme">
             @foreach($new_posts as $key =>$value)
-            <div class="col-md-4 col-sm-6 col-6 product">
+            <div class=" item product">
                 <div class="tinnoibat">
                     <img src="{{asset('images/news/'.$value->image)}}" alt="">
                     <div class="over-lay">

@@ -14,9 +14,9 @@ class LoginController extends Controller
     //
     use AuthenticatesUsers;
     public function __construct()
-    {
-        $this->middleware('guest:admins')->except('logout');
-    }
+{
+    $this->middleware('guest:admins')->except('logout');
+}
     // Phương thức này trả về view dùng để đăng nhập cho admin
     public function login()
     {
@@ -36,6 +36,7 @@ class LoginController extends Controller
                 'password'=>$request->password,
                 'status'=>1
             ],
+
             $request->remember
         )){
             return redirect()->intended(route('admin.index'));
