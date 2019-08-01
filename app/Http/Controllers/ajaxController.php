@@ -18,8 +18,7 @@ class ajaxController extends Controller
                 ['color_size.quantity','>',0]
             ])
             ->get();
-        $html='';
-
+        $html='<option value="0">--chọn Size--</option>';
         foreach ($size as $value) {
             $html .= "<option value='".$value->id."'>".$value->name."</option>";
         }
@@ -74,6 +73,23 @@ class ajaxController extends Controller
         echo $html;
 
     }
+
+    public function quantity(Request $request){
+        //dd($request->all());
+
+        $quantity = DB::table('color_size')
+            ->select('color_size.quantity')
+            ->join('product_details', 'product_details.id', '=', 'color_size.detail_id')
+            ->where([
+                ['product_details.product_id', $request->product],
+                ['product_details.color_id', $request->color],
+                ['color_size.size_id', $request->size],
+            ])->first();
+
+            echo $quantity->quantity;
+    }
+
+
     public function addcart(Request $request){
 
         session_start();
@@ -83,6 +99,14 @@ class ajaxController extends Controller
         $product= DB::table('products')->find($input['id']);
         $size= DB::table('size')->find($input['size']);
         $color= DB::table('color')->find($input['color']);
+        $quantity = DB::table('color_size')
+            ->select('color_size.quantity')
+            ->join('product_details', 'product_details.id', '=', 'color_size.detail_id')
+            ->where([
+                ['product_details.product_id', $product->id],
+                ['product_details.color_id', $color->id],
+                ['color_size.size_id', $size->id],
+            ])->first();
         //dd($product);
 
         /* echo "<pre>";
@@ -97,6 +121,7 @@ class ajaxController extends Controller
                 'price' => $product->sale,
                 'quantity' => $input['quantity'],
                 'attributes' => array(
+                    'conlai' => $quantity->quantity,
                     'sizeid' => $size->id,
                     'sizename' => $size->name,
                     'colorid' => $color->id,

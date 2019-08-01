@@ -54,6 +54,7 @@ Route::get('tintuc/{slug}', [
 
     Route::get('selectsize/{id}', 'ajaxController@selectsize')->name('selectsize');
     Route::get('selectcolor/{colorid}/{productid}', 'ajaxController@selectcolor')->name('selectcolor');
+    Route::post('quantity/', 'ajaxController@quantity')->name('quantity');
 
     /*
      * giỏ hàng

@@ -53,9 +53,9 @@
             </div>
         </div>
         <div class="d-flex flex-column bot-footer text-left">
-            <span><i class="fas fa-copyright"></i> Coppy right Talent Win Dev Team</span>
-            <span>Số điện thoại: 024 3193 4294 - Email: cskh@company.vn</span>
-            <span>Địa chỉ:Bách Khoa . Q. Hai Bà Trưng, TP. Hà Nội</span>
+            <span><i class="fas fa-copyright"></i> Coppy right Talent Wins Teachnology</span>
+            <span>Số điện thoại: <a href="tel:0927151535">0927 151 535</a> - Email: contact@talentwins.co</span>
+            <span>Địa chỉ:Tòa CT2, Khu đô thi Thái Hà Constrexim, 43 Phạm Văn Đồng, Hà Nội</span>
             <span>Giấy chứng nhận đăng kí kinh doanh số được cấp bởi Sở Kế hoạch và Đầu tư thành phố Hà Nội</span>
         </div>
     </div>

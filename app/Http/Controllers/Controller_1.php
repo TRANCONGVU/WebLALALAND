@@ -213,6 +213,25 @@ class Controller_1 extends Controller
                 'money' => $value->price*$value->quantity,
             ]);
         }
+        foreach ($carts as $value) {
+            $quantity = DB::table('color_size')
+                ->select('color_size.quantity')
+                ->join('product_details', 'product_details.id', '=', 'color_size.detail_id')
+                ->where([
+                    ['product_details.product_id', $value->id],
+                    ['product_details.color_id', $value->attributes->colorid],
+                    ['color_size.size_id', $value->attributes->sizeid],
+                ])->first();
+            DB::table('color_size')
+                ->join('product_details', 'product_details.id', '=', 'color_size.detail_id')
+                ->where([
+                    ['product_details.product_id', $value->id],
+                    ['product_details.color_id', $value->attributes->colorid],
+                    ['color_size.size_id', $value->attributes->sizeid],
+                ])->update([
+                    'quantity' => $quantity->quantity-$value->quantity,
+                ]);
+        }
 
         if(isset($input['userid'])){
             DB::table('users')->where('id', $input['userid'])->update([
@@ -220,6 +239,8 @@ class Controller_1 extends Controller
                'phone' =>  $input['phone'],
             ]);
         }
+
+        \Cart::clear();
     return \view('pages.xacnhan', compact('cartid'));
 
 
