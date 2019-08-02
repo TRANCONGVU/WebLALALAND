@@ -234,12 +234,37 @@
     </div>
 </section>
 <section class="section-3 container-fluid my-4">
-    {{--<img src="{{asset('')}}images/banner-3.jpg" alt="">--}}
-    @foreach($sliders as $key => $slider)
-        @if($key==0)
-            <img src="{{asset('assets/img/'.$slider->image)}}" alt="">
-        @endif
-    @endforeach
+
+    <div class="row">
+        <div class="col-md-6 ss3-img">
+                <img src="{{asset('')}}images/banner-3.jpg" alt="">
+                <div class="ss3-content">
+                    <span>Chương trình khuyến mãi 20 / 10 / 2019</span>
+                    <span>Giảm giá 20% - 02% từ 01/10 - 20/10</span>
+
+
+
+                </div>
+                <div class="show-more" style="margin-top : 20px;">
+                        <a href="">Xem ngay</a>
+                </div>
+        </div>
+        <div class="col-md-6 ss3-img">
+                <img src="{{asset('')}}images/banner-3.jpg" alt="">
+                <div class="ss3-content">
+                    <span>Bộ sưu tập đông hè 2019</span>
+                    <span>Giảm giá 20% - 02% từ 01/10 - 20/10</span>
+
+
+
+                </div>
+                <div class="show-more" style="margin-top : 20px;">
+                        <a href="">Xem ngay</a>
+                </div>
+        </div>
+    </div>
+
+
 </section>
 
 <div class="container border-line">
