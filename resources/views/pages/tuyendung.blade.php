@@ -36,7 +36,7 @@
                             <div class="tt-tuyendung">
                                     <span> Bán hàng part time 22h - 6h </span>
                                     <span><i class="fas fa-map-marker-alt"></i>236 Hoàng Quốc Việt</span>
-                                    <a href="#">Xem ngay</a>
+                                    <a href="{{ url('tuyendungdetaits') }}">Xem ngay</a>
                             </div>
                         </div>
                         <div class="tuyendung-box">
@@ -44,7 +44,7 @@
                                 <div class="tt-tuyendung">
                                         <span> Bán hàng part time 22h - 6h </span>
                                         <span><i class="fas fa-map-marker-alt"></i>236 Hoàng Quốc Việt</span>
-                                        <a href="#">Xem ngay</a>
+                                        <a href="{{ url('tuyendungdetaits') }}">Xem ngay</a>
                                 </div>
                             </div>
                             <div class="tuyendung-box">
@@ -52,7 +52,7 @@
                                     <div class="tt-tuyendung">
                                             <span> Bán hàng part time 22h - 6h </span>
                                             <span><i class="fas fa-map-marker-alt"></i>236 Hoàng Quốc Việt</span>
-                                            <a href="#">Xem ngay</a>
+                                            <a href="{{ url('tuyendungdetaits') }}">Xem ngay</a>
                                     </div>
                                 </div>
                     </div>

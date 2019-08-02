@@ -179,7 +179,14 @@ nav.nav-horizontal a{
 .nav-horizontal-content ul.nav-ul-lv-1{
 	margin-bottom: 0;
 	float: left;
-	line-height: 60px;
+    line-height: 60px;
+
+    width : 100%;
+}
+.right {
+    position: absolute !important;
+    right: 0;
+    top: 15px;
 }
 .nav-horizontal-content ul.nav-ul-lv-1>li{
 	display: inline-block;
@@ -427,6 +434,10 @@ section.banner-slider-active-1{
     color: #000;
 }
 .menu-mobile .search2 {
+    position: absolute;
+    display: none;
+}
+.menu-mobile .search3 {
     position: absolute;
     display: none;
 }
@@ -868,6 +879,7 @@ section.back-to-top{
     top : 5px;
     position: relative;
 }
+
 .head-2-left .nav-link{
     padding: 0 10px;
     text-transform: capitalize;
