@@ -789,7 +789,7 @@ position: absolute;
     margin-right: 10px;
 }
 .xacnhan {
-    display: none;
+
 }
 .xacnhan2 {
     display: block;
@@ -952,6 +952,7 @@ position: absolute;
 .xapsep2 .col-md-3 {
     max-width: 100%;
     display: flex;
+    padding-bottom: 51px;
 }
 .xapsep2 .product-img {
     height: 350px !important;

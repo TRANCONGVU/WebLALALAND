@@ -5,18 +5,18 @@
             <div class="col-md-8 d-flex justify-content-around text-left">
                 <div class="d-flex flex-column footer-contact">
                     <h6>Thông tin cửa hàng</h6>
-                    <a href="">Sản phẩm nổi bật</a>
-                    <a href="">Hệ thống cửa hàh</a>
-                    <a href="">Lookbook / Bộ sưu tập</a>
+                    <a href="{{ url('loaisanpham/all') }}">Sản phẩm nổi bật</a>
+                    <a href="{{ url('showrom') }}">Hệ thống cửa hàng</a>
+                    <a href="{{ url('bosuutap/all') }}">Lookbook / Bộ sưu tập</a>
                     <img class="mt-5" src="images/dathongbao.png" alt="">
                 </div>
                 <div class="d-flex flex-column footer-contact">
                     <h6>dịch vụ khách hàng</h6>
-                    <a href="">Đơn hàng</a>
-                    <a href="">Câu hỏi thường gặp</a>
-                    <a href="">Liên hệ với chúng tôi</a>
-                    <a href="">Tuyển dụng</a>
-                    <a href="">Về chúng tôi</a>
+                    <a href="{{ url('cart') }}">Đơn hàng</a>
+                    <a href="{{ url('cauhoi') }}">Câu hỏi thường gặp</a>
+                    <a href="{{ url('lienhe') }}">Liên hệ với chúng tôi</a>
+                    <a href="{{ url('tuyendung') }}">Tuyển dụng</a>
+                    <a href="{{ url('gioithieu') }}">Về chúng tôi</a>
                 </div>
                 <div class="d-flex flex-column footer-contact">
                     <h6>dịch vụ khách hàng</h6>
@@ -32,10 +32,18 @@
             <div class="col-md-4 conect-bottom d-flex flex-column ">
                 <h6 class="">kết nối với chúng tôi</h6>
                 <div class="conect">
-                    <a href=""><img src="images/fb-icon.png" alt=""></a>
-                    <a href=""><img src="images/youtube-icon.png" alt=""></a>
-                    <a href=""><img src="images/instar-icon.png" alt=""></a>
-                    <a href=""><img src="images/twitter.png" alt=""></a>
+                    @if($introduce->facebook!='')
+                        <a target="_blank" href="{{ $introduce->facebook }}"><img src="images/fb-icon.png" alt=""></a>
+                    @endif
+                    @if($introduce->youtube!='')
+                        <a target="_blank" href="{{ $introduce->youtube }}"><img src="images/youtube-icon.png" alt=""></a>
+                    @endif
+                    @if($introduce->instagram!='')
+                        <a target="_blank" href="{{ $introduce->instagram }}"><img src="images/instar-icon.png" alt=""></a>
+                    @endif
+                    @if($introduce->twitter!='')
+                        <a target="_blank" href="{{ $introduce->twitter }}"><img src="images/twitter.png" alt=""></a>
+                    @endif
                 </div>
                 <h6 class="mt-3">Đăng ký nhận tin</h6>
                 <form action="" class="form-inline">
@@ -45,9 +53,9 @@
             </div>
         </div>
         <div class="d-flex flex-column bot-footer text-left">
-            <span><i class="fas fa-copyright"></i> Coppy right Talent Win Dev Team</span>
-            <span>Số điện thoại: 024 3193 4294 - Email: cskh@company.vn</span>
-            <span>Địa chỉ:Bách Khoa . Q. Hai Bà Trưng, TP. Hà Nội</span>
+            <span><i class="fas fa-copyright"></i> Coppy right Talent Wins Teachnology</span>
+            <span>Số điện thoại: <a href="tel:0927151535">0927 151 535</a> - Email: contact@talentwins.co</span>
+            <span>Địa chỉ:Tòa CT2, Khu đô thi Thái Hà Constrexim, 43 Phạm Văn Đồng, Hà Nội</span>
             <span>Giấy chứng nhận đăng kí kinh doanh số được cấp bởi Sở Kế hoạch và Đầu tư thành phố Hà Nội</span>
         </div>
     </div>
@@ -63,7 +71,7 @@
         <div class="hide">
             <a href="#">
                 <div class="box-up-item">
-                    <img src="images/mail-icon.png" alt="">
+                    <a href="mailto:{{ $introduce->email }}"><img src="images/mail-icon.png" alt=""></a>
                 </div>
             </a>
             <a href="">
@@ -73,7 +81,7 @@
             </a>
             <a href="">
                 <div class="box-up-item">
-                    <img src="images/phone-icon.png" alt="">
+                    <a href="tel:{{ $introduce->phone }}"><img src="images/phone-icon.png" alt=""></a>
                 </div>
             </a>
 

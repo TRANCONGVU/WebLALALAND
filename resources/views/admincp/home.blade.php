@@ -5,14 +5,14 @@
 @section('content')
     <div id="page-wrapper">
         <div class="graphs">
-            <div class=" row">
+            <div class="col_3 row">
                 <div class="col-md-3 widget widget1">
                     <div class="r3_counter_box">
                         <i class="fa fa-mail-forward"></i>
                         <div class="stats">
-                            <h5>45 <span>%</span></h5>
+                            <h5>{{ $countproducts }}</h5>
                             <div class="grow">
-                                <p>Growth</p>
+                                <p>Sản Phẩm</p>
                             </div>
                         </div>
                     </div>
@@ -21,9 +21,9 @@
                     <div class="r3_counter_box">
                         <i class="fa fa-users"></i>
                         <div class="stats">
-                            <h5>50 <span>%</span></h5>
+                            <h5>{{ $countusers }}</h5>
                             <div class="grow grow1">
-                                <p>New Users</p>
+                                <p>Người Dùng</p>
                             </div>
                         </div>
                     </div>
@@ -32,9 +32,9 @@
                     <div class="r3_counter_box">
                         <i class="fa fa-eye"></i>
                         <div class="stats">
-                            <h5>70 <span>%</span></h5>
+                            <h5>{{ $countbill }}</h5>
                             <div class="grow grow3">
-                                <p>Visitors</p>
+                                <p>Hóa Đơn</p>
                             </div>
                         </div>
                     </div>
@@ -43,9 +43,9 @@
                     <div class="r3_counter_box">
                         <i class="fa fa-usd"></i>
                         <div class="stats">
-                            <h5>70 <span>%</span></h5>
+                            <h5>{{ $countcontacts }}</h5>
                             <div class="grow grow2">
-                                <p>Profit</p>
+                                <p>Phản Hồi</p>
                             </div>
                         </div>
                     </div>
@@ -59,16 +59,16 @@
                     <div class="col-md-4 switch-right">
                         <div class="switch-right-grid">
                             <div class="switch-right-grid1">
-                                <h3>TODAY'S STATS</h3>
-                                <p>Duis aute irure dolor in reprehenderit.</p>
+                                <h3>Doanh Thu theo Ngày</h3>
+                                <hr>
                                 <ul>
-                                    <li>Earning: $400 USD</li>
-                                    <li>Items Sold: 20 Items</li>
-                                    <li>Last Hour Sales: $34 USD</li>
+                                    <li>Earning: {{ number_format($countday)." VNĐ" }}</li>
+                                    <li>Items Sold: {{ $cartday }} Đơn</li>
+                                    <li><a href="{{ url('admincp/bill/view/day') }}">Xem</a> </li>
                                 </ul>
                             </div>
                         </div>
-                        <div class="sparkline">
+                       {{-- <div class="sparkline">
                             <canvas id="line" height="150" width="480" style="width: 480px; height: 150px;"></canvas>
                             <script>
                                 var lineChartData = {
@@ -86,21 +86,22 @@
                                 };
                                 new Chart(document.getElementById("line").getContext("2d")).Line(lineChartData);
                             </script>
-                        </div>
+                        </div>--}}
                     </div>
                     <div class="col-md-4 switch-right">
                         <div class="switch-right-grid">
                             <div class="switch-right-grid1">
-                                <h3>MONTHLY STATS</h3>
-                                <p>Duis aute irure dolor in reprehenderit.</p>
+                                <h3>Doanh Thu Theo Tháng (Tháng {{ getdate()['mon'] }})</h3>
+                                <hr>
                                 <ul>
-                                    <li>Earning: $5,000 USD</li>
-                                    <li>Items Sold: 400 Items</li>
-                                    <li>Last Hour Sales: $2,434 USD</li>
+                                    <li>Doanh Thu: {{ number_format($countmon)." VNĐ" }}</li>
+                                    <li>Số Đơn: {{ $cartmon }} Đơn</li>
+                                    <li><a href="{{ url('admincp/bill/view/mon') }}">Xem</a> </li>
+
                                 </ul>
                             </div>
                         </div>
-                        <div class="sparkline">
+                        {{--<div class="sparkline">
                             <canvas id="bar" height="150" width="480" style="width: 480px; height: 150px;"></canvas>
                             <script>
                                 var barChartData = {
@@ -121,21 +122,21 @@
                                 };
                                 new Chart(document.getElementById("bar").getContext("2d")).Bar(barChartData);
                             </script>
-                        </div>
+                        </div>--}}
                     </div>
                     <div class="col-md-4 switch-right">
                         <div class="switch-right-grid">
                             <div class="switch-right-grid1">
-                                <h3>ALLTIME STATS</h3>
-                                <p>Duis aute irure dolor in reprehenderit.</p>
+                                <h3>Tổng Doanh Thu</h3>
+                                <hr>
                                 <ul>
-                                    <li>Earning: $80,000 USD</li>
-                                    <li>Items Sold: 8,000 Items</li>
-                                    <li>Last Hour Sales: $75,434 USD</li>
+                                    <li>Doanh Thu: {{ number_format($countall)." VNĐ" }}</li>
+                                    <li>Số Đơn: {{ $cartall }} Đơn</li>
+                                    <li><a href="{{ url('admincp/bill/view/all') }}">Xem</a> </li>
                                 </ul>
                             </div>
                         </div>
-                        <div class="sparkline">
+                        {{--<div class="sparkline">
                             <!--graph-->
                             <link rel="stylesheet" href="css/graph.css">
                             <script src="js/jquery.flot.min.js"></script>
@@ -206,7 +207,7 @@
                                     <div id="graph-bars"> </div>
                                 </div>
                             </div>
-                        </div>
+                        </div>--}}
                     </div>
                     <div class="clearfix"></div>
                 </div>
@@ -217,16 +218,18 @@
                     <div class="activity_box">
                         <h3>Inbox</h3>
                         <div class="scrollbar scrollbar1" id="style-2">
+                            @foreach($contacts as $contact)
                             <div class="activity-row">
-                                <div class="col-xs-3 activity-img"><img src='images/1.png' class="img-responsive" alt=""/></div>
+                                <div class="col-xs-3 activity-img"><img src='{{ asset('images/avatar/male.png') }}' class="img-responsive" alt=""/></div>
                                 <div class="col-xs-7 activity-desc">
-                                    <h5><a href="#">John Smith</a></h5>
-                                    <p>Hey ! There I'm available.</p>
+                                    <h5><a href="mailto:{{ $contact->email }}">{{ $contact->name }}</a></h5>
+                                    <p>{{ $contact->content }}</p>
                                 </div>
-                                <div class="col-xs-2 activity-desc1"><h6>13:40 PM</h6></div>
+                                <div class="col-xs-2 activity-desc1"><h6>{{ $contact->created_at }}</h6></div>
                                 <div class="clearfix"> </div>
                             </div>
-                            <div class="activity-row">
+                            @endforeach
+                           {{-- <div class="activity-row">
                                 <div class="col-xs-3 activity-img"><img src='images/5.png' class="img-responsive" alt=""/></div>
                                 <div class="col-xs-7 activity-desc">
                                     <h5><a href="#">Andrew Jos</a></h5>
@@ -261,11 +264,11 @@
                                 </div>
                                 <div class="col-xs-2 activity-desc1"><h6>13:40 PM</h6></div>
                                 <div class="clearfix"> </div>
-                            </div>
+                            </div>--}}
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4 span_8">
+             {{--   <div class="col-md-4 span_8">
                     <div class="activity_box activity_box1">
                         <h3>chat</h3>
                         <div class="scrollbar" id="style-2">
@@ -379,12 +382,11 @@
                         </form>
                     </div>
                     <div class="clearfix"> </div>
-                </div>
+                </div>--}}
                 <div class="clearfix"> </div>
 
             </div>
         </div>
         <!--body wrapper start-->
     </div>
-
 @endsection

@@ -17,6 +17,8 @@ class UpDb extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->date('birth')->nullable();
+            $table->string('address')->nullable();
+            $table->string('phone')->nullable();
             $table->string('avatar');
             $table->integer('gender');
             $table->string('email')->unique();
@@ -74,14 +76,25 @@ class UpDb extends Migration
             $table->timestamps();
         });*/
 
-
-
-
         //gioi thieu
         Schema::create('introduce', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->text('summary');
             $table->text('content');
-            $table->timestamps();
+            $table->text('video')->nullable();
+            $table->string('email')->nullable();
+            $table->string('phone')->nullable();
+            $table->string('facebook')->nullable();
+            $table->string('youtube')->nullable();
+            $table->string('instagram')->nullable();
+            $table->string('twitter')->nullable();
+
+        });
+        Schema::create('showrom', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('name');
+            $table->string('address');
+            $table->string('phone');
         });
 
         // lien he
@@ -143,6 +156,7 @@ class UpDb extends Migration
         Schema::create('collections', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
+            $table->string('slug');
             $table->string('image');
             $table->integer('status')->default(1);
             $table->timestamps();
@@ -180,6 +194,8 @@ class UpDb extends Migration
             $table->integer('status')->default(1);
         });
 
+
+
         Schema::create('product_details',function (Blueprint $table){
             $table->bigIncrements('id');
             $table->bigInteger('product_id')->unsigned();
@@ -207,6 +223,68 @@ class UpDb extends Migration
                 ->on('size')
                 ->onDelete('cascade');
             $table->integer('quantity')->default(1);
+        });
+
+        Schema::create('payment_methods',function (Blueprint $table){
+            $table->bigIncrements('id');
+            $table->string('name');
+        });
+
+        Schema::create('carts',function (Blueprint $table){
+            $table->bigIncrements('id');
+            $table->string('code');
+            $table->string('name');
+            $table->string('email');
+            $table->string('phone');
+            $table->string('address');
+            $table->bigInteger('payment_method_id')->unsigned();
+            $table->foreign('payment_method_id')
+                ->references('id')
+                ->on('payment_methods')
+                ->onDelete('cascade');
+            $table->bigInteger('total');
+            $table->date('day');
+            $table->integer('status')->default(0);
+        });
+        Schema::create('cart_details',function (Blueprint $table){
+            $table->bigIncrements('id');
+            $table->bigInteger('cart_id')->unsigned();
+            $table->foreign('cart_id')
+                ->references('id')
+                ->on('carts')
+                ->onDelete('cascade');
+            $table->string('name');
+            $table->bigInteger('color');
+            $table->bigInteger('size');
+           $table->integer('price');
+           $table->integer('quantity');
+           $table->integer('money');
+        });
+        /*
+         * tuyển dụng
+         * */
+        Schema::create('recruitments',function (Blueprint $table){
+            $table->bigIncrements('id');
+            $table->string('title');
+            $table->string('slug');
+            $table->string('code');
+            $table->date('begin_time');
+            $table->date('end_time');
+            $table->string('image');
+            $table->text('content');
+            $table->bigInteger('salary');
+            $table->string('position');
+            $table->integer('work_time');
+            $table->integer('status')->default(0);
+        });
+        Schema::create('tag_recruitment',function (Blueprint $table){
+            $table->bigIncrements('id');
+            $table->string('name');
+            $table->bigInteger('recruitment_id')->unsigned();
+            $table->foreign('recruitment_id')
+                ->references('id')
+                ->on('recruitments')
+                ->onDelete('cascade');
         });
 
     }

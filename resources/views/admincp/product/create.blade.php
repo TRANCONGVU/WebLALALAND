@@ -44,12 +44,7 @@
                         </select>
 
                     </div>
-                    <div class="form-group">
-                        <label class="text-body custom-control-label">Ảnh(*):</label>
-                        <input name='file-0-0' id='file-0-0' class='form-control' type='file' required onchange='fileValidation(this)'>
-                        <div id='imagePreviewfile-0-0'>
-                        </div>
-                    </div>
+
 
                     <div class="form-group">
                         <label class="text-body custom-control-label">Giá Niêm Yết(VNĐ)(*):</label>
@@ -63,8 +58,12 @@
                     </div>
                     <div class="form-group">
                         <label class="text-body custom-control-label">Giá Sale(VNĐ):</label>
-                        <input id="sale" type="number" class="form-control backgroundinput @error('name') is-invalid @enderror" name="sale" value="{{ old('sale') }}" autocomplete="price" autofocus>
-
+                        {{--<input id="sale" type="number" class="form-control backgroundinput @error('name') is-invalid @enderror" name="sale" value="{{ old('sale') }}" autocomplete="price" autofocus>--}}
+                        <select class="form-control" name="sale">
+                            @for($i=0; $i<=100; $i+=10)
+                                <option value="{{ $i }}">{{ $i.'%' }}</option>
+                            @endfor
+                        </select>
                         @error('sale')
                         <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -102,7 +101,7 @@
                                     html+="<div id='imagePreviewfile-3-"+$('#color').val()+"'>";
                                     html+="</div>";
                                     html+="<h5>Chọn Size:</h5>";
-                                    html+="<select id='"+$('#color').val()+"' onchange='chonsize(this)'>";
+                                    html+="<select id='"+$('#color').val()+"' onchange='chonsize(this)' required>";
                                     @foreach($sizes as $value)
                                         html+="<option value='"+"{{ $value->id }}"+"'>"+"{{ $value->name }}"+"</option>";
                                     @endforeach
@@ -127,7 +126,7 @@
                                 //Kiểm tra định dạng
                                 if (!allowedExtensions.exec(filePath)) {
                                     alert('You can only select files with .jpeg/.jpg/.png/.gif extension.');
-                                    obj.value = '';
+                                    obj.valuơe = '';
                                     return false;
                                 } else {
                                     //Image preview
@@ -165,6 +164,7 @@
                         </script>
 
                     </div>
+
 
                     <div class="form-group">
                         <input id="quantity" type="hidden" value="0">

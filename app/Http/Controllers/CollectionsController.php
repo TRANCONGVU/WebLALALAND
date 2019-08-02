@@ -39,6 +39,7 @@ class CollectionsController extends Controller
 
         DB::table('collections')->insert([
            'name' => $input['name'],
+           'slug' => $this->slug($input['name']),
            'image' => $file_name,
         ]);
 
@@ -59,7 +60,7 @@ class CollectionsController extends Controller
                 $Hinh = str_random(4) . "_collections_" . $name;
             }
             $file->move('images/collections/', $avatar);
-            if($old->avatar!='collections.jpg' && file_exists('images/collections/' . $old->avatar)){
+            if($old->image!='collections.jpg' && file_exists('images/collections/' . $old->image)){
                 unlink('images/collections/' . $old->avatar);
             }
             $file_name = $avatar;
@@ -70,13 +71,32 @@ class CollectionsController extends Controller
 
         DB::table('collections')->where('id', $id)->update([
             'name' => $input['name'],
+            'slug' => $this->slug($input['name']),
             'image' => $file_name,
         ]);
 
         return redirect()->back()->with('thongbao', 'Sửa Bộ Sưu Tập thành công');
     }
 
-    public function destroy($id, $value){
+    public function destroy($id){
+        $images = DB::table('product_details')
+            ->select('product_details.image')
+            ->join('products', 'products.id', '=', 'product_details.product_id')
+            ->where('products.collections_id', $id)
+            ->get();
+        foreach ($images as $value){
+            $pictures=explode(',',$value->image);
+            foreach ($pictures as $pic){
+                if($pic !='' && file_exists('images/products/' . $pic)){
+                    unlink('images/products/' . $pic);
+                }
+            }
+        }
+        DB::table('collections')->where('id', $id)->delete();
+        return redirect()->back()->with('thongbao', 'xóa bộ sưu tập thành công!');
+    }
+
+    public function setactive($id, $value){
         DB::table('collections')->where('id', $id)->update([
             'status' => $value
         ]);

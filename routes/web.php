@@ -1,4 +1,4 @@
-	<?php
+<?php
 
 /*
 |--------------------------------------------------------------------------
@@ -42,10 +42,10 @@ Route::get('tintuc/{slug}', [
         Route::get('checkpass/{id}/{value}', 'Controller_1@checkpass')->name('checkpass');
         Route::post('changepass/{id}', 'Controller_1@changepass')->name('changepass');
     });
-    Route::get('sanpham/{slug}', [
-        'as' =>'chitietsanpham1',
-        'uses' => 'Controller_1@get_chitietsanpham'
-    ]);
+
+    Route::get('sanpham/{slug}', 'Controller_1@get_chitietsanpham')->name('sanpham');
+    Route::get('showrom', 'Controller_1@showrom')->name('showrom');
+
 
 
     /*
@@ -54,10 +54,38 @@ Route::get('tintuc/{slug}', [
 
     Route::get('selectsize/{id}', 'ajaxController@selectsize')->name('selectsize');
     Route::get('selectcolor/{colorid}/{productid}', 'ajaxController@selectcolor')->name('selectcolor');
+    Route::post('quantity/', 'ajaxController@quantity')->name('quantity');
+
+    /*
+     * giỏ hàng
+     * */
+    Route::post('addcart', 'ajaxController@addcart')->name('addcart');
+    Route::post('updatecart', 'ajaxController@updatecart')->name('updatecart');
+    Route::get('deletecart/{id}', 'ajaxController@deletecart')->name('deletecart');
+    Route::get('thanhtoan', [
+        'as' =>'form',
+        'uses' => 'Controller_1@get_form'
+    ]);
+    Route::post('postthanhtoan', 'Controller_1@postthanhtoan')->name('postthanhtoan');
+
+    Route::get('editcolor/{productid}/{colorid}', 'ajaxController@editcolor')->name('editcolor');
+    Route::get('deletecolor/{productid}/{colorid}', 'ajaxController@deletecolor')->name('deletecolor');
+
+    Route::post('showproduct', 'ajaxController@showproduct')->name('showproduct');
+    Route::post('sapxep', 'ajaxController@sapxep')->name('sapxep');
+    Route::post('sale', 'ajaxController@sale')->name('sale');
+    Route::get('search', [
+        'as' =>'search',
+        'uses' => 'Controller_1@search'
+    ]);
 
 
+    /*
+     * tuyển dụng
+     * */
+    Route::get('tuyendung/{slug}', 'Controller_1@chitiettuyendung')->name('chitiettuyendung');
 
-Route::get('product', [
+Route::get('loaisanpham/{slug}', [
 	'as' =>'product',
 	'uses' => 'Controller_1@get_product'
 ]);
@@ -73,7 +101,7 @@ Route::get('tuyendung', [
 	'as' =>'tuyendung',
 	'uses' => 'Controller_1@get_tuyendung'
 ]);
-Route::get('bosuutap', [
+Route::get('bosuutap/{slug}', [
 	'as' =>'bosuutap',
 	'uses' => 'Controller_1@get_bosuutap'
 ]);
@@ -126,10 +154,7 @@ Route::get('cart', [
 	'as' =>'cart',
 	'uses' => 'Controller_1@get_cart'
 ]);
-Route::get('form', [
-	'as' =>'form',
-	'uses' => 'Controller_1@get_form'
-]);
+
 Route::get('dangky', [
 	'as' =>'dangky  ',
 	'uses' => 'Controller_1@get_dangky'
@@ -141,6 +166,7 @@ Route::get('dangnhap', [
 
 Route::post('createuser', 'Auth\UserLoginController@createuser')->name('createuser');
 Route::post('loginuser', 'Auth\UserLoginController@loginuser')->name('loginuser');
+Route::post('logoutuser', 'Auth\UserLoginController@logout')->name('logoutuser');
 Route::get('sale', [
 	'as' =>'sale  ',
 	'uses' => 'Controller_1@get_sale'
@@ -190,8 +216,8 @@ Route::prefix('admincp')->group(function () {
 			//xoa
 			Route::get('delete/{id}','IntroduceController@delete');
 			//edit
-			Route::get('editIntro/{id}','IntroduceController@edit');
-			Route::post('editIntro/{id}','IntroduceController@postEdit');
+			Route::get('edit/{id}','IntroduceController@edit');
+			Route::post('edit/{id}','IntroduceController@update');
 		});
 
 		//category product
@@ -202,8 +228,10 @@ Route::prefix('admincp')->group(function () {
 			Route::get('edit/{id}','CateProductController@edit')->name('edit.cateproduct');
 			Route::post('edit/{id}','CateProductController@update')->name('update.cateproduct');
 			Route::get('detail','CateProductController@show')->name('show.cateproduct');
-			Route::get('destroy/{id}/{value}','CateProductController@destroy')->name('destroy.cateproduct');
-		});
+			Route::get('destroy/{id}','CateProductController@destroy')->name('destroy.cateproduct');
+            route::get('setactive/{id}/{status}','CateProductController@cateproduct')->name('active.cateproduct');
+
+        });
         //product type
 		Route::group(['prefix' => 'producttype'],function (){
             Route::get('/','ProductTypeController@index')->name('list.producttype');
@@ -221,7 +249,8 @@ Route::prefix('admincp')->group(function () {
             Route::post('create','CollectionsController@store')->name('store.collections');
 
             Route::post('edit/{id}','CollectionsController@update')->name('update.collections');
-            Route::get('destroy/{id}/{value}','CollectionsController@destroy')->name('destroy.collections');
+            Route::get('setactive/{id}/{value}','CollectionsController@setactive')->name('setactive.collections');
+            Route::get('delete/{id}','CollectionsController@destroy')->name('delete.collections');
         });
 
         /*
@@ -233,7 +262,8 @@ Route::prefix('admincp')->group(function () {
             Route::post('create','SizeController@store')->name('store.size');
 
             Route::post('edit/{id}','SizeController@update')->name('update.size');
-            Route::get('delete/{id}/{value}','SizeController@destroy')->name('destroy.size');
+            Route::get('setactive/{id}/{value}','SizeController@setactive')->name('setactive.size');
+            Route::get('delete/{id}','SizeController@destroy')->name('delete.size');
         });
 
         Route::group(['prefix' => 'color'],function (){
@@ -242,7 +272,8 @@ Route::prefix('admincp')->group(function () {
             Route::post('create','ColorController@store')->name('store.color');
 
             Route::post('edit/{id}','ColorController@update')->name('update.color');
-            Route::get('delete/{id}/{value}','ColorController@destroy')->name('destroy.color');
+            Route::get('setactive/{id}/{value}','ColorController@setactive')->name('setactive.color');
+            Route::get('delete/{id}','ColorController@destroy')->name('destroy.color');
         });
 
         //product
@@ -254,7 +285,7 @@ Route::prefix('admincp')->group(function () {
             Route::get('edit/{id}','ProductController@edit')->name('edit.product');
             Route::post('edit/{id}','ProductController@update')->name('update.product');
             Route::get('detail','ProductController@show')->name('show.product');
-            Route::get('destroy','ProductController@destroy')->name('destroy.product');
+            Route::get('delete/{id}','ProductController@destroy')->name('destroy.product');
         });
 
 
@@ -264,10 +295,11 @@ Route::prefix('admincp')->group(function () {
             route::get('/create','useraccountcontroller@create')->name('create.useraccount');
             route::post('/store','useraccountcontroller@store')->name('store.useraccount');
 
-            route::get('edit/{id}','useraccountconedit-cateproducttroller@edit')->name('edit.useraccount');
+            route::get('edit/{id}','useraccountcontroller@edit')->name('edit.useraccount');
             route::post('update/{id}','useraccountcontroller@update')->name('update.useraccount');
 
             route::get('setactive/{id}/{status}','useraccountcontroller@active')->name('active.useraccount');
+            route::get('delete/{id}','useraccountcontroller@destroy')->name('delete.useraccount');
         });
         Route::group(['prefix' => 'adminaccount'], function (){
             route::get('/','adminaccountcontroller@index')->name('list.adminaccount');
@@ -278,6 +310,7 @@ Route::prefix('admincp')->group(function () {
             route::post('update/{id}','adminaccountcontroller@update')->name('update.adminaccount');
 
             route::get('setactive/{id}/{status}','adminaccountcontroller@active')->name('active.adminaccount');
+            route::get('delete/{id}','adminaccountcontroller@destroy')->name('delete.adminaccount');
 
 		});
 		Route::group(['prefix' => 'catenews'], function (){
@@ -299,6 +332,35 @@ Route::prefix('admincp')->group(function () {
             route::post('update/{id}','NewsController@update')->name('update.news');
 
             Route::get('delete/{id}','NewsController@destroy')->name('delete.news');
+        });
+
+        Route::group(['prefix' => 'recruitment'], function (){
+            route::get('/','RecruitmentController@index')->name('list.recruitment');
+
+            route::get('/create','RecruitmentController@create')->name('create.recruitment');
+            route::post('/store','RecruitmentController@store')->name('store.recruitment');
+
+            route::get('edit/{id}','RecruitmentController@edit')->name('edit.recruitment');
+            route::post('update/{id}','RecruitmentController@update')->name('update.recruitment');
+
+            Route::get('delete/{id}','RecruitmentController@destroy')->name('delete.recruitment');
+        });
+        Route::group(['prefix' => 'showrom'], function (){
+            route::get('/','ShowromController@index')->name('list.showrom');
+
+            route::post('/store','ShowromController@store')->name('store.showrom');
+
+            route::post('update/{id}','ShowromController@update')->name('update.showrom');
+
+            Route::get('delete/{id}','ShowromController@destroy')->name('delete.showrom');
+        });
+        Route::group(['prefix' => 'bill'], function (){
+            route::get('/','BillController@index')->name('list.bill');
+
+            route::get('item/{id}','BillController@item')->name('item.bill');
+
+            Route::get('confirm/{id}','BillController@confirm')->name('confirm.bill');
+            Route::get('view/{value}','BillController@view')->name('view.bill');
         });
 
 		Route::get('addslider','SliderController@addSlider');

@@ -7,22 +7,29 @@
                 <div class="sidebar-content">
                     <div class="title-sidebar">
                         <span>danh mục sản phẩm</span>
+                        <div class="tintuc-sidebar">
+                            @foreach($cate_products as $value)
+                                <a href="{{ url('loaisanpham/'.$value->slug) }}">{{ $value->name }}</a>
+                            @endforeach
+                        </div>
                     </div>
                 </div>
                 <div class="sidebar-content">
                     <div class="title-sidebar">
                         <span>sản phẩm nổi bật</span>
                     </div>
-                    <img src="images/product-1.jpg" alt="">
+                    @foreach($headerproducts as $key => $value)
+                        @if($key==0)
+                            <a href="{{ url('sanpham/'.$value->slug) }}"> <img src="{{ asset('images/products/'.$value->image) }}" alt=""></a>
+                        @endif
+                    @endforeach
                 </div>
                 <div class="sidebar-content">
                     <div class="title-sidebar">
                         <span>Về chúng tôi</span>
                     </div>
                     <span>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo velit aliquam sint dolorum placeat
-                        fugiat itaque nostrum veniam ipsam alias libero odio nesciunt optio, possimus qui voluptate illo
-                        atque deleniti!
+                        {{ $introduce->summary }}
                     </span>
 
                 </div>
@@ -32,17 +39,17 @@
 
                 <div class="row xapsep">
                     <div class="col-12 video  " id="vv">
-                        <iframe width="100%" height="400px" src="https://www.youtube.com/embed/knW7-x7Y7RE" frameborder="0"
-                            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                            allowfullscreen></iframe>
+                      {!! $introduce->video !!}
 
                     </div>
 
 
                 </div>
-                <div class="show-more text-center mb-3">
-                    <a href="#">Xem thêm</a>
-                </div>
+                @if($introduce->youtube=='null')
+                   <div class="show-more text-center mb-3">
+                       <a target="_blank" href="{{ $introduce->youtube }}">Xem thêm</a>
+                   </div>
+                @endif
             </div>
 
         </div>

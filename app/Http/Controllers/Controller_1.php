@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\View;
+use Darryldecode\Cart\Cart;
 
 class Controller_1 extends Controller
 {
@@ -16,8 +17,18 @@ class Controller_1 extends Controller
         View::share('cate_news', $cate_news);
         $new_post = DB::table('news')->orderBy('id', 'desc')->limit(4)->get();
         View::share('new_posts', $new_post);
-        $cate_products = DB::table('cate_products')->orderBy('id', 'desc')->limit(4)->get();
+        $cate_products = DB::table('cate_products')->where('status', '=',1)->orderBy('id', 'desc')->get();
         View::share('cate_products', $cate_products);
+        $products = DB::table('products')->orderBy('id','desc')->get();
+        View::share('headerproducts', $products);
+        $collection = DB::table('collections')->where('status', '=',1)->get();
+        View::share('headcollections', $collection);
+
+        $introduce = DB::table('introduce')->first();
+        View::share('introduce', $introduce);
+
+
+        View::share('soluong', '10');
 
     }
 
@@ -49,6 +60,10 @@ class Controller_1 extends Controller
 //        dd($data['colors']);
 
         return view('pages.chitietsanpham', $data);
+    }
+    public function showrom(){
+        $data['showroms'] = DB::table('showrom')->orderBy('id', 'desc')->get();
+        return view('pages.showrom', $data);
     }
 
     /*
@@ -154,24 +169,155 @@ class Controller_1 extends Controller
             return redirect()->back()->with('thongbao','Change password success');
     }
 
+    public  function get_form(){
+        $data['cart'] = \Cart::getContent();
+
+        $data['tong']=0;
+        foreach ($data['cart'] as $value){
+            $data['tong'] += $value->quantity*$value->price;
+        }
+        $data['pays'] = DB::table('payment_methods')->get();
+        $data['pays'] = DB::table('payment_methods')->get();
+
+        return view('pages.form', $data);
+    }
+
+    public function postthanhtoan(Request $request){
+        $carts = \Cart::getContent();
+
+        $input = $request->all();
+        //dd($request->all());
+        DB::table('carts')->insert([
+           'code' => $input['code'],
+           'name' => $input['name'],
+           'email' => $input['email'],
+           'phone' => $input['phone'],
+           'address' => $input['address'],
+           'payment_method_id' => $input['payment_methods'],
+           'total' => $input['tong'],
+           'day' => now(),
+        ]);
+
+        $cartid = DB::table('carts')
+            ->select('carts.*', 'payment_methods.name as pay')
+            ->join('payment_methods', 'payment_methods.id','=', 'carts.payment_method_id')
+            ->where('code', $input['code'])->first();
+        foreach ($carts as $value){
+            DB::table('cart_details')->insert([
+                'cart_id' => $cartid->id,
+                'name' => $value->name,
+                'color' => $value->attributes->colorid,
+                'size' => $value->attributes->sizeid,
+                'price' => $value->price,
+                'quantity' => $value->quantity,
+                'money' => $value->price*$value->quantity,
+            ]);
+        }
+        foreach ($carts as $value) {
+            $quantity = DB::table('color_size')
+                ->select('color_size.quantity')
+                ->join('product_details', 'product_details.id', '=', 'color_size.detail_id')
+                ->where([
+                    ['product_details.product_id', $value->id],
+                    ['product_details.color_id', $value->attributes->colorid],
+                    ['color_size.size_id', $value->attributes->sizeid],
+                ])->first();
+            DB::table('color_size')
+                ->join('product_details', 'product_details.id', '=', 'color_size.detail_id')
+                ->where([
+                    ['product_details.product_id', $value->id],
+                    ['product_details.color_id', $value->attributes->colorid],
+                    ['color_size.size_id', $value->attributes->sizeid],
+                ])->update([
+                    'quantity' => $quantity->quantity-$value->quantity,
+                ]);
+        }
+
+        if(isset($input['userid'])){
+            DB::table('users')->where('id', $input['userid'])->update([
+               'address' =>  $input['address'],
+               'phone' =>  $input['phone'],
+            ]);
+        }
+
+        \Cart::clear();
+    return \view('pages.xacnhan', compact('cartid'));
+
+
+    }
     public function createuser(Request $request){
         dd($request->all());
     }
 
-    public  function get_product(){
-    	return view('pages.product');
+    public  function get_product($slug){
+
+        if($slug== 'all'){
+            $data['products'] = DB::table('products')->orderBy('id', 'desc')->paginate(12);
+        }
+        else {
+            $data['cate'] = DB::table('cate_products')->where('slug', $slug)->first();
+            $data['products'] = DB::table('products')
+                ->select('products.*')
+                ->join('cate_products', 'cate_products.id','=', 'products.category_id')
+                ->where('cate_products.slug',  $slug)
+                ->orderBy('products.id', 'desc')->paginate(12);
+
+        }
+
+    	return view('pages.product', $data);
     }
-    public  function get_bosuutap(){
-    	return view('pages.bosuutap');
+    public  function get_bosuutap($slug){
+        if($slug== 'all'){
+            $data['products'] = DB::table('products')->orderBy('id', 'desc')->paginate(12);
+            $data['collections'] = null;
+        }
+        else {
+            $data['collections'] = DB::table('collections')->where('slug', $slug)->first();
+            $data['products'] = DB::table('products')
+                ->select('products.*')
+                ->join('collections', 'collections.id','=', 'products.collections_id')
+                ->where('collections.slug',  $slug)
+                ->orderBy('products.id', 'desc')->paginate(12);
+
+        }
+    	return view('pages.bosuutap', $data);
+    }
+
+    public function search(Request $request){
+        //dd($request->all());
+        $data['key'] =$request->name;
+        $data['countproducts'] = DB::table('products')->where('name', 'like', '%'.$request->name."%")->count();
+        $data['countnews'] = DB::table('news')
+            ->join('tagnews', 'tagnews.news_id', '=','news.id')
+            ->where('tagnews.name', 'like', '%'.$request->name."%")->count();
+        $data['countrecruitments'] = DB::table('recruitments')
+            ->join('tag_recruitment', 'tag_recruitment.recruitment_id', '=','recruitments.id')
+            ->where('tag_recruitment.name', 'like', '%'.$request->name."%")->count();
+        $data['count']= $data['countproducts'] + $data['countnews'] +$data['countrecruitments'];
+
+        $data['searchproducts'] = DB::table('products')->where('name', 'like', '%'.$request->name."%")->get();
+        $data['searchnews'] = DB::table('news')
+            ->join('tagnews', 'tagnews.news_id', '=','news.id')
+            ->where('tagnews.name', 'like', '%'.$request->name."%")->get();
+        $data['searchrecruitments'] = DB::table('recruitments')
+            ->join('tag_recruitment', 'tag_recruitment.recruitment_id', '=','recruitments.id')
+            ->where('tag_recruitment.name', 'like', '%'.$request->name."%")->get();
+        //dd($data['recruitments']);
+
+        return view('pages.search', $data);
     }
     public  function get_gioithieu(){
     	return view('pages.gioithieu');
     }
     public  function get_lienhe(){
-    	return view('pages.lienhe');
+        $data['showroms'] = DB::table('showrom')->orderBy('id', 'desc')->get();
+    	return view('pages.lienhe', $data);
     }
     public  function get_cauhoi(){
-    	return view('pages.cauhoi');
+        $data['showroms'] = DB::table('showrom')->orderBy('id', 'desc')->get();
+        $data['payments'] = DB::table('payment_methods')->orderBy('id', 'desc')->get();
+
+        return view('pages.cauhoi', $data);
     }
     public  function get_tintuc(){
     	return view('pages.tintuc');
@@ -196,11 +342,16 @@ class Controller_1 extends Controller
     }
 
     public  function get_cart(){
-    	return view('pages.cart');
+        $data['cart'] = \Cart::getContent();
+
+        $data['tong']=0;
+        foreach ($data['cart'] as $value){
+            $data['tong'] += $value->quantity*$value->price;
+        }
+//                dd($data['tong']);
+    	return view('pages.cart', $data);
     }
-    public  function get_form(){
-    	return view('pages.form');
-    }
+
     public  function get_dangky(){
     	return view('pages.dangky');
     }
@@ -208,13 +359,49 @@ class Controller_1 extends Controller
     	return view('pages.dangnhap');
     }
     public  function get_sale(){
-        return view('pages.sale');
+
+        $data['products'] = DB::table('products')
+            ->select('products.*')
+            ->join('cate_products', 'cate_products.id','=', 'products.category_id')
+            ->orderBy('products.id', 'desc')->paginate(12);
+        return view('pages.sale', $data);
     }
     public  function get_video(){
         return view('pages.video');
     }
     public  function get_tuyendung(){
-        return view('pages.tuyendung');
+
+        $data['recruitments'] = DB::table('recruitments')->orderBy('id', 'desc')->paginate(6);
+        return view('pages.tuyendung', $data);
+    }
+    public function chitiettuyendung($slug){
+        $max = DB::table('recruitments')->max('id');
+        $min = DB::table('recruitments')->min('id');
+
+        $data['recruitment'] = DB::table('recruitments')->where('slug', $slug)->first();
+
+        if($data['recruitment']->id<$max) {
+            $next = $data['recruitment']->id;
+            do {
+                $next++;
+                $data['next'] = DB::table('news')->where('id', $next)->first();
+            } while ($data['$recruitment'] == null);
+        }
+        if($data['recruitment']->id>$min) {
+            $pre = $data['recruitment']->id;
+
+            do {
+                $pre--;
+                $data['pre'] = DB::table('news')->where('id', $pre)->first();
+            } while ($data['pre'] == null);
+        }
+
+        $data['pre'] = DB::table('recruitments')->where('id', $data['recruitment']->id-1)->first();
+        $data['next'] = DB::table('recruitments')->where('id', $data['recruitment']->id+1)->first();
+        $data['tags'] = DB::table('tag_recruitment')->where('recruitment_id', $data['recruitment']->id)->limit(10)->get();
+
+        return view('pages.chitiettuyendung', $data);
+
     }
     public  function get_tuyendungdetaits(){
         return view('pages.tuyendungdetais');
@@ -229,6 +416,7 @@ class Controller_1 extends Controller
            'email' => $input['email_message'],
            'phone' => $input['phone_message'],
            'content' => $input['content_message'],
+            'created_at' => now()
         ]);
 
         return redirect()->back()->with('thongbao', 'Cảm ơn bạn đã để lại lời nhắn! chúng tôi sẽ phản hôi trong thời gian sớm nhất!');

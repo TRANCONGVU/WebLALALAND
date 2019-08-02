@@ -6,23 +6,29 @@
             <div class="col-md-3 col sidebar my-4">
                 <div class="sidebar-content">
                     <div class="title-sidebar">
-                        <span>danh mục sản phẩm</span>
+                        <span>Tin Nổi Bật</span>
+
+                        @foreach($new_posts as $value)
+                            <a href="{{ url('tintuc/'.$value->slug) }}">{{ $value->title }}</a>
+                        @endforeach
                     </div>
                 </div>
                 <div class="sidebar-content">
                     <div class="title-sidebar">
                         <span>sản phẩm nổi bật</span>
                     </div>
-                    <img src="images/product-1.jpg" alt="">
+                    @foreach($headerproducts as $key => $value)
+                        @if($key==0)
+                            <a href="{{ url('sanpham/'.$value->slug) }}"> <img src="{{ asset('images/products/'.$value->image) }}" alt=""></a>
+                        @endif
+                    @endforeach
                 </div>
                 <div class="sidebar-content">
                     <div class="title-sidebar">
                         <span>Về chúng tôi</span>
                     </div>
                     <span>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo velit aliquam sint dolorum placeat
-                        fugiat itaque nostrum veniam ipsam alias libero odio nesciunt optio, possimus qui voluptate illo
-                        atque deleniti!
+                        {{ $introduce->summary }}
                     </span>
 
                 </div>
@@ -31,9 +37,11 @@
                 <h4 class="text-uppercase mt-3 ">tuyển dụng</h4>
                 <div class="row">
                     <div class="col-12">
+                        @foreach($recruitments as $value)
                         <div class="tuyendung-box">
-                            <img src="images/product-1.jpg" alt="">
+                            <img src="{{ asset('images/recruitment/'.$value->image) }}" alt="">
                             <div class="tt-tuyendung">
+
                                     <span> Bán hàng part time 22h - 6h </span>
                                     <span><i class="fas fa-map-marker-alt"></i>236 Hoàng Quốc Việt</span>
                                     <a href="{{ url('tuyendungdetaits') }}">Xem ngay</a>
@@ -55,13 +63,14 @@
                                             <a href="{{ url('tuyendungdetaits') }}">Xem ngay</a>
                                     </div>
                                 </div>
+
                     </div>
 
 
 
                 </div>
                 <div class="show-more text-center mb-3">
-                    <a href="#">Xem thêm</a>
+                   {{ $recruitments->links() }}
                 </div>
             </div>
 

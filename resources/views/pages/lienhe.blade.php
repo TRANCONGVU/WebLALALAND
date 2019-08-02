@@ -71,21 +71,14 @@
             </div>
             <span>Hệ thống cửa hàng của chúng tôi</span>
             <div class="cuahang">
-                <ul>
-                    <li>Cơ sở chính</li>
-                    <li>Địa chỉ : 34 , Phạm văn đồng , hà nội </li>
-                    <li>SDT : 01223423255 </li>
-                </ul>
-                <ul>
-                    <li>Của hàng số 1</li>
-                    <li>Địa chỉ : 34 , Phạm văn đồng , hà nội </li>
-                    <li>SDT : 01223423255 </li>
-                </ul>
-                <ul>
-                    <li>Của hàng số 2</li>
-                    <li>Địa chỉ : 34 , Phạm văn đồng , hà nội </li>
-                    <li>SDT : 01223423255 </li>
-                </ul>
+                @foreach($showroms as $value)
+                    <ul>
+                        <li><b>{{ $value->name }}</b></li>
+                        <li>Địa chỉ : {{ $value->address }}</li>
+                        <li>SĐT : {{ $value->phone }} </li>
+                    </ul>
+                    <hr>
+                @endforeach
 
             </div>
             <div class="container border-line"></div>
@@ -103,5 +96,5 @@
     <iframe
         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3722.8580470816996!2d105.78534501457999!3d21.07833109146081!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135aacbe6b051d3%3A0x99154d3da13e19eb!2zNDMgUGjhuqFtIFbEg24gxJDhu5NuZywgWHXDom4gxJDhu4luaCwgVOG7qyBMacOqbSwgSMOgIE7hu5lpLCBWaeG7h3QgTmFt!5e0!3m2!1svi!2s!4v1561690516089!5m2!1svi!2s"
         width="100%" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
-</div>
+    </div>
 @endsection

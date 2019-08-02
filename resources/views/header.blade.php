@@ -1,3 +1,4 @@
+
 <div class="header">
     <div class="container-flui bg-dark py-2">
     <div class="container head d-flex justify-content-between mt-1">
@@ -22,6 +23,7 @@
                     <a class="text-white" href="{{--{{ url('dangky') }}--}}" data-toggle="modal" data-target="#registerModal" style="margin : 0 5px">Đăng ký</a>
                     @endif
                     @else
+
                     {{--  <ul class="nav-ul-lv-1">
                                 <li>
                                     <a href="{{ url('bosuutap') }}">Bộ sưu tập<i class="fas fa-caret-down"></i></a>
@@ -36,6 +38,7 @@
                         {{ Auth::user()->name }}
                     </a>
                     /
+
                     <a class="" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                                  document.getElementById('logout-form').submit();">
                         {{ __('Logout') }}
@@ -98,6 +101,7 @@
                             @endforeach
 
                             {{--<div class="col text-left px-5">
+
                                   <div class="hover-item hover-item1 d-flex flex-column justify-content-start">
                                       <a href="">Áo</a>
                                       <a href="#">jacket</a>
@@ -265,3 +269,4 @@
     </div>
     <script type="text/javascript" src="js/menu-mobile.js"></script>
 </section>
+
