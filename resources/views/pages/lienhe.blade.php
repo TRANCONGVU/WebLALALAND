@@ -1,4 +1,7 @@
 @extends('master-layout')
+@section('title')
+    Liên Hệ
+@endsection
 @section('content')
 <div class="container-fluid d-flex justify-content-start">
     <div class="row">

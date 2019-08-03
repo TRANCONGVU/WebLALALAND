@@ -57,7 +57,7 @@ class Controller_1 extends Controller
             ->where('category_id',  $data['product']->category_id)->limit(5)->get();
         $data['product_hot']=DB::table('products')
             ->limit(4)->orderBy('pay','desc')->first();
-//        dd($data['colors']);
+//        dd($data['product']);
 
         return view('pages.chitietsanpham', $data);
     }

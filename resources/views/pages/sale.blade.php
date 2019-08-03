@@ -1,4 +1,7 @@
 @extends('master-layout')
+@section('title')
+    Sản phẩm Khuyến mãi
+@endsection
 @section('content')
 <div class="container-fluid">
     <div class="container">

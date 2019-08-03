@@ -127,10 +127,23 @@ class DatabaseSeeder extends Seeder
 
         DB::table('introduce')->insert([
             'summary' => 'Cửa hàng thời trang',
-            'content' => '<p>C&ocirc;ng ty ch&uacute;ng t&ocirc;i lu&ocirc;n mang đến gi&aacute; trị tốt nhất cho bạn</p>',
-            'email' => 'kienchidong@gmail.com',
-            'phone' => '0392123325',
-            'facebook' => 'https://www.facebook.com/kienchidong',
+            'content' => '<p><a href="https://www.facebook.com/hashtag/lalaland?source=feed_text&amp;epa=HASHTAG&amp;__xts__%5B0%5D=68.ARDLloVr0Gst6HpSA8Kd8_VPPKlIXz_qgVbi-3JC5mGoLAuPMESJW40el-U9A7FGMUlyIBf1DpGMfbNXjUOm_C60PX7fZSbAjgsKzhm21eBcTd2S1opNPm8yfV260J6wJcr86BFxG-8JXehnmOxHCan87s-PKkUbjPv1u1wprOtAMQjp2HwoUuUcB_LTpXF47-wTT3vyIvQrTFSLPo2kzODXqt2btChK_7gX2pcaM-reyngA2X0U7lEwvtY_Uu-pgr5xwawxT3euaRJFWhmO5EJrJbLfdSr9TpDJxQxe9WnMyEp43YNfrSuL7Le--O6h5OxArTBIp1xZg5_sxjX3M2o&amp;__tn__=%2ANK-R">#Lalaland</a> l&agrave; thương hiệu thời trang nữ của Việt Nam, chuy&ecirc;n thiết kế ĐẦM v&agrave; &Aacute;O DẠ cao cấp. <a href="https://www.facebook.com/hashtag/lalaland?source=note&amp;epa=HASHTAG" target="_blank">#Lalaland</a> được thai ngh&eacute;n v&agrave; ra đời bởi những người trẻ c&oacute; chung niềm đam m&ecirc; thời trang v&agrave; kh&aacute;t khao đưa tới kh&aacute;ch h&agrave;ng những sản phẩm thủ c&ocirc;ng từ ch&iacute;nh đ&ocirc;i b&agrave;n tay v&agrave; tr&iacute; s&aacute;ng tạo của họ. 📷&lt;3📷&lt;3 📷<img alt="" src="https://static.xx.fbcdn.net/images/emoji.php/v9/taa/1/18/2764.png" style="height:18px; width:18px" />&lt;3<br />'
+                         .'C&aacute;c sản phẩm của <a href="https://www.facebook.com/hashtag/lalaland?source=note&amp;epa=HASHTAG" target="_blank">#Lalaland</a> lu&ocirc;n đề cao sự tinh tế v&agrave; quyến rũ trong từng đường n&eacute;t nhưng vẫn đảm bảo trẻ trung, sang trọng, l&atilde;ng mạn ph&ugrave; hợp cho c&aacute;c chị em khi đi l&agrave;m cũng như dự c&aacute;c sự kiện quan trọng.<br />'
+                         .'Với sứ mệnh mang tới vẻ đẹp c&ugrave;ng sự tự tin, quyến rũ cho người phụ nữ Việt Nam, <a href="https://www.facebook.com/hashtag/lalaland?source=note&amp;epa=HASHTAG" target="_blank">#Lalaland</a> cam kết sẽ thường xuy&ecirc;n đưa ra thị trường c&aacute;c mẫu thiết kế mới, hiện đại nhất để lu&ocirc;n đem đến sự l&agrave;m h&agrave;i l&ograve;ng kh&aacute;ch h&agrave;ng. 📷<img alt="" src="https://static.xx.fbcdn.net/images/emoji.php/v9/taa/1/18/2764.png" style="height:18px; width:18px" />&lt;3 📷<img alt="" src="https://static.xx.fbcdn.net/images/emoji.php/v9/taa/1/18/2764.png" style="height:18px; width:18px" />&lt;3 📷<img alt="" src="https://static.xx.fbcdn.net/images/emoji.php/v9/taa/1/18/2764.png" style="height:18px; width:18px" />&lt;3</p>'
+    #                    .'<p>KH&Ocirc;NG CHỈ LÀ THỜI TRANG</p>'
+                        .'<p>LALALAND THI&Ecirc;́T K&Ecirc;́ GI&Acirc;C MƠ CỦA BẠN</p>'
+                        .'<p>Album Summer Sale: <a href="https://www.facebook.com/pg/thoitrangthietkeLalaland/photos/?tab=album&amp;album_id=976923762512194">https://www.facebook.com/pg/thoitrangthietkeLalaland/photos/?tab=album&amp;album_id=976923762512194</a></p>'
+                        .'<p>BST Hè: <a href="https://www.facebook.com/pg/thoitrangthietkeLalaland/photos/?tab=album&amp;album_id=973221242882446">https://www.facebook.com/pg/thoitrangthietkeLalaland/photos/?tab=album&amp;album_id=973221242882446</a></p>'
+                        .'<p>BST Áo dài: <a href="https://www.facebook.com/pg/thoitrangthietkeLalaland/photos/?tab=album&amp;album_id=939486196255951">https://www.facebook.com/pg/thoitrangthietkeLalaland/photos/?tab=album&amp;album_id=939486196255951</a></p>'
+                        .'<p>📍Địa chỉ : 40 Đo&agrave;n Trần Nghiệp - Hai B&agrave; Trưng - H&agrave; Nội<br />'
+                        .'☎️ Hotline : 0969.995.586e<br />'
+                        .'📌 Fanpage FB: LalaLand<br />'
+                        .'📌 IG : thoitranglalaland</p>',
+            'video' => '<iframe width="560" height="315" src="https://www.youtube.com/embed/hVPpMS2-s7s" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>',
+            'email' => 'lalaland40dtn@gmail.com',
+            'phone' => '0375787600',
+            'facebook' => 'https://www.facebook.com/thoitrangthietkeLalaland/',
+            'instagram' => 'https://www.instagram.com/thoitranglalaland/',
         ]);
     }
 }

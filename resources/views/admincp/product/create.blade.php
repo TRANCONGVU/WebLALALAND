@@ -45,6 +45,11 @@
 
                     </div>
                     <div class="form-group">
+                        <label class="text-body custom-control-label">Mô tả(*):</label>
+                        {{--<input id="price" type="number" class="form-control backgroundinput @error('name') is-invalid @enderror" name="price" value="{{ old('price') }}" required autocomplete="price" autofocus>--}}
+                        <textarea class="form-control" required name="describe" rows="5">{{ old('describe') }}</textarea>
+                    </div>
+                    <div class="form-group">
                         <label class="text-body custom-control-label">Ảnh(*):</label>
                         <input name='file-0-0' id='file-0-0' class='form-control' type='file' required onchange='fileValidation(this)'>
                         <div id='imagePreviewfile-0-0'>
@@ -53,8 +58,15 @@
 
                     <div class="form-group">
                         <label class="text-body custom-control-label">Giá Niêm Yết(VNĐ)(*):</label>
-                        <input id="price" type="number" class="form-control backgroundinput @error('name') is-invalid @enderror" name="price" value="{{ old('price') }}" required autocomplete="price" autofocus>
-
+                        <input id="price" type="number" class="form-control backgroundinput @error('name') is-invalid @enderror" name="price" value="{{ old('price') }}" required autocomplete="price" onchange="checkprice(this)">
+                        <script>
+                            function checkprice(obj) {
+                                if(obj.value<0){
+                                    toastr.error('Bạn không được chọn giá niêm yết nhỏ hơn 0%!', 'Thông báo', {timeOut: 3000});
+                                    obj.value=0;
+                                }
+                            }
+                        </script>
                         @error('price')
                         <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -63,8 +75,19 @@
                     </div>
                     <div class="form-group">
                         <label class="text-body custom-control-label">Giá Sale(VNĐ):</label>
-                        <input id="sale" type="number" class="form-control backgroundinput @error('name') is-invalid @enderror" name="sale" value="{{ old('sale') }}" autocomplete="price" autofocus>
-
+                        <input id="sale" type="number" class="form-control backgroundinput @error('name') is-invalid @enderror" name="sale" min="1" max="70" value="{{ old('sale') }}" autocomplete="price" onchange="checksale(this)">
+                        <script>
+                        function checksale(obj) {
+                            if(obj.value >70){
+                                toastr.error('Bạn không nên chọn giá sale lớn hơn 70%!', 'Thông báo', {timeOut: 3000});
+                                obj.value=70;
+                            }
+                            else if(obj.value<0){
+                                toastr.error('Bạn không được chọn giá sale nhỏ hơn 0%!', 'Thông báo', {timeOut: 3000});
+                                obj.value=0;
+                            }
+                        }
+                        </script>
                         @error('sale')
                         <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -91,7 +114,7 @@
                                     html+="<div style='text-align: right'><a onclick='huychon("+$('#color').val()+")'><i class='fa fa-times' ></i></a> </div>";
                                     html+="<h4>Thêm màu</h4>";
                                     html+="<hr>";
-                                    html+="<input name='color"+number+"' class='form-control' type='text' value='"+$('#color').val()+"'>";
+                                    html+="<input name='color"+number+"' class='form-control' type='hidden' value='"+$('#color').val()+"'>";
                                     html+="<input name='file-"+number+"-1' id='file-1-"+$('#color').val()+"' class='form-control' type='file' required onchange='fileValidation(this)'>";
                                     html+="<div id='imagePreviewfile-1-"+$('#color').val()+"'>";
                                     html+="</div>";
@@ -108,7 +131,7 @@
                                     @endforeach
                                     html+="</select>";
                                     html+="<div id='soluong"+$('#color').val()+"'>";
-                                    html+="<input name='sizenumber"+$('#color').val()+"' id='sizenumber"+$('#color').val()+"' class='form-control' type='text' value='0'>";
+                                    html+="<input name='sizenumber"+$('#color').val()+"' id='sizenumber"+$('#color').val()+"' class='form-control' type='hidden' value='0'>";
                                     html+="</div>";
                                     html+="<hr>";
                                     html+="</div>";
@@ -185,11 +208,11 @@
         });
         function send() {
             if($('#color-number').val()=== '0'){
-                alert('Bạn chưa chọn màu sản phẩm!');
+                toastr.error('Bạn chưa chọn màu sản phẩm!', 'Thông báo', {timeOut: 3000});
                 return false;
             }
             if($('#quantity').val()=== '0'){
-                alert('Bạn chưa nhập số lượng sản phẩm!');
+                toastr.error('Bạn chưa chọn số lượng sản phẩm!', 'Thông báo', {timeOut: 3000});
                 return false;
             }
         }

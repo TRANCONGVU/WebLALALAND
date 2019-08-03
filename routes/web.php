@@ -11,6 +11,17 @@
 |
 */
 
+Route::get('/ip', function (){
+    $ip = $_SERVER['REMOTE_ADDR'];
+
+    if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
+        $ip = $_SERVER['HTTP_CLIENT_IP'];
+    } else if (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+        $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+    }
+    echo "IP address: " . $ip;
+});
+
 Route::get('/', [
 	'as' =>'home',
 	'uses' => 'Controller_1@get_trangchu'

@@ -17,7 +17,6 @@
                         @foreach($new_posts as $value)
                             <a href="{{ url('tintuc/'.$value->slug) }}">{{ $value->title }}</a>
                         @endforeach
-
                         {{--<a href="#">sự kiện 2019</a>
                         <a href="#">thời trang 2019</a>
                         <a href="#">sản phẩm giá rẻ , chất lượng tốt 2019</a>

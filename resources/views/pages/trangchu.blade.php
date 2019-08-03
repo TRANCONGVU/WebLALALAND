@@ -1,4 +1,7 @@
 @extends('master-layout')
+@section('title')
+    Thời trang Phụ Nữ
+@endsection
 @section('content')
 
 <section class="section-1 container-fluid owl-carousel owl-theme">

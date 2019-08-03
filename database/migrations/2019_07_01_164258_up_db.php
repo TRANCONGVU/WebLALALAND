@@ -57,15 +57,7 @@ class UpDb extends Migration
             $table->timestamps();
         });
 
-        //san pham
-        Schema::create('cate_products', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('name')->unique();
-            $table->string('slug')->index();
-            $table->tinyInteger('status')->default(1);
-            $table->bigInteger('total_product')->default(0);
-            $table->timestamps();
-        });
+
        /* Schema::create('product_type', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
@@ -161,12 +153,22 @@ class UpDb extends Migration
             $table->integer('status')->default(1);
             $table->timestamps();
         });
+        //san pham
+        Schema::create('cate_products', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('name')->unique();
+            $table->string('slug')->index();
+            $table->tinyInteger('status')->default(1);
+            $table->bigInteger('total_product')->default(0);
+            $table->timestamps();
+        });
 
         Schema::create('products', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
             $table->string('slug');
             $table->string('code');
+            $table->text('describe');
             $table->integer('pay')->default(0);
             $table->integer('sale')->default(0);
             $table->integer('price');

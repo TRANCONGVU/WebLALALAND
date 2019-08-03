@@ -1,4 +1,7 @@
 @extends('master-layout')
+@section('title')
+    Giới thiệu
+@endsection
 @section('content')
 <div class="container gioithieu d-flex flex-column">
     <h4 class="text-left text-uppercase">Giới thiệu</h4>

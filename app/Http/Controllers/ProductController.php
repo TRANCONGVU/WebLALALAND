@@ -51,15 +51,10 @@ class ProductController extends Controller
     {
        //dd($request->all());
         $input= $request->all();
-        if($input['sale']==''){
-            $sale=0;
-        }
-        else{
-            $sale=$input['sale'];
-        }
+        $sale = $request->price - ($request->price*$request->sale)/100;
         if ($request->hasFile('file-0-0')) {
             $file = $request->file('file-0-0');
-            $name = str_slug($file->getClientOriginalName());
+            $name = $this->name_image($file->getClientOriginalName());
             $avatar = str_random(4) . "_product_" . $name;
             while (file_exists('images/products/' . $avatar)) {
                 $Hinh = str_random(4) . "_product_" . $name;
@@ -71,6 +66,7 @@ class ProductController extends Controller
             'name' => $input['name'],
             'slug' => $this->slug($input['name']),
             'code' => str_random(7),
+            'describe'=> $input['describe'],
             'price'=> $input['price'],
             'sale'=> $sale,
             'category_id' => $input['cate'],
@@ -88,7 +84,7 @@ class ProductController extends Controller
                 for($k=1; $k<=3; $k++) {
                     if ($request->hasFile('file-'.$i.'-'.$k)) {
                         $file = $request->file('file-'.$i.'-'.$k);
-                        $name = str_slug($file->getClientOriginalName());;
+                        $name = $this->name_image($file->getClientOriginalName());;
                         $avatar = str_random(4) . "_product_" . $name;
                         while (file_exists('images/products/' . $avatar)) {
                             $Hinh = str_random(4) . "_product_" . $name;
@@ -177,16 +173,11 @@ class ProductController extends Controller
 
         //
 
-        if($input['sale']==''){
-            $sale=0;
-        }
-        else{
-            $sale=$input['sale'];
-        }
+        $sale = $request->price - ($request->price*$request->sale)/100;
         if ($request->hasFile('file-0-0')) {
             $old = DB::table('products')->find($id);
             $file = $request->file('file-0-0');
-            $name = str_slug($file->getClientOriginalName());
+            $name = $this->name_image($file->getClientOriginalName());
             $avatar = str_random(4) . "_product_" . $name;
             while (file_exists('images/products/' . $avatar)) {
                 $Hinh = str_random(4) . "_product_" . $name;
@@ -203,6 +194,7 @@ class ProductController extends Controller
         DB::table('products')->where('id', $id)->update([
             'name' => $input['name'],
             'slug' => $this->slug($input['name']),
+            'describe'=> $input['describe'],
             'price'=> $input['price'],
             'sale'=> $sale,
             'category_id' => $input['cate'],
@@ -221,7 +213,7 @@ class ProductController extends Controller
                     for($k=1; $k<=3; $k++) {
                         if ($request->hasFile('file-'.$i.'-'.$k)) {
                             $file = $request->file('file-'.$i.'-'.$k);
-                            $name = str_slug($file->getClientOriginalName());
+                            $name = $this->name_image($file->getClientOriginalName());
                             $avatar = str_random(4) . "_product_" . $name;
                             while (file_exists('images/products/' . $avatar)) {
                                 $Hinh = str_random(4) . "_product_" . $name;
@@ -263,7 +255,7 @@ class ProductController extends Controller
                         if ($request->hasFile('file-has-' . $has->color_id . '-' . $i)) {
                             $old = DB::table('products')->find($id);
                             $file = $request->file('file-has-' . $has->color_id . '-' . $i);
-                            $name = str_slug($file->getClientOriginalName());
+                            $name = $this->name_image($file->getClientOriginalName());
                             $avatar = str_random(4) . "_product_" . $name;
                             while (file_exists('images/products/' . $avatar)) {
                                 $Hinh = str_random(4) . "_product_" . $name;

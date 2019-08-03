@@ -33,9 +33,9 @@ a{
 login form
 */
 .login-custom-form{
-    background: rgba(0, 0, 0, 0.85);
-    color: white;
-}
+     background: rgba(0, 0, 0, 0.85);
+     color: white;
+ }
 .login-custom-form .backgroundinput{
     background: rgba(0, 0, 0, 0.28);
     color: white;

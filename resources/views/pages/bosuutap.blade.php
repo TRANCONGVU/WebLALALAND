@@ -1,4 +1,11 @@
 @extends('master-layout')
+@section('title')
+    @isset($collections)
+        {{ $collections->name }}
+    @else
+        Tất Cả Sản Phẩm
+    @endisset
+@endsection
 @section('content')
     <div class="container-fluid">
         <div class="container">

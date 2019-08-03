@@ -9,11 +9,6 @@
         Danh sách Sản Phẩm...
     </h1>
     <br>
-    @if(session('thongbao'))
-        <script>
-            alert('{{ session('thongbao') }}');
-        </script>
-    @endif
     <div class="table-data__tool">
         <a class="btn btn-success" href="{{ route('create.product') }}">Thêm Sản phẩm</a>
     </div>

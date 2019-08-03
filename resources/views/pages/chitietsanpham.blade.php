@@ -1,4 +1,7 @@
 @extends('master-layout')
+@section('title')
+    {{ $product->name }}
+@endsection
 @section('content')
     <link rel="stylesheet" href="{{ asset('xzoom/xzoom.css') }}">
     <style>
@@ -101,7 +104,14 @@
                         <b>Giá cũ :</b> <p class="" style="  text-decoration: line-through;">{{ number_format($product->price)." VNĐ" }}</p>
                         <span>Mã hàng : {{ $product->code }}</span>
                         <div class="form-group mt-3">
-                            <label for="1">Màu sắc</label>
+                            <label for="1">Mô tả:</label>
+                            <div class="describe">
+                                {{ $product->describe }}
+                            <hr>
+                            </div>
+                        </div>
+                        <div class="form-group mt-3">
+                            <label for="1">Màu sắc:</label>
                             <select class="form-control my-3" name="productcolor" id="productcolor"  onchange="selectsize(this)">
                                 <option value="0">--Màu--</option>
                                 @foreach($colors as $color)
@@ -134,7 +144,7 @@
                                 {{--<option>Green</option>--}}
                             </select>
                             <div id="chosesize" class="hide">
-                            <label for="1">Kích cỡ</label>
+                            <label for="1">Kích cỡ:</label>
                             <select class="form-control" id="sizeproduct" name="productsize" onchange="quantity(this)">
 
                             </select>
@@ -263,7 +273,6 @@
                             $.ajax(agrs);
                         }
                     }
-
                 </script>
                 <div class="container border-line">
                     <span> # Sản phẩm liên quan </span>
