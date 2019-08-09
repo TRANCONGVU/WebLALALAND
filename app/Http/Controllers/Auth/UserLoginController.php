@@ -27,7 +27,7 @@ class UserLoginController extends Controller
             ],
             $request->remember
         )){
-            return redirect()->back();
+            return redirect()->back()->with('thongbao', 'Xin chào '.Auth::user()->name);
         }else {
             return redirect()->back()->with('thongbao', 'Login Failed');
         }
@@ -77,7 +77,7 @@ class UserLoginController extends Controller
             ],
             $request->remember
         )){
-            return redirect()->back();
+            return redirect()->back()->with('thongbao', 'Xin chào '.$input['name']);
         }else {
             return redirect()->back()->with('thongbao', 'Login Failed');
         }
@@ -86,7 +86,7 @@ class UserLoginController extends Controller
     {
         Auth::guard('web')->logout();
         // chuyển hướng về trang login của admin
-        return redirect()->back();
+        return redirect()->back()->with('thongbao', 'Đăng xuát thành công!');
     }
 
 }

@@ -13,9 +13,9 @@
         display: none;
     }
 </style>
-
+<div class="bs-example4" data-example-id="simple-responsive-table">
 <h1>
-        Danh sách Danh Mục Tin...
+        Danh sách Màu Sắc...
     </h1>
     <br>
     @if(session('thongbao'))
@@ -25,7 +25,7 @@
         </script>
     @endif
     <div class="table-data__tool">
-    <button class="btn btn-success" id="btadd"  onclick="addcate()">Thêm danh mục</button>
+    <button class="btn btn-success" id="btadd"  onclick="addcate()">Thêm Màu sắc</button>
     <button class="btn btn-danger" id="bthuy"  onclick="huycate()">Hủy</button>
         <div id="addcate" class="hide">
             <hr>
@@ -33,7 +33,7 @@
                 @csrf
                 <div class="row">
                     <div class="col-md-2">
-                        <h3>Tên Danh Mục:</h3>
+                        <h3>Tên Màu Sắc:</h3>
                     </div>
                     <div class="col-md-7">
 
@@ -187,5 +187,5 @@
         
     
     </script>
-
+</div>
     @endsection

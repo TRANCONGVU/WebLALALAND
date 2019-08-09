@@ -24,6 +24,7 @@
     </script>
     <!-- //Meta-Tags -->
     <!-- Index-Page-CSS -->
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('images/logo-nguoi2.png') }}" />
     <link rel="stylesheet" href="{{ asset('admin/login') }}/css/style.css" type="text/css" media="all">
     <!-- //Custom-Stylesheet-Links -->
     <!--fonts -->
@@ -37,7 +38,7 @@
 <h1 class="title-agile text-center">Login Admin</h1>
 <div class="content-w3ls">
     <div class="content-top-agile">
-        <h2>sign in</h2>
+        <img src="{{ asset('images/lalaland.png') }}" alt="">
     </div>
     <div class="content-bottom">
         <form action="{{ route('admin.auth.loginAdmin') }}" method="post">
@@ -52,7 +53,7 @@
             <div class="field-group pass">
                 <span class="fa fa-lock" aria-hidden="true"></span>
                 <div class="wthree-field">
-                    <input name="password" id="paswword" type="password" placeholder="Password*" required autocomplete="off" />
+                    <input name="password" id="paswword" type="password" placeholder="Mật Khẩu*" required autocomplete="off" />
                 </div>
                 <div class="showpass"><i class="fa fa-eye" aria-hidden="true" onclick="showpass()"></i></div>
                 <script>
@@ -72,23 +73,20 @@
                     <label class="switch">
                         <input type="checkbox">
                         <span class="slider round"></span>
-                        keep me signed in
+                        nhớ đăng nhập
                     </label>
-                </li>
-                <li>
-                    <a href="#" class="text-right" style="color: white">forgot password?</a>
                 </li>
                 <li class="clearfix"></li>
             </ul>
             <div class="wthree-field">
-                <input id="saveForm" name="saveForm" type="submit" value="sign in"/>
+                <input id="saveForm" name="saveForm" type="submit" value="Đăng Nhập"/>
             </div>
         </form>
     </div>
 </div>
 <div class="copyright text-center">
-    <p>© 2018 Switch Login Form. All rights reserved | Design by
-        <a href="http://w3layouts.com">W3layouts</a>
+    <p>© 2018 Copy right
+        <a target="_blank" href="http://talentwins.co/">Talent Wins Technology</a>
     </p>
 </div>
 </body>

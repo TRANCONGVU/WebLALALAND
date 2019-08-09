@@ -42,10 +42,11 @@ class Controller extends BaseController
         $str = preg_replace('/(ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ)/', 'u', $str);
         $str = preg_replace('/(ỳ|ý|ỵ|ỷ|ỹ)/', 'y', $str);
         $str = preg_replace('/(đ)/', 'd', $str);
+        $str = preg_replace('/(_)/', ' ', $str);
         $exp = explode(' ',$str);
         $kq='';
         foreach($exp as $val){
-            $kq .= $val.'-';
+            $kq .= '-'.$val;
         }
 
         return $kq;

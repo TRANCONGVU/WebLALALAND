@@ -51,7 +51,8 @@ class ProductController extends Controller
     {
        //dd($request->all());
         $input= $request->all();
-        $sale = $request->price - ($request->price*$request->sale)/100;
+        $sale= $input['price']-($input['price']*$input['sale'])/100;
+        //dd($sale);
         if ($request->hasFile('file-0-0')) {
             $file = $request->file('file-0-0');
             $name = $this->name_image($file->getClientOriginalName());
@@ -65,7 +66,7 @@ class ProductController extends Controller
         DB::table('products')->insert([
             'name' => $input['name'],
             'slug' => $this->slug($input['name']),
-            'code' => str_random(7),
+            'code' => $input['code'],
             'describe'=> $input['describe'],
             'price'=> $input['price'],
             'sale'=> $sale,
@@ -137,6 +138,7 @@ class ProductController extends Controller
     public function edit($id)
     {
         $data['product'] = DB::table('products')->find($id);
+        $data['sale'] = 100-($data['product']->sale/$data['product']->price)*100;
         $data['cates'] = DB::table('cate_products')->get();
         $data['collections'] = DB::table('collections')->get();
         $data['sizes'] = DB::table('size')->get();
@@ -172,8 +174,8 @@ class ProductController extends Controller
 
 
         //
-
-        $sale = $request->price - ($request->price*$request->sale)/100;
+        $sale= $input['price']-($input['price']*$input['sale'])/100;
+        //dd($sale);
         if ($request->hasFile('file-0-0')) {
             $old = DB::table('products')->find($id);
             $file = $request->file('file-0-0');
@@ -191,6 +193,7 @@ class ProductController extends Controller
         else{
             $file_name1= $input['old-image'];
         }
+
         DB::table('products')->where('id', $id)->update([
             'name' => $input['name'],
             'slug' => $this->slug($input['name']),

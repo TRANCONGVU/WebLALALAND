@@ -18,6 +18,7 @@
 
 	<!-- Start WOWSlider.com HEAD section --> <!-- add to the <head> of your page -->
 	<link rel="stylesheet" type="text/css" href="{{ asset('lib/banner-slider/engine1/style.css') }}" />
+	<link rel="stylesheet" href="{{ asset('assets/toar/css/toastr.css') }}">
     <!-- End WOWSlider.com HEAD section -->
 	<link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{ asset('css/header.css') }}">
@@ -29,15 +30,41 @@
 <body>
 @if(session('thongbao'))
 	{{-- <div class = "alert alert-success">{{ session('thongbao') }}</div>--}}
-	<script>
-		alert('{{ session('thongbao') }}');
-	</script>
 @endif
 @include('header')
 @include('pages.dangnhap')
 @include('pages.dangky')
 @yield('content')
 @include('footer')
+<script type="text/javascript">
+	$(window).load(function () {
+		alert('hihi');
+		//jQuery.noConflict();
+		// if(document.cookie.indexOf("adf")===-1){
+			document.cookie = "popunder1=adf";
+			$('#loginModal').modal('show');
+
+	});
+</script>
+<script src="{{ asset('assets/toar/js/toastr.min.js') }}"></script>
+@if(session('thongbao'))
+	<script type="text/javascript">
+		toastr.success('{{ session('thongbao') }}', 'Thông báo', {timeOut: 3000});
+		toastr.options.progressBar = true;
+	</script>
+@endif
+@if ($errors->any())
+	@foreach ($errors->all() as $error)
+		<script type="text/javascript">
+			toastr.error('{{ $error }}', 'Thông báo', {timeOut: 3000});
+		</script>
+	@endforeach
+@endif
+@if(session('error'))
+	<script type="text/javascript">
+		toastr.error('{{ session('error') }}', 'Thông báo', {timeOut: 3000});
+	</script>
+@endif
 
 </body>
 </html>

@@ -44,12 +44,30 @@
                         <div class="tuyendung-box">
                             <img src="{{ asset('images/recruitment/'.$value->image) }}" alt="">
                             <div class="tt-tuyendung">
+
                                     <span>{{ $value->title }}</span>
-                                    <span><i class="fas fa-map-marker-alt"></i>{{ $value->begin_time." to ".$value->end_time}}</span>
-                                    <a href="{{ url('tuyendung/'.$value->slug) }}">Xem ngay</a>
+                                    <span><i class="fas fa-map-marker-alt"></i>236 Hoàng Quốc Việt</span>
+                                    <a href="{{ url('tuyendung'.$value->slug) }}">Xem ngay</a>
                             </div>
                         </div>
                         @endforeach
+                       {{-- <div class="tuyendung-box">
+                                <img src="images/product-1.jpg" alt="">
+                                <div class="tt-tuyendung">
+                                        <span> Bán hàng part time 22h - 6h </span>
+                                        <span><i class="fas fa-map-marker-alt"></i>236 Hoàng Quốc Việt</span>
+                                        <a href="{{ url('tuyendungdetaits') }}">Xem ngay</a>
+                                </div>
+                            </div>
+                            <div class="tuyendung-box">
+                                    <img src="images/product-1.jpg" alt="">
+                                    <div class="tt-tuyendung">
+                                            <span> Bán hàng part time 22h - 6h </span>
+                                            <span><i class="fas fa-map-marker-alt"></i>236 Hoàng Quốc Việt</span>
+                                            <a href="{{ url('tuyendungdetaits') }}">Xem ngay</a>
+                                    </div>
+                                </div>--}}
+
                     </div>
 
 

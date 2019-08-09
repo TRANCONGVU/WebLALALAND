@@ -98,7 +98,7 @@
                         <input type="hidden" name="productid" value="{{ $product->id }}" />--}}
                     <div class="col-md-6  text-left d-flex flex-column">
                         <h4>{{ $product->name }}</h4>
-                        <span class="gia">Giá Khuyến Mại : {{ number_format($product->sale)." VNĐ" }}</span>
+                        <span class="gia">{{ number_format($product->sale)." VNĐ" }}</span>
                         <input id="sale" type="hidden" value="{{ $product->sale }}">
                         <span class="">Sale :  {{ 100-($product->sale/$product->price)*100 }}%</span>
                         <b>Giá cũ :</b> <p class="" style="  text-decoration: line-through;">{{ number_format($product->price)." VNĐ" }}</p>

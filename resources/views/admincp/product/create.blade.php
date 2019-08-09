@@ -26,6 +26,11 @@
                         @enderror
                         <p style="color:red">{{ $errors->first('name') }}</p>
                     </div>
+                    <div class="form-group">
+                        <label class="text-body custom-control-label">Mã Sản Phẩm(*):</label>
+                        <input id="code" type="text" class="form-control backgroundinput @error('code') is-invalid @enderror" name="code" value="{{ old('code') }}" required autocomplete="name" autofocus>
+
+                    </div>
 
                     <div class="form-group">
                         <label class="text-body custom-control-label">Danh Mục(*):</label>
@@ -55,6 +60,7 @@
                         <div id='imagePreviewfile-0-0'>
                         </div>
                     </div>
+
 
                     <div class="form-group">
                         <label class="text-body custom-control-label">Giá Niêm Yết(VNĐ)(*):</label>
@@ -150,7 +156,7 @@
                                 //Kiểm tra định dạng
                                 if (!allowedExtensions.exec(filePath)) {
                                     alert('You can only select files with .jpeg/.jpg/.png/.gif extension.');
-                                    obj.value = '';
+                                    obj.valuơe = '';
                                     return false;
                                 } else {
                                     //Image preview
@@ -188,6 +194,7 @@
                         </script>
 
                     </div>
+
 
                     <div class="form-group">
                         <input id="quantity" type="hidden" value="0">

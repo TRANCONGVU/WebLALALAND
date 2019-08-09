@@ -46,6 +46,7 @@ Route::get('tintuc/{slug}', [
     'uses' => 'Controller_1@get_tin'
 ]);
 
+
     Route::group(['prefix' => 'profile'], function (){
         Route::get('/{id}', 'Controller_1@profile')->name('profile');
         Route::post('changeinfor/{id}', 'Controller_1@changeinfor')->name('changeinfor');
@@ -177,7 +178,7 @@ Route::get('dangnhap', [
 
 Route::post('createuser', 'Auth\UserLoginController@createuser')->name('createuser');
 Route::post('loginuser', 'Auth\UserLoginController@loginuser')->name('loginuser');
-Route::post('logoutuser', 'Auth\UserLoginController@logout')->name('logoutuser');
+Route::get('logoutuser', 'Auth\UserLoginController@logout')->name('logoutuser');
 Route::get('sale', [
 	'as' =>'sale  ',
 	'uses' => 'Controller_1@get_sale'

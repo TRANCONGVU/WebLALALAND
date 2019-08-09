@@ -63,12 +63,7 @@
 </div>
 <div class="container-flui" style="position : relative">
     <div class="box-up">
-        <a id="hihi" onclick="hihi">
-            <div class="box-up-item bacham">
-                <i class="fas fa-ellipsis-h"></i>
-            </div>
-        </a>
-        <div class="hide">
+        <div id="contact" hidden>
             <a href="#">
                 <div class="box-up-item">
                     <a href="mailto:{{ $introduce->email }}"><img src="images/mail-icon.png" alt=""></a>
@@ -86,27 +81,25 @@
             </a>
 
         </div>
+        <a id="showcontact" onclick="showcontact()">
+            <div class="box-up-item bacham">
+                <i class="fas fa-ellipsis-h"></i>
+            </div>
+        </a>
+
 
     </div>
 </div>
 <script type="text/javascript">
-    var lk = document.getElementById("hihi");
-    var hihi = document.querySelector(".hide");
-    var hidett = true;
-    lk.addEventListener('click', function () {
-        if (hidett === true) {
-            hihi.classList.add('show');
-            hihi.classList.remove('hide');
-            return hidett = false;
-            console.log(hidett);
-        } else {
-            hihi.classList.add('hide');
-            hihi.classList.remove('show');
-            return hidett = true;
-            console.log(hidett);
+    function showcontact() {
+        //var contact= document.getElementById('contact');
+        if($('#contact').prop('hidden')===true){
+            document.getElementById('contact').removeAttribute('hidden');
         }
-    });
-
+        else {
+            $('#contact').prop('hidden', true);
+        }
+    }
 </script>
 
 <section class="back-to-top">

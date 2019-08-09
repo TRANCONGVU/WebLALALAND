@@ -86,6 +86,7 @@ class CateProductController extends Controller
      */
     public function update(Request $request,$id)
     {
+        //dd($id);
         $this->validate($request,[
             'name'=>'required|min:3'
         ],

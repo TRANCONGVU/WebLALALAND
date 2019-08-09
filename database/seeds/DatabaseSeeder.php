@@ -112,7 +112,7 @@ class DatabaseSeeder extends Seeder
               }
         DB::table('sliders')->insert([
             [
-                'image' => 'xnrS_image_banner-1.jpg'
+                'image' => '0FFa_image_banner-3.jpg'
             ],
             [
                 'image' => 't4BX_image_banner-2.jpg'

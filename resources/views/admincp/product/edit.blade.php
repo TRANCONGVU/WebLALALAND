@@ -53,6 +53,11 @@
 
                     </div>
                     <div class="form-group">
+                        <label class="text-body custom-control-label">Mô tả(*):</label>
+                        {{--<input id="price" type="number" class="form-control backgroundinput @error('name') is-invalid @enderror" name="price" value="{{ old('price') }}" required autocomplete="price" autofocus>--}}
+                        <textarea class="form-control" required name="describe" rows="5">{{ $product->describe }}</textarea>
+                    </div>
+                    <div class="form-group">
                         <label class="text-body custom-control-label">Ảnh(*):</label>
                         <input name='file-0-0' id='file-0-0' class='form-control' type='file' onchange='fileValidation(this)'>
                         <input name="old-image" type="hidden" value="{{ $product->image }}">
@@ -73,8 +78,16 @@
                     </div>
                     <div class="form-group">
                         <label class="text-body custom-control-label">Giá Sale(VNĐ):</label>
-                        <input id="sale" type="number" class="form-control backgroundinput @error('name') is-invalid @enderror" name="sale" value="{{ $product->sale  }}" autocomplete="price" autofocus>
-
+                        {{--<input id="sale" type="number" class="form-control backgroundinput @error('name') is-invalid @enderror" name="sale" value="{{ $product->sale  }}" autocomplete="price" autofocus>--}}
+                        <select class="form-control" name="sale">
+                            @for($i=0; $i<=100; $i+=10)
+                                <option value="{{ $i }}"
+                                    @if($sale == $i)
+                                        selected
+                                    @endif
+                                >{{ $i.'%' }}</option>
+                            @endfor
+                        </select>
                         @error('sale')
                         <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>

@@ -196,6 +196,8 @@ class UpDb extends Migration
             $table->integer('status')->default(1);
         });
 
+
+
         Schema::create('product_details',function (Blueprint $table){
             $table->bigIncrements('id');
             $table->bigInteger('product_id')->unsigned();
@@ -224,6 +226,20 @@ class UpDb extends Migration
                 ->onDelete('cascade');
             $table->integer('quantity')->default(1);
         });
+        Schema::create('product_likes',function (Blueprint $table){
+            $table->bigIncrements('id');
+            $table->bigInteger('product_id')->unsigned();
+            $table->foreign('product_id')
+                ->references('id')
+                ->on('products')
+                ->onDelete('cascade');
+            $table->bigInteger('user_id')->unsigned();
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade');
+        });
+
 
         Schema::create('payment_methods',function (Blueprint $table){
             $table->bigIncrements('id');
