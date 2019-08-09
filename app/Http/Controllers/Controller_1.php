@@ -13,38 +13,41 @@ class Controller_1 extends Controller
 {
     public function __construct()
     {
-        $cate_news=DB::table('cate_news')->get();
-        View::share('cate_news', $cate_news);
-        $new_post = DB::table('news')->orderBy('id', 'desc')->limit(4)->get();
-        View::share('new_posts', $new_post);
-        $cate_products = DB::table('cate_products')->where('status', '=',1)->orderBy('id', 'desc')->get();
-        View::share('cate_products', $cate_products);
-        $products = DB::table('products')->orderBy('id','desc')->get();
-        View::share('headerproducts', $products);
-        $collection = DB::table('collections')->where('status', '=',1)->get();
-        View::share('headcollections', $collection);
+         $cate_news=DB::table('cate_news')->get();
+         View::share('cate_news', $cate_news);
+         $new_post = DB::table('news')->orderBy('id', 'desc')->limit(4)->get();
+         View::share('new_posts', $new_post);
+         $cate_products = DB::table('cate_products')->where('status', '=',1)->orderBy('id', 'desc')->get();
+         View::share('cate_products', $cate_products);
+         $products = DB::table('products')->orderBy('id','desc')->get();
+         View::share('headerproducts', $products);
+         $collection = DB::table('collections')->where('status', '=',1)->get();
+         View::share('headcollections', $collection);
+         View::share('all_products', DB::table('products')->get());
+         View::share('introduce', DB::table('introduce')->first());
+         View::share('likes', DB::table('product_likes')->get());
+         View::share('soluong', '1');
 
-        $introduce = DB::table('introduce')->first();
-        View::share('introduce', $introduce);
+     }
 
+     public  function get_trangchu(){
+         $data['sliders']=DB::table('sliders')->limit(3)->orderBy('id','desc')->get();
+         $data['product_hots']=DB::table('products')
+          /*   ->select('products.*', 'product_likes.user_id')
+             ->leftJoin('product_likes', 'product_likes.product_id', '=', 'products.id')*/
+             ->limit(4)->orderBy('pay','desc')->get();
+         $data['product_news']=DB::table('products')
+            /* ->select('products.*', 'product_likes.user_id')
+             ->leftJoin('product_likes', 'product_likes.product_id', '=', 'products.id')*/
+             ->limit(4)->orderBy('id','desc')->get();
+         //dd($data['product_hots']);
 
-        View::share('soluong', '10');
-
-    }
-
-    public  function get_trangchu(){
-        $data['sliders']=DB::table('sliders')->limit(3)->orderBy('id','desc')->get();
-        $data['product_hots']=DB::table('products')
-            ->limit(4)->orderBy('pay','desc')->get();
-        $data['product_news']=DB::table('products')
-            ->limit(4)->orderBy('id','desc')->get();
-        //dd($data['product_hots']);
-
-    	return view('pages.trangchu', $data);
-    }
-    /*
-     * sản phẩm
-     * */
+         
+         return view('pages.trangchu', $data);
+     }
+     /*
+      * sản phẩm
+      * */
     public  function get_chitietsanpham($slug){
         $data['product']=DB::table('products')
             ->where('slug', $slug)->first();
@@ -57,7 +60,7 @@ class Controller_1 extends Controller
             ->where('category_id',  $data['product']->category_id)->limit(5)->get();
         $data['product_hot']=DB::table('products')
             ->limit(4)->orderBy('pay','desc')->first();
-//        dd($data['colors']);
+//        dd($data['product']);
 
         return view('pages.chitietsanpham', $data);
     }
@@ -213,6 +216,25 @@ class Controller_1 extends Controller
                 'money' => $value->price*$value->quantity,
             ]);
         }
+        foreach ($carts as $value) {
+            $quantity = DB::table('color_size')
+                ->select('color_size.quantity')
+                ->join('product_details', 'product_details.id', '=', 'color_size.detail_id')
+                ->where([
+                    ['product_details.product_id', $value->id],
+                    ['product_details.color_id', $value->attributes->colorid],
+                    ['color_size.size_id', $value->attributes->sizeid],
+                ])->first();
+            DB::table('color_size')
+                ->join('product_details', 'product_details.id', '=', 'color_size.detail_id')
+                ->where([
+                    ['product_details.product_id', $value->id],
+                    ['product_details.color_id', $value->attributes->colorid],
+                    ['color_size.size_id', $value->attributes->sizeid],
+                ])->update([
+                    'quantity' => $quantity->quantity-$value->quantity,
+                ]);
+        }
 
         if(isset($input['userid'])){
             DB::table('users')->where('id', $input['userid'])->update([
@@ -220,6 +242,8 @@ class Controller_1 extends Controller
                'phone' =>  $input['phone'],
             ]);
         }
+
+        \Cart::clear();
     return \view('pages.xacnhan', compact('cartid'));
 
 
@@ -286,7 +310,8 @@ class Controller_1 extends Controller
         return view('pages.search', $data);
     }
     public  function get_gioithieu(){
-        $data['introduce'] = DB::table('introduce')->orderBy('id','desc')->limit(1)->get();
+        $data['sliders']=DB::table('sliders')->limit(3)->orderBy('id','desc')->get();
+        $data['introduce'] = DB::table('introduce')->orderBy('id','desc')->first();
     	return view('pages.gioithieu',$data);
     }
     public  function get_lienhe(){

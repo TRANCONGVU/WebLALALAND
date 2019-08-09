@@ -1,4 +1,7 @@
 @extends('master-layout')
+@section('title')
+    Thời trang Phụ Nữ
+@endsection
 @section('content')
 
 <section class="section-1 container-fluid owl-carousel owl-theme">
@@ -90,13 +93,17 @@
         <span> # hàng mới về </span>
     </div>
     <div class="container">
-        <div class="row">
+        <div class="row sanphammoi">
             @foreach($product_news as $product)
                 <div class="col-md-3 col-sm-6 col-6 new-product">
                     <div class="product-img">
-                        <img src="{{asset('images/products/'.$product->image)}}" alt="" width="208px" height="406px">
+                        <img src="{{asset('images/products/'.$product->image)}}" class="img1" alt="" width="208px" height="406px">
                         <div class="over-lay d-flex flex-column justify-content-center">
-                            <a href=""><i class="far fa-heart"></i></a>
+                            @guest
+                                <a data-toggle="modal" data-target="#loginModal" ><i class="far fa-heart"></i></a>
+                            @else
+                              {{--@if($product->user_id)--}}
+                            @endguest
                             <a href="{{ url('sanpham/'.$product->slug) }}">Mua ngay</a>
                         </div>
                     </div>
@@ -229,17 +236,36 @@
 
     </div>
     <div class="show-more text-center mb-3">
-        <a href="#">Xem thêm</a>
+        <a href="{{ url('loaisanpham/all') }}">Xem thêm</a>
     </div>
     </div>
 </section>
 <section class="section-3 container-fluid my-4">
-    {{--<img src="{{asset('')}}images/banner-3.jpg" alt="">--}}
     @foreach($sliders as $key => $slider)
         @if($key==0)
-            <img src="{{asset('assets/img/'.$slider->image)}}" alt="">
+                <img src="{{asset('assets/img/'.$slider->image)}}" alt="">
         @endif
     @endforeach
+             {{--   <div class="ss3-content">
+                    <span>Chương trình khuyến mãi 20 / 10 / 2019</span>
+                    <span>Giảm giá 20% - 02% từ 01/10 - 20/10</span>
+                </div>
+                <div class="show-more" style="margin-top : 20px;">
+                        <a href="">Xem ngay</a>
+                </div>--}}
+        {{--<div class="col-md-6 ss3-img">
+                <img src="{{asset('')}}images/banner-3.jpg" alt="">
+                <div class="ss3-content">
+                    <span>Bộ sưu tập đông hè 2019</span>
+                    <span>Giảm giá 20% - 02% từ 01/10 - 20/10</span>
+
+
+
+                </div>
+                <div class="show-more" style="margin-top : 20px;">
+                        <a href="">Xem ngay</a>
+                </div>
+        </div>--}}
 </section>
 
 <div class="container border-line">
@@ -252,7 +278,12 @@
             <div class="product-img">
                 <img src="{{asset('images/products/'.$product->image)}}" alt="" width="208px" height="406px">
                 <div class="over-lay d-flex flex-column justify-content-center">
-                    <a href=""><i class="far fa-heart"></i></a>
+                    @guest
+                        <a data-toggle="modal" data-target="#loginModal" ><i class="far fa-heart"></i></a>
+                    @else
+                        <a href="" style="color: red"><i class="far fa-heart"></i></a>
+                    @endguest
+
                     <a href="">Mua ngay</a>
                     <a href="#">Xem ngay</a>
                 </div>
@@ -331,12 +362,11 @@
     <span> # Tin tức nổi bật </span>
 </div>
 <section class="section-4">
-    <div class="container">
-        <div class="row noibatsp">
+        <div class="container fashion owl-carousel owl-theme">
             @foreach($new_posts as $key =>$value)
-            <div class="col-md-4 col-sm-6 col-6 product">
+            <div class=" item product">
                 <div class="tinnoibat">
-                    <img src="{{asset('images/news/'.$value->image)}}" alt="">
+                    <img src="{{asset('images/news/'.$value->image)}}" class="img_new" alt="">
                     <div class="over-lay">
                     </div>
                 </div>

@@ -4,16 +4,11 @@
 @endsection
 @section('content')
 
-
+    <div class="bs-example4" data-example-id="simple-responsive-table">
     <h1>
         Danh sách Sản Phẩm...
     </h1>
     <br>
-    @if(session('thongbao'))
-        <script>
-            alert('{{ session('thongbao') }}');
-        </script>
-    @endif
     <div class="table-data__tool">
         <a class="btn btn-success" href="{{ route('create.product') }}">Thêm Sản phẩm</a>
     </div>
@@ -66,5 +61,6 @@
             return confirm("Bạn có chắc chắn không?")
         }
     </script>
+    </div>
 
 @endsection

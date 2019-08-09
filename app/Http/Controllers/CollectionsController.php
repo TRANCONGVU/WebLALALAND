@@ -47,7 +47,7 @@ class CollectionsController extends Controller
     }
 
     public function update(Request $request, $id){
-
+        //dd($request->all());
         $input=$request->all();
 
 
@@ -61,7 +61,7 @@ class CollectionsController extends Controller
             }
             $file->move('images/collections/', $avatar);
             if($old->image!='collections.jpg' && file_exists('images/collections/' . $old->image)){
-                unlink('images/collections/' . $old->avatar);
+                unlink('images/collections/' . $old->image);
             }
             $file_name = $avatar;
         }

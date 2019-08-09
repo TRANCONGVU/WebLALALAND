@@ -1,4 +1,7 @@
 @extends('master-layout')
+@section('title')
+    {{ $product->name }}
+@endsection
 @section('content')
     <link rel="stylesheet" href="{{ asset('xzoom/xzoom.css') }}">
     <style>
@@ -93,14 +96,16 @@
                    {{-- <form action="#" method="post" name="">
                         @csrf
                         <input type="hidden" name="productid" value="{{ $product->id }}" />--}}
-                    <div class="col-md-6  text-left d-flex flex-column">
+                    <div class="col-md-6  text-left d-flex flex-column" style="margin-top: -43px">
                         <h4>{{ $product->name }}</h4>
-                        <span class="gia">Giá Khuyến Mại : {{ number_format($product->sale)." VNĐ" }}</span>
+                        <span class="gia">{{ number_format($product->sale)." VNĐ" }}</span>
+                        <input id="sale" type="hidden" value="{{ $product->sale }}">
                         <span class="">Sale :  {{ 100-($product->sale/$product->price)*100 }}%</span>
                         <b>Giá cũ :</b> <p class="" style="  text-decoration: line-through;">{{ number_format($product->price)." VNĐ" }}</p>
                         <span>Mã hàng : {{ $product->code }}</span>
+                        
                         <div class="form-group mt-3">
-                            <label for="1">Màu sắc</label>
+                            <label for="1">Màu sắc:</label>
                             <select class="form-control my-3" name="productcolor" id="productcolor"  onchange="selectsize(this)">
                                 <option value="0">--Màu--</option>
                                 @foreach($colors as $color)
@@ -108,6 +113,7 @@
                                 @endforeach
                                     <script>
                                         function selectsize(obj){
+                                            var chosesize= document.querySelector('#chosesize');
                                             var options = obj.children;
                                             var x = obj.value;
                                             if(x==="0"){
@@ -117,7 +123,8 @@
                                                 for (var i = 0; i < options.length; i++) {
                                                     if (options[i].selected) {
                                                         $.get('{{ url('selectsize/') }}/' + options[i].id, function (data) {
-                                                            $("#sizeproduct").html(data);
+                                                            $("#sizeproduct").html(data)
+                                                            chosesize.classList.remove('hide');
                                                         });
                                                     }
                                                 }
@@ -130,64 +137,114 @@
                                     </script>
                                 {{--<option>Green</option>--}}
                             </select>
-                            <label for="1">Kích cỡ</label>
-                            <select class="form-control" id="sizeproduct" name="productsize">
+                            <div id="chosesize" class="hide">
+                            <label for="1">Kích cỡ:</label>
+                            <select class="form-control" id="sizeproduct" name="productsize" onchange="quantity(this)">
 
                             </select>
-                        </div>
-                        <h6>Số lượng</h6>
-                        <div class="soluong d-flex justify-content-between">
-                            @csrf
-                            <button class="btn" onclick="minus()"><i class="fas fa-minus"></i></button>
-                            <input name="quantity" class="quantity" id="quantity" type="number" value="1" onchange="cost(this)">
-                            <input id="sale" type="hidden" value="{{ $product->sale }}">
-                            <button class="btn" onclick="plus()"><i class="fas fa-plus"></i></button>
+
+                                <input id="quantitynow" type="hidden" value="0">
                             <script>
-                                function plus(){
-                                    var number=parseInt($('#quantity').val())+1;
-                                    $('#quantity').val(number);
-                                    var total = number*parseInt($('#sale').val());
-
-                                    document.getElementById('total').innerHTML= total.toLocaleString()+' VNĐ';
+                                function quantity(obj) {
+                                    var quantity = document.querySelector('#quantityselect');
+                                    var error = document.querySelector('#errorquantity');
+                                    //$('#quantitynow').val(obj.value);
+                                    var agrs = {
+                                        url: "{{ url('quantity') }}", // gửi ajax đến file result.php
+                                        type: "post", // chọn phương thức gửi là post
+                                        dataType: "text", // dữ liệu trả về dạng text
+                                        data: { // Danh sách các thuộc tính sẽ gửi đi
+                                            _token: '{{ csrf_token() }}',
+                                            product: '{{ $product->id }}',
+                                            color: $('#productcolor').val(),
+                                            size: obj.value,
+                                        },
+                                        success: function (result) {
+                                            quantity.classList.remove('hide');
+                                            error.classList.remove('alert');
+                                            error.classList.remove('alert-danger');
+                                            error.innerHTML='';
+                                            $('#quantitynow').val(result);
+                                            document.getElementById('quantity').value=1;
+                                            document.getElementById('total').innerHTML = '{{ number_format($product->sale) }}' + ' VNĐ'
+                                        }
+                                    };
+                                    $.ajax(agrs);
                                 }
-                                function minus() {
-                                    if(parseInt($('#quantity').val()) > 1){
-                                        var number = parseInt($('#quantity').val()) - 1;
+                            </script>
+                            </div>
+                        </div>
 
-                                        $('#quantity').val(number);
-                                        var total = number * parseInt($('#sale').val());
 
-                                        document.getElementById('total').innerHTML = total.toLocaleString() + ' VNĐ';
-                                    }
-                                }
+                        <div id="quantityselect" class="hide">
+                            @csrf
+                            <h6>Số lượng</h6>
+                            <input name="quantity" class="form-control" id="quantity" type="number" value="1" onchange="cost(this)">
+                            <script>
+
                                 function cost(obj) {
-                                    //alert(obj.value);
+                                    var error = document.querySelector('#errorquantity');
+                                    //alert($('#quantitynow').val());
                                     if(obj.value <1){
-                                        alert('bạn không thể chọn số lượng nhỏ hơn 1');
+                                        error.classList.remove('hide');
+                                        error.classList.add('alert');
+                                        error.classList.add('alert-danger');
+                                        error.innerHTML='bạn không thể chọn số lượng nhỏ hơn 1';
                                         obj.value= 1;
                                     }
-                                    else{
+                                    else if(obj.value > $('#quantitynow').val() ) {
+                                        error.classList.remove('hide');
+                                        error.classList.add('alert');
+                                        error.classList.add('alert-danger');
+                                        error.innerHTML='Sản phảm trong kho không đủ!';
+                                        obj.value= $('#quantitynow').val();
+                                    }else{
+                                        error.classList.add('hide');
                                         var total = parseInt(obj.value) * parseInt($('#sale').val());
-
                                         document.getElementById('total').innerHTML = total.toLocaleString() + ' VNĐ';
                                     }
                                 }
                             </script>
+                            <h6>
+                                Số tiền :   <span id="total"> {{ number_format($product->sale). " VNĐ" }}</span>
+                            </h6>
                         </div>
-                        <h6>
-                            Số tiền :   <span id="total"> {{ number_format($product->sale). " VNĐ" }}</span>
-                        </h6>
-                        <div id="result"></div>
+                        <div id="errorquantity"></div>
                     </div>
 
                 </div>
-                <div class="show-more text-center mb-3">
-                    <button class="btn btn-outline-success"   data-toggle="modal" data-target="#modal1" onclick="addcart()">Thêm vào giỏ hàng</button>
+                <hr>
+                <div class="form-group mt-3">
+                    <label for="1">Mô tả:</label>
+                    <div class="describe">
+                        {{ $product->describe }}
+                    <hr>
+                    </div>
                 </div>
+                <div id="errorcart"></div>
+                <div class="show-more text-center mb-3" id="actionaddcart">
+                    <button class="btn btn-outline-success" onclick="addcart()">Thêm vào giỏ hàng</button>
+                </div>
+                <div id="addcartsuccess" style="text-align: center" class="hide">
+                    <a class="btn btn-outline-primary" href="{{ url('trang-chu') }}">Tiếp tục mua sắm</a>
+                    <a class="btn btn-outline-success" href="{{ url('cart') }}">Tới giỏ hàng</a>
+                </div>
+
                 <script>
                     function addcart() {
+                        var errorcart= document.querySelector('#errorcart');
+                        var actionaddcart= document.querySelector('#actionaddcart');
+                        var done= document.querySelector('#addcartsuccess');
+                        errorcart.classList.add('alert');
                         if($('#productcolor').val() === '0'){
-                            alert('bạn chưa chọn size');
+                            errorcart.classList.remove('alert-success');
+                            errorcart.classList.add('alert-danger');
+                            errorcart.innerHTML='Bạn chưa chọn Màu!';
+                        }
+                        if($('#sizeproduct').val() === '0'){
+                            errorcart.classList.remove('alert-success');
+                            errorcart.classList.add('alert-danger');
+                            errorcart.innerHTML='Bạn chưa chọn size!';
                         }
                         else {
                             var agrs = {
@@ -204,7 +261,12 @@
                                 success: function (result) {
                                     // Sau khi gửi và kết quả trả về thành công thì gán nội dung trả về
                                     // đó vào thẻ div có id = result
-                                    $('#result').html(result);
+                                    errorcart.classList.remove('alert-danger');
+                                    errorcart.classList.add('alert-success');
+                                    errorcart.innerHTML='Thêm vào giỏ hàng thành công!';
+                                    done.classList.remove('hide');
+                                    actionaddcart.classList.add('hide');
+
                                 }
                             };
 
@@ -212,7 +274,6 @@
                             $.ajax(agrs);
                         }
                     }
-
                 </script>
                 <div class="container border-line">
                     <span> # Sản phẩm liên quan </span>

@@ -9,17 +9,11 @@
         border: none;
     }
 </style>
-
+<div class="bs-example4" data-example-id="simple-responsive-table">
 <h1>
         Danh sách Bộ Sưu Tập...
     </h1>
     <br>
-    @if(session('thongbao'))
-        <script>
-            alert('{{ session('thongbao') }}');
-
-        </script>
-    @endif
     <div class="table-data__tool">
     <button class="btn btn-success" id="btadd"  onclick="addcate()">Thêm Bộ Sưu Tập</button>
     <button class="btn btn-danger" id="bthuy"  onclick="huycate()">Hủy</button>
@@ -196,5 +190,6 @@
         
     
     </script>
+</div>
 
     @endsection

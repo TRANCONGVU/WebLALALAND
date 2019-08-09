@@ -46,6 +46,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
 <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+    <link rel="stylesheet" href="{{ asset('assets/toar/css/toastr.css') }}">
   
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
 
@@ -54,6 +55,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <script type="text/javascript" charset="utf8" src="/DataTables/datatables.js"></script> --}}
 
         <script type="text/javascript" src="{{asset('')}}ckeditor/ckeditor.js"></script>
+        <script src="{{ asset('assets/toar/js/toastr.min.js') }}"></script>
         {{-- <script type="text/javascript" src="//cdn.ckeditor.com/4.5.3/standard/ckeditor.js"></script> --}}
         <link rel="stylesheet" href="{{asset('ducbe.css')}}">
 
@@ -73,6 +75,24 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <section style="margin: 2.5%">
         @yield('content')
     </section>
+        @if(session('thongbao'))
+            <script type="text/javascript">
+                toastr.success('{{ session('thongbao') }}', 'Thông báo', {timeOut: 3000});
+                toastr.options.progressBar = true;
+            </script>
+        @endif
+        @if ($errors->any())
+            @foreach ($errors->all() as $error)
+                <script type="text/javascript">
+                    toastr.error('{{ $error }}', 'Thông báo', {timeOut: 3000});
+                </script>
+            @endforeach
+        @endif
+        @if(session('error'))
+            <script type="text/javascript">
+                toastr.error('{{ session('error') }}', 'Thông báo', {timeOut: 3000});
+            </script>
+        @endif
     <!--body wrapper end-->
     </div>
     <!--footer section start-->

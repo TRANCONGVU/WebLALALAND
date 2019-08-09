@@ -25,6 +25,10 @@
     .body{
         padding: 20px;
     }
+    .menu-mobile .search {
+        left: -165px;
+        top: -10px;
+    }
 }
 @media only screen and (max-width: 1200px) {
 
@@ -52,7 +56,9 @@
     .product-banner .banner-item {
         margin: 0px 10px;
     }
-
+    .dathang{
+        display: none;
+    }
 }
 @media only screen and (max-width: 1060px) {
     .nav-horizontal-content-active .nav-logo {
@@ -147,7 +153,10 @@
 	.nav-horizontal-container-active,.nav-horizontal-container-active-1{
 		padding-top: 5px;
 		padding-bottom: 5px;
-	}
+    }
+    .head-2-left a {
+        margin: 0 7px;
+    }
 }
 @media only screen and (max-width: 826px) {
     .title-banner span:nth-child(1) {
@@ -282,7 +291,7 @@
     }
 
     .section-1 .item {
-        height: 350px;
+        height: 450px;
     }
     .title-banner span:nth-child(1) {
         font-size: 30px;
@@ -295,11 +304,12 @@
         top: 25%;
     }
     .owl-carousel .owl-nav button.owl-prev {
-        top: 20%;
+        top: 28%;
     }
-    .product-img img{
+    .product-img .img1{
         height: 200px;
     }
+
     .chose div {
         margin: 0%;
     }
@@ -317,8 +327,9 @@
         height: 30px;
     }
     .box-up-item{
-        width: 30px;
-        height: 30px;
+        width: 40px;
+        height: 40px;
+        right: -5px;
     }
 
 }

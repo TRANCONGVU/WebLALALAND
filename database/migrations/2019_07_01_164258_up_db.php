@@ -57,15 +57,7 @@ class UpDb extends Migration
             $table->timestamps();
         });
 
-        //san pham
-        Schema::create('cate_products', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('name')->unique();
-            $table->string('slug')->index();
-            $table->tinyInteger('status')->default(1);
-            $table->bigInteger('total_product')->default(0);
-            $table->timestamps();
-        });
+
        /* Schema::create('product_type', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
@@ -161,12 +153,22 @@ class UpDb extends Migration
             $table->integer('status')->default(1);
             $table->timestamps();
         });
+        //san pham
+        Schema::create('cate_products', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('name')->unique();
+            $table->string('slug')->index();
+            $table->tinyInteger('status')->default(1);
+            $table->bigInteger('total_product')->default(0);
+            $table->timestamps();
+        });
 
         Schema::create('products', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
             $table->string('slug');
             $table->string('code');
+            $table->text('describe');
             $table->integer('pay')->default(0);
             $table->integer('sale')->default(0);
             $table->integer('price');
@@ -193,6 +195,8 @@ class UpDb extends Migration
             $table->string('name');
             $table->integer('status')->default(1);
         });
+
+
 
         Schema::create('product_details',function (Blueprint $table){
             $table->bigIncrements('id');
@@ -222,6 +226,20 @@ class UpDb extends Migration
                 ->onDelete('cascade');
             $table->integer('quantity')->default(1);
         });
+        Schema::create('product_likes',function (Blueprint $table){
+            $table->bigIncrements('id');
+            $table->bigInteger('product_id')->unsigned();
+            $table->foreign('product_id')
+                ->references('id')
+                ->on('products')
+                ->onDelete('cascade');
+            $table->bigInteger('user_id')->unsigned();
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade');
+        });
+
 
         Schema::create('payment_methods',function (Blueprint $table){
             $table->bigIncrements('id');

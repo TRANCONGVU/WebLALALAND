@@ -13,7 +13,7 @@
         display: none;
     }
 </style>
-
+<div class="bs-example4" data-example-id="simple-responsive-table">
 <h1>
         Danh sách Kích cỡ sản phẩm...
     </h1>
@@ -184,5 +184,5 @@
         
     
     </script>
-
+</div>
     @endsection

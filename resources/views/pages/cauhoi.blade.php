@@ -1,4 +1,7 @@
 @extends('master-layout')
+@section('title')
+    Các câu hỏi thường gặp
+@endsection
 @section('content')
 
 

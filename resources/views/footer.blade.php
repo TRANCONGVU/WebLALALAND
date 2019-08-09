@@ -53,9 +53,9 @@
             </div>
         </div>
         <div class="d-flex flex-column bot-footer text-left">
-            <span><i class="fas fa-copyright"></i> Coppy right Talent Win Dev Team</span>
-            <span>Số điện thoại: 024 3193 4294 - Email: cskh@company.vn</span>
-            <span>Địa chỉ:Bách Khoa . Q. Hai Bà Trưng, TP. Hà Nội</span>
+            <span><i class="fas fa-copyright"></i> Coppy right Talent Wins Teachnology</span>
+            <span>Số điện thoại: <a href="tel:0927151535">0927 151 535</a> - Email: contact@talentwins.co</span>
+            <span>Địa chỉ:Tòa CT2, Khu đô thi Thái Hà Constrexim, 43 Phạm Văn Đồng, Hà Nội</span>
             <span>Giấy chứng nhận đăng kí kinh doanh số được cấp bởi Sở Kế hoạch và Đầu tư thành phố Hà Nội</span>
         </div>
     </div>
@@ -63,12 +63,7 @@
 </div>
 <div class="container-flui" style="position : relative">
     <div class="box-up">
-        <a id="hihi" onclick="hihi">
-            <div class="box-up-item bacham">
-                <i class="fas fa-ellipsis-h"></i>
-            </div>
-        </a>
-        <div class="hide">
+        <div id="contact" hidden>
             <a href="#">
                 <div class="box-up-item">
                     <a href="mailto:{{ $introduce->email }}"><img src="images/mail-icon.png" alt=""></a>
@@ -86,27 +81,25 @@
             </a>
 
         </div>
+        <a id="showcontact" onclick="showcontact()">
+            <div class="box-up-item bacham">
+                <i class="fas fa-ellipsis-h"></i>
+            </div>
+        </a>
+
 
     </div>
 </div>
 <script type="text/javascript">
-    var lk = document.getElementById("hihi");
-    var hihi = document.querySelector(".hide");
-    var hidett = true;
-    lk.addEventListener('click', function () {
-        if (hidett === true) {
-            hihi.classList.add('show');
-            hihi.classList.remove('hide');
-            return hidett = false;
-            console.log(hidett);
-        } else {
-            hihi.classList.add('hide');
-            hihi.classList.remove('show');
-            return hidett = true;
-            console.log(hidett);
+    function showcontact() {
+        //var contact= document.getElementById('contact');
+        if($('#contact').prop('hidden')===true){
+            document.getElementById('contact').removeAttribute('hidden');
         }
-    });
-
+        else {
+            $('#contact').prop('hidden', true);
+        }
+    }
 </script>
 
 <section class="back-to-top">
