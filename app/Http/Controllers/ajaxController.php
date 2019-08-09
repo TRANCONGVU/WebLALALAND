@@ -186,10 +186,10 @@ class ajaxController extends Controller
         $html.="<div style='text-align: right'><a onclick='deletecolorhas(".$colorid.")'><i class='fa fa-times' ></i></a> </div>";
         $html.="<h4>Thêm màu</h4>";
         $html.="<hr>";
-        $html.="<input name='color-has-".$colorid."' class='form-control' type='text' value='".$colorid."'>";
+        $html.="<input name='color-has-".$colorid."' class='form-control' type='hidden' value='".$colorid."'>";
         foreach ($images as $key => $image) {
             if($image!='') {
-                $html.= "<input name='old-file-has-".$colorid."-".$key."' value='".$image."'>";
+                $html.= "<input name='old-file-has-".$colorid."-".$key."' type='hidden' value='".$image."'>";
                 $html .= "<input name='file-has-".$colorid."-".$key."' id='file-".$key."-" . $colorid . "' class='form-control' type='file' onchange='fileValidation(this)'>";
                 $html .= "<div id='imagePreviewfile-".$key."-" . $colorid . "'>";
                 $html .= "<img style='width:200px;' src='" . asset('images/products/' . $image) . "'/>";
@@ -208,7 +208,7 @@ class ajaxController extends Controller
         foreach($sizehas as $keysize => $size){
             $html.='<h5>'.$size->name.'</h5>';
             $html.='<input type="hidden" id="size-name-has-'.$colorid.'-'.$keysize.'" name="size-name-has-'.$colorid.'-'.$keysize.'" value="'.$size->id.'">';
-            $html.='<input type="number" id="quantity-has-'.$colorid.'-'.$keysize.'" name="quantity-has-'.$colorid.'-'.$keysize.'" min="1" max="100" value="'.$size->quantity.'">';
+            $html.='<input type="hidden" id="quantity-has-'.$colorid.'-'.$keysize.'" name="quantity-has-'.$colorid.'-'.$keysize.'" min="1" max="100" value="'.$size->quantity.'">';
         }
         $html.="</div>";
         if(isset($keysize)) {
@@ -217,7 +217,7 @@ class ajaxController extends Controller
         else{
             $number=0;
         }
-        $html.="<input name='sizenumber-has-".$colorid."' id='sizenumberhas-".$colorid."' class='form-control' type='text' value='". $number."'>";
+        $html.="<input name='sizenumber-has-".$colorid."' id='sizenumberhas-".$colorid."' class='form-control' type='hidden' value='". $number."'>";
 
         $html.="</div>";
         echo $html;

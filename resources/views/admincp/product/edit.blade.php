@@ -105,7 +105,7 @@
                          </select>
                         <div id="hascolorcontent">
                         </div>
-                        <input name="has-color-select" id="hascolorselect" type="text" value="0">
+                        <input name="has-color-select" id="hascolorselect" type="hidden" value="0">
 
                           <script>
                               function colorhas(obj) {
@@ -137,7 +137,7 @@
                                 <option value="{{ $cate->id }}" id="colorvalue{{$cate->id}}">{{ $cate->name }}</option>
                             @endforeach
                         </select>
-                        <input type="text" id="color-number" name="color-number" value="0">
+                        <input type="hidden" id="color-number" name="color-number" value="0">
                         <div id="content-color" ></div>
                         <script>
                             function chonmau() {
@@ -148,7 +148,7 @@
                                 html+="<div style='text-align: right'><a onclick='huychon("+$('#color').val()+")'><i class='fa fa-times' ></i></a> </div>";
                                 html+="<h4>Thêm màu</h4>";
                                 html+="<hr>";
-                                html+="<input name='color"+number+"' class='form-control' type='text' value='"+$('#color').val()+"'>";
+                                html+="<input name='color"+number+"' class='form-control' type='hidden' value='"+$('#color').val()+"'>";
                                 html+="<input name='file-"+number+"-1' id='file-1-"+$('#color').val()+"' class='form-control' type='file' required onchange='fileValidation(this)'>";
                                 html+="<div id='imagePreviewfile-1-"+$('#color').val()+"'>";
                                 html+="</div>";
@@ -165,7 +165,7 @@
                                 @endforeach
                                     html+="</select>";
                                 html+="<div id='soluong"+$('#color').val()+"'>";
-                                html+="<input name='sizenumber"+$('#color').val()+"' id='sizenumber"+$('#color').val()+"' class='form-control' type='text' value='0'>";
+                                html+="<input name='sizenumber"+$('#color').val()+"' id='sizenumber"+$('#color').val()+"' class='form-control' type='hidden' value='0'>";
                                 html+="</div>";
                                 html+="<hr>";
                                 html+="</div>";

@@ -42,6 +42,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <!-- Meters graphs -->
     <script src="{{ asset('admin/dasbroad') }}/js/jquery-1.10.2.min.js"></script>
     <!-- Placed js at the end of the document so the pages load faster -->
+    <!--dbtable -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
 <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
