@@ -12,6 +12,27 @@
             border: none;
             color: white;
         }
+        * {box-sizing: border-box;}
+
+        .img-zoom-container {
+        position: relative;
+        }
+
+        .img-zoom-lens {
+        position: absolute;
+        border: 1px solid #d4d4d4;
+        /*set the size of the lens:*/
+        width: 40px;
+        height: 40px;
+        }
+
+        .img-zoom-result {
+        border: 1px solid #d4d4d4;
+        /*set the size of the result div:*/
+        width: 300px;
+        height: 300px;
+        }
+
     </style>
 <div class="container-fluid">
     <div class="container">
@@ -73,7 +94,11 @@
                             </ol>--}}
                             <div class="carousel-inner">
                                 <div class="carousel-item active">
-                                    <img class="xzoom" src="{{asset('images/products/'.$product->image)}}" alt="">
+                                    <div class="img-zoom-container xzoom">
+                                        <img id="myimage" src="{{asset('images/products/'.$product->image)}}" width="300" height="240">
+                                        {{-- <div id="myresult" class="img-zoom-result"></div> --}}
+                                    </div>
+                                    {{-- <img class="xzoom" src="{{asset('images/products/'.$product->image)}}" alt=""> --}}
                                 </div>
                                {{-- <div class="carousel-item">
                                     <img class="d-block w-100" src="images/product-1.jpg" alt="Second slide">
@@ -96,7 +121,7 @@
                    {{-- <form action="#" method="post" name="">
                         @csrf
                         <input type="hidden" name="productid" value="{{ $product->id }}" />--}}
-                    <div class="col-md-6  text-left d-flex flex-column" style="margin-top: -43px">
+                    <div class="col-md-6  text-left d-flex flex-column img-zoom-result" id="myresult" style="margin-top: -43px; color:blue;">
                         <h4>{{ $product->name }}</h4>
                         <span class="gia">{{ number_format($product->sale)." VNĐ" }}</span>
                         <input id="sale" type="hidden" value="{{ $product->sale }}">
@@ -104,7 +129,7 @@
                         <b>Giá cũ :</b> <p class="" style="  text-decoration: line-through;">{{ number_format($product->price)." VNĐ" }}</p>
                         <span>Mã hàng : {{ $product->code }}</span>
                         
-                        <div class="form-group mt-3">
+                        <div class="form-group mt-3" >
                             <label for="1">Màu sắc:</label>
                             <select class="form-control my-3" name="productcolor" id="productcolor"  onchange="selectsize(this)">
                                 <option value="0">--Màu--</option>
@@ -174,7 +199,7 @@
                             </script>
                             </div>
                         </div>
-
+                        
 
                         <div id="quantityselect" class="hide">
                             @csrf
@@ -332,5 +357,67 @@
 <script type="text/javascript" src="lib/OwlCarousel2-2.3.4/owl.carousel.min.js"></script>
 <script type="text/javascript" src="js/carousel.js"></script>
     <script type="text/javascript" src="{{asset('xzoom/xzoom.min.js')}}"></script>
+{{-- zoom  --}}
 
+<script>
+    function imageZoom(imgID, resultID) {
+      var img, lens, result, cx, cy;
+      img = document.getElementById(imgID);
+      result = document.getElementById(resultID);
+      /*create lens:*/
+      lens = document.createElement("DIV");
+      lens.setAttribute("class", "img-zoom-lens");
+      /*insert lens:*/
+      img.parentElement.insertBefore(lens, img);
+      /*calculate the ratio between result DIV and lens:*/
+      cx = result.offsetWidth / lens.offsetWidth;
+      cy = result.offsetHeight / lens.offsetHeight;
+      /*set background properties for the result DIV:*/
+      result.style.backgroundImage = "url('" + img.src + "')";
+      result.style.backgroundSize = (img.width * cx) + "px " + (img.height * cy) + "px";
+      /*execute a function when someone moves the cursor over the image, or the lens:*/
+      lens.addEventListener("mousemove", moveLens);
+      img.addEventListener("mousemove", moveLens);
+      /*and also for touch screens:*/
+      lens.addEventListener("touchmove", moveLens);
+      img.addEventListener("touchmove", moveLens);
+      function moveLens(e) {
+        var pos, x, y;
+        /*prevent any other actions that may occur when moving over the image:*/
+        e.preventDefault();
+        /*get the cursor's x and y positions:*/
+        pos = getCursorPos(e);
+        /*calculate the position of the lens:*/
+        x = pos.x - (lens.offsetWidth / 2);
+        y = pos.y - (lens.offsetHeight / 2);
+        /*prevent the lens from being positioned outside the image:*/
+        if (x > img.width - lens.offsetWidth) {x = img.width - lens.offsetWidth;}
+        if (x < 0) {x = 0;}
+        if (y > img.height - lens.offsetHeight) {y = img.height - lens.offsetHeight;}
+        if (y < 0) {y = 0;}
+        /*set the position of the lens:*/
+        lens.style.left = x + "px";
+        lens.style.top = y + "px";
+        /*display what the lens "sees":*/
+        result.style.backgroundPosition = "-" + (x * cx) + "px -" + (y * cy) + "px";
+      }
+      function getCursorPos(e) {
+        var a, x = 0, y = 0;
+        e = e || window.event;
+        /*get the x and y positions of the image:*/
+        a = img.getBoundingClientRect();
+        /*calculate the cursor's x and y coordinates, relative to the image:*/
+        x = e.pageX - a.left;
+        y = e.pageY - a.top;
+        /*consider any page scrolling:*/
+        x = x - window.pageXOffset;
+        y = y - window.pageYOffset;
+        return {x : x, y : y};
+      }
+    }
+    </script>
+    <script>
+    // Initiate zoom effect:
+    imageZoom("myimage", "myresult");
+    </script>
 @endsection
