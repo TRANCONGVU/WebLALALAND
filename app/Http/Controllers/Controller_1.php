@@ -42,6 +42,7 @@ class Controller_1 extends Controller
              ->limit(4)->orderBy('id','desc')->get();
          //dd($data['product_hots']);
 
+         
          return view('pages.trangchu', $data);
      }
      /*
@@ -309,7 +310,9 @@ class Controller_1 extends Controller
         return view('pages.search', $data);
     }
     public  function get_gioithieu(){
-    	return view('pages.gioithieu');
+        $data['sliders']=DB::table('sliders')->limit(3)->orderBy('id','desc')->get();
+        $data['introduce'] = DB::table('introduce')->orderBy('id','desc')->first();
+    	return view('pages.gioithieu',$data);
     }
     public  function get_lienhe(){
         $data['showroms'] = DB::table('showrom')->orderBy('id', 'desc')->get();

@@ -10,7 +10,7 @@
                 <div class="form-row">
                     @guest
                         <div class="form-group col-md-12">
-                            <label for="Họ và Tên">Email</label>
+                            <label for="Họ và Tên">Tên</label>
                             <input type="text" class="form-control" id="name" name="name" required placeholder="Họ và Tên" />
                         </div>
                         <div class="form-group col-md-12">
