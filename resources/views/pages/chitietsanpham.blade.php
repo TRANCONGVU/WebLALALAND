@@ -112,42 +112,34 @@
                         </div>
                         <div class="form-group mt-3">
                             <label for="1">Màu sắc:</label>
-                            <select class="form-control my-3" name="productcolor" id="productcolor"  onchange="selectsize(this)">
-                                <option value="0">--Màu--</option>
-                                @foreach($colors as $color)
-                                    <option value="{{ $color->colorid }}" id="{{ $color->detailid }}">{{ $color->name }}</option>
-                                @endforeach
+                            @foreach($colors as $color)
+                            <button class="btn has-color" id="color{{$color->colorid}}" onclick="selectcolor({{ $color->colorid }})">{{ $color->name }}</button>
+                            @endforeach
+                            <input id="selectcolor" type="hidden" value="">
                                     <script>
-                                        function selectsize(obj){
+                                        function selectcolor(colorid){
+                                            var x= document.querySelector('.active-color');
+                                            if(x!=null) {
+                                                x.classList.remove('active-color');
+                                            }
                                             var chosesize= document.querySelector('#chosesize');
-                                            var options = obj.children;
-                                            var x = obj.value;
-                                            if(x==="0"){
-                                                   $("#sizeproduct").html('');
-                                               }
-                                               else {
-                                                for (var i = 0; i < options.length; i++) {
-                                                    if (options[i].selected) {
-                                                        $.get('{{ url('selectsize/') }}/' + options[i].id, function (data) {
-                                                            $("#sizeproduct").html(data)
-                                                            chosesize.classList.remove('hide');
-                                                        });
-                                                    }
-                                                }
-                                                   $.get('{{ url('selectcolor/') }}/' + obj.value + '/{{ $product->id }}', function (data) {
-                                                       $("#product-carousel").html(data);
-                                                   });
-
-                                                }
+                                            $.get('{{ url('selectsize/') }}/' + colorid, function (data) {
+                                                $("#sizeproduct").html(data)
+                                                chosesize.classList.remove('hide');
+                                            });
+                                           $.get('{{ url('selectcolor/') }}/' + colorid + '/{{ $product->id }}', function (data) {
+                                               $("#product-carousel").html(data);
+                                           });
+                                           $('#selectcolor').val(colorid);
+                                           document.querySelector('#color'+colorid).classList.add('active-color');
                                         };
                                     </script>
                                 {{--<option>Green</option>--}}
-                            </select>
                             <div id="chosesize" class="hide">
                             <label for="1">Kích cỡ:</label>
-                            <select class="form-control" id="sizeproduct" name="productsize" onchange="quantity(this)">
+                            <div id="sizeproduct" >
 
-                            </select>
+                            </div>
 
                                 <input id="quantitynow" type="hidden" value="0">
                             <script>

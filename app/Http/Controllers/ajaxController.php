@@ -10,6 +10,7 @@ class ajaxController extends Controller
 {
     //
     public function selectsize($id){
+        //dd('hihi');
         $size = DB::table('color_size')
             ->select('size.id','size.name')
             ->join('size', 'size.id', '=', 'color_size.size_id')
@@ -18,9 +19,10 @@ class ajaxController extends Controller
                 ['color_size.quantity','>',0]
             ])
             ->get();
-        $html='<option value="0">--chọn Size--</option>';
+        $html="";
+        //dd($size);
         foreach ($size as $value) {
-            $html .= "<option value='".$value->id."'>".$value->name."</option>";
+            $html .= '<button class="btn has-color" >'.$value->name.'</button>';
         }
         echo $html;
     }

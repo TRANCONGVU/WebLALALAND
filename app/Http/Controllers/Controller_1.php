@@ -159,7 +159,7 @@ class Controller_1 extends Controller
         if (password_verify($value,$user->password)) {
 
         }else{
-            echo 'This old pasword dose not match';
+            echo 'Mật khẩu cũ không đúng!';
         }
     }
     public function changepass(Request $request, $id){

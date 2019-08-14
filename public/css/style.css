@@ -1025,4 +1025,15 @@ position: absolute;
 .noibatsp {
     /* padding: 0; */
 }
-
+.has-color{
+    border: black solid 1px;
+    background: none;
+    margin: 5px;
+}
+.has-color:hover{
+    box-shadow: 1px 1px 0px 1px grey;
+    background: lightblue;
+}
+.active-color{
+    background: #1e7e34;
+}

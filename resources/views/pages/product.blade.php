@@ -78,8 +78,8 @@
                             <span>sắp xếp theo</span>
                             <select onchange="sapxep(this)">
                                 <option value="pay,desc">Bán Chạy Nhất</option>
-                                <option value="sale,desc">Giá, Tăng Dần</option>
-                                <option value="sale,asc">Giá, Giảm Dần</option>
+                                <option value="price_sale,desc">Giá, Tăng Dần</option>
+                                <option value="price_sale,asc">Giá, Giảm Dần</option>
                                 <option value="name,desc">Thứ tự, A-Z</option>
                                 <option value="name,asc">Thứ tự, Z-A</option>
                                 <option value="id,asc">Cũ Nhất</option>

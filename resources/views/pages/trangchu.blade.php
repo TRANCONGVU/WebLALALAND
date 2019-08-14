@@ -11,8 +11,7 @@
         <img src="{{asset('assets/img/'.$slider->image)}}" alt="">
         <div class="title-banner">
             <span>SALE 100%</span>
-            <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti veritatis laborum fuga, velit
-                !</span>
+            <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti veritatis laborum fuga, velit!</span>
         </div>
     </div>
     @elseif($key==1)
@@ -33,8 +32,6 @@
                         <a href="{{ url('sanpham/'.$product->slug) }}">{{ $product->name }}</a>
                         <span>{{ number_format($product->sale)." VNĐ" }}</span>
                     </div>
-
-
                 </div>
                 @endforeach
                 {{-- <div class="col-md-3 ">
@@ -406,5 +403,5 @@
 </div>
 <script type="text/javascript" src="{{asset('')}}lib/jquery.min.js"></script>
 <script type="text/javascript" src="{{asset('')}}lib/OwlCarousel2-2.3.4/owl.carousel.min.js"></script>
-<script type="text/javascript" src="{{asset('')}}js/carousel.js"></script>
+    <script type="text/javascript" src="{{asset('')}}js/carousel.js"></script>
 @endsection
