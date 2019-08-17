@@ -87,45 +87,32 @@
 
                      <div class="col-md-5" id="imageproduct">
                         <div id="product-carousel" class="carousel slide" data-ride="carousel">
-                           {{-- <ol class="carousel-indicators">
-                                <li data-target="#product-carousel" data-slide-to="0" class="active" style=" background-image: url('{{ asset('images/product-1.jpg') }}');"></li>
-                                <li data-target="#product-carousel" data-slide-to="1" style=" background-image: url('{{ asset('images/product-1.jpg') }}');"></li>
-                                <li data-target="#product-carousel" data-slide-to="2" style=" background-image: url('{{ asset('images/product-1.jpg') }}');"></li>
-                            </ol>--}}
                             <div class="carousel-inner">
                                 <div class="carousel-item active">
-                                    <div class="img-zoom-container xzoom">
-                                        <img id="myimage" src="{{asset('images/products/'.$product->image)}}" width="300" height="240">
-                                        {{-- <div id="myresult" class="img-zoom-result"></div> --}}
+                                    <div class="img-zoom-container xzoom zoom-box">
+                                        <img id="myimage" class="xzoom-1" src="{{asset('images/products/'.$product->image)}}" xoriginal="{{asset('images/products/'.$product->image)}}" width="300" height="">
+                                    <script>
+                                        $(function () {
+                                            $('.xzoom-1').xzoom();
+                                        });
+                                    </script>
                                     </div>
-                                    {{-- <img class="xzoom" src="{{asset('images/products/'.$product->image)}}" alt=""> --}}
                                 </div>
-                               {{-- <div class="carousel-item">
-                                    <img class="d-block w-100" src="images/product-1.jpg" alt="Second slide">
-                                </div>
-                                <div class="carousel-item">
-                                    <img class="d-block w-100" src="images/product-1.jpg" alt="Third slide">
-                                </div>--}}
                             </div>
-                           {{-- <a class="carousel-control-prev" href="#product-carousel" role="button" data-slide="prev">
-                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                <span class="sr-only">Previous</span>
-                            </a>
-                            <a class="carousel-control-next" href="#product-carousel" role="button" data-slide="next">
-                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                <span class="sr-only">Next</span>
-                            </a>--}}
                         </div>
 
                     </div>
                    {{-- <form action="#" method="post" name="">
                         @csrf
                         <input type="hidden" name="productid" value="{{ $product->id }}" />--}}
-                    <div class="col-md-6  text-left d-flex flex-column img-zoom-result" id="myresult" style="margin-top: -43px; color:blue;">
+{{--
+                    <div class="flex-column img-zoom-result" id="myresult" style="display: none; margin-left: 50%; color:blue; position: absolute;z-index: 999;">
+--}}
+                    <div style="z-index:0; position: inherit;">
                         <h4>{{ $product->name }}</h4>
                         <span class="gia">{{ number_format($product->sale)." VNĐ" }}</span>
-                        <input id="sale" type="hidden" value="{{ $product->sale }}">
-                        <span class="">Sale :  {{ 100-($product->sale/$product->price)*100 }}%</span>
+                        <input id="sale" type="hidden" value="{{ $product->sale }}"><br>
+                        <span class="">Sale :  {{ 100-($product->sale/$product->price)*100 }}%</span><br>
                         <b>Giá cũ :</b> <p class="" style="  text-decoration: line-through;">{{ number_format($product->price)." VNĐ" }}</p>
                         <span>Mã hàng : {{ $product->code }}</span>
                         
@@ -134,7 +121,7 @@
                             @foreach($colors as $color)
                             <button class="btn has-color" id="color{{$color->colorid}}" onclick="selectcolor({{ $color->colorid }})">{{ $color->name }}</button>
                             @endforeach
-                            <input id="selectcolor" type="hidden" value="">
+                            <input id="productcolor" type="hidden" value="0">
                                     <script>
                                         function selectcolor(colorid){
                                             var x= document.querySelector('.active-color');
@@ -149,7 +136,7 @@
                                            $.get('{{ url('selectcolor/') }}/' + colorid + '/{{ $product->id }}', function (data) {
                                                $("#product-carousel").html(data);
                                            });
-                                           $('#selectcolor').val(colorid);
+                                           $('#productcolor').val(colorid);
                                            document.querySelector('#color'+colorid).classList.add('active-color');
                                         };
                                     </script>
@@ -157,13 +144,14 @@
                             <div id="chosesize" class="hide">
                             <label for="1">Kích cỡ:</label>
                             <div id="sizeproduct" >
-
                             </div>
-
+                                <p style="color: red" id="hetsize"></p>
+                                <input id="selectsize" type="hidden" value="0">
                                 <input id="quantitynow" type="hidden" value="0">
                             <script>
-                                function quantity(obj) {
-                                    var quantity = document.querySelector('#quantityselect');
+                                function selectsize(sizeid) {
+                                        {{--alert('{{ $product->id }}');--}}
+                                   var quantity = document.querySelector('#quantityselect');
                                     var error = document.querySelector('#errorquantity');
                                     //$('#quantitynow').val(obj.value);
                                     var agrs = {
@@ -174,19 +162,28 @@
                                             _token: '{{ csrf_token() }}',
                                             product: '{{ $product->id }}',
                                             color: $('#productcolor').val(),
-                                            size: obj.value,
+                                            size: sizeid,
                                         },
                                         success: function (result) {
-                                            quantity.classList.remove('hide');
-                                            error.classList.remove('alert');
-                                            error.classList.remove('alert-danger');
-                                            error.innerHTML='';
-                                            $('#quantitynow').val(result);
-                                            document.getElementById('quantity').value=1;
-                                            document.getElementById('total').innerHTML = '{{ number_format($product->sale) }}' + ' VNĐ'
+                                            //$('#errorquantity').html(result);
+                                            if(result!=0) {
+                                                quantity.classList.remove('hide');
+                                                error.classList.remove('alert');
+                                                error.classList.remove('alert-danger');
+                                                error.innerHTML = '';
+                                                $('#quantitynow').val(result);
+                                                document.getElementById('quantity').value = 1;
+                                                document.getElementById('total').innerHTML = '{{ number_format($product->sale) }}' + ' VNĐ';
+                                                $('#hetsize').html('');
+                                            }
+                                            else{
+                                                $('#quantitynow').val(result);
+                                                $('#hetsize').html('<p style="color: red">Size này đã tạm thời hết hàng!</p>');
+                                                quantity.classList.add('hide');
+                                            }
                                         }
                                     };
-                                    $.ajax(agrs);
+                                    $.ajax(agrs);$('#selectsize').val(sizeid);
                                 }
                             </script>
                             </div>
@@ -249,6 +246,7 @@
 
                 <script>
                     function addcart() {
+                        //alert($('#productcolor').val());
                         var errorcart= document.querySelector('#errorcart');
                         var actionaddcart= document.querySelector('#actionaddcart');
                         var done= document.querySelector('#addcartsuccess');
@@ -258,7 +256,7 @@
                             errorcart.classList.add('alert-danger');
                             errorcart.innerHTML='Bạn chưa chọn Màu!';
                         }
-                        if($('#sizeproduct').val() === '0'){
+                        else if($('#selectsize').val() === '0'){
                             errorcart.classList.remove('alert-success');
                             errorcart.classList.add('alert-danger');
                             errorcart.innerHTML='Bạn chưa chọn size!';
@@ -272,7 +270,7 @@
                                     _token: '{{ csrf_token() }}',
                                     id: {{ $product->id }},
                                     color: $('#productcolor').val(),
-                                    size: $('#sizeproduct').val(),
+                                    size: $('#selectsize').val(),
                                     quantity: $('#quantity').val(),
                                 },
                                 success: function (result) {
@@ -297,7 +295,6 @@
                 </div>
                 <div class="sp-lienquan owl-carousel owl-theme">
                 @foreach($lienquan as $product)
-
                         <div class="item">
                             <div class="over-lay d-flex flex-column justify-content-center">
                                 <a href=""><i class="far fa-heart"></i></a>
@@ -313,10 +310,6 @@
 
                 @endforeach
                 </div>
-
-
-
-
             </div>
 
 
@@ -356,6 +349,7 @@
       var img, lens, result, cx, cy;
       img = document.getElementById(imgID);
       result = document.getElementById(resultID);
+
       /*create lens:*/
       lens = document.createElement("DIV");
       lens.setAttribute("class", "img-zoom-lens");
@@ -374,6 +368,8 @@
       lens.addEventListener("touchmove", moveLens);
       img.addEventListener("touchmove", moveLens);
       function moveLens(e) {
+          var a = document.querySelector('#'+resultID);
+          a.classList.add('d-flex');
         var pos, x, y;
         /*prevent any other actions that may occur when moving over the image:*/
         e.preventDefault();

@@ -3,8 +3,24 @@
     Thời trang Phụ Nữ
 @endsection
 @section('content')
-
-<section class="section-1 container-fluid owl-carousel owl-theme">
+    <link rel="stylesheet" href="{{ asset('css/linhnguyen.css') }}">
+    <script src="{{ asset('js/jquery.popup.js') }}"></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script type="text/javascript" src="http://giaiphapthuonghieu.vn/miniapps/popuponload/jquery.popup.js"></script>
+    <script type="text/javascript" >
+        jQuery(window).load(function() {
+            jQuery.noConflict();
+            if(document.cookie.indexOf("adf")==-1) {
+                document.cookie= "popunder1=adf";
+                jQuery('#myModal').linhnguyen(jQuery('#myModal').data());
+            }
+        });
+    </script>
+    <div id="myModal" class="linhnguyen-modal">
+        <img src="http://2.bp.blogspot.com/-eLSsK_4fUzg/Uk9dEo40_4I/AAAAAAAABfM/LcB3n6svA_s/s1600/popup-faceseo.jpg" />
+        <a class="close-linhnguyen-modal">X</a>
+    </div>
+    <section class="section-1 container-fluid owl-carousel owl-theme">
     @foreach($sliders as $key => $slider)
     @if($key==0)
     <div class="item">

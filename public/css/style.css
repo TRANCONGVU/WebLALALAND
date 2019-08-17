@@ -615,11 +615,11 @@ position: absolute;
     position: relative;
 }
 .product-page .carousel-item {
-    height: 500px;
+    /*height: 500px;*/
 }
 .product-page  .carousel-indicators{
     position: initial;
-
+    margin: 0;
 
 }
 .product-page .carousel-control-prev-icon {
@@ -636,10 +636,9 @@ position: absolute;
     left: -130px;
 }
 .product-page .carousel-indicators li:nth-child(1){
-    top: 0px;
     background-size: cover;
 
-    top: 20px;
+    /*top: 20px;*/
 }
 .product-page .carousel-indicators li:nth-child(2){
     top: 0px;

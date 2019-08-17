@@ -25,6 +25,8 @@
 	<link rel="stylesheet" type="text/css" href="{{ asset('css/responsive.css') }}">
 	<script type="text/javascript" src="{{ asset('js/jquery-3.4.1.min.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('lib/bootstrap_4.0.0/js/bootstrap.min.js') }}"></script>
+	<script type="text/javascript" src="https://unpkg.com/xzoom/dist/xzoom.min.js"></script>
+	<link rel="stylesheet" href="{{ asset('css/xzoom.css') }}">
 <!-- Load Facebook SDK for JavaScript -->
 <div id="fb-root"></div>
 <script>
@@ -62,13 +64,9 @@
 @yield('content')
 @include('footer')
 <script type="text/javascript">
-	$(window).load(function () {
-		alert('hihi');
-		//jQuery.noConflict();
-		// if(document.cookie.indexOf("adf")===-1){
-			document.cookie = "popunder1=adf";
-			$('#loginModal').modal('show');
 
+	$(window).load(function () {
+		$('#loginModal').show();
 	});
 </script>
 <script src="{{ asset('assets/toar/js/toastr.min.js') }}"></script>

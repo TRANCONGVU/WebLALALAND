@@ -22,7 +22,7 @@ class ajaxController extends Controller
         $html="";
         //dd($size);
         foreach ($size as $value) {
-            $html .= '<button class="btn has-color" >'.$value->name.'</button>';
+            $html .= '<button class="btn has-color" onclick="selectsize('.$value->id.')">'.$value->name.'</button>';
         }
         echo $html;
     }
@@ -37,10 +37,10 @@ class ajaxController extends Controller
             ->first();
 
         $images = explode(',', $product->image);
+        //$html='';
         $html = '<ol class="carousel-indicators">';
         foreach ($images as $key => $image){
             if($key==0){
-                $url= asset('images/products/'.$image);
                 $html .= '<li data-target="#product-carousel" data-slide-to="0" class="active" style="background-image: url('.asset('images/products/'.$image).');"></li>';
             }
             elseif($image!=''){
@@ -50,18 +50,33 @@ class ajaxController extends Controller
         }
         $html.= '</ol>';
         //dd($html);
-        $html .='<div class="carousel-inner">';
+        $html .='<div id="product-carousel" class="carousel slide" data-ride="carousel">';
         foreach ($images as $key => $image){
             if($key==0){
 
                 $html .= '<div class="carousel-item active">';
-                $html .= '<img src="'.asset('images/products/'.$image).'" alt="">';
+                $html .= '<div class="img-zoom-container xzoom zoom-box">';
+                $html .= '<img class="xzoom-'.$key.'" src="'.asset('images/products/'.$image).'" xoriginal="'.asset('images/products/'.$image).'" width="" alt="">';
+                $html.= '<script type="text/javascript">';
+                    $html.='$(function () {';
+                        $html.='$(".xzoom-'.$key.'").xzoom()';
+                    $html.='});';
+                $html.='</script>';
+                $html .= '</div>';
                 $html .= '</div>';
             }
             elseif($image!=''){
                 $html .= '<div class="carousel-item">';
-                $html .= '<img src="'.asset('images/products/'.$image).'" alt="">';
-                $html .= '</div>';}
+                $html .= '<div class="img-zoom-container xzoom zoom-box">';
+                $html .= '<img class="xzoom-'.$key.'" src="'.asset('images/products/'.$image).'" xoriginal="'.asset('images/products/'.$image).'" width="300" alt="">';
+                $html.= '<script type="text/javascript">';
+                $html.='$(function () {';
+                $html.='$(".xzoom-'.$key.'").xzoom()';
+                $html.='});';
+                $html.='</script>';
+                $html .= '</div>';
+                $html .= '</div>';
+            }
         }
         $html .='</div>';
         $html .='<a class="carousel-control-prev" href="#product-carousel" role="button" data-slide="prev">';
@@ -77,7 +92,6 @@ class ajaxController extends Controller
     }
 
     public function quantity(Request $request){
-        //dd($request->all());
 
         $quantity = DB::table('color_size')
             ->select('color_size.quantity')
@@ -87,8 +101,12 @@ class ajaxController extends Controller
                 ['product_details.color_id', $request->color],
                 ['color_size.size_id', $request->size],
             ])->first();
-
+        if($quantity==null){
+            echo 0;
+        }
+        else {
             echo $quantity->quantity;
+        }
     }
 
 

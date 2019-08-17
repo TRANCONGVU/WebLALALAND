@@ -21,6 +21,9 @@ Route::get('/ip', function (){
     }
     echo "IP address: " . $ip;
 });
+Route::get('/test', function () {
+    return view('test');
+});
 
 Route::get('/', [
 	'as' =>'home',
